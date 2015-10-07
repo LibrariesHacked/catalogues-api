@@ -25,3 +25,10 @@ build/Release
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
+*.dll
+.ntvs_analysis.dat
+*.njsproj
+Catalogue-WS.sln
+Catalogue-WS.v12.suo
+obj/Debug/Catalogue-WS.njsproj.FileListAbsolute.txt
+*.cache

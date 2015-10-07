@@ -1,0 +1,79 @@
+{
+    "LibraryServices": [
+        {
+            "Name": "LibrariesWest",
+            "Type": "axiell",
+            "Url": "http://91.106.192.135/arena.pa.palma/catalogue",
+            "Id": "280001"
+        },
+        {
+            "Name": "Gloucestershire",
+            "Type": "capita",
+            "Url": "http://capitadiscovery.co.uk/gloslibraries/",
+            "Id": ""
+        },
+        {
+            "Name": "LibrariesWest2",
+            "Type": "solus",
+            "Url": "http://mobile.solus.co.uk/catalogue/CatService.asmx",
+            "Id": "e89f85e6-c6d5-47d0-a4e2-a3da0355f8e6"
+        },
+        {
+            "Name": "Surrey",
+            "Type": "biblioCommons",
+            "Url": "https://surrey.bibliocommons.com/api/Library/71/",
+            "Id": "71"
+        },
+        {
+            "Name": "Yorkshire",
+            "Type": "sirsiDynix",
+            "Url": "",
+            "Id": "YORKPUB"
+        },
+        {
+            "Name": "Cambridgeshire",
+            "Type": "civica",
+            "Url": "http://cambridgeshire.spydus.co.uk/iSorcer/"
+        },
+        {
+            "Name": "Western downs",
+            "Type": "civica",
+            "Url": "https://westerndowns.spydus.com/SorcerInt/"
+        },
+        {
+            "Name": "Brighton and Hove",
+            "Type": "civica",
+            "Url": "https://upgradebrighton-hove.spydus.co.uk/SorcerInt/"
+        },
+        {
+            "Name": "Buckinghamshire",
+            "Type": "civica",
+            "Url": "https://upgradebuckinghamshire.spydus.co.uk/SorcerInt/"
+        },
+        {
+            "Name": "Camden",
+            "Type": "civica",
+            "Url": "https://upgradecamden.spydus.co.uk/SorcerInt/"
+        },
+        {
+            "Name": "Hertfordshire",
+            "Type": "civica",
+            "Url": "https://upgradeherts.spydus.co.uk/SorcerInt/"
+        },
+        {
+            "Name": "Kent",
+            "Type": "civica",
+            "Url": "https://upgradekent.spydus.co.uk/SorcerInt/"
+        },
+        {
+            "Name": "Milton Keynes",
+            "Type": "civica",
+            "Url": "https://upgrademiltonkeynes.spydus.co.uk/SorcerInt/"
+        },
+        {
+            "Name": "West Berkshire",
+            "Type": "civica",
+            "Url": "https://upgradewestberks.spydus.co.uk/SorcerInt/"
+        }
+    ]
+}
