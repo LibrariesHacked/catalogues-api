@@ -1,21 +1,30 @@
-///
+//////////////////////
+// Requires
+//
+//////////////////////
 var xml2js = require('xml2js');
 var request = require('request');
+
+//////////////////////
+// Variables
+//////////////////////
 var reqHeader = { "Content-Type": "text/xml; charset=utf-8" };
 
-///
+//////////////////////////
+// Function: searchByISBN
+//////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
     
     var responseHoldings = [];
 
-    // Request 1: 
+    // Request 1
     //
     request.get({ url: lib.Url + 'SearchCatalog/KEYWORD/' + isbn, headers: reqHeader }, function (error, msg, response) {
         xml2js.parseString(response, function (err, res) {
             if (res.searchCatalog.TotalCount[0] > 0) {
                 var bibId = res.searchCatalog.Bib[0].BcId[0];
 
-                // Request 2: 
+                // Request 2
                 request.get({ url: lib.Url + 'currentItems/' + bibId, headers: reqHeader }, function (error, msg, response) {
 
                     xml2js.parseString(response, function (err, result) {

@@ -1,20 +1,29 @@
+////////////////////
+// Requires
+////////////////////
 var request = require('request');
 
+//////////////////////////
+// Function: searchByISBN
+//////////////////////////
 exports.searchByISBN = function (isbn, libraryService, callback) {
 
     var responseHoldings = [];
+
+    var headers = {
+        "Accept": "application/json",
+        "Accept-Language": "en-gb",
+        "Host": "bookmyne.bc.sirsidynix.net",
+        "ILS-Profile": libraryService.Profile,
+        "Referer": "https://bookmyne.bc.sirsidynix.net/bookmyne/app.html#extendedDetail",
+        "SD-Institution": +libraryService.InstitutionId,
+        "SD-Region": +libraryService.Region
+    };
+
     // Need to search first by 13 digit ISBN
     var titlesOptions = {
-        url: 'https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1/search/os?q=GENERAL%3A' + isbn + '&qf=GENERAL&rw=0&ct=10&pr=YORKPUB&ext=dss&library_id=474',
-        headers: {
-            "Accept": "application/json",
-            "Accept-Language": "en-gb",
-            "Host": "bookmyne.bc.sirsidynix.net",
-            "ILS-Profile": "YORKPUB",
-            "Referer": "https://bookmyne.bc.sirsidynix.net/bookmyne/app.html#extendedDetail",
-            "SD-Institution": "174",
-            "SD-Region": "3"
-        }
+        url: libraryService.Url + '/search/os?q=GENERAL%3A' + isbn + '&qf=GENERAL&rw=0&ct=10&pr=' + libraryService.Profile + '&ext=dss&library_id=' + libraryService.Id,
+        headers: headers
     };
 
     request.get(titlesOptions, function (error, msg, response) {
@@ -24,16 +33,8 @@ exports.searchByISBN = function (isbn, libraryService, callback) {
         if (jsonResponse.totalResults && jsonResponse.totalResults > 0) {
             var id = jsonResponse.entry[0].id;
             var holdingsOptions = {
-                url: "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1/title/holdings?title_id=" + id,
-                headers: {
-                    "Accept": "application/json",
-                    "Accept-Language": "en-gb",
-                    "Host": "bookmyne.bc.sirsidynix.net",
-                    "ILS-Profile": "YORKPUB",
-                    "Referer": "https://bookmyne.bc.sirsidynix.net/bookmyne/app.html#extendedDetail",
-                    "SD-Institution": "174",
-                    "SD-Region": "3"
-                }
+                url: libraryService.Url + '/title/holdings?title_id=' + id,
+                headers: headers
             };
 
             request.get(holdingsOptions, function (error, msg, response) {

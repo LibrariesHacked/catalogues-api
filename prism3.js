@@ -1,7 +1,17 @@
+////////////////////
+// Requires
+////////////////////
 var request = require('request');
 var cheerio = require('cheerio');
+
+/////////////
+// Variables
+////////////
 var reqHeader = { "Content-Type": "text/xml; charset=utf-8" };
 
+//////////////////////////
+// Function: searchByISBN
+//////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
 
     var responseHoldings = [];
