@@ -31,9 +31,10 @@ exports.searchByISBN = function (isbn, lib, callback) {
 
                         var libraries = {};
                         for (x = 0; x < result.CurrentItems.LibraryItem.length ; x++) {
-                            if (!libraries[result.CurrentItems.LibraryItem[x].Branch[0].Name[0]]) libraries[result.CurrentItems.LibraryItem[x].Branch[0].Name[0]] = { available: 0, onLoan: 0 };
-                            if (result.CurrentItems.LibraryItem[x].Status[0] == 'UNAVAILABLE') libraries[result.CurrentItems.LibraryItem[x].Branch[0].Name[0]].onLoan++;
-                            if (result.CurrentItems.LibraryItem[x].Status[0] == 'AVAILABLE') libraries[result.CurrentItems.LibraryItem[x].Branch[0].Name[0]].available++;
+                            var libName = result.CurrentItems.LibraryItem[x].Branch[0].Name[0];
+                            if (!libraries[libName]) libraries[libName] = { available: 0, unavailable: 0 };
+                            if (result.CurrentItems.LibraryItem[x].Status[0] == 'UNAVAILABLE') libraries[libName].unavailable++;
+                            if (result.CurrentItems.LibraryItem[x].Status[0] == 'AVAILABLE') libraries[libName].available++;
                         }
 
                         for (var lib in libraries) {

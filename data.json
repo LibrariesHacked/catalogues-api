@@ -1,9 +1,61 @@
 ﻿{
   "LibraryServices": [
     {
+      "Name": "Aberdeen City",
+      "Type": "prism3",
+      "Url": "https://capitadiscovery.co.uk/aberdeencity/"
+    },
+    {
+      "Name": "Aberdeenshire",
+      "Type": "spydus",
+      "Url": "https://aberdeenshire.spydus.co.uk/cgi-bin/spydus.exe/MSGTRN/OPAC/HOME"
+    },
+    {
+      "Name": "Anglesey",
+      "Type": "prism3",
+      "Url": "http://capitadiscovery.co.uk/ynysmon/"
+    },
+    {
+      "Name": "Angus",
+      "Type": "horizon",
+      "Url": "http://library.angus.gov.uk/"
+    },
+    {
+      "Name": "Argyll & Bute",
+      "Type": "spydus",
+      "Url": "https://argyll-bute.spydus.co.uk/"
+    },
+    {
+      "Name": "Barking & Dagenham",
+      "Type": "mobilearena",
+      "Id": "226006",
+      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
+    },
+    {
+      "Name": "Barnet",
+      "Type": "vubis",
+      "Url": "http://www.libraries.barnet.gov.uk/vs/Vubis.csp"
+    },
+    {
       "Name": "Barnsley",
       "Type": "prism3",
       "Url": "https://capitadiscovery.co.uk/barnsleymbc/"
+    },
+    {
+      "Name": "Bath & North East Somerset",
+      "Type": "mobilearena",
+      "Url": ""
+    },
+    {
+      "Name": "Bedford",
+      "Type": "arena",
+      "Url": "https://beds-arena.culturalservices.net/web/arena"
+    },
+    {
+      "Name": "Bexley",
+      "Type": "mobilearena",
+      "Id": "226018",
+      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
     },
     {
       "Name": "Birmingham",
@@ -16,9 +68,29 @@
       "Url": "https://bwdlibraries.spydus.co.uk/"
     },
     {
+      "Name": "Blackpool",
+      "Type": "enterprise",
+      "Url": "http://libraries.blackpool.gov.uk"
+    },
+    {
+      "Name": "Blaenau Gwent",
+      "Type": "ibistro",
+      "Url": "http://bglibcat.blaenau-gwent.gov.uk/"
+    },
+    {
       "Name": "Bolton",
       "Type": "spydus",
       "Url": "https://bolton.spydus.co.uk/"
+    },
+    {
+      "Name": "Bournemouth",
+      "Type": "prism3",
+      "Url": "https://capitadiscovery.co.uk/bournemouth/"
+    },
+    {
+      "Name": "Bracknell Forest",
+      "Type": "prism3",
+      "Url": "https://capitadiscovery.co.uk/bracknellforest"
     },
     {
       "Name": "Bradford",
@@ -26,14 +98,105 @@
       "Url": "https://capitadiscovery.co.uk/bradford/"
     },
     {
+      "Name": "Brent",
+      "Type": "mobilearena",
+      "Id": "226011",
+      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
+    },
+    {
+      "Name": "Bridgend",
+      "Type": "vubis",
+      "Url": "https://opac.awen-wales.com/bvs-app/Vubis.csp"
+    },
+    {
+      "Name": "Brighton & Hove",
+      "Type": "spydus",
+      "Url": "http://brighton-hove.spydus.co.uk/"
+    },
+    {
+      "Name": "Bristol City",
+      "Type": "mobilearena",
+      "Url": ""
+    },
+    {
+      "Name": "Bromley",
+      "Type": "arena",
+      "Url": "https://arena.yourlondonlibrary.net/web/bromley"
+    },
+    {
+      "Name": "Buckinghamshire",
+      "Type": "spydus",
+      "Url": "https://buckinghamshire.spydus.co.uk/"
+    },
+    {
+      "Name": "Bury",
+      "Type": "webpac",
+      "Url": "https://library.bury.gov.uk/"
+    },
+    {
+      "Name": "Caerphilly",
+      "Type": "iguana",
+      "Url": "http://libraries.caerphilly.gov.uk/"
+    },
+    {
       "Name": "Calderdale",
       "Type": "spydus",
       "Url": "http://online.calderdale.gov.uk/"
     },
     {
-      "Name": "Cheshire",
-      "Type": "viewpoint",
-      "Url": "https://libcat.cheshire.gov.uk/"
+      "Name": "Cambridgeshire",
+      "Type": "spydus",
+      "Url": "https://cambridgeshire.spydus.co.uk/"
+    },
+    {
+      "Name": "Camden",
+      "Type": "spydus",
+      "Url": "https://camden.spydus.co.uk/"
+    },
+    {
+      "Name": "Cardiff",
+      "Type": "ibistro",
+      "Url": "http://ibistro.cardiff.gov.uk/uhtbin/cgisirsi/x/x/0/49/"
+    },
+    {
+      "Name": "Carmarthenshire",
+      "Type": "vubis",
+      "Url": "http://212.219.142.126/carvs/vubis.csp"
+    },
+    {
+      "Name": "Ceredigion",
+      "Type": "vubis",
+      "Url": "http://libraries.ceredigion.gov.uk/vs/Vubis.csp"
+    },
+    {
+      "Name": "Cheshire West and Chester",
+      "Type": "koha",
+      "Url": "https://cheslive.koha-ptfs.co.uk/"
+    },
+    {
+      "Name": "Cheshire East",
+      "Type": "koha",
+      "Url": "https://cheslive.koha-ptfs.co.uk/"
+    },
+    {
+      "Name": "City of London",
+      "Type": "prism3",
+      "Url": "https://capitadiscovery.co.uk/cityoflondon/"
+    },
+    {
+      "Name": "Clackmannanshire",
+      "Type": "vufind",
+      "Url": "http://vufind-cl.sedar.org.uk/"
+    },
+    {
+      "Name": "Conwy",
+      "Type": "prism3",
+      "Url": "https://capitadiscovery.co.uk/conwy/"
+    },
+    {
+      "Name": "Cornwall",
+      "Type": "prism3",
+      "Url": "https://capitadiscovery.co.uk/cornwall/"
     },
     {
       "Name": "Coventry",
@@ -41,10 +204,21 @@
       "Url": "https://capitadiscovery.co.uk/coventry/"
     },
     {
-      "Name": "Darlington",
-      "Type": "arena",
-      "Url": "http://www2.darlington.gov.uk/web/arena/"
+      "Name": "Croydon",
+      "Type": "vubis",
+      "Url": "http://catalogue.croydonlibraries.com/vs/Vubis.csp"
     },
+    {
+      "Name": "Cumbria",
+      "Type": "enterprise",
+      "Url": "http://cmbr.ent.sirsidynix.net.uk/client/default"
+    },
+    {
+      "Name": "Darlington",
+      "Type": "mobilearena",
+      "Id": "230001",
+      "Url": "http://www2.darlington.gov.uk/arena.pa.palma/catalogue"
+    },//Here
     {
       "Name": "Derbyshire",
       "Type": "elibrary",
@@ -52,8 +226,9 @@
     },
     {
       "Name": "Doncaster",
-      "Type": "arena",
-      "Url": "http://library.doncaster.gov.uk/web/arena/"
+      "Type": "mobilearena",
+      "Id": "243001",
+      "Url": "http://library.doncaster.gov.uk/arena.pa.palma/catalogue"
     },
     {
       "Name": "Dudley",
@@ -61,9 +236,10 @@
       "Url": "https://libcat.dudley.gov.uk/"
     },
     {
-      "Name": "East riding",
-      "Type": "arena",
-      "Url": "https://library.eastriding.gov.uk/web/arena/"
+      "Name": "East Riding",
+      "Type": "mobilearena",
+      "Id": "205001",
+      "Url": "https://library.eastriding.gov.uk/arena.pa.palma/catalogue"
     },
     {
       "Name": "Gateshead",
@@ -91,14 +267,21 @@
       "Url": "https://capitadiscovery.co.uk/leeds/"
     },
     {
-      "Name": "Leicester",
-      "Type": "arena",
-      "Url": "https://bookfinder.leicester.gov.uk/web/arena/"
+      "Name": "Leicester City",
+      "Type": "mobilearena",
+      "Id": "201001",
+      "Url": "https://bookfinder.leicester.gov.uk/arena.pa.palma"
     },
     {
       "Name": "Leicestershire",
       "Type": "prism3",
       "Url": "https://capitadiscovery.co.uk/leicestershire/"
+    },
+    {
+      "Name": "Libraries West",
+      "Type": "mobilearena",
+      "Id": "280001",
+      "Url": "http://91.106.192.135/arena.pa.palma/catalogue"
     },
     {
       "Name": "Lincolnshire",
@@ -112,33 +295,37 @@
     },
     {
       "Name": "Manchester",
-      "Type": "viewpoint",
-      "Url": "https://librarycatalogue.manchester.gov.uk/"
+      "Type": "spydus",
+      "Url": "https://manchester.spydus.co.uk/"
     },
     {
-      "Name": "Middlesborough",
+      "Name": "Middlesbrough",
       "Type": "viewpoint",
       "Url": "http://libraries.middlesbrough.gov.uk/"
     },
     {
       "Name": "Newcastle",
-      "Type": "arena",
-      "Url": "http://library.newcastle.gov.uk/web/arena/"
+      "Type": "mobilearena",
+      "Id": "224001",
+      "Url": "http://library.newcastle.gov.uk/arena.pa.palma/catalogue"
     },
     {
       "Name": "Northamptonshire",
-      "Type": "arena",
-      "Url": "https://www.librarycatalogue.northamptonshire.gov.uk/web/arena/"
+      "Type": "mobilearena",
+      "Id": "256001",
+      "Url": "https://www.librarycatalogue.northamptonshire.gov.uk/arena.pa.palma/catalogue"
     },
     {
       "Name": "North East Lincolnshire",
-      "Type": "arena",
-      "Url": "http://library.nelincs.gov.uk/web/arena/"
+      "Type": "mobilearena",
+      "Id": "252001",
+      "Url": "http://91.106.192.188/arena.pa.palma/catalogue"
     },
     {
       "Name": "North Lincolnshire",
-      "Type": "arena",
-      "Url": "http://www.opac.northlincs.gov.uk/web/arena/"
+      "Type": "mobilearena",
+      "Url": "http://91.106.192.190/arena.pa.palma/catalogue",
+      "Id": "221001"
     },
     {
       "Name": "North Tyneside",
@@ -202,8 +389,9 @@
     },
     {
       "Name": "Staffordshire",
-      "Type": "arena",
-      "Url": "https://www.yourlibcat.staffordshire.gov.uk/web/arena/"
+      "Type": "mobilearena",
+      "Id": "250001",
+      "Url": "https://www.yourlibcat.staffordshire.gov.uk/arena.pa.palma/catalogue"
     },
     {
       "Name": "Stockport",
@@ -227,13 +415,15 @@
     },
     {
       "Name": "Wakefield",
-      "Type": "arena",
-      "Url": "https://libraries.wakefield.gov.uk/web/arena/"
+      "Type": "mobilearena",
+      "Id": "212001",
+      "Url": "https://libraries.wakefield.gov.uk/arena.pa.palma/catalogue"
     },
     {
       "Name": "Walsall",
-      "Type": "arena",
-      "Url": "https://libcat.walsall.gov.uk/web/arena/"
+      "Type": "mobilearena",
+      "Id": "140001",
+      "Url": "https://libcat.walsall.gov.uk/arena.pa.palma/catalogue"
     },
     {
       "Name": "Wigan",
@@ -254,81 +444,18 @@
       "Name": "Worcestershire",
       "Type": "prism3",
       "Url": "https://capitadiscovery.co.uk/worcs/"
-    },
-    {
-      "Name": "Bath & North East Somerset",
-      "Type": "viewpoint",
-      "Url": "https://www.librarieswest.org.uk/"
-    },
-    {
-      "Name": "Barking and Dagenham",
-      "Type": "viewpoint",
-      "Url": "https://www.londonlibraries.gov.uk/"
-    },
-    {
-      "Name": "Bedfordshire",
-      "Type": "viewpoint",
-      "Url": "https://vpoint.culturalservices.net/bedford/"
-    },
-    {
-      "Name": "Bexley",
-      "Type": "viewpoint",
-      "Url": "https://www.londonlibraries.gov.uk/"
-    },
-    {
-      "Name": "Bournemouth",
-      "Type": "prism3",
-      "Url": "https://capitadiscovery.co.uk/bournemouth/"
-    },
-    {
-      "Name": "Brent",
-      "Type": "viewpoint",
-      "Url": "https://www.londonlibraries.gov.uk/"
-    },
-    {
-      "Name": "Brighton & Hove",
-      "Type": "spydus",
-      "Url": "http://brighton-hove.spydus.co.uk/"
-    },
-    {
-      "Name": "Bristol",
-      "Type": "viewpoint",
-      "Url": "https://www.librarieswest.org.uk/"
-    },
-    {
-      "Name": "Buckinghamshire",
-      "Type": "spydus",
-      "Url": "https://buckinghamshire.spydus.co.uk/"
-    },
-    {
-      "Name": "Cambridgeshire",
-      "Type": "spydus",
-      "Url": "https://cambridgeshire.spydus.co.uk/"
-    },
-    {
-      "Name": "Camden",
-      "Type": "spydus",
-      "Url": "https://camden.spydus.co.uk/"
-    },
-    {
-      "Name": "City of London",
-      "Type": "prism3",
-      "Url": "https://capitadiscovery.co.uk/cityoflondon/"
-    },
-    {
-      "Name": "Cornwall",
-      "Type": "prism3",
-      "Url": "https://capitadiscovery.co.uk/cornwall/"
-    },
+    },  
     {
       "Name": "Ealing",
-      "Type": "viewpoint",
-      "Url": "https://www.londonlibraries.gov.uk/"
+      "Type": "mobilearena",
+      "Id": "226014",
+      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
     },
     {
       "Name": "Enfield",
-      "Type": "viewpoint",
-      "Url": "https://www.londonlibraries.gov.uk/"
+      "Type": "mobilearena",
+      "Id": "226012",
+      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
     },
     {
       "Name": "Gloucestershire",
@@ -352,13 +479,15 @@
     },
     {
       "Name": "Harrow",
-      "Type": "arena",
-      "Url": "https://arena.yourlondonlibrary.net/web/harrow/"
+      "Type": "mobilearena",
+      "Id": "226020",
+      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
     },
     {
       "Name": "Havering",
-      "Type": "viewpoint",
-      "Url": "https://www.londonlibraries.gov.uk/"
+      "Type": "mobilearena",
+      "Id": "226001",
+      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
     },
     {
       "Name": "Hertfordshire",
@@ -372,8 +501,9 @@
     },
     {
       "Name": "Hounslow",
-      "Type": "arena",
-      "Url": "http://www.hounslowlibraries.org/web/arena/"
+      "Type": "mobilearena",
+      "Id": "219001",
+      "Url": "http://www.hounslowlibraries.org/arena.pa.palma/catalogue"
     },
     {
       "Name": "Isle of Wight",
@@ -402,8 +532,9 @@
     },
     {
       "Name": "Kingston",
-      "Type": "arena",
-      "Url": "https://arena.yourlondonlibrary.net/web/kingston/"
+      "Type": "mobilearena",
+      "Id": "226016",
+      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
     },
     {
       "Name": "Lambeth",
@@ -412,8 +543,9 @@
     },
     {
       "Name": "Lewisham",
-      "Type": "viewpoint",
-      "Url": "https://www.londonlibraries.gov.uk/"
+      "Type": "mobilearena",
+      "Id": "226015",
+      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
     },
     {
       "Name": "Medway",
@@ -422,8 +554,9 @@
     },
     {
       "Name": "Merton",
-      "Type": "viewpoint",
-      "Url": "https://www.londonlibraries.gov.uk/"
+      "Type": "mobilearena",
+      "Id": "226017",
+      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
     },
     {
       "Name": "Milton Keynes",
@@ -432,8 +565,9 @@
     },
     {
       "Name": "Newham",
-      "Type": "viewpoint",
-      "Url": "https://www.londonlibraries.gov.uk/"
+      "Type": "mobilearena",
+      "Id": "226008",
+      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
     },
     {
       "Name": "Norfolk",
@@ -467,8 +601,9 @@
     },
     {
       "Name": "Redbridge",
-      "Type": "viewpoint",
-      "Url": "https://www.londonlibraries.gov.uk/"
+      "Type": "mobilearena",
+      "Id": "226002",
+      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
     },
     {
       "Name": "Richmond",
@@ -522,8 +657,9 @@
     },
     {
       "Name": "Tower Hamlets",
-      "Type": "viewpoint",
-      "Url": "https://www.londonlibraries.gov.uk/"
+      "Type": "mobilearena",
+      "Id": "226010",
+      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
     },
     {
       "Name": "Waltham Forest",
@@ -532,8 +668,9 @@
     },
     {
       "Name": "Wandsworth",
-      "Type": "viewpoint",
-      "Url": "https://www.londonlibraries.gov.uk/"
+      "Type": "mobilearena",
+      "Id": "226003",
+      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
     },
     {
       "Name": "Westminster",
@@ -547,13 +684,15 @@
     },
     {
       "Name": "West Sussex",
-      "Type": "viewpoint",
-      "Url": "https://viewpoint.westsussex.gov.uk/"
+      "Type": "mobilearena",
+      "Id": "380001",
+      "Url": "http://91.106.192.190/arena.pa.palma/catalogue"
     },
     {
       "Name": "Wiltshire",
-      "Type": "arena",
-      "Url": "https://libraries.wiltshire.gov.uk/web/arena/"
+      "Type": "mobilearena",
+      "Id": "400001",
+      "Url": "https://libraries.wiltshire.gov.uk/arena.pa.palma/catalogue"
     },
     {
       "Name": "Windsor & Maidenhead",
@@ -564,21 +703,6 @@
       "Name": "Wokingham",
       "Type": "spydus",
       "Url": "https://wokingham.spydus.co.uk/"
-    },
-    {
-      "Name": "Aberdeen City",
-      "Type": "prism3",
-      "Url": "https://capitadiscovery.co.uk/aberdeencity/"
-    },
-    {
-      "Name": "Aberdeenshire",
-      "Type": "prism3",
-      "Url": "https://capitadiscovery.co.uk/aberdeenshire/"
-    },
-    {
-      "Name": "Argyll & Bute",
-      "Type": "spydus",
-      "Url": "https://argyll-bute.spydus.co.uk/"
     },
     {
       "Name": "Dundee City",
@@ -632,8 +756,9 @@
     },
     {
       "Name": "Midlothian",
-      "Type": "viewpoint",
-      "Url": "https://libraries.midlothian.gov.uk/"
+      "Type": "mobilearena",
+      "Id": "750001",
+      "Url": "http://91.106.197.135/arena.pa.palma/catalogue"
     },
     {
       "Name": "Moray",
@@ -666,11 +791,6 @@
       "Url": "https://www.sllclibrary.co.uk/"
     },
     {
-      "Name": "Conwy",
-      "Type": "prism3",
-      "Url": "https://capitadiscovery.co.uk/conwy/"
-    },
-    {
       "Name": "Flintshire",
       "Type": "viewpoint",
       "Url": "http://libraryonline.flintshire.gov.uk/"
@@ -691,22 +811,10 @@
       "Url": "https://capitadiscovery.co.uk/torfaen/"
     },
     {
-      "Name": "LibrariesWest",
-      "Type": "axiellmobile",
-      "Url": "http://91.106.192.135/arena.pa.palma/catalogue",
-      "Id": "280001"
-    },
-    {
-      "Name": "LibrariesWest2",
-      "Type": "solus",
-      "Url": "http://mobile.solus.co.uk/catalogue/CatService.asmx",
-      "Id": "e89f85e6-c6d5-47d0-a4e2-a3da0355f8e6"
-    },
-    {
       "Name": "Surrey",
-      "Type": "bibliocommons",
-      "Url": "https://surrey.bibliocommons.com/api/Library/71/",
-      "Id": "71"
+      "Type": "mobilearena",
+      "Id": "210002",
+      "Url": "http://arena.surreylibraries.org/arena.pa.palma/catalogue"
     },
     {
       "Name": "Yorkshire",

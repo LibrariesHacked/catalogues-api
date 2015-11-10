@@ -16,8 +16,8 @@ exports.searchByISBN = function (isbn, libraryService, callback) {
         "Host": "bookmyne.bc.sirsidynix.net",
         "ILS-Profile": libraryService.Profile,
         "Referer": "https://bookmyne.bc.sirsidynix.net/bookmyne/app.html#extendedDetail",
-        "SD-Institution": +libraryService.InstitutionId,
-        "SD-Region": +libraryService.Region
+        "SD-Institution": libraryService.InstitutionId,
+        "SD-Region": libraryService.Region
     };
 
     // Need to search first by 13 digit ISBN
@@ -26,9 +26,9 @@ exports.searchByISBN = function (isbn, libraryService, callback) {
         headers: headers
     };
 
+    // Request 1: Call web service to get the item ID
     request.get(titlesOptions, function (error, msg, response) {
 
-        // the response should include the title id
         var jsonResponse = JSON.parse(response);
         if (jsonResponse.totalResults && jsonResponse.totalResults > 0) {
             var id = jsonResponse.entry[0].id;
@@ -37,6 +37,7 @@ exports.searchByISBN = function (isbn, libraryService, callback) {
                 headers: headers
             };
 
+            // Request 2: Call web service to get the holdings
             request.get(holdingsOptions, function (error, msg, response) {
                 console.log(response);
                 var holdings = JSON.parse(response).holdingList;
@@ -44,16 +45,16 @@ exports.searchByISBN = function (isbn, libraryService, callback) {
                 for (var holding in holdings) {
                     var noAvailable = 0;
                     var noItems = 0;
-                    var noOnLoan = 0;
+                    var noUnavailable = 0;
                     var holdingsItemList = holdings[holding].holdingsItemList;
                     for (var item in holdingsItemList) {
                         noItems++;
                         if (holdingsItemList[item].currentLocation == 'SHELF') noAvailable++;
-                        if (holdingsItemList[item].currentLocation == 'ON-LOAN') noOnLoan++;
-                        if (holdingsItemList[item].currentLocation == 'INTRANSIT') noOnLoan++;
+                        if (holdingsItemList[item].currentLocation == 'ON-LOAN') noUnavailable++;
+                        if (holdingsItemList[item].currentLocation == 'INTRANSIT') noUnavailable++;
                     }
 
-                    responseHoldings.push({ library: holdings[holding].libraryDescription, available: noAvailable, onLoan: noOnLoan });
+                    responseHoldings.push({ library: holdings[holding].libraryDescription, available: noAvailable, unavailable: noUnavailable });
                 }
                 callback(responseHoldings);
             })
