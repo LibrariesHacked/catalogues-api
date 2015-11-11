@@ -218,11 +218,26 @@
       "Type": "mobilearena",
       "Id": "230001",
       "Url": "http://www2.darlington.gov.uk/arena.pa.palma/catalogue"
-    },//Here
+    },
+    {
+      "Name": "Denbighshire",
+      "Type": "arena",
+      "Url": "https://onlinelibrary.denbighshire.gov.uk"
+    },
+    {
+      "Name": "Derby City",
+      "Type": "portfolio",
+      "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/derby/"
+    },
     {
       "Name": "Derbyshire",
-      "Type": "elibrary",
+      "Type": "portfolio",
       "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/derbyshire/"
+    },
+    {
+      "Name": "Devon",
+      "Type": "viewpoint",
+      "Url": "http://www.devon.gov.uk/library/catalogue/cgi-bin/vps2.5_viewpoint.sh"
     },
     {
       "Name": "Doncaster",
@@ -231,9 +246,55 @@
       "Url": "http://library.doncaster.gov.uk/arena.pa.palma/catalogue"
     },
     {
+      "Name": "Dorset",
+      "Type": "webpac",
+      "Url": "http://libcat.dorsetforyou.com/"
+    },
+    {
       "Name": "Dudley",
-      "Type": "viewpoint",
-      "Url": "https://libcat.dudley.gov.uk/"
+      "Type": "arena",
+      "Url": "https://libcat.dudley.gov.uk"
+    },
+    {
+      "Name": "Dumfries & Galloway",
+      "Type": "iguana",
+      "Url": "http://library.dumgal.gov.uk"
+    },
+    {
+      "Name": "Dundee City",
+      "Type": "spydus",
+      "Url": "http://opac.dundeecity.gov.uk"
+    },
+    {
+      "Name": "Durham",
+      "Type": "durham",
+      "Url": "https://libraryonline.durham.gov.uk/pgCatKeywordSearch.aspx"
+    },
+    {
+      "Name": "Ealing",
+      "Type": "mobilearena",
+      "Id": "226014",
+      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
+    },
+    {
+      "Name": "East Ayrshire",
+      "Type": "portfolio",
+      "Url": "http://libcatalogue.east-ayrshire.gov.uk/uhtbin/webcat"
+    },
+    {
+      "Name": "East Dunbartonshire",
+      "Type": "vufind",
+      "Url": "http://vufind-ed.sedar.org.uk/"
+    },
+    {
+      "Name": "East Lothian",
+      "Type": "prism3",
+      "Url": "https://capitadiscovery.co.uk/eastlothian/"
+    },
+    {
+      "Name": "East Renfrewshire",
+      "Type": "prism3",
+      "Url": "https://capitadiscovery.co.uk/eastrenfrewshire/"
     },
     {
       "Name": "East Riding",
@@ -242,9 +303,101 @@
       "Url": "https://library.eastriding.gov.uk/arena.pa.palma/catalogue"
     },
     {
+      "Name": "East Sussex",
+      "Type": "spydus",
+      "Url": "https://e-library.eastsussex.gov.uk"
+    },
+    {
+      "Name": "Edinburgh",
+      "Type": "prism3",
+      "Url": "https://capitadiscovery.co.uk/edinburgh/"
+    },
+    {
+      "Name": "Enfield",
+      "Type": "mobilearena",
+      "Id": "226012",
+      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
+    },
+    {
+      "Name": "Essex",
+      "Type": "vubis",
+      "Url": "http://classiccatalogue.essex.gov.uk/vs/Vubis.csp"
+    },
+    {
+      "Name": "Falkirk",
+      "Type": "enterprise",
+      "Url": "http://fct.ent.sirsidynix.net.uk/client/en_GB/libraries/"
+    },
+    {
+      "Name": "Fife",
+      "Type": "prism3",
+      "Url": "https://capitadiscovery.co.uk/fife/"
+    },
+    {
+      "Name": "Flintshire",
+      "Type": "arena",
+      "Url": "http://libraryonline.flintshire.gov.uk/"
+    },
+    {
       "Name": "Gateshead",
       "Type": "prism3",
       "Url": "https://capitadiscovery.co.uk/gateshead/"
+    },
+    {
+      "Name": "Glasgow",
+      "Type": "arena",
+      "Url": "http://libcat.csglasgow.org/"
+    },
+    {
+      "Name": "Gloucestershire",
+      "Type": "prism3",
+      "Url": "https://capitadiscovery.co.uk/gloslibraries/"
+    },
+    {
+      "Name": "Greenwich",
+      "Type": "prism3",
+      "Url": "http://capitadiscovery.co.uk/royalgreenwich/"
+    },
+    {
+      "Name": "Guernsey",
+      "Type": "prism3",
+      "Url": "https://capitadiscovery.co.uk/guernsey/"
+    },
+    {
+      "Name": "Gwynedd",
+      "Type": "prism3",
+      "Url": "http://capitadiscovery.co.uk/gwynedd/"
+    },
+    {
+      "Name": "Hackney",
+      "Type": "arena",
+      "Url": "https://arena.yourlondonlibrary.net/web/hackney"
+    },
+    {
+      "Name": "Halton",
+      "Type": "koha",
+      "Url": "http://hpl.koha-ptfs.eu/"
+    },
+    {
+      "Name": "Hammersmith & Fulham",
+      "Type": "portfolio",
+      "Url": "https://trib.ent.sirsidynix.net.uk/client/en_GB/lbhf/"
+    },
+    {
+      "Name": "Hampshire",
+      "Type": "spydus",
+      "Url": "https://librarycat.hants.gov.uk/"
+    },
+    {
+      "Name": "Haringey",
+      "Type": "prism3",
+      "Url": "http://capitadiscovery.co.uk/haringey"
+    },
+    {
+      "Name": "Harrow",
+      "Type": "mobilearena",
+      "Id": "226020",
+      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
     },
     {
       "Name": "Hartlepool",
@@ -252,9 +405,66 @@
       "Url": "https://capitadiscovery.co.uk/hartlepool/"
     },
     {
+      "Name": "Havering",
+      "Type": "mobilearena",
+      "Id": "226001",
+      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
+    },
+    {
       "Name": "Herefordshire",
       "Type": "prism3",
       "Url": "https://capitadiscovery.co.uk/herefordshire/"
+    },
+    {
+      "Name": "Hertfordshire",
+      "Type": "spydus",
+      "Url": "https://herts.spydus.co.uk/"
+    },
+    {
+      "Name": "Highland",
+      "Type": "prism3",
+      "Url": "https://capitadiscovery.co.uk/highland/"
+    },
+    {
+      "Name": "Hillingdon",
+      "Type": "enterprise",
+      "Url": "http://hldn.ent.sirsidynix.net.uk"
+    },
+    {
+      "Name": "Hounslow",
+      "Type": "mobilearena",
+      "Id": "219001",
+      "Url": "http://www.hounslowlibraries.org/arena.pa.palma/catalogue"
+    },
+    {
+      "Name": "Hull",
+      "Type": "elibrary",
+      "Url": "http://prismcollect.hullcc.gov.uk"
+    },
+    {
+      "Name": "Inverclyde",
+      "Type": "spydus",
+      "Url": "http://ipac.inverclyde-libraries.org/"
+    },
+    {
+      "Name": "Isle of Wight",
+      "Type": "spydus",
+      "Url": "http://iow.spydus.co.uk/"
+    },
+    {
+      "Name": "Isle of Man",
+      "Type": "heritage",
+      "Url": "http://www.douglas.gov.im/HeritageScripts/"
+    },
+    {
+      "Name": "Islington",
+      "Type": "prism3",
+      "Url": "https://capitadiscovery.co.uk/islington/"
+    },//Here
+    {
+      "Name": "Jersey",
+      "Type": "prism3",
+      "Url": "https://capitadiscovery.co.uk/jersey/"
     },
     {
       "Name": "Lancashire",
@@ -444,81 +654,6 @@
       "Name": "Worcestershire",
       "Type": "prism3",
       "Url": "https://capitadiscovery.co.uk/worcs/"
-    },  
-    {
-      "Name": "Ealing",
-      "Type": "mobilearena",
-      "Id": "226014",
-      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
-    },
-    {
-      "Name": "Enfield",
-      "Type": "mobilearena",
-      "Id": "226012",
-      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
-    },
-    {
-      "Name": "Gloucestershire",
-      "Type": "prism3",
-      "Url": "https://capitadiscovery.co.uk/gloslibraries/"
-    },
-    {
-      "Name": "Guernsey",
-      "Type": "prism3",
-      "Url": "https://capitadiscovery.co.uk/guernsey/"
-    },
-    {
-      "Name": "Hackney",
-      "Type": "viewpoint",
-      "Url": "https://www.londonlibraries.gov.uk/"
-    },
-    {
-      "Name": "Hampshire",
-      "Type": "spydus",
-      "Url": "https://librarycat.hants.gov.uk/"
-    },
-    {
-      "Name": "Harrow",
-      "Type": "mobilearena",
-      "Id": "226020",
-      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
-    },
-    {
-      "Name": "Havering",
-      "Type": "mobilearena",
-      "Id": "226001",
-      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
-    },
-    {
-      "Name": "Hertfordshire",
-      "Type": "spydus",
-      "Url": "https://herts.spydus.co.uk/"
-    },
-    {
-      "Name": "Hillingdon",
-      "Type": "elibrary",
-      "Url": "http://library.hillingdon.gov.uk/uhtbin/cgisirsi/X/X/X/29/X/X/3/"
-    },
-    {
-      "Name": "Hounslow",
-      "Type": "mobilearena",
-      "Id": "219001",
-      "Url": "http://www.hounslowlibraries.org/arena.pa.palma/catalogue"
-    },
-    {
-      "Name": "Isle of Wight",
-      "Type": "spydus",
-      "Url": "http://iow.spydus.co.uk/"
-    },
-    {
-      "Name": "Islington",
-      "Type": "prism3",
-      "Url": "https://capitadiscovery.co.uk/islington/"
-    },
-    {
-      "Name": "Jersey",
-      "Type": "prism3",
-      "Url": "https://capitadiscovery.co.uk/jersey/"
     },
     {
       "Name": "Kensington & Chelsea",
@@ -703,56 +838,6 @@
       "Name": "Wokingham",
       "Type": "spydus",
       "Url": "https://wokingham.spydus.co.uk/"
-    },
-    {
-      "Name": "Dundee City",
-      "Type": "spydus",
-      "Url": "http://opac.dundeecity.gov.uk/"
-    },
-    {
-      "Name": "East Ayrshire",
-      "Type": "elibrary",
-      "Url": "http://libcatalogue.east-ayrshire.gov.uk/uhtbin/cgisirsi/X/X/X/29/X/X/3/"
-    },
-    {
-      "Name": "East Lothian",
-      "Type": "prism3",
-      "Url": "https://capitadiscovery.co.uk/eastlothian/"
-    },
-    {
-      "Name": "East Renfrewshire",
-      "Type": "prism3",
-      "Url": "https://capitadiscovery.co.uk/eastrenfrewshire/"
-    },
-    {
-      "Name": "Edinburgh",
-      "Type": "prism3",
-      "Url": "https://capitadiscovery.co.uk/edinburgh/"
-    },
-    {
-      "Name": "Falkirk",
-      "Type": "viewpoint",
-      "Url": "http://library.falkirkcommunitytrust.org/"
-    },
-    {
-      "Name": "Fife",
-      "Type": "prism3",
-      "Url": "https://capitadiscovery.co.uk/fife/"
-    },
-    {
-      "Name": "Glasgow",
-      "Type": "viewpoint",
-      "Url": "http://libcat.csglasgow.org/"
-    },
-    {
-      "Name": "Highland",
-      "Type": "prism3",
-      "Url": "https://capitadiscovery.co.uk/highland/"
-    },
-    {
-      "Name": "Inverclyde",
-      "Type": "spydus",
-      "Url": "http://ipac.inverclyde-libraries.org/"
     },
     {
       "Name": "Midlothian",
