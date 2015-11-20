@@ -20,7 +20,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
 
     var responseHoldings = [];
     var soapSearchXML = searchRequest.replace('[ISBN]', isbn).replace('[SERVICEID]', lib.Id);
-
+    console.log(soapSearchXML);
     // Request 1: Search for the item ID from ISBN 
     // Internal ID required to then retrieve holdings.
     request.post({ url: lib.Url, body: soapSearchXML, headers: reqHeader }, function (error, msg, response) {

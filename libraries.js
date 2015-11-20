@@ -1,6 +1,6 @@
-////////////////////
+///////////////////////////////////////////
 // Requires
-////////////////////
+///////////////////////////////////////////
 var async = require('async');
 var data = require('./data');
 
@@ -27,41 +27,25 @@ exports.getAllLibraries = function (req, res) {
 };
 
 /////////////////////////////////////////////////////////////////
-// Function: searchISBNAllServices
+// Function: isbnSearch
 // Route: /isbnSearch/:isbn
-// Test: http://localhost:3000/isbnSearch/9780747532743
+// Test: http://localhost:3000/isbnSearch/9780747532743?libraries=wiltshire
 /////////////////////////////////////////////////////////////////
-exports.searchISBNAllServices = function (req, res) {
-    var searches = data.LibraryServices.map(function (libraryService) {
-        return function (callback) {
-            serviceFunctions[libraryService.Type].searchByISBN(req.params.isbn, libraryService, function (response) {
-                callback(null, response);
-            });
-        }
-    });
+exports.isbnSearch = function (req, res) {
+
+    var searches = data.LibraryServices
+        .filter(function (service) {
+            return (!req.query.library || req.query.library.indexOf(service.Name) > -1);
+        })
+        .map(function (service) {
+            return function (callback) {
+                serviceFunctions[service.Type].searchByISBN(req.params.isbn, service, function (response) {
+                    callback(null, response);
+                });
+            }
+        });
 
     async.parallel(searches, function (err, response) {
         res.send(response);
     });
-};
-
-/////////////////////////////////////////////////////////////////
-// Function: searchISBNAllServices
-// Route: /isbnSearch/:services/:isbn
-// Given a list of library services (>0)
-// returns the holdings data
-// Test: http://localhost:3000/isbnSearch/swindon/9780747532743
-/////////////////////////////////////////////////////////////////
-exports.searchISBNByServices = function (req, res) {
-
-    var foundLibrary = false;
-    for (var i = 0; i < data.LibraryServices.length; i++) {
-        if (data.LibraryServices[i].Name.toLowerCase() == req.params.services.toLowerCase()) {
-            foundLibrary = true;
-            serviceFunctions[data.LibraryServices[i].Type].searchByISBN(req.params.isbn, data.LibraryServices[i], function (response) {
-                res.send(response);
-            });
-        }
-    }
-    if (!foundLibrary) res.send({ "Error": "Library service not found" });
 };

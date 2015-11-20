@@ -21,20 +21,21 @@
       "Url": "http://library.angus.gov.uk/"
     },
     {
-      "Name": "Argyll & Bute",
+      "Name": "Argyll and Bute",
       "Type": "spydus",
       "Url": "https://argyll-bute.spydus.co.uk/"
     },
     {
-      "Name": "Barking & Dagenham",
+      "Name": "Barking and Dagenham",
       "Type": "mobilearena",
       "Id": "226006",
       "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
     },
     {
       "Name": "Barnet",
-      "Type": "vubis",
-      "Url": "http://www.libraries.barnet.gov.uk/vs/Vubis.csp"
+      "Type": "aquabrowser",
+      "Id": "|library/vubissmart-marc|220344",
+      "Url": "http://www.libraries.barnet.gov.uk/abl/"
     },
     {
       "Name": "Barnsley",
@@ -44,13 +45,14 @@
     {
       "Name": "Bath & North East Somerset",
       "Type": "mobilearena",
-      "Id": "",
-      "Url": ""
+      "Id": "280001",
+      "Url": "http://91.106.192.135/arena.pa.palma/catalogue"
     },
     {
       "Name": "Bedford",
-      "Type": "arena",
-      "Url": "https://beds-arena.culturalservices.net/web/arena"
+      "Type": "mobilearena",
+      "Id": "220001",
+      "Url": "https://beds-arena.culturalservices.net/arena.pa.palma/catalogue"
     },
     {
       "Name": "Bexley",
@@ -71,7 +73,7 @@
     {
       "Name": "Blackpool",
       "Type": "enterprise",
-      "Url": "http://libraries.blackpool.gov.uk"
+      "Url": "http://libraries.blackpool.gov.uk/"
     },
     {
       "Name": "Blaenau Gwent",
@@ -91,7 +93,7 @@
     {
       "Name": "Bracknell Forest",
       "Type": "prism3",
-      "Url": "https://capitadiscovery.co.uk/bracknellforest"
+      "Url": "https://capitadiscovery.co.uk/bracknellforest/"
     },
     {
       "Name": "Bradford",
@@ -107,7 +109,7 @@
     {
       "Name": "Bridgend",
       "Type": "vubis",
-      "Url": "https://opac.awen-wales.com/bvs-app/Vubis.csp"
+      "Url": "https://opac.awen-wales.com/bvs-app/"
     },
     {
       "Name": "Brighton & Hove",
@@ -117,13 +119,14 @@
     {
       "Name": "Bristol City",
       "Type": "mobilearena",
-      "Id": "",
-      "Url": ""
+      "Id": "280001",
+      "Url": "http://91.106.192.135/arena.pa.palma/catalogue"
     },
     {
       "Name": "Bromley",
-      "Type": "arena",
-      "Url": "https://arena.yourlondonlibrary.net/web/bromley"
+      "Type": "mobilearena",
+      "Id": "226019",
+      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
     },
     {
       "Name": "Buckinghamshire",
@@ -157,8 +160,12 @@
     },
     {
       "Name": "Cardiff",
-      "Type": "ibistro",
-      "Url": "http://ibistro.cardiff.gov.uk/uhtbin/cgisirsi/x/x/0/49/"
+      "Type": "bookmyne",
+      "Id": "446",
+      "Region": "3",
+      "InstitutionId": "163",
+      "Profile": "ALL_LIBS",
+      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1"
     },
     {
       "Name": "Carmarthenshire",
@@ -212,8 +219,12 @@
     },
     {
       "Name": "Cumbria",
-      "Type": "enterprise",
-      "Url": "http://cmbr.ent.sirsidynix.net.uk/client/default"
+      "Type": "bookmyne",
+      "Id": "8348",
+      "Region": "3",
+      "InstitutionId": "768",
+      "Profile": "ALL_LIBS",
+      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1"
     },
     {
       "Name": "Darlington",
@@ -223,8 +234,8 @@
     },
     {
       "Name": "Denbighshire",
-      "Type": "arena",
-      "Url": "https://onlinelibrary.denbighshire.gov.uk"
+      "Type": "viewpoint",
+      "Url": "https://onlinelibrary.denbighshire.gov.uk/"
     },
     {
       "Name": "Derby City",
@@ -233,8 +244,12 @@
     },
     {
       "Name": "Derbyshire",
-      "Type": "portfolio",
-      "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/derbyshire/"
+      "Type": "bookmyne",
+      "Id": "8757",
+      "Region": "3",
+      "InstitutionId": "860",
+      "Profile": "DANDD-SRCH",
+      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1"
     },
     {
       "Name": "Devon",
@@ -254,11 +269,11 @@
     },
     {
       "Name": "Dudley",
-      "Type": "arena",
+      "Type": "viewpoint",
       "Url": "https://libcat.dudley.gov.uk"
     },
     {
-      "Name": "Dumfries & Galloway",
+      "Name": "Dumfries and Galloway",
       "Type": "iguana",
       "Url": "http://library.dumgal.gov.uk"
     },
@@ -347,8 +362,9 @@
     },
     {
       "Name": "Glasgow",
-      "Type": "arena",
-      "Url": "http://libcat.csglasgow.org/"
+      "Type": "mobilearena",
+      "Id": "480001",
+      "Url": "http://libcat.csglasgow.org/arena.pa.palma/catalogue"
     },
     {
       "Name": "Gloucestershire",
@@ -372,8 +388,9 @@
     },
     {
       "Name": "Hackney",
-      "Type": "arena",
-      "Url": "https://arena.yourlondonlibrary.net/web/hackney"
+      "Type": "mobilearena",
+      "Id": "226013",
+      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
     },
     {
       "Name": "Halton",
@@ -429,8 +446,12 @@
     },
     {
       "Name": "Hillingdon",
-      "Type": "enterprise",
-      "Url": "http://hldn.ent.sirsidynix.net.uk"
+      "Type": "bookmyne",
+      "Id": "622",
+      "Region": "3",
+      "InstitutionId": "55",
+      "Profile": "ALL_BRANCH",
+      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1"
     },
     {
       "Name": "Hounslow",
@@ -440,7 +461,7 @@
     },
     {
       "Name": "Hull",
-      "Type": "elibrary",
+      "Type": "ibistro",
       "Url": "http://prismcollect.hullcc.gov.uk"
     },
     {
@@ -538,8 +559,9 @@
     },
     {
       "Name": "Luton",
-      "Type": "arena",
-      "Url": "https://beds-arena.culturalservices.net/web/arena/"
+      "Type": "mobilearena",
+      "Id": "",
+      "Url": "https://beds-arena.culturalservices.net/arena.pa.palma/catalogue"
     },
     {
       "Name": "Manchester",
@@ -590,8 +612,8 @@
     },
     {
       "Name": "Neath Port Talbot",
-      "Type": "aquabrowser",
-      "Url": "http://212.219.142.110/ABNPT/"
+      "Type": "vubis",
+      "Url": "http://212.219.142.126/nptvs/Vubis.csp"
     },
     {
       "Name": "Newcastle",
@@ -640,8 +662,8 @@
     {
       "Name": "North Somerset",
       "Type": "mobilearena",
-      "Id": "",
-      "Url": ""
+      "Id": "280001",
+      "Url": "http://91.106.192.135/arena.pa.palma/catalogue"
     },
     {
       "Name": "North Tyneside",
@@ -666,13 +688,21 @@
     },
     {
       "Name": "Nottingham City",
-      "Type": "enterprise",
-      "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/nottcity"
+      "Type": "bookmyne",
+      "Id": "575",
+      "Region": "3",
+      "InstitutionId": "378",
+      "Profile": "GROUP51",
+      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1"
     },
     {
       "Name": "Nottinghamshire",
-      "Type": "enterprise",
-      "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/nelib"
+      "Type": "bookmyne",
+      "Id": "580",
+      "Region": "3",
+      "InstitutionId": "330",
+      "Profile": "GROUP31",
+      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1"
     },
     {
       "Name": "Northern Ireland",
@@ -787,8 +817,8 @@
     },
     {
       "Name": "Scottish Borders",
-      "Type": "aquabrowser",
-      "Url": "http://librarysearch.scotborders.gov.uk/ab/default.ashx"
+      "Type": "vubis",
+      "Url": "http://librarysearch.scotborders.gov.uk/vs/vubis.csp"
     },
     {
       "Name": "Sefton",
@@ -823,8 +853,8 @@
     {
       "Name": "Somerset",
       "Type": "mobilearena",
-      "Id": "",
-      "Url": ""
+      "Id": "280001",
+      "Url": "http://91.106.192.135/arena.pa.palma/catalogue"
     },
     {
       "Name": "South Ayrshire",
@@ -834,8 +864,8 @@
     {
       "Name": "South Gloucestershire",
       "Type": "mobilearena",
-      "Id": "",
-      "Url": ""
+      "Id": "280001",
+      "Url": "http://91.106.192.135/arena.pa.palma/catalogue"
     },
     {
       "Name": "South Lanarkshire",
@@ -911,13 +941,20 @@
     },
     {
       "Name": "Sutton",
-      "Type": "ibistro",
-      "Url": "http://www.sutton-libraries.gov.uk/"
+      "Type": "bookmyne",
+      "Id": "383",
+      "Region": "3",
+      "InstitutionId": "263",
+      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1"
     },
     {
       "Name": "Swansea",
-      "Type": "enterprise",
-      "Url": "https://swan.ent.sirsidynix.net.uk"
+      "Type": "bookmyne",
+      "Id": "406",
+      "Region": "3",
+      "InstitutionId": "74",
+      "Profile": "ALLLIBSG",
+      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1"
     },
     {
       "Name": "Swindon",
@@ -931,8 +968,9 @@
     },
     {
       "Name": "Telford & Wrekin",
-      "Type": "arena",
-      "Url": "http://library.telford.gov.uk/"
+      "Type": "mobilearena",
+      "Id": "",
+      "Url": "http://library.telford.gov.uk/arena.pa.palma/catalogue"
     },
     {
       "Name": "Thurrock",
@@ -979,8 +1017,9 @@
     },
     {
       "Name": "Waltham Forest",
-      "Type": "arena",
-      "Url": "https://arena.yourlondonlibrary.net/web/walthamforest/home"
+      "Type": "mobilearena",
+      "Id": "226004",
+      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
     },
     {
       "Name": "Wandsworth",
@@ -1026,7 +1065,7 @@
     {
       "Name": "Westminster",
       "Type": "portfolio",
-      "Url": "https://elibrary.westminster.gov.uk/client/en_GB/wcc/?
+      "Url": "https://elibrary.westminster.gov.uk/client/en_GB/wcc/?"
     },
     {
       "Name": "Wigan",
@@ -1072,11 +1111,11 @@
     {
       "Name": "York City",
       "Type": "bookmyne",
-      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1",
       "Id": "474",
-      "Profile": "YORKPUB",
       "Region": "3",
-      "InstitutionId": "174"
+      "InstitutionId": "174",
+      "Profile": "YORKPUB",
+      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1"
     }
   ]
 }

@@ -14,11 +14,9 @@ var reqHeader = { "Content-Type": "text/xml; charset=utf-8" };
 // Function: searchByISBN
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    
-    var responseHoldings = [];
 
-    // Request 1
-    //
+    var responseHoldings = [];
+    // Request 1: 
     request.get({ url: lib.Url + 'SearchCatalog/KEYWORD/' + isbn, headers: reqHeader }, function (error, msg, response) {
         xml2js.parseString(response, function (err, res) {
             if (res.searchCatalog.TotalCount[0] > 0) {
@@ -37,9 +35,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
                             if (result.CurrentItems.LibraryItem[x].Status[0] == 'AVAILABLE') libraries[libName].available++;
                         }
 
-                        for (var lib in libraries) {
-                            responseHoldings.push({ library: lib, available: libraries[lib].available, onLoan: libraries[lib].onLoan });
-                        }
+                        for (var lib in libraries) responseHoldings.push({ library: lib, available: libraries[lib].available, unavailable: libraries[lib].unavailable });
 
                         callback(responseHoldings);
                     });

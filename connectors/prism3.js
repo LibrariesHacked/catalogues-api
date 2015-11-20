@@ -17,10 +17,8 @@ exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = [];
 
     request.get({ url: lib.Url + "items.json?query=" + isbn , headers: reqHeader }, function (error, msg, res) {
-
         res = JSON.parse(res);
         var itemUrl = Object.keys(res)[2];
-
         if (itemUrl) {
             request.get({ url: itemUrl, headers: reqHeader }, function (error, msg, res) {
                 $ = cheerio.load(res);

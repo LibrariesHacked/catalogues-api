@@ -1,0 +1,17 @@
+////////////////////
+// Requires
+////////////////////
+var request = require('request');
+
+/////////////
+// Variables
+////////////
+
+//////////////////////////
+// Function: searchByISBN
+//////////////////////////
+exports.searchByISBN = function (isbn, lib, callback) {
+
+
+
+};
