@@ -14,7 +14,6 @@ var cheerio = require('cheerio');
 exports.searchByISBN = function (isbn, lib, callback) {
 
     var responseHoldings = [];
-
     // Request 1: Search for page by ISBN
     request.get({ url: lib.Url + 'cgi-bin/spydus.exe/ENQ/OPAC/BIBENQ?ISBN=' + isbn }, function (error, msg, res) {
 

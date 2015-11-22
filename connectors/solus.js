@@ -7,10 +7,7 @@ var itemRequest = '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xs
 
 exports.searchByISBN = function (isbn, libraryService, callback) {
 
-    // Brighton Rock: 9780140004427
-
     var responseHoldings = [];
-
 	var soapXML = isbnRequest.replace('[ISBN]', isbn).replace('[APPID]', libraryService.Id);
 	var optionsISBN = {
 	    url: libraryService.Url + '?op=SearchISBN',
@@ -51,7 +48,6 @@ exports.searchByISBN = function (isbn, libraryService, callback) {
                             var soapDetailsResponse = details['soap:Envelope']['soap:Body'][0]['GetDetailsResponse'][0]['GetDetailsResult'];
                             var resultDetailsString = soapDetailsResponse[0];
 
-                            console.log(resultDetailsString);
                             xml2js.parseString(resultDetailsString, function (err, holdings) {
                                 var availability = holdings.items.availability;
                                 for (var i = 0; i < availability.length ; i++) {

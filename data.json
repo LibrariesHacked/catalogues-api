@@ -78,6 +78,7 @@
     {
       "Name": "Blaenau Gwent",
       "Type": "ibistro",
+      "Available": "On Shelf",
       "Url": "http://bglibcat.blaenau-gwent.gov.uk/"
     },
     {
@@ -170,12 +171,12 @@
     {
       "Name": "Carmarthenshire",
       "Type": "vubis",
-      "Url": "http://212.219.142.126/carvs/vubis.csp"
+      "Url": "http://212.219.142.126/carvs/"
     },
     {
       "Name": "Ceredigion",
       "Type": "vubis",
-      "Url": "http://libraries.ceredigion.gov.uk/vs/Vubis.csp"
+      "Url": "http://libraries.ceredigion.gov.uk/vs/"
     },
     {
       "Name": "Cheshire West and Chester",
@@ -215,7 +216,7 @@
     {
       "Name": "Croydon",
       "Type": "vubis",
-      "Url": "http://catalogue.croydonlibraries.com/vs/Vubis.csp"
+      "Url": "http://catalogue.croydonlibraries.com/vs/"
     },
     {
       "Name": "Cumbria",
@@ -338,7 +339,7 @@
     {
       "Name": "Essex",
       "Type": "vubis",
-      "Url": "http://classiccatalogue.essex.gov.uk/vs/Vubis.csp"
+      "Url": "http://classiccatalogue.essex.gov.uk/vs/"
     },
     {
       "Name": "Falkirk",
@@ -462,7 +463,8 @@
     {
       "Name": "Hull",
       "Type": "ibistro",
-      "Url": "http://prismcollect.hullcc.gov.uk"
+      "Available": "Item on shelves",
+      "Url": "http://prismcollect.hullcc.gov.uk/"
     },
     {
       "Name": "Inverclyde",
@@ -828,7 +830,8 @@
     {
       "Name": "Sheffield",
       "Type": "ibistro",
-      "Url": "http://library.sheffield.gov.uk/uhtbin/webcat"
+      "Available": "",
+      "Url": "http://library.sheffield.gov.uk/"
     },
     {
       "Name": "Shetland",
@@ -931,7 +934,8 @@
     {
       "Name": "Sunderland",
       "Type": "ibistro",
-      "Url": "http://www.sunderland.gov.uk"
+      "Available": "Item is on the shelf",
+      "Url": "http://www.sunderland.gov.uk/"
     },
     {
       "Name": "Surrey",

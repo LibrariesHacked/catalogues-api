@@ -27,7 +27,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
                 var lib = $(this).find('td').eq(0).text().trim();
                 var bc = $(this).find('td').eq(2).text().trim();
                 var status = avail.strings[avail.ids.indexOf(bc)].trim();
-                console.log(status);
+
                 if (!libraries[lib]) libraries[lib] = { available: 0, unavailable: 0 };
                 if (status == 'Standard shelving location') {
                     libraries[lib].available++;

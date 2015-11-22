@@ -32,11 +32,12 @@ exports.searchByISBN = function (isbn, lib, callback) {
 
                 var libraries = {};
                 $('.holdingst tbody').find('tr').each(function (i, elem) {
+
+                    // Fetch the library name, and associated availability status.
                     var lib = $(this).find('td.location span span').eq(1).text().trim();
                     var status = $(this).find('td.status span').text().trim();
 
                     if (!libraries[lib]) libraries[lib] = { available: 0, unavailable: 0 };
-                    console.log(status);
                     if (status == 'Available') libraries[lib].available++;
                     if (status != 'Available') libraries[lib].unavailable++;
                 });
