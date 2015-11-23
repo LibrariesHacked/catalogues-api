@@ -73,7 +73,7 @@
     {
       "Name": "Blackpool",
       "Type": "enterprise",
-      "Url": "http://libraries.blackpool.gov.uk/"
+      "Url": "http://libraries.blackpool.gov.uk/client/default/"
     },
     {
       "Name": "Blaenau Gwent",
@@ -142,7 +142,7 @@
     {
       "Name": "Caerphilly",
       "Type": "iguana",
-      "Url": "http://libraries.caerphilly.gov.uk/"
+      "Url": "http://libraries.caerphilly.gov.uk/iguana/"
     },
     {
       "Name": "Calderdale",
@@ -240,7 +240,7 @@
     },
     {
       "Name": "Derby City",
-      "Type": "portfolio",
+      "Type": "enterprise",
       "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/derby/"
     },
     {
@@ -296,8 +296,8 @@
     },
     {
       "Name": "East Ayrshire",
-      "Type": "portfolio",
-      "Url": "http://libcatalogue.east-ayrshire.gov.uk/uhtbin/webcat"
+      "Type": "ibistro",
+      "Url": "http://libcatalogue.east-ayrshire.gov.uk/"
     },
     {
       "Name": "East Dunbartonshire",
@@ -400,7 +400,7 @@
     },
     {
       "Name": "Hammersmith & Fulham",
-      "Type": "portfolio",
+      "Type": "enterprise",
       "Url": "https://trib.ent.sirsidynix.net.uk/client/en_GB/lbhf/"
     },
     {
@@ -510,12 +510,12 @@
     {
       "Name": "Kirklees",
       "Type": "enterprise",
-      "Url": "http://kir.ent.sirsidynix.net.uk/"
+      "Url": "http://kir.ent.sirsidynix.net.uk/client/en_GB/default/"
     },
     {
       "Name": "Knowsley",
       "Type": "enterprise",
-      "Url": "http://kmbc.sdp.sirsidynix.net.uk"
+      "Url": "http://kmbc.sdp.sirsidynix.net.uk/client/default/"
     },
     {
       "Name": "Lambeth",
@@ -540,8 +540,8 @@
     },
     {
       "Name": "Leicestershire",
-      "Type": "portfolio",
-      "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/leics"
+      "Type": "enterprise",
+      "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/leics/"
     },
     {
       "Name": "Lewisham",
@@ -709,7 +709,7 @@
     {
       "Name": "Northern Ireland",
       "Type": "enterprise",
-      "Url": "http://lni.ent.sirsidynix.net.uk/"
+      "Url": "http://lni.ent.sirsidynix.net.uk/client/en_GB/default/"
     },
     {
       "Name": "Oldham",
@@ -764,7 +764,7 @@
     {
       "Name": "Reading",
       "Type": "horizon",
-      "Url": "http://reading-hip.epixtech.co.uk"
+      "Url": "http://reading-hip.epixtech.co.uk/"
     },
     {
       "Name": "Redbridge",
@@ -805,7 +805,7 @@
     {
       "Name": "Rutland",
       "Type": "enterprise",
-      "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/rutland"
+      "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/rutland/"
     },
     {
       "Name": "Salford",
@@ -898,7 +898,7 @@
     {
       "Name": "St Helens",
       "Type": "enterprise",
-      "Url": "https://enterprise.sthelens.gov.uk/"
+      "Url": "https://enterprise.sthelens.gov.uk/client/en_GB/mylibrary/"
     },
     {
       "Name": "Staffordshire",
@@ -1048,12 +1048,12 @@
     {
       "Name": "West Dunbartonshire",
       "Type": "enterprise",
-      "Url": "http://wd.ent.sirsidynix.net.uk/client/en_US/"
+      "Url": "http://wd.ent.sirsidynix.net.uk/client/wd/"
     },
     {
       "Name": "West Lothian",
       "Type": "horizon",
-      "Url": "http://webpac.westlothian.gov.uk/ipac20/ipac.jsp?profile="
+      "Url": "http://webpac.westlothian.gov.uk/"
     },
     {
       "Name": "West Sussex",
@@ -1068,8 +1068,8 @@
     },
     {
       "Name": "Westminster",
-      "Type": "portfolio",
-      "Url": "https://elibrary.westminster.gov.uk/client/en_GB/wcc/?"
+      "Type": "enterprise",
+      "Url": "https://elibrary.westminster.gov.uk/client/en_GB/wcc/"
     },
     {
       "Name": "Wigan",

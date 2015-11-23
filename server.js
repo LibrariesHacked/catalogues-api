@@ -11,7 +11,7 @@ var libraries = require('./libraries');
 ///////////////////////////////////////////
 var app = express();
 app.get('/services', libraries.getAllLibraries);
-app.get('/isbnSearch/:isbn', libraries.isbnSearch);
+app.get('/availabilityByISBN/:isbn', libraries.isbnSearch);
 
 ///////////////////////////////////////////
 // Startup

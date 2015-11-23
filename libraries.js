@@ -29,10 +29,9 @@ exports.getAllLibraries = function (req, res) {
 /////////////////////////////////////////////////////////////////
 // Function: isbnSearch
 // Route: /isbnSearch/:isbn
-// Test: http://localhost:3000/isbnSearch/9780747532743?libraries=wiltshire
+// Test: http://localhost:3000/availabilityByISBN/9780747532743?libraries=wiltshire
 /////////////////////////////////////////////////////////////////
 exports.isbnSearch = function (req, res) {
-
     var searches = data.LibraryServices
         .filter(function (service) {
             return (!req.query.library || req.query.library.indexOf(service.Name) > -1);
@@ -44,7 +43,6 @@ exports.isbnSearch = function (req, res) {
                 });
             }
         });
-
     async.parallel(searches, function (err, response) {
         res.send(response);
     });

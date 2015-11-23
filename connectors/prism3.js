@@ -1,19 +1,21 @@
-////////////////////
-// Requires
-////////////////////
-var request = require('request');
-var cheerio = require('cheerio');
+///////////////////////////////////////////
+// REQUIRES
+// Request (for HTTP calls) and cheerio for
+// querying the HTML returned.
+///////////////////////////////////////////
+var request = require('request'),
+    cheerio = require('cheerio');
+console.log('prism3 connector loading...');
 
-/////////////
-// Variables
-////////////
+///////////////////////////////////////////
+// VARIABLES
+///////////////////////////////////////////
 var reqHeader = { "Content-Type": "text/xml; charset=utf-8" };
 
 //////////////////////////
 // Function: searchByISBN
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-
     var responseHoldings = [];
     request.get({ url: lib.Url + "items.json?query=" + isbn , headers: reqHeader }, function (error, msg, res) {
         res = JSON.parse(res);
@@ -21,17 +23,12 @@ exports.searchByISBN = function (isbn, lib, callback) {
         if (itemUrl) {
             request.get({ url: itemUrl, headers: reqHeader }, function (error, msg, res) {
                 $ = cheerio.load(res);
-
                 $('#availability').find('ul.options li').each(function (i, elem) {
-                    var library = $(this).find('h3 span span').text().trim();
-                    var available = 0;
-                    var unavailable = 0;
+                    var lib = { library: $(this).find('h3 span span').text().trim(), available: 0, unavailable: 0 };
                     $(this).find('div.jsHidden table tbody tr').each(function (i, elem) {
-                        if ($(this).find('td.item-status span').text().trim() == 'Available') available++;
-                        if ($(this).find('td.item-status span').text().indexOf('Overdue') != -1) unavailable++;
-                        if ($(this).find('td.item-status span').text().indexOf('Due back') != -1) unavailable++;
+                        $(this).find('td.item-status span').text().trim() ? lib.available++ : lib.unavailable++;
                     });
-                    responseHoldings.push({ library: library, available: available, onLoan: unavailable });
+                    responseHoldings.push(lib);
                 });
                 callback(responseHoldings);
             });

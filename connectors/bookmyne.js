@@ -1,61 +1,41 @@
-////////////////////
-// Requires
-////////////////////
+///////////////////////////////////////////
+// REQUIRES
+// Request (for HTTP calls)
+///////////////////////////////////////////
 var request = require('request');
+console.log('bookmyne connector loading...');
+
+///////////////////////////////////////////
+// VARIABLES
+///////////////////////////////////////////
+var host = "bookmyne.bc.sirsidynix.net"
+var headers = { "Accept": "application/json", "Accept-Language": "en-gb", "Host": host, "Referer": "https://" + host + "/bookmyne/app.html#extendedDetail" };
+var searchUrl = "/search/os?q=GENERAL%3A[ISBN]&qf=GENERAL&rw=0&ct=10&pr=[PROFILE]&ext=dss&library_id=[LIBID]";
 
 //////////////////////////
 // Function: searchByISBN
 //////////////////////////
-exports.searchByISBN = function (isbn, libraryService, callback) {
-
+exports.searchByISBN = function (isbn, lib, callback) {
+    headers["ILS-Profile"] = libraryService.Profile;
+    headers["SD-Institution"] = libraryService.InstitutionId;
+    headers["SD-Region"] = libraryService.Region;
     var responseHoldings = [];
-
-    var headers = {
-        "Accept": "application/json",
-        "Accept-Language": "en-gb",
-        "Host": "bookmyne.bc.sirsidynix.net",
-        "ILS-Profile": libraryService.Profile,
-        "Referer": "https://bookmyne.bc.sirsidynix.net/bookmyne/app.html#extendedDetail",
-        "SD-Institution": libraryService.InstitutionId,
-        "SD-Region": libraryService.Region
-    };
-
-    // Need to search first by 13 digit ISBN
-    var titlesOptions = {
-        url: libraryService.Url + '/search/os?q=GENERAL%3A' + isbn + '&qf=GENERAL&rw=0&ct=10&pr=' + libraryService.Profile + '&ext=dss&library_id=' + libraryService.Id,
-        headers: headers
-    };
-
     // Request 1: Call web service to get the item ID
-    request.get(titlesOptions, function (error, msg, response) {
-
+    request.get({ url: lib.Url + searchUrl.replace('[ISBN]', isbn).replace('[PROFILE]', lib.Profile).replace('[LIBID]', lib.Id), headers: headers }, function (error, msg, response) {
         var jsonResponse = JSON.parse(response);
         if (jsonResponse.totalResults && jsonResponse.totalResults > 0) {
             var id = jsonResponse.entry[0].id;
-            var holdingsOptions = {
-                url: libraryService.Url + '/title/holdings?title_id=' + id,
-                headers: headers
-            };
-
             // Request 2: Call web service to get the holdings
-            request.get(holdingsOptions, function (error, msg, response) {
-                console.log(response);
-                var holdings = JSON.parse(response).holdingList;
-
-                for (var holding in holdings) {
-                    var noAvailable = 0;
-                    var noItems = 0;
-                    var noUnavailable = 0;
-                    var holdingsItemList = holdings[holding].holdingsItemList;
-                    for (var item in holdingsItemList) {
-                        noItems++;
-                        if (holdingsItemList[item].currentLocation == 'SHELF') noAvailable++;
-                        if (holdingsItemList[item].currentLocation == 'ON-LOAN') noUnavailable++;
-                        if (holdingsItemList[item].currentLocation == 'INTRANSIT') noUnavailable++;
-                    }
-
-                    responseHoldings.push({ library: holdings[holding].libraryDescription, available: noAvailable, unavailable: noUnavailable });
-                }
+            request.get({ url: libraryService.Url + '/title/holdings?title_id=' + id, headers: headers }, function (error, msg, response) {
+                JSON.parse(response).holdingList.forEach(function (holding) {
+                    var libs = {};
+                    holding.holdingsItemList.forEach(function (item) {
+                        var name = holding.libraryDescription;
+                        if (!libs[name]) libs[name] = { available: 0, unavailable: 0 };
+                        item.currentLocation == 'SHELF' ? libs[name].available++ : libs[name].unavailable++;
+                    });
+                });
+                for (var l in libs) responseHoldings.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
                 callback(responseHoldings);
             })
         } else {
