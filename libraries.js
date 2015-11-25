@@ -1,19 +1,17 @@
 ///////////////////////////////////////////
-// Requires
+// REQUIRES
+// Load async so that requests to libraries 
+// can be done in parallel, and the data file.
 ///////////////////////////////////////////
 var async = require('async');
 var data = require('./data');
 
-/// On first run this sets up the library service connectors
-/// that are currently referred to in the data.json file.
+// On first run this sets up all the library service connectors
+// that are currently referred to in the data.json file.
 var serviceFunctions = {};
-for (service in data.LibraryServices) {
-    var type = data.LibraryServices[service].Type;
-    if (!serviceFunctions[type] && type != '') {
-        var req = require('./connectors/' + type);
-        serviceFunctions[type] = req;
-    }
-}
+data.LibraryServices.forEach(function (service) {
+    if (!serviceFunctions[service.Type]) serviceFunctions[service.Type] = require('./connectors/' + service.Type);
+});
 
 /////////////////////////////////////////////////////////////////
 // Function: getAllLibraries
@@ -29,7 +27,7 @@ exports.getAllLibraries = function (req, res) {
 /////////////////////////////////////////////////////////////////
 // Function: isbnSearch
 // Route: /isbnSearch/:isbn
-// Test: http://localhost:3000/availabilityByISBN/9780747532743?libraries=wiltshire
+// Test: http://localhost:3000/availabilityByISBN/9780747532743?library=Wiltshire
 /////////////////////////////////////////////////////////////////
 exports.isbnSearch = function (req, res) {
     var searches = data.LibraryServices

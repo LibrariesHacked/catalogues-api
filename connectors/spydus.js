@@ -1,3 +1,5 @@
+console.log('spydus connector loading...');
+
 ///////////////////////////////////////////
 // REQUIRES
 // Request (for HTTP calls) and cheerio for
@@ -5,7 +7,6 @@
 ///////////////////////////////////////////
 var request = require('request'),
     cheerio = require('cheerio');
-console.log('spydus connector loading...');
 
 ///////////////////////////////////////////
 // VARIABLES
@@ -17,17 +18,17 @@ var searchUrl = 'cgi-bin/spydus.exe/ENQ/OPAC/BIBENQ?ISBN=';
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = [];
-    // Request 1: Search for page by ISBN
+    // Request 1: Deep link to item page by ISBN.
     request.get({ url: lib.Url + searchUrl + isbn }, function (error, msg, res) {
         $ = cheerio.load(res);
         var libs = {};
         $('div.holdings table tr').slice(1).each(function (i, elem) {
-            var lib = $(this).find('td').eq(0).text().trim();
+            var name = $(this).find('td').eq(0).text().trim();
             var status = $(this).find('td').eq(3).text().trim();
-            if (!libs[lib]) libs[lib] = { available: 0, unavailable: 0 };
-            status == 'Available' ? libs[lib].available++ : libs[lib].unavailable++;
+            if (!libs[name]) libs[name] = { available: 0, unavailable: 0 };
+            status == 'Available' ? libs[name].available++ : libs[name].unavailable++;
         });
-        for (var l in libs) responseHoldings.push({ library: lib, available: libs[l].available, unavailable: libs[l].unavailable });
+        for (var l in libs) responseHoldings.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
         callback(responseHoldings);
     });
 };

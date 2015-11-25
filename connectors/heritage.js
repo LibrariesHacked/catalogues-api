@@ -1,3 +1,5 @@
+console.log('heritage connector loading...');
+
 ///////////////////////////////////////////
 // REQUIRES
 // Request (for HTTP calls) and xml2js for 
@@ -5,17 +7,19 @@
 ///////////////////////////////////////////
 var xml2js = require('xml2js'),
     request = require('request');
-console.log('heritage connector loading...');
 
 ///////////////////////////////////////////
 // VARIABLES
 ///////////////////////////////////////////
+var searchUrl = 'search2?searchTerm0=';
 
 //////////////////////////
 // Function: searchByISBN
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
 
+    request.get(lib.Url + searchUrl + isbn, function (error, message, response) {
 
 
+    });
 };

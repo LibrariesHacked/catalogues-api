@@ -1,3 +1,5 @@
+console.log('solus connector loading...');
+
 ///////////////////////////////////////////
 // REQUIRES
 // Request (for HTTP calls) and xml2js for 
@@ -5,7 +7,6 @@
 ///////////////////////////////////////////
 var xml2js = require('xml2js'),
     request = require('request');
-console.log('solus connector loading...');
 
 ///////////////////////////////////////////
 // VARIABLES
@@ -15,6 +16,9 @@ var itemRequest = '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xs
 
 ///////////////////////////////////////////
 // Function: searchByISBN
+// Not actually currently used but could be
+// as a backup - though if there were issues
+// chances are this wouldn't work either!
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, libraryService, callback) {
     var responseHoldings = [];

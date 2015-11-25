@@ -43,7 +43,7 @@
       "Url": "https://capitadiscovery.co.uk/barnsleymbc/"
     },
     {
-      "Name": "Bath & North East Somerset",
+      "Name": "Bath and North East Somerset",
       "Type": "mobilearena",
       "Id": "280001",
       "Url": "http://91.106.192.135/arena.pa.palma/catalogue"
@@ -113,7 +113,7 @@
       "Url": "https://opac.awen-wales.com/bvs-app/"
     },
     {
-      "Name": "Brighton & Hove",
+      "Name": "Brighton and Hove",
       "Type": "spydus",
       "Url": "http://brighton-hove.spydus.co.uk/"
     },
@@ -142,6 +142,7 @@
     {
       "Name": "Caerphilly",
       "Type": "iguana",
+      "Database": "1_LIBS",
       "Url": "http://libraries.caerphilly.gov.uk/iguana/"
     },
     {
@@ -196,7 +197,7 @@
     {
       "Name": "Clackmannanshire",
       "Type": "vufind",
-      "Url": "http://vufind-cl.sedar.org.uk/"
+      "Url": "http://vufind-cl.sedar.org.uk/vufind/"
     },
     {
       "Name": "Conwy",
@@ -210,8 +211,9 @@
     },
     {
       "Name": "Coventry",
-      "Type": "prism3",
-      "Url": "https://capitadiscovery.co.uk/coventry/"
+      "Type": "iguana",
+      "Database": "1",
+      "Url": "https://librarycatalogue.coventry.gov.uk/iguana/"
     },
     {
       "Name": "Croydon",
@@ -254,7 +256,7 @@
     },
     {
       "Name": "Devon",
-      "Type": "viewpoint",
+      "Type": "viewpoint-old",
       "Url": "http://www.devon.gov.uk/library/catalogue/cgi-bin/vps2.5_viewpoint.sh"
     },
     {
@@ -271,22 +273,23 @@
     {
       "Name": "Dudley",
       "Type": "viewpoint",
-      "Url": "https://libcat.dudley.gov.uk"
+      "Url": "https://libcat.dudley.gov.uk/"
     },
     {
       "Name": "Dumfries and Galloway",
       "Type": "iguana",
-      "Url": "http://library.dumgal.gov.uk"
+      "Database": "1_LIBS",
+      "Url": "http://library.dumgal.gov.uk/iguana/"
     },
     {
       "Name": "Dundee City",
       "Type": "spydus",
-      "Url": "http://opac.dundeecity.gov.uk"
+      "Url": "http://opac.dundeecity.gov.uk/"
     },
     {
       "Name": "Durham",
       "Type": "durham",
-      "Url": "https://libraryonline.durham.gov.uk/pgCatKeywordSearch.aspx"
+      "Url": "https://libraryonline.durham.gov.uk/"
     },
     {
       "Name": "Ealing",
@@ -323,7 +326,7 @@
     {
       "Name": "East Sussex",
       "Type": "spydus",
-      "Url": "https://e-library.eastsussex.gov.uk"
+      "Url": "https://e-library.eastsussex.gov.uk/"
     },
     {
       "Name": "Edinburgh",
@@ -411,7 +414,7 @@
     {
       "Name": "Haringey",
       "Type": "prism3",
-      "Url": "http://capitadiscovery.co.uk/haringey"
+      "Url": "http://capitadiscovery.co.uk/haringey/"
     },
     {
       "Name": "Harrow",
@@ -479,7 +482,7 @@
     {
       "Name": "Isle of Man",
       "Type": "heritage",
-      "Url": "http://www.douglas.gov.im/HeritageScripts/"
+      "Url": "http://www.douglas.gov.im/HeritageScripts/Hapi.dll"
     },
     {
       "Name": "Islington",
@@ -632,7 +635,8 @@
     {
       "Name": "Newport",
       "Type": "iguana",
-      "Url": "https://opac.newport.gov.uk/iguana"
+      "Database": "1",
+      "Url": "https://opac.newport.gov.uk/iguana/"
     },
     {
       "Name": "Norfolk",
@@ -744,7 +748,7 @@
     {
       "Name": "Plymouth",
       "Type": "viewpoint",
-      "Url": "https://www.webopac.plymouth.gov.uk/"
+      "Url": "http://www.webopac.plymouth.gov.uk/"
     },
     {
       "Name": "Poole",
@@ -754,7 +758,7 @@
     {
       "Name": "Portsmouth",
       "Type": "spydus",
-      "Url": "https://librarycat.portsmouth.gov.uk"
+      "Url": "https://librarycat.portsmouth.gov.uk/"
     },
     {
       "Name": "Powys",
@@ -780,7 +784,8 @@
     {
       "Name": "Renfrewshire",
       "Type": "iguana",
-      "Url": "https://libcat.renfrewshire.gov.uk/iguana"
+      "Database": "1",
+      "Url": "https://libcat.renfrewshire.gov.uk/iguana/"
     },
     {
       "Name": "Rhondda Cynon Taf",
@@ -841,7 +846,7 @@
     {
       "Name": "Shropshire",
       "Type": "viewpoint",
-      "Url": "http://libraries.shropshire.gov.uk"
+      "Url": "http://libraries.shropshire.gov.uk/"
     },
     {
       "Name": "Slough",
@@ -1038,6 +1043,7 @@
     {
       "Name": "Warwickshire",
       "Type": "iguana",
+      "Database": "1",
       "Url": "http://library.warwickshire.gov.uk/iguana/"
     },
     {
@@ -1109,7 +1115,7 @@
     },
     {
       "Name": "Wrexham",
-      "Type": "viewpoint",
+      "Type": "viewpoint-old",
       "Url": "https://www.wrexham.gov.uk/Library-Online-Catalogue"
     },
     {

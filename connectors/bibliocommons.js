@@ -1,3 +1,5 @@
+console.log('bibliocommons connector loading...');
+
 ///////////////////////////////////////////
 // REQUIRES
 // Request (for HTTP calls) and xml2js for 
@@ -5,11 +7,11 @@
 ///////////////////////////////////////////
 var xml2js = require('xml2js'),
     request = require('request');
-console.log('bibliocommons connector loading...');
 
 ///////////////////////////////////////////
 // VARIABLES
 ///////////////////////////////////////////
+var searchUrl = 'SearchCatalog/KEYWORD/';
 var reqHeader = { "Content-Type": "text/xml; charset=utf-8" };
 
 ///////////////////////////////////////////
@@ -20,7 +22,7 @@ var reqHeader = { "Content-Type": "text/xml; charset=utf-8" };
 exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = [];
     // Request 1: web service to search for item
-    request.get({ url: lib.Url + 'SearchCatalog/KEYWORD/' + isbn, headers: reqHeader }, function (error, msg, response) {
+    request.get({ url: lib.Url + searchUrl + isbn, headers: reqHeader }, function (error, msg, response) {
         xml2js.parseString(response, function (err, res) {
             if (res.searchCatalog.TotalCount[0] > 0) {
                 var bibId = res.searchCatalog.Bib[0].BcId[0];
@@ -33,7 +35,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
                             if (!libs[libName]) libs[libName] = { available: 0, unavailable: 0 };
                             item.Status[0] == 'UNAVAILABLE' ? libs[libName].unavailable++ : libs[libName].available++;
                         });
-                        for (var lib in libraries) responseHoldings.push({ library: lib, available: libraries[lib].available, unavailable: libraries[lib].unavailable });
+                        for (var l in libs) responseHoldings.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
                         callback(responseHoldings);
                     });
                 });

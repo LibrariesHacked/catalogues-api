@@ -1,3 +1,5 @@
+console.log('webpac connector loading');
+
 ///////////////////////////////////////////
 // REQUIRES
 // Request (for HTTP calls) and cheerio for
@@ -5,11 +7,9 @@
 ///////////////////////////////////////////
 var request = require('request'),
     cheerio = require('cheerio');
-console.log('webpac connector loading');
 
 ///////////////////////////////////////////
 // Function: searchByISBN
-// 
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = [];

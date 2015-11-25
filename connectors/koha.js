@@ -1,3 +1,5 @@
+console.log('koha connector loading...');
+
 ///////////////////////////////////////////
 // REQUIRES
 // Request (for HTTP calls) and cheerio for
@@ -5,7 +7,6 @@
 ///////////////////////////////////////////
 var request = require('request'),
     cheerio = require('cheerio');
-console.log('koha connector loading...');
 
 //////////////////////////
 // VARIABLES

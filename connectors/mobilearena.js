@@ -1,3 +1,5 @@
+console.log('mobilearena connector loading...');
+
 ///////////////////////////////////////////
 // REQUIRES
 // Request (for HTTP calls) and xml2js for 
@@ -5,7 +7,6 @@
 ///////////////////////////////////////////
 var xml2js = require('xml2js'),
     request = require('request');
-console.log('mobilearena connector loading...');
 
 ///////////////////////////////////////////
 // VARIABLES

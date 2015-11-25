@@ -1,3 +1,5 @@
+console.log('horizon connector loading...');
+
 ///////////////////////////////////////////
 // REQUIRES
 // Request (for HTTP calls) and cheerio for 
@@ -5,7 +7,6 @@
 ///////////////////////////////////////////
 var cheerio = require('cheerio'),
     request = require('request');
-console.log('horizon connector loading...');
 
 ///////////////////////////////////////////
 // VARIABLES

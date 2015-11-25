@@ -1,3 +1,5 @@
+console.log('enterprise connector loading...');
+
 ///////////////////////////////////////////
 // REQUIRES
 // Request (for HTTP calls) and cheerio for
@@ -5,7 +7,6 @@
 ///////////////////////////////////////////
 var request = require('request'),
     cheerio = require('cheerio');
-console.log('enterprise connector loading...');
 
 ///////////////////////////////////////////
 // VARIABLES
@@ -20,9 +21,18 @@ var header = { 'X-Requested-With': 'XMLHttpRequest' };
 exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = [];
     // Request 1: Call the deep link to the item by ISBN
-    request.get({ url: lib.Url + searchUrl.replace('', isbn) }, function (error, msg, resp1) {
+    request.get({ url: lib.Url + searchUrl.replace('[ISBN]', isbn) }, function (error, msg, resp1) {
         var uri = msg.request.uri.path;
         var ils = uri.substring(uri.lastIndexOf("ent:") + 4, uri.lastIndexOf("/one;"));
+
+        if (!ils && ils.length < 5) {
+            $ = cheerio.load(resp1);
+            var link = $('#da0').text('value');
+            ils = link.substring(link.lastIndexOf("ent:") + 4);
+            console.log(ils);
+        }
+
+        
         // Request 2: A post request returns the data used to show the availability information
         request.post({ url: lib.Url + itemUrl.replace('[ILS]', ils), headers: header }, function (error, msg, resp2) {
             var avail = JSON.parse(resp2);

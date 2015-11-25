@@ -1,3 +1,5 @@
+console.log('ibistro connector loading...');
+
 ///////////////////////////////////////////
 // REQUIRES
 // Request (for HTTP calls) and cheerio for
@@ -5,7 +7,6 @@
 ///////////////////////////////////////////
 var request = require('request'),
     cheerio = require('cheerio');
-console.log('ibistro connector loading...');
 
 ///////////////////////////////////////////
 // VARIABLES
@@ -28,9 +29,9 @@ exports.searchByISBN = function (isbn, lib, callback) {
                 if (libr == 'Copies') libr = $(this).find('.holdingsheader_users_library').eq(0).text().trim();
                 currentLib = libr;
                 libs[libr] = { available: 0, unavailable: 0 };
+                var status = $(this).find('td.holdingslist').eq(3).text().trim();
+                status == lib.Available ? libs[currentLib].available++ : libs[currentLib].unavailable++;
             }
-            var status = $(this).find('td.holdingslist').eq(3).text().trim();
-            status == lib.Available ? libs[currentLib].available++ : libs[currentLib].unavailable++;
         });
         for (var l in libs) responseHoldings.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
         callback(responseHoldings);
