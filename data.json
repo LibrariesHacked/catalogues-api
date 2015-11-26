@@ -539,7 +539,7 @@
       "Name": "Leicester City",
       "Type": "mobilearena",
       "Id": "201001",
-      "Url": "https://bookfinder.leicester.gov.uk/arena.pa.palma"
+      "Url": "https://bookfinder.leicester.gov.uk/arena.pa.palma/catalogue"
     },
     {
       "Name": "Leicestershire",
@@ -565,7 +565,7 @@
     {
       "Name": "Luton",
       "Type": "mobilearena",
-      "Id": "",
+      "Id": "220002",
       "Url": "https://beds-arena.culturalservices.net/arena.pa.palma/catalogue"
     },
     {
@@ -736,7 +736,7 @@
       "Url": "http://libraryonline.pembrokeshire.gov.uk/pemvs/Vubis.csp"
     },
     {
-      "Name": "Perth & Kinross",
+      "Name": "Perth and Kinross",
       "Type": "prism3",
       "Url": "https://capitadiscovery.co.uk/perthandkinross/"
     },
@@ -883,7 +883,7 @@
     {
       "Name": "South Tyneside",
       "Type": "prism3",
-      "Url": "https://capitadiscovery.co.uk/southtyneside"
+      "Url": "https://capitadiscovery.co.uk/southtyneside/"
     },
     {
       "Name": "Southampton",
@@ -976,10 +976,10 @@
       "Url": "http://intouch.tameside.gov.uk/vubis/Vubis.csp"
     },
     {
-      "Name": "Telford & Wrekin",
+      "Name": "Telford and Wrekin",
       "Type": "mobilearena",
-      "Id": "",
-      "Url": "http://library.telford.gov.uk/arena.pa.palma/catalogue"
+      "Id": "320001",
+      "Url": "https://library.telford.gov.uk/arena.pa.palma/catalogue"
     },
     {
       "Name": "Thurrock",

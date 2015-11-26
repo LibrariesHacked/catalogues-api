@@ -24,14 +24,15 @@ exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = [];
     var soapSearchXML = searchRequest.replace('[ISBN]', isbn).replace('[SERVICEID]', lib.Id);
     // Request 1: Search for the item ID from ISBN
-    request.post({ url: lib.Url, body: soapSearchXML, headers: reqHeader }, function (error, msg, response) {
+    // RejectUnauthorised used again (for Leicester City).  Investigate.
+    request.post({ url: lib.Url, body: soapSearchXML, headers: reqHeader, rejectUnauthorized: false }, function (error, msg, response) {
         xml2js.parseString(response, function (err, res) {
             var soapResponse = res['soap:Envelope']['soap:Body'][0]['ns1:SearchResponse'][0]['searchResponse'];
             if (soapResponse[0] && soapResponse[0].catalogueRecords && soapResponse[0].catalogueRecords[0]) {
                 var crId = soapResponse[0].catalogueRecords[0].catalogueRecord[0].id;
                 var soapDetailXML = detailsRequest.replace('[CRID]', crId).replace('[SERVICEID]', lib.Id);
                 // Request 2: Search for item details (which will include availability holdings information.
-                request.post({ url: lib.Url, body: soapDetailXML, headers: reqHeader }, function (error, msg, response) {
+                request.post({ url: lib.Url, body: soapDetailXML, headers: reqHeader, rejectUnauthorized: false }, function (error, msg, response) {
                     xml2js.parseString(response, function (err, res) {
                         var soapResponse = res['soap:Envelope']['soap:Body'][0]['ns1:GetCatalogueRecordDetailResponse'][0]['catalogueRecordDetailResponse'];
                         if (soapResponse[0] && soapResponse[0].holdings) {
