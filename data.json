@@ -73,6 +73,7 @@
     {
       "Name": "Blackpool",
       "Type": "enterprise",
+      "Available": "Standard shelving location",
       "Url": "http://libraries.blackpool.gov.uk/client/default/"
     },
     {
@@ -243,6 +244,7 @@
     {
       "Name": "Derby City",
       "Type": "enterprise",
+      "Available": "In stock",
       "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/derby/"
     },
     {
@@ -347,6 +349,7 @@
     {
       "Name": "Falkirk",
       "Type": "enterprise",
+      "Available": "In stock",
       "Url": "http://fct.ent.sirsidynix.net.uk/client/en_GB/libraries/"
     },
     {
@@ -402,8 +405,9 @@
       "Url": "http://hpl.koha-ptfs.eu/"
     },
     {
-      "Name": "Hammersmith & Fulham",
+      "Name": "Hammersmith and Fulham",
       "Type": "enterprise",
+      "Available": "In stock",
       "Url": "https://trib.ent.sirsidynix.net.uk/client/en_GB/lbhf/"
     },
     {
@@ -495,8 +499,9 @@
       "Url": "https://capitadiscovery.co.uk/jersey/"
     },
     {
-      "Name": "Kensington & Chelsea",
+      "Name": "Kensington and Chelsea",
       "Type": "enterprise",
+      "Available": "In stock",
       "Url": "https://trib.ent.sirsidynix.net.uk/client/en_GB/rbkc/"
     },
     {
@@ -513,11 +518,13 @@
     {
       "Name": "Kirklees",
       "Type": "enterprise",
+      "Available": "In stock",
       "Url": "http://kir.ent.sirsidynix.net.uk/client/en_GB/default/"
     },
     {
       "Name": "Knowsley",
       "Type": "enterprise",
+      "Available": "In stock",
       "Url": "http://kmbc.sdp.sirsidynix.net.uk/client/default/"
     },
     {
@@ -544,6 +551,7 @@
     {
       "Name": "Leicestershire",
       "Type": "enterprise",
+      "Available": "In stock",
       "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/leics/"
     },
     {
@@ -608,6 +616,7 @@
     {
       "Name": "Monmouthshire",
       "Type": "enterprise",
+      "Available": "In stock",
       "Url": "http://catalogue.monmouthshire.gov.uk/"
     },
     {
@@ -690,6 +699,7 @@
     {
       "Name": "Northumberland",
       "Type": "enterprise",
+      "Available": "In stock",
       "Url": "http://library.northumberland.gov.uk"
     },
     {
@@ -713,6 +723,7 @@
     {
       "Name": "Northern Ireland",
       "Type": "enterprise",
+      "Available": "In stock",
       "Url": "http://lni.ent.sirsidynix.net.uk/client/en_GB/default/"
     },
     {
@@ -763,6 +774,7 @@
     {
       "Name": "Powys",
       "Type": "enterprise",
+      "Available": "In stock",
       "Url": "http://powys.sirsidynix.net.uk/"
     },
     {
@@ -810,6 +822,7 @@
     {
       "Name": "Rutland",
       "Type": "enterprise",
+      "Available": "In stock",
       "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/rutland/"
     },
     {
@@ -903,6 +916,7 @@
     {
       "Name": "St Helens",
       "Type": "enterprise",
+      "Available": "In stock",
       "Url": "https://enterprise.sthelens.gov.uk/client/en_GB/mylibrary/"
     },
     {
@@ -1038,6 +1052,7 @@
     {
       "Name": "Warrington",
       "Type": "enterprise",
+      "Available": "In stock",
       "Url": "http://warc.ent.sirsidynix.net.uk/client/en_GB/libonline/"
     },
     {
@@ -1054,6 +1069,7 @@
     {
       "Name": "West Dunbartonshire",
       "Type": "enterprise",
+      "Available": "In stock",
       "Url": "http://wd.ent.sirsidynix.net.uk/client/wd/"
     },
     {
@@ -1075,6 +1091,7 @@
     {
       "Name": "Westminster",
       "Type": "enterprise",
+      "Available": "In stock",
       "Url": "https://elibrary.westminster.gov.uk/client/en_GB/wcc/"
     },
     {
