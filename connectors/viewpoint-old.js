@@ -14,8 +14,6 @@ var request = require('request');
 // Function: searchByISBN
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-
-    callback([]);
-
-
+    var responseHoldings = [];
+    callback(responseHoldings);
 };

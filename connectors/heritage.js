@@ -17,9 +17,8 @@ var searchUrl = 'search2?searchTerm0=';
 // Function: searchByISBN
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-
+    var responseHoldings = [];
     request.get(lib.Url + searchUrl + isbn, function (error, message, response) {
-
-
+        callback(responseHoldings);
     });
 };

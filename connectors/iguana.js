@@ -21,12 +21,16 @@ exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = [];
     // Request 1: Post to the search web service
     request.post({ url: lib.Url + 'Proxy.SearchRequest.cls', body: reqBody.replace('[ISBN]', isbn).replace('[DB]', lib.Database).replace('[TID]', 'Iguana_Brief'), headers: reqHeader }, function (error, msg, response) {
-        xml2js.parseString(response, function (err, res) {
-            var holdings = res["zs:searchRetrieveResponse"]["zs:records"][0]["zs:record"][0]["zs:recordData"][0].BibDocument[0].HoldingsSummary[0].ShelfmarkData;
-            holdings.forEach(function (item) {
-                responseHoldings.push({ library: item.Shelfmark[0], available: item.Available[0], unavailable: item.Available == "0" ? 1 : 0 });
+        if (error) {
+            callback(responseHoldings);
+        } else {
+            xml2js.parseString(response, function (err, res) {
+                var holdings = res["zs:searchRetrieveResponse"]["zs:records"][0]["zs:record"][0]["zs:recordData"][0].BibDocument[0].HoldingsSummary[0].ShelfmarkData;
+                holdings.forEach(function (item) {
+                    responseHoldings.push({ library: item.Shelfmark[0], available: item.Available[0], unavailable: item.Available == "0" ? 1 : 0 });
+                });
             });
-        });
-        callback(responseHoldings);
+            callback(responseHoldings);
+        }
     });
 };

@@ -615,8 +615,7 @@
     },
     {
       "Name": "Monmouthshire",
-      "Type": "enterprise",
-      "Available": "In stock",
+      "Type": "ibistro",
       "Url": "http://catalogue.monmouthshire.gov.uk/"
     },
     {
@@ -698,9 +697,9 @@
     },
     {
       "Name": "Northumberland",
-      "Type": "enterprise",
+      "Type": "ibistro",
       "Available": "In stock",
-      "Url": "http://library.northumberland.gov.uk"
+      "Url": "http://library.northumberland.gov.uk/"
     },
     {
       "Name": "Nottingham City",
@@ -773,8 +772,7 @@
     },
     {
       "Name": "Powys",
-      "Type": "enterprise",
-      "Available": "In stock",
+      "Type": "ibistro",
       "Url": "http://powys.sirsidynix.net.uk/"
     },
     {

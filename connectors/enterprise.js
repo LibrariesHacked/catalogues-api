@@ -35,7 +35,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
                 var libs = {};
                 $('.detailItemsTableRow').each(function (index, elem) {
                     var name = $(this).find('td').eq(0).text().trim();
-                    var bc = $(this).find('td').eq(2).text().trim();
+                    var bc = $(this).find('td div.availabilityDiv').attr('id').replace('availabilityDiv','');
                     var status = avail.strings[avail.ids.indexOf(bc)].trim();
                     if (!libs[name]) libs[name] = { available: 0, unavailable: 0 };
                     status == lib.Available ? libs[name].available++ : libs[name].unavailable++;
@@ -45,17 +45,21 @@ exports.searchByISBN = function (isbn, lib, callback) {
             });
         }
 
+        console.log(error);
         var uri = msg.request.uri.path;
         var ils = uri.substring(uri.lastIndexOf("ent:") + 4, uri.lastIndexOf("/one;"));
 
         // Bail out here if we don't get back an ID.
-        if (!ils) callback(responseHoldings);
-
-        if (ils == '/cl') {
+        if (!ils) {
+            callback(responseHoldings);
+        } else if (ils == '/cl') {
             // In this situation need to call the item page.
             ils = null;
             $ = cheerio.load(resp1);
             if ($('#da0').attr('value')) ils = $('#da0').attr('value').substring($('#da0').attr('value').lastIndexOf("ent:") + 4);
+
+            // To do:
+            callback(responseHoldings);
         } else {
             getItemAvailability(ils, resp1)
         }

@@ -31,7 +31,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
             var enc = $('input[name=EncodedRequest]').attr('value');
             var url = lib.Url + searchUrl.replace('[ISBN]', isbn) + isbn + '&EncodedRequest=' + enc;
 
-            // Request 1: Get the search frameset (*vomits*)
+            // Request 1: Get the search frameset (*voms*)
             request.get({ url: url }, function (error, msg, response) {
 
                 // Also horrible code, but declaring this here to use later on
