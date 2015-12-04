@@ -18,18 +18,25 @@ var reqHeader = { "Content-Type": "application/x-www-form-urlencoded" };
 // Function: searchByISBN
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = [];
+    var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
+    var handleError = function (error) {
+        responseHoldings.error = error;
+        responseHoldings.end = new Date();
+        callback(responseHoldings);
+    };
+
     // Request 1: Post to the search web service
     request.post({ url: lib.Url + 'Proxy.SearchRequest.cls', body: reqBody.replace('[ISBN]', isbn).replace('[DB]', lib.Database).replace('[TID]', 'Iguana_Brief'), headers: reqHeader }, function (error, msg, response) {
         if (error) {
-            callback(responseHoldings);
+            handleError(error);
         } else {
             xml2js.parseString(response, function (err, res) {
                 var holdings = res["zs:searchRetrieveResponse"]["zs:records"][0]["zs:record"][0]["zs:recordData"][0].BibDocument[0].HoldingsSummary[0].ShelfmarkData;
                 holdings.forEach(function (item) {
-                    responseHoldings.push({ library: item.Shelfmark[0], available: item.Available[0], unavailable: item.Available == "0" ? 1 : 0 });
+                    responseHoldings.availability.push({ library: item.Shelfmark[0], available: item.Available[0], unavailable: item.Available == "0" ? 1 : 0 });
                 });
             });
+            responseHoldings.end = new Date();
             callback(responseHoldings);
         }
     });

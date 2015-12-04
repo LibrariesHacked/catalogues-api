@@ -1,21 +1,20 @@
-console.log('spydus connector loading...');
+console.log('viewpoint connector loading...');
 
-///////////////////////////////////////////
-// REQUIRES
-// Request (for HTTP calls) and cheerio for
-// querying the HTML returned.
-///////////////////////////////////////////
+//////////////////////////
+// Requires
+//////////////////////////
 var request = require('request'),
     cheerio = require('cheerio');
 
-///////////////////////////////////////////
-// VARIABLES
-///////////////////////////////////////////
-var searchUrl = 'cgi-bin/spydus.exe/ENQ/OPAC/BIBENQ?ISBN=';
+//////////////////////////
+// Variables
+//////////////////////////
+var searchUrl = '02_Catalogue/02_004_TitleResults.aspx?page=1&searchType=5&searchTerm=';
+var container = '#ctl00_ContentPlaceCenterContent_copyAvailabilityContainer';
 
-///////////////////////////////////////////
+//////////////////////////
 // Function: searchByISBN
-///////////////////////////////////////////
+//////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
     var handleError = function (error) {
@@ -24,8 +23,9 @@ exports.searchByISBN = function (isbn, lib, callback) {
         callback(responseHoldings);
     };
 
-    // Request 1: Deep link to item page by ISBN.
-    request.get({ url: lib.Url + searchUrl + isbn }, function (error, msg, res) {
+    // Request 1: Deep link to the item by ISBN
+    // Really wouldn't wanna use rejectUnauthorised for serious calls - query with Denbighshire about their certificate
+    request.get({ url: lib.Url + searchUrl + isbn, rejectUnauthorized: false }, function (error, msg, res) {
         if (error) {
             responseHoldings.error = error;
             responseHoldings.end = new Date();
@@ -33,11 +33,11 @@ exports.searchByISBN = function (isbn, lib, callback) {
         } else {
             $ = cheerio.load(res);
             var libs = {};
-            $('div.holdings table tr').slice(1).each(function (i, elem) {
+            $(container).find('table tr').slice(1).each(function (i, elem) {
                 var name = $(this).find('td').eq(0).text().trim();
                 var status = $(this).find('td').eq(3).text().trim();
                 if (!libs[name]) libs[name] = { available: 0, unavailable: 0 };
-                status == 'Available' ? libs[name].available++ : libs[name].unavailable++;
+                status == '' ? libs[name].available++ : libs[name].unavailable++;
             });
             for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
             responseHoldings.end = new Date();

@@ -5,7 +5,7 @@ console.log('heritage connector loading...');
 // Request (for HTTP calls) and xml2js for 
 // converting xml response to JSON
 ///////////////////////////////////////////
-var xml2js = require('xml2js'),
+var cheerio = require('cheerio'),
     request = require('request');
 
 ///////////////////////////////////////////
@@ -13,12 +13,34 @@ var xml2js = require('xml2js'),
 ///////////////////////////////////////////
 var searchUrl = 'search2?searchTerm0=';
 
-//////////////////////////
+///////////////////////////////////////////
 // Function: searchByISBN
-//////////////////////////
+///////////////////////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = [];
-    request.get(lib.Url + searchUrl + isbn, function (error, message, response) {
+    var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
+    var handleError = function (error) {
+        responseHoldings.error = error;
+        responseHoldings.end = new Date();
         callback(responseHoldings);
+    };
+
+    // Request 1: 
+    request.get({ url: lib.Url + searchUrl + isbn, jar: true }, function (error, message, response) {
+        if (error) {
+            handleError(error);
+        } else {
+            $ = cheerio.load(response);
+            var libs = {};
+            console.log(response);
+            $('tbody.faccs tr').each(function () {
+                var name = $(this).find('td').eq(3).text().trim();
+                var status = $(this).find('td span').text().trim();
+                if (!libs[name]) libs[name] = { available: 0, unavailable: 0 }
+                status != 'On Loan' ? libs[name].available++ : libs[name].unavailable++;
+            });
+            for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
+            responseHoldings.end = new Date();
+            callback(responseHoldings);
+        }
     });
 };

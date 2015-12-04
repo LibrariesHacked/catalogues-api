@@ -26,13 +26,13 @@ exports.getAllLibraries = function (req, res) {
 
 /////////////////////////////////////////////////////////////////
 // Function: isbnSearch
-// Route: /isbnSearch/:isbn
-// Test: http://localhost:3000/availabilityByISBN/9780747532743?library=Wiltshire
+// Route: /availabilityByISBN/:isbn
+// Test: http://localhost:3000/availabilityByISBN/9780747532743?service=Wiltshire
 /////////////////////////////////////////////////////////////////
 exports.isbnSearch = function (req, res) {
     var searches = data.LibraryServices
         .filter(function (service) {
-            return (service.Type != "" && (!req.query.library || req.query.library.indexOf(service.Name) > -1));
+            return (service.Type != "" && (!req.query.service || req.query.service.indexOf(service.Name) > -1));
         })
         .map(function (service) {
             return function (callback) {

@@ -2,8 +2,8 @@
   "LibraryServices": [
     {
       "Name": "Aberdeen City",
-      "Type": "prism3",
-      "Url": "https://capitadiscovery.co.uk/aberdeencity/"
+      "Type": "spydus",
+      "Url": "https://aberdeencity.spydus.co.uk/"
     },
     {
       "Name": "Aberdeenshire",
@@ -17,8 +17,8 @@
     },
     {
       "Name": "Angus",
-      "Type": "horizon",
-      "Url": "http://library.angus.gov.uk/"
+      "Type": "spydus",
+      "Url": "https://angus.spydus.co.uk/"
     },
     {
       "Name": "Argyll and Bute",
@@ -73,14 +73,15 @@
     {
       "Name": "Blackpool",
       "Type": "enterprise",
-      "Available": "Standard shelving location",
+      "Available": [ "Standard shelving location" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "Url": "http://libraries.blackpool.gov.uk/client/default/"
     },
     {
       "Name": "Blaenau Gwent",
       "Type": "ibistro",
-      "Available": "On Shelf",
-      "Url": "http://bglibcat.blaenau-gwent.gov.uk/"
+      "Available": [ "On Shelf" ],
+      "Url": "http://bglibcat.blaenau-gwent.gov.uk/uhtbin/cgisirsi.exe/x/0/0/5"
     },
     {
       "Name": "Bolton",
@@ -238,13 +239,14 @@
     },
     {
       "Name": "Denbighshire",
-      "Type": "viewpoint",
+      "Type": "viewpoint3",
       "Url": "https://onlinelibrary.denbighshire.gov.uk/"
     },
     {
       "Name": "Derby City",
       "Type": "enterprise",
-      "Available": "In stock",
+      "Available": [ "In stock" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/derby/"
     },
     {
@@ -258,7 +260,8 @@
     },
     {
       "Name": "Devon",
-      "Type": "viewpoint-old",
+      "Type": "viewpoint2",
+      "Available": "Check Shelves",
       "Url": "http://www.devon.gov.uk/library/catalogue/cgi-bin/vps2.5_viewpoint.sh"
     },
     {
@@ -274,7 +277,7 @@
     },
     {
       "Name": "Dudley",
-      "Type": "viewpoint",
+      "Type": "viewpoint3",
       "Url": "https://libcat.dudley.gov.uk/"
     },
     {
@@ -302,7 +305,8 @@
     {
       "Name": "East Ayrshire",
       "Type": "ibistro",
-      "Url": "http://libcatalogue.east-ayrshire.gov.uk/"
+      "Available": [ "SHELVES", "RESERVES" ],
+      "Url": "http://libcatalogue.east-ayrshire.gov.uk/uhtbin/cgisirsi/x/0/0/5"
     },
     {
       "Name": "East Dunbartonshire",
@@ -349,7 +353,8 @@
     {
       "Name": "Falkirk",
       "Type": "enterprise",
-      "Available": "In stock",
+      "Available": [ "In stock" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "Url": "http://fct.ent.sirsidynix.net.uk/client/en_GB/libraries/"
     },
     {
@@ -359,7 +364,7 @@
     },
     {
       "Name": "Flintshire",
-      "Type": "viewpoint",
+      "Type": "viewpoint3",
       "Url": "http://libraryonline.flintshire.gov.uk/"
     },
     {
@@ -407,7 +412,8 @@
     {
       "Name": "Hammersmith and Fulham",
       "Type": "enterprise",
-      "Available": "In stock",
+      "Available": [ "In stock" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "Url": "https://trib.ent.sirsidynix.net.uk/client/en_GB/lbhf/"
     },
     {
@@ -470,8 +476,8 @@
     {
       "Name": "Hull",
       "Type": "ibistro",
-      "Available": "Item on shelves",
-      "Url": "http://prismcollect.hullcc.gov.uk/"
+      "Available": [ "Item on shelves" ],
+      "Url": "http://prismcollect.hullcc.gov.uk/uhtbin/cgisirsi.exe/x/0/0/5"
     },
     {
       "Name": "Inverclyde",
@@ -486,7 +492,7 @@
     {
       "Name": "Isle of Man",
       "Type": "heritage",
-      "Url": "http://www.douglas.gov.im/HeritageScripts/Hapi.dll"
+      "Url": "http://www.douglas.gov.im/HeritageScripts/Hapi.dll/"
     },
     {
       "Name": "Islington",
@@ -501,7 +507,8 @@
     {
       "Name": "Kensington and Chelsea",
       "Type": "enterprise",
-      "Available": "In stock",
+      "Available": [ "In stock" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "Url": "https://trib.ent.sirsidynix.net.uk/client/en_GB/rbkc/"
     },
     {
@@ -518,13 +525,15 @@
     {
       "Name": "Kirklees",
       "Type": "enterprise",
-      "Available": "In stock",
+      "Available": [ "In stock" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "Url": "http://kir.ent.sirsidynix.net.uk/client/en_GB/default/"
     },
     {
       "Name": "Knowsley",
       "Type": "enterprise",
-      "Available": "In stock",
+      "Available": [ "In stock" ],
+      "AvailabilityUrl": "search/results.displaypanel.displaycell.detail.detailitemstable:loadAvailability/en_GB/Unknown/0/DEFAULT/ent:",
       "Url": "http://kmbc.sdp.sirsidynix.net.uk/client/default/"
     },
     {
@@ -551,7 +560,8 @@
     {
       "Name": "Leicestershire",
       "Type": "enterprise",
-      "Available": "In stock",
+      "Available": [ "In stock" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/leics/"
     },
     {
@@ -599,7 +609,7 @@
     },
     {
       "Name": "Middlesbrough",
-      "Type": "viewpoint",
+      "Type": "viewpoint3",
       "Url": "http://libraries.middlesbrough.gov.uk/"
     },
     {
@@ -616,7 +626,8 @@
     {
       "Name": "Monmouthshire",
       "Type": "ibistro",
-      "Url": "http://catalogue.monmouthshire.gov.uk/"
+      "Available": [ "SHELVES", "RESERVES" ],
+      "Url": "http://catalogue.monmouthshire.gov.uk/uhtbin/cgisirsi.exe/x/0/0/5"
     },
     {
       "Name": "Moray",
@@ -626,7 +637,7 @@
     {
       "Name": "Neath Port Talbot",
       "Type": "vubis",
-      "Url": "http://212.219.142.126/nptvs/Vubis.csp"
+      "Url": "http://212.219.142.126/nptvs/"
     },
     {
       "Name": "Newcastle",
@@ -665,7 +676,7 @@
     {
       "Name": "North Lanarkshire",
       "Type": "vubis",
-      "Url": "https://librariesnl.northlan.gov.uk/vs/Vubis.csp"
+      "Url": "https://librariesnl.northlan.gov.uk/vs/"
     },
     {
       "Name": "North Lincolnshire",
@@ -698,31 +709,36 @@
     {
       "Name": "Northumberland",
       "Type": "ibistro",
-      "Available": "In stock",
-      "Url": "http://library.northumberland.gov.uk/"
+      "Available": [ "SHELVES", "RESERVES" ],
+      "Url": "http://library.northumberland.gov.uk/uhtbin/cgisirsi.exe/x/0/0/5"
     },
     {
       "Name": "Nottingham City",
-      "Type": "bookmyne",
+      "Type": "enterprise",
       "Id": "575",
       "Region": "3",
       "InstitutionId": "378",
       "Profile": "GROUP51",
-      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1"
+      "Available": [ "" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+      "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/nottcity/"
     },
     {
       "Name": "Nottinghamshire",
-      "Type": "bookmyne",
+      "Type": "enterprise",
       "Id": "580",
       "Region": "3",
       "InstitutionId": "330",
       "Profile": "GROUP31",
-      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1"
+      "Available": [ "" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+      "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/nelib/"
     },
     {
       "Name": "Northern Ireland",
       "Type": "enterprise",
-      "Available": "In stock",
+      "Available": [ "In stock" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "Url": "http://lni.ent.sirsidynix.net.uk/client/en_GB/default/"
     },
     {
@@ -737,13 +753,13 @@
     },
     {
       "Name": "Oxfordshire",
-      "Type": "viewpoint",
+      "Type": "viewpoint3",
       "Url": "https://www.libcat.oxfordshire.gov.uk/"
     },
     {
       "Name": "Pembrokeshire",
       "Type": "vubis",
-      "Url": "http://libraryonline.pembrokeshire.gov.uk/pemvs/Vubis.csp"
+      "Url": "http://libraryonline.pembrokeshire.gov.uk/pemvs/"
     },
     {
       "Name": "Perth and Kinross",
@@ -757,7 +773,7 @@
     },
     {
       "Name": "Plymouth",
-      "Type": "viewpoint",
+      "Type": "viewpoint3",
       "Url": "http://www.webopac.plymouth.gov.uk/"
     },
     {
@@ -773,7 +789,8 @@
     {
       "Name": "Powys",
       "Type": "ibistro",
-      "Url": "http://powys.sirsidynix.net.uk/"
+      "Available": [ "Adult Fiction" ],
+      "Url": "http://powys.sirsidynix.net.uk/uhtbin/cgisirsi.exe/x/0/0/5"
     },
     {
       "Name": "Reading",
@@ -788,7 +805,7 @@
     },
     {
       "Name": "Redcar & Cleveland",
-      "Type": "viewpoint",
+      "Type": "viewpoint3",
       "Url": "https://libraries.redcar-cleveland.gov.uk/"
     },
     {
@@ -820,7 +837,8 @@
     {
       "Name": "Rutland",
       "Type": "enterprise",
-      "Available": "In stock",
+      "Available": [ "In stock" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/rutland/"
     },
     {
@@ -836,7 +854,7 @@
     {
       "Name": "Scottish Borders",
       "Type": "vubis",
-      "Url": "http://librarysearch.scotborders.gov.uk/vs/vubis.csp"
+      "Url": "http://librarysearch.scotborders.gov.uk/vs/"
     },
     {
       "Name": "Sefton",
@@ -846,8 +864,8 @@
     {
       "Name": "Sheffield",
       "Type": "ibistro",
-      "Available": "",
-      "Url": "http://library.sheffield.gov.uk/"
+      "Available": [ "SHELVES", "RESERVES" ],
+      "Url": "http://library.sheffield.gov.uk/uhtbin/cgisirsi.exe/x/0/0/5"
     },
     {
       "Name": "Shetland",
@@ -856,7 +874,7 @@
     },
     {
       "Name": "Shropshire",
-      "Type": "viewpoint",
+      "Type": "viewpoint3",
       "Url": "http://libraries.shropshire.gov.uk/"
     },
     {
@@ -904,7 +922,7 @@
     {
       "Name": "Southend on Sea",
       "Type": "vubis",
-      "Url": "http://classiccatalogue.essex.gov.uk/vs/Vubis.csp"
+      "Url": "http://classiccatalogue.essex.gov.uk/vs/"
     },
     {
       "Name": "Southwark",
@@ -914,7 +932,8 @@
     {
       "Name": "St Helens",
       "Type": "enterprise",
-      "Available": "In stock",
+      "Available": [ "In stock" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "Url": "https://enterprise.sthelens.gov.uk/client/en_GB/mylibrary/"
     },
     {
@@ -941,7 +960,7 @@
     {
       "Name": "Stoke on Trent",
       "Type": "vubis",
-      "Url": "http://www.librariesonline.stoke.gov.uk/vs/Vubis.csp"
+      "Url": "http://www.librariesonline.stoke.gov.uk/vs/"
     },
     {
       "Name": "Suffolk",
@@ -951,8 +970,8 @@
     {
       "Name": "Sunderland",
       "Type": "ibistro",
-      "Available": "Item is on the shelf",
-      "Url": "http://www.sunderland.gov.uk/"
+      "Available": [ "Item is on the shelf" ],
+      "Url": "http://www.sunderland.gov.uk/uhtbin/cgisirsi.exe/x/0/0/5"
     },
     {
       "Name": "Surrey",
@@ -966,6 +985,7 @@
       "Id": "383",
       "Region": "3",
       "InstitutionId": "263",
+      "Profile": "ALL_LIBS",
       "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1"
     },
     {
@@ -985,7 +1005,7 @@
     {
       "Name": "Tameside",
       "Type": "vubis",
-      "Url": "http://intouch.tameside.gov.uk/vubis/Vubis.csp"
+      "Url": "http://intouch.tameside.gov.uk/vubis/"
     },
     {
       "Name": "Telford and Wrekin",
@@ -996,11 +1016,11 @@
     {
       "Name": "Thurrock",
       "Type": "vubis",
-      "Url": "http://classiccatalogue.essex.gov.uk/vs/Vubis.csp"
+      "Url": "http://classiccatalogue.essex.gov.uk/vs/"
     },
     {
       "Name": "Torbay",
-      "Type": "viewpoint",
+      "Type": "viewpoint3",
       "Url": "https://libraries.torbay.gov.uk/"
     },
     {
@@ -1022,7 +1042,7 @@
     {
       "Name": "Vale of Glamorgan",
       "Type": "vubis",
-      "Url": "http://libhip.valeofglamorgan.gov.uk/vs/Vubis.csp"
+      "Url": "http://libhip.valeofglamorgan.gov.uk/vs/"
     },
     {
       "Name": "Wakefield",
@@ -1050,7 +1070,8 @@
     {
       "Name": "Warrington",
       "Type": "enterprise",
-      "Available": "In stock",
+      "Available": [ "In stock" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "Url": "http://warc.ent.sirsidynix.net.uk/client/en_GB/libonline/"
     },
     {
@@ -1067,7 +1088,8 @@
     {
       "Name": "West Dunbartonshire",
       "Type": "enterprise",
-      "Available": "In stock",
+      "Available": [ "In stock" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "Url": "http://wd.ent.sirsidynix.net.uk/client/wd/"
     },
     {
@@ -1089,7 +1111,8 @@
     {
       "Name": "Westminster",
       "Type": "enterprise",
-      "Available": "In stock",
+      "Available": [ "In stock" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "Url": "https://elibrary.westminster.gov.uk/client/en_GB/wcc/"
     },
     {
@@ -1130,8 +1153,9 @@
     },
     {
       "Name": "Wrexham",
-      "Type": "viewpoint-old",
-      "Url": "https://www.wrexham.gov.uk/Library-Online-Catalogue"
+      "Type": "viewpoint2",
+      "Available": "On shelf",
+      "Url": "https://www.wrexham.gov.uk/Library-Online-Catalogue/cgi-bin/vps2_viewpoint.sh"
     },
     {
       "Name": "York City",

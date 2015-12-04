@@ -17,26 +17,38 @@ var catUrl = 'cgi-bin/koha/opac-search.pl?format=rss2&idx=nb&q=';
 // Function: searchByISBN
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = [];
+    var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
+    var handleError = function (error) {
+        responseHoldings.error = error;
+        responseHoldings.end = new Date();
+        callback(responseHoldings);
+    };
+
     // Request 1: The ISBN search
     request.get({ url: lib.Url + catUrl + isbn }, function (error, msg, res) {
-        $ = cheerio.load(res, { normalizeWhitespace: true, xmlMode: true });
-        var bibLink = $('guid').text();
-        if (bibLink) {
-            request.get({ url: bibLink }, function (error, msg, res) {
-                $ = cheerio.load(res);
-                var libs = {};
-                $('.holdingst tbody').find('tr').each(function (i, elem) {
-                    var lib = $(this).find('td.location span span').eq(1).text().trim();
-                    var status = $(this).find('td.status span').text().trim();
-                    if (!libs[lib]) libs[lib] = { available: 0, unavailable: 0 };
-                    status == 'Available' ? libs[lib].available++ : libs[lib].unavailable++;
-                });
-                for (var l in libs) responseHoldings.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
-                callback(responseHoldings);
-            });
+        if (error) {
+            handleError(error);
         } else {
-            callback(responseHoldings);
+            $ = cheerio.load(res, { normalizeWhitespace: true, xmlMode: true });
+            var bibLink = $('guid').text();
+            if (bibLink) {
+                request.get({ url: bibLink + '&viewallitems=1' }, function (error, msg, res) {
+                    $ = cheerio.load(res);
+                    var libs = {};
+                    $('.holdingst tbody').find('tr').each(function (i, elem) {
+                        var lib = $(this).find('td.location span span').eq(1).text().trim();
+                        var status = $(this).find('td.status span').text().trim();
+                        if (!libs[lib]) libs[lib] = { available: 0, unavailable: 0 };
+                        status == 'Available' ? libs[lib].available++ : libs[lib].unavailable++;
+                    });
+                    for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
+                    responseHoldings.end = new Date();
+                    callback(responseHoldings);
+                });
+            } else {
+                responseHoldings.end = new Date();
+                callback(responseHoldings);
+            }
         }
     });
 };
