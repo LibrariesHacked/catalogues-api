@@ -59,9 +59,10 @@ exports.searchByISBN = function (isbn, lib, callback) {
                     request.get({ url: lib.Url + message.headers.location, gzip: true, jar: true, headers: headers, timeout: 10000 }, function (error, message, response) {
                         if (handleError(error)) return;
                         console.log(response);
+                        // That should bring back the results list.
 
                         $ = cheerio.load(response);
-
+                        $('#ct100_cph1_lvResults_ctr10_lnkbtnTitle')
 
                         // Request 6: 
 
