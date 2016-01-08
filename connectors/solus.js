@@ -26,22 +26,29 @@ exports.searchByISBN = function (isbn, libraryService, callback) {
         responseHoldings.error = error;
         responseHoldings.end = new Date();
         callback(responseHoldings);
+        return true;
     };
 
     var soapXML = isbnRequest.replace('[ISBN]', isbn).replace('[APPID]', libraryService.Id);
-    request.post({ url: libraryService.Url + '?op=SearchISBN', body: soapXML, headers: { "Content-Type": "text/xml; charset=utf-8", "Content-Length": soapXML.length, "SOAPAction": "http://mobile.solus.co.uk/SearchISBN" } }, function (error, msg, response) {
+    request.post({ url: libraryService.Url + '?op=SearchISBN', body: soapXML, headers: { "Content-Type": "text/xml; charset=utf-8", "Content-Length": soapXML.length, "SOAPAction": "http://mobile.solus.co.uk/SearchISBN" }, timeout: 20000 }, function (error, msg, response) {
+        if (handleError(error)) return;
         xml2js.parseString(response, function (err, result) {
+            if (handleError(err)) return;
             var soapResponse = result['soap:Envelope']['soap:Body'][0]['SearchISBNResponse'][0]['SearchISBNResult'];
             var resultString = soapResponse[0];
             xml2js.parseString(resultString, function (err, res) {
+                if (handleError(err)) return;
                 if (res.items.item) {
                     var itemId = res.items.item[0].$.recordID;
                     var soapXML = itemRequest.replace('[RECORDID]', itemId).replace('[APPID]', libraryService.Id);
-                    request.post({ url: libraryService.Url + '?op=GetDetails', body: soapXML, headers: { "Content-Type": "text/xml; charset=utf-8", "Content-Length": soapXML.length, "SOAPAction": "http://mobile.solus.co.uk/GetDetails" } }, function (error, msg, res) {
+                    request.post({ url: libraryService.Url + '?op=GetDetails', body: soapXML, headers: { "Content-Type": "text/xml; charset=utf-8", "Content-Length": soapXML.length, "SOAPAction": "http://mobile.solus.co.uk/GetDetails" }, timeout: 20000 }, function (error, msg, res) {
+                        if (handleError(error)) return;
                         xml2js.parseString(res, function (err, details) {
+                            if (handleError(err)) return;
                             var soapDetailsResponse = details['soap:Envelope']['soap:Body'][0]['GetDetailsResponse'][0]['GetDetailsResult'];
                             var resultDetailsString = soapDetailsResponse[0];
                             xml2js.parseString(resultDetailsString, function (err, holdings) {
+                                if (handleError(err)) return;
                                 holdings.items.availability.forEach(function (item) {
                                     responseHoldings.availability.push({ library: item.$.location, available: item.$.status == 'Available for loan' ? 1 : 0, unavailable: item.$.status == 'Available for loan' ? 0 : 1 });
                                 });

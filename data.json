@@ -13,6 +13,7 @@
     {
       "Name": "Anglesey",
       "Type": "prism3",
+      "Available": [ "Ar gael" ],
       "Url": "http://capitadiscovery.co.uk/ynysmon/"
     },
     {
@@ -27,9 +28,10 @@
     },
     {
       "Name": "Barking and Dagenham",
-      "Type": "mobilearena",
+      "Type": "arena",
+      "OrganisationId": "AUK000226|6",
       "Id": "226006",
-      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
+      "Url": "https://arena.yourlondonlibrary.net/web/barking-and-dagenham/"
     },
     {
       "Name": "Barnet",
@@ -44,21 +46,21 @@
     },
     {
       "Name": "Bath and North East Somerset",
-      "Type": "mobilearena",
+      "Type": "viewpoint3",
       "Id": "280001",
-      "Url": "http://91.106.192.135/arena.pa.palma/catalogue"
+      "Url": "https://www.librarieswest.org.uk/"
     },
     {
       "Name": "Bedford",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "220001",
-      "Url": "https://beds-arena.culturalservices.net/arena.pa.palma/catalogue"
+      "Url": "https://beds-arena.culturalservices.net/web/arena/"
     },
     {
       "Name": "Bexley",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "226018",
-      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
+      "Url": "https://arena.yourlondonlibrary.net/web/bexley/"
     },
     {
       "Name": "Birmingham",
@@ -105,9 +107,9 @@
     },
     {
       "Name": "Brent",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "226011",
-      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
+      "Url": "https://arena.yourlondonlibrary.net/web/brent/"
     },
     {
       "Name": "Bridgend",
@@ -121,15 +123,15 @@
     },
     {
       "Name": "Bristol City",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "280001",
-      "Url": "http://91.106.192.135/arena.pa.palma/catalogue"
+      "Url": "https://www.librarieswest.org.uk/"
     },
     {
       "Name": "Bromley",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "226019",
-      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
+      "Url": "http://arena.yourlondonlibrary.net/web/bromley/"
     },
     {
       "Name": "Buckinghamshire",
@@ -233,9 +235,9 @@
     },
     {
       "Name": "Darlington",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "230001",
-      "Url": "http://www2.darlington.gov.uk/arena.pa.palma/catalogue"
+      "Url": "http://www2.darlington.gov.uk/web/arena/"
     },
     {
       "Name": "Denbighshire",
@@ -266,9 +268,9 @@
     },
     {
       "Name": "Doncaster",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "243001",
-      "Url": "http://library.doncaster.gov.uk/arena.pa.palma/catalogue"
+      "Url": "http://library.doncaster.gov.uk/web/arena/"
     },
     {
       "Name": "Dorset",
@@ -298,9 +300,9 @@
     },
     {
       "Name": "Ealing",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "226014",
-      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
+      "Url": "https://arena.yourlondonlibrary.net/web/ealing/"
     },
     {
       "Name": "East Ayrshire",
@@ -325,9 +327,9 @@
     },
     {
       "Name": "East Riding",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "205001",
-      "Url": "https://library.eastriding.gov.uk/arena.pa.palma/catalogue"
+      "Url": "https://library.eastriding.gov.uk/web/arena/"
     },
     {
       "Name": "East Sussex",
@@ -341,9 +343,9 @@
     },
     {
       "Name": "Enfield",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "226012",
-      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
+      "Url": "http://arena.yourlondonlibrary.net/web/enfield/"
     },
     {
       "Name": "Essex",
@@ -374,9 +376,9 @@
     },
     {
       "Name": "Glasgow",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "480001",
-      "Url": "http://libcat.csglasgow.org/arena.pa.palma/catalogue"
+      "Url": "http://libcat.csglasgow.org/web/arena/"
     },
     {
       "Name": "Gloucestershire",
@@ -400,9 +402,9 @@
     },
     {
       "Name": "Hackney",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "226013",
-      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
+      "Url": "https://arena.yourlondonlibrary.net/web/hackney/"
     },
     {
       "Name": "Halton",
@@ -428,9 +430,9 @@
     },
     {
       "Name": "Harrow",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "226020",
-      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
+      "Url": "https://arena.yourlondonlibrary.net/web/harrow/"
     },
     {
       "Name": "Hartlepool",
@@ -439,9 +441,9 @@
     },
     {
       "Name": "Havering",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "226001",
-      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
+      "Url": "http://arena.yourlondonlibrary.net/web/havering/"
     },
     {
       "Name": "Herefordshire",
@@ -469,9 +471,9 @@
     },
     {
       "Name": "Hounslow",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "219001",
-      "Url": "http://www.hounslowlibraries.org/arena.pa.palma/catalogue"
+      "Url": "http://www.hounslowlibraries.org/web/arena/"
     },
     {
       "Name": "Hull",
@@ -518,9 +520,9 @@
     },
     {
       "Name": "Kingston",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "226016",
-      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
+      "Url": "https://arena.yourlondonlibrary.net/web/kingston/"
     },
     {
       "Name": "Kirklees",
@@ -553,9 +555,9 @@
     },
     {
       "Name": "Leicester City",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "201001",
-      "Url": "https://bookfinder.leicester.gov.uk/arena.pa.palma/catalogue"
+      "Url": "https://bookfinder.leicester.gov.uk/web/arena/"
     },
     {
       "Name": "Leicestershire",
@@ -566,9 +568,9 @@
     },
     {
       "Name": "Lewisham",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "226015",
-      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
+      "Url": "https://arena.yourlondonlibrary.net/web/lewisham/"
     },
     {
       "Name": "Lincolnshire",
@@ -582,9 +584,9 @@
     },
     {
       "Name": "Luton",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "220002",
-      "Url": "https://beds-arena.culturalservices.net/arena.pa.palma/catalogue"
+      "Url": "https://beds-arena.culturalservices.net/web/arena/"
     },
     {
       "Name": "Manchester",
@@ -603,9 +605,9 @@
     },
     {
       "Name": "Merton",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "226017",
-      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
+      "Url": "https://arena.yourlondonlibrary.net/web/merton/"
     },
     {
       "Name": "Middlesbrough",
@@ -614,9 +616,9 @@
     },
     {
       "Name": "Midlothian",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "750001",
-      "Url": "http://91.106.197.135/arena.pa.palma/catalogue"
+      "Url": "https://libraries.midlothian.gov.uk/web/arena/"
     },
     {
       "Name": "Milton Keynes",
@@ -641,15 +643,15 @@
     },
     {
       "Name": "Newcastle",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "224001",
       "Url": "http://library.newcastle.gov.uk/arena.pa.palma/catalogue"
     },
     {
       "Name": "Newham",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "226008",
-      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
+      "Url": "https://arena.yourlondonlibrary.net/web/newham/"
     },
     {
       "Name": "Newport",
@@ -669,9 +671,9 @@
     },
     {
       "Name": "North East Lincolnshire",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "252001",
-      "Url": "http://91.106.192.188/arena.pa.palma/catalogue"
+      "Url": "http://library.nelincs.gov.uk/web/arena/"
     },
     {
       "Name": "North Lanarkshire",
@@ -680,15 +682,15 @@
     },
     {
       "Name": "North Lincolnshire",
-      "Type": "mobilearena",
-      "Url": "http://91.106.192.190/arena.pa.palma/catalogue",
+      "Type": "viewpoint2",
+      "Url": "http://www.opac.northlincs.gov.uk/web/arena/",
       "Id": "221001"
     },
     {
       "Name": "North Somerset",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "280001",
-      "Url": "http://91.106.192.135/arena.pa.palma/catalogue"
+      "Url": "https://www.librarieswest.org.uk/"
     },
     {
       "Name": "North Tyneside",
@@ -702,9 +704,9 @@
     },
     {
       "Name": "Northamptonshire",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "256001",
-      "Url": "https://www.librarycatalogue.northamptonshire.gov.uk/arena.pa.palma/catalogue"
+      "Url": "http://www.librarycatalogue.northamptonshire.gov.uk/web/arena/"
     },
     {
       "Name": "Northumberland",
@@ -799,9 +801,9 @@
     },
     {
       "Name": "Redbridge",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "226002",
-      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
+      "Url": "https://arena.yourlondonlibrary.net/web/redbridge/"
     },
     {
       "Name": "Redcar & Cleveland",
@@ -889,9 +891,9 @@
     },
     {
       "Name": "Somerset",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "280001",
-      "Url": "http://91.106.192.135/arena.pa.palma/catalogue"
+      "Url": "https://www.librarieswest.org.uk/"
     },
     {
       "Name": "South Ayrshire",
@@ -900,9 +902,9 @@
     },
     {
       "Name": "South Gloucestershire",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "280001",
-      "Url": "http://91.106.192.135/arena.pa.palma/catalogue"
+      "Url": "https://www.librarieswest.org.uk/"
     },
     {
       "Name": "South Lanarkshire",
@@ -938,9 +940,9 @@
     },
     {
       "Name": "Staffordshire",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "250001",
-      "Url": "https://www.yourlibcat.staffordshire.gov.uk/arena.pa.palma/catalogue"
+      "Url": "https://www.yourlibcat.staffordshire.gov.uk/web/arena/"
     },
     {
       "Name": "Stirling",
@@ -975,9 +977,9 @@
     },
     {
       "Name": "Surrey",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "210002",
-      "Url": "http://arena.surreylibraries.org/arena.pa.palma/catalogue"
+      "Url": "http://arena.surreylibraries.org/web/arena/"
     },
     {
       "Name": "Sutton",
@@ -1009,9 +1011,9 @@
     },
     {
       "Name": "Telford and Wrekin",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "320001",
-      "Url": "https://library.telford.gov.uk/arena.pa.palma/catalogue"
+      "Url": "https://library.telford.gov.uk/web/arena"
     },
     {
       "Name": "Thurrock",
@@ -1030,9 +1032,9 @@
     },
     {
       "Name": "Tower Hamlets",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "226010",
-      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
+      "Url": "https://arena.yourlondonlibrary.net/web/tower-hamlets/"
     },
     {
       "Name": "Trafford",
@@ -1046,21 +1048,21 @@
     },
     {
       "Name": "Wakefield",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "212001",
-      "Url": "https://libraries.wakefield.gov.uk/arena.pa.palma/catalogue"
+      "Url": "https://libraries.wakefield.gov.uk/web/arena/"
     },
     {
       "Name": "Walsall",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "140001",
-      "Url": "https://libcat.walsall.gov.uk/arena.pa.palma/catalogue"
+      "Url": "https://libcat.walsall.gov.uk/web/arena/"
     },
     {
       "Name": "Waltham Forest",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "226004",
-      "Url": "https://arena.yourlondonlibrary.net/arena.pa.palma/catalogue"
+      "Url": "https://arena.yourlondonlibrary.net/web/walthamforest/"
     },
     {
       "Name": "Wandsworth",
@@ -1099,9 +1101,9 @@
     },
     {
       "Name": "West Sussex",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "380001",
-      "Url": "https://arena.westsussex.gov.uk/arena.pa.palma/catalogue"
+      "Url": "https://arena.westsussex.gov.uk/web/arena/"
     },
     {
       "Name": "Western Isles",
@@ -1122,9 +1124,9 @@
     },
     {
       "Name": "Wiltshire",
-      "Type": "mobilearena",
+      "Type": "viewpoint2",
       "Id": "400001",
-      "Url": "https://libraries.wiltshire.gov.uk/arena.pa.palma/catalogue"
+      "Url": "https://libraries.wiltshire.gov.uk/web/arena/"
     },
     {
       "Name": "Windsor & Maidenhead",

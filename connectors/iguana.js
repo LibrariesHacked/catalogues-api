@@ -23,21 +23,20 @@ exports.searchByISBN = function (isbn, lib, callback) {
         responseHoldings.error = error;
         responseHoldings.end = new Date();
         callback(responseHoldings);
+        return true;
     };
 
     // Request 1: Post to the search web service
-    request.post({ url: lib.Url + 'Proxy.SearchRequest.cls', body: reqBody.replace('[ISBN]', isbn).replace('[DB]', lib.Database).replace('[TID]', 'Iguana_Brief'), headers: reqHeader }, function (error, msg, response) {
-        if (error) {
-            handleError(error);
-        } else {
-            xml2js.parseString(response, function (err, res) {
-                var holdings = res["zs:searchRetrieveResponse"]["zs:records"][0]["zs:record"][0]["zs:recordData"][0].BibDocument[0].HoldingsSummary[0].ShelfmarkData;
-                holdings.forEach(function (item) {
-                    responseHoldings.availability.push({ library: item.Shelfmark[0], available: item.Available[0], unavailable: item.Available == "0" ? 1 : 0 });
-                });
+    request.post({ url: lib.Url + 'Proxy.SearchRequest.cls', body: reqBody.replace('[ISBN]', isbn).replace('[DB]', lib.Database).replace('[TID]', 'Iguana_Brief'), headers: reqHeader, timeout: 20000 }, function (error, msg, response) {
+        if (handleError(error)) return;
+        xml2js.parseString(response, function (err, res) {
+            if (handleError(err)) return;
+            // Loop through all the holdings records.
+            res["zs:searchRetrieveResponse"]["zs:records"][0]["zs:record"][0]["zs:recordData"][0].BibDocument[0].HoldingsSummary[0].ShelfmarkData.forEach(function (item) {
+                responseHoldings.availability.push({ library: item.Shelfmark[0], available: item.Available[0], unavailable: item.Available == "0" ? 1 : 0 });
             });
-            responseHoldings.end = new Date();
-            callback(responseHoldings);
-        }
+        });
+        responseHoldings.end = new Date();
+        callback(responseHoldings);
     });
 };

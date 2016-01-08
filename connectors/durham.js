@@ -4,7 +4,8 @@ console.log('durham connector loading...');
 // REQUIRES
 // Request (for HTTP calls)
 ///////////////////////////////////////////
-var request = require('request');
+var request = require('request'),
+    cheerio = require('cheerio');
 
 ///////////////////////////////////////////
 // VARIABLES
@@ -16,34 +17,60 @@ var request = require('request');
 exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
     var handleError = function (error) {
-        responseHoldings.error = error;
-        responseHoldings.end = new Date();
-        callback(responseHoldings);
+        if (error) {
+            responseHoldings.error = error;
+            responseHoldings.end = new Date();
+            callback(responseHoldings);
+            return true;
+        }
     };
 
     // Request 1: initialise the session - go to home page.
-    request.get(lib.Url, function (error, message, response) {
+    request.get({ url: lib.Url, timeout: 10000, jar: true }, function (error, message, response) {
+        if (handleError(error)) return;
+        // Request 2: Enter the library catalogue as a guest
+        request.post({ url: lib.Url + 'pgLogin.aspx?CheckJavascript=1', jar: true, timeout: 10000 }, function (error, message, response) {
+            if (handleError(error)) return;
+            // Request 3: Go to catalogue page
+            request.post({ url: lib.Url + 'pgCatKeywordSearch.aspx', jar: true, timeout: 10000 }, function (error, message, response) {
+                if (handleError(error)) return;
+                var headers = {
+                    'Accept-Encoding': 'gzip, deflate',
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+                $ = cheerio.load(response);
+                var viewstate = $('input[name=__VIEWSTATE]').val();
+                var viewstategenerator = $('input[name=__VIEWSTATEGENERATOR]').val();
+                var eventValidation = $('input[name=__EVENTVALIDATION]').val();
+                var aspNetForm = {
+                    __VIEWSTATE: viewstate,
+                    __VIEWSTATEGENERATOR: viewstategenerator,
+                    __EVENTVALIDATION: eventValidation,
+                    ctl00$cph1$cbBooks: 'on',
+                    ctl00$cph1$Keywords: isbn,
+                    ctl00$cph1$btSearch: 'Search'
+                };
+
+                // Request 4: postback the page.
+                request.post({ url: lib.Url + 'pgCatKeywordSearch.aspx', gzip: true, form: aspNetForm, jar: true, headers: headers, timeout: 10000 }, function (error, message, response) {
+                    if (handleError(error)) return;
+
+                    // Request 5: 
+                    request.get({ url: lib.Url + message.headers.location, gzip: true, jar: true, headers: headers, timeout: 10000 }, function (error, message, response) {
+                        if (handleError(error)) return;
+                        console.log(response);
+
+                        $ = cheerio.load(response);
 
 
+                        // Request 6: 
 
 
-        // Request 2: Go to catalogue page.
-
-
-        // Request 3: Postback search
-
-
-        // Request 4: Postback 
-
-
-        // Request 5: Postback
-
-
-
-
-        // Click to get book details "ctl00$cph1$lvResults$ctrl0$lnkbtnTitle"
-        // Postback https://libraryonline.durham.gov.uk/pgCatKeywordResults.aspx?KEY=1980835&ITEMS=1
-        responseHoldings.end = new Date();
-        callback(responseHoldings);
+                        responseHoldings.end = new Date();
+                        callback(responseHoldings);
+                    });
+                });
+            });
+        });
     });
 };

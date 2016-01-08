@@ -22,25 +22,23 @@ exports.searchByISBN = function (isbn, lib, callback) {
         responseHoldings.error = error;
         responseHoldings.end = new Date();
         callback(responseHoldings);
+        return true;
     };
 
-    // Request 1: 
-    request.get({ url: lib.Url + searchUrl + isbn, jar: true }, function (error, message, response) {
-        if (error) {
-            handleError(error);
-        } else {
-            $ = cheerio.load(response);
-            var libs = {};
-            console.log(response);
-            $('tbody.faccs tr').each(function () {
-                var name = $(this).find('td').eq(3).text().trim();
-                var status = $(this).find('td span').text().trim();
-                if (!libs[name]) libs[name] = { available: 0, unavailable: 0 }
-                status != 'On Loan' ? libs[name].available++ : libs[name].unavailable++;
-            });
-            for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
-            responseHoldings.end = new Date();
-            callback(responseHoldings);
-        }
+    // Request 1: Gte the deep link URL
+    request.get({ url: lib.Url + searchUrl + isbn, jar: true, timeout: 20000 }, function (error, message, response) {
+        if (handleError(error)) return;
+        $ = cheerio.load(response);
+        var libs = {};
+        console.log(response);
+        $('tbody.faccs tr').each(function () {
+            var name = $(this).find('td').eq(3).text().trim();
+            var status = $(this).find('td span').text().trim();
+            if (!libs[name]) libs[name] = { available: 0, unavailable: 0 }
+            status != 'On Loan' ? libs[name].available++ : libs[name].unavailable++;
+        });
+        for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
+        responseHoldings.end = new Date();
+        callback(responseHoldings);
     });
 };

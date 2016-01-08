@@ -24,79 +24,65 @@ exports.searchByISBN = function (isbn, lib, callback) {
         responseHoldings.error = error;
         responseHoldings.end = new Date();
         callback(responseHoldings);
-    }
+        return true;
+    };
+    // Declaring this here to use later on
+    var itemRequest = function (link) {
+        request.get({ url: link, timeout: 10000 }, function (error, msg, response) {
+            if (handleError(error)) return;
+            var libs = {};
+            $ = cheerio.load(response);
+            var availIndex = $('table[summary="FullBB.HoldingDetails"] tr').eq(1).find(':contains(Availability)').index();
+            var shelfMarkIndex = $('table[summary="FullBB.HoldingDetails"] tr').eq(1).find(':contains(Shelfmark)').index();
+            $('table[summary="FullBB.HoldingDetails"] tr').slice(2).each(function () {
+                var status = $(this).find('td').eq(availIndex).text().trim();
+                var name = $(this).find('td').eq(shelfMarkIndex).text().trim();
+                if (!libs[name]) libs[name] = { available: 0, unavailable: 0 };
+                status == 'Available' ? libs[name].available++ : libs[name].unavailable++;
+            });
+            for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
+            responseHoldings.end = new Date();
+            callback(responseHoldings);
+        });
+    };
 
     // Request 1: Kick off a session
-    request.get(lib.Url + 'vubis.csp', function (error, message, response) {
-        if (error) {
+    request.get({ url: lib.Url + 'vubis.csp', timeout: 10000 }, function (error, message, response) {
+        handleError(error);
+        $ = cheerio.load(response);
+        var link = $('FRAME[Title="Vubis.Body"]').attr('src');
+        // Request 2: Should now have the StartBody link - do it!
+        request.get({ url: lib.Url + link, timeout: 10000 }, function (error, message, response) {
             handleError(error);
-        } else {
             $ = cheerio.load(response);
-            var link = $('FRAME[Title="Vubis.Body"]').attr('src');
-
-            console.log(response);
-
-            // Request 2: Should now have the StartBody link - do it!
-            request.get(lib.Url + link, function (error, message, response) {
-                if (error) {
-                    handleError(error);
-                } else {
-                    $ = cheerio.load(response);
-                    // Get the encoded value to perform the search.
-                    var enc = $('input[name=EncodedRequest]').attr('value');
-                    var url = lib.Url + searchUrl.replace('[ISBN]', isbn) + isbn + '&EncodedRequest=' + enc;
-                    // Request 2: Get the search frameset (*voms*)
-                    request.get({ url: url }, function (error, msg, response) {
-                        if (error) {
+            // Get the encoded value to perform the search.
+            var enc = $('input[name=EncodedRequest]').attr('value');
+            var url = lib.Url + searchUrl.replace('[ISBN]', isbn) + isbn + '&EncodedRequest=' + enc;
+            // Request 3: Get the search frameset (*voms*)
+            request.get({ url: url, timeout: 20000 }, function (error, msg, response) {
+                handleError(error);
+                $ = cheerio.load(response);
+                // In some (but not all) cases this will redirect to the relevant item page
+                var link = $('FRAME[title="List.Body"]').attr('src');
+                if (link && link.indexOf('ListBody') != -1) {
+                    request.get({ url: lib.Url + link, timeout: 20000 }, function (error, msg, response) {
+                        handleError(errror);
+                        $ = cheerio.load(response);
+                        var link = $('td.listitemOdd').last().find('a');
+                        request.get(lib.Url + link.attr('href'), function (error, message, response) {
                             handleError(error);
-                        } else {
-                            // Also horrible code, but declaring this here to use later on
-                            var itemRequest = function (link) {
-                                request.get({ url: link }, function (error, msg, response) {
-                                    if (error) {
-                                        handleError(error);
-                                    } else {
-                                        var libs = {};
-                                        $ = cheerio.load(response);
-                                        var availIndex = $('table[summary="FullBB.HoldingDetails"] tr').eq(1).find(':contains(Availability)').index();
-                                        var shelfMarkIndex = $('table[summary="FullBB.HoldingDetails"] tr').eq(1).find(':contains(Shelfmark)').index();
-                                        $('table[summary="FullBB.HoldingDetails"] tr').slice(2).each(function () {
-                                            var status = $(this).find('td').eq(availIndex).text().trim();
-                                            var name = $(this).find('td').eq(shelfMarkIndex).text().trim();
-                                            if (!libs[name]) libs[name] = { available: 0, unavailable: 0 };
-                                            status == 'Available' ? libs[name].available++ : libs[name].unavailable++;
-                                        });
-                                        for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
-                                        responseHoldings.end = new Date();
-                                        callback(responseHoldings);
-                                    }
-                                });
-                            };
-
                             $ = cheerio.load(response);
-                            // In some (but not all) cases this will redirect to the relevant item page
-                            var link = $('FRAME[title="List.Body"]').attr('src');
-
-                            if (link && link.indexOf('ListBody') != -1) {
-                                request.get({ url: lib.Url + link }, function (error, msg, response) {
-                                    $ = cheerio.load(response);
-                                    var link = $('td.listitemOdd').last().find('a');
-                                    request.get(lib.Url + link.attr('href'), function (error, message, response) {
-                                        $ = cheerio.load(response);
-                                        var link = $('frame').eq(1).attr('src');
-                                        itemRequest(lib.Url + link);
-                                    });
-                                });
-                            } else if (link && link.indexOf('FullBBBody') != -1) {
-                                itemRequest(lib.Url + link);
-                            } else {
-                                responseHoldings.end = new Date();
-                                callback(responseHoldings);
-                            }
-                        }
+                            var link = $('frame').eq(1).attr('src');
+                            itemRequest(lib.Url + link);
+                        });
                     });
+                } else if (link && link.indexOf('FullBBBody') != -1) {
+                    itemRequest(lib.Url + link);
+                } else {
+                    responseHoldings.end = new Date();
+                    callback(responseHoldings);
                 }
             });
-        }
+        });
     });
 };
