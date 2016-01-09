@@ -30,7 +30,6 @@ exports.searchByISBN = function (isbn, lib, callback) {
         if (handleError(error)) return;
         $ = cheerio.load(response);
         var libs = {};
-        console.log(response);
         $('tbody.faccs tr').each(function () {
             var name = $(this).find('td').eq(3).text().trim();
             var status = $(this).find('td span').text().trim();
