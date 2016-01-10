@@ -21,10 +21,12 @@ var searchUrl = 'List.csp?Index1=Keywords&Database=1&Location=NoPreference&Langu
 exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
     var handleError = function (error) {
-        responseHoldings.error = error;
-        responseHoldings.end = new Date();
-        callback(responseHoldings);
-        return true;
+        if(error) {
+            responseHoldings.error = error;
+            responseHoldings.end = new Date();
+            callback(responseHoldings);
+            return true;  
+        }
     };
     // Declaring this here to use later on
     var itemRequest = function (link) {
@@ -66,7 +68,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
                 var link = $('FRAME[title="List.Body"]').attr('src');
                 if (link && link.indexOf('ListBody') != -1) {
                     request.get({ url: lib.Url + link, timeout: 20000 }, function (error, msg, response) {
-                        handleError(errror);
+                        handleError(error);
                         $ = cheerio.load(response);
                         var link = $('td.listitemOdd').last().find('a');
                         request.get(lib.Url + link.attr('href'), function (error, message, response) {
