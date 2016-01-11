@@ -1,4 +1,4 @@
-﻿{
+{
   "LibraryServices": [
     {
       "Name": "Aberdeen City",
@@ -42,6 +42,7 @@
     {
       "Name": "Barnsley",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/barnsleymbc/"
     },
     {
