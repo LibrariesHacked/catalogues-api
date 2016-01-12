@@ -11,7 +11,7 @@ var request = require('request'),
 ///////////////////////////////////////////
 // VARIABLES
 ///////////////////////////////////////////
-var searchUrl = 'cgi-bin/spydus.exe/ENQ/OPAC/BIBENQ?ISBN=';
+var searchUrl = 'cgi-bin/spydus.exe/ENQ/OPAC/BIBENQ?NRECS=1&ISBN=';
 
 ///////////////////////////////////////////
 // Function: searchByISBN

@@ -32,7 +32,7 @@ exports.getAllLibraries = function (req, res) {
 exports.isbnSearch = function (req, res) {
     var searches = data.LibraryServices
         .filter(function (service) {
-            return (service.Type != "" && (!req.query.service || req.query.service.indexOf(service.Name) > -1));
+            return (service.Type != "" && (!req.query.service || service.Name.indexOf(req.query.service) > -1));
         })
         .map(function (service) {
             return function (callback) {

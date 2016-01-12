@@ -30,9 +30,9 @@ exports.searchByISBN = function (isbn, lib, callback) {
     request.get({ url: lib.Url + searchUrl.replace('[ISBN]',isbn).replace('[ORGID]',lib.OrganisationId), timeout: 10000, jar: true }, function (error, message, response) {
         if (handleError(error)) return;
         console.log(lib.Url + searchUrl.replace('[ISBN]',isbn).replace('[ORGID]',lib.OrganisationId));
-        console.log(response);
+        //console.log(response);
         // Request 2: After triggering the search, we should then be able to get the availability container XML data
-        request.get({ url: lib.url + 'results?random=', headers: { 'Wicket-Ajax': true } }, function () {
+        request.get({ url: lib.url + 'results?random=0.125', headers: { 'Wicket-Ajax': true }, timeout: 10000, jar: true }, function () {
             if (handleError(error)) return;
             //console.log(response);
         });
