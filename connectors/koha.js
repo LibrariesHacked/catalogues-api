@@ -26,12 +26,12 @@ exports.searchByISBN = function (isbn, lib, callback) {
     };
 
     // Request 1: The ISBN search
-    request.get({ url: lib.Url + catUrl + isbn, timeout: 20000 }, function (error, msg, res) {
+    request.get({ url: lib.Url + catUrl + isbn, timeout: 10000 }, function (error, msg, res) {
         if (handleError(error)) return;
         $ = cheerio.load(res, { normalizeWhitespace: true, xmlMode: true });
         var bibLink = $('guid').text();
         if (bibLink) {
-            request.get({ url: bibLink + '&viewallitems=1', timeout: 20000 }, function (error, msg, res) {
+            request.get({ url: bibLink + '&viewallitems=1', timeout: 10000 }, function (error, msg, res) {
                 if (handleError(error)) return;
                 $ = cheerio.load(res);
                 var libs = {};
