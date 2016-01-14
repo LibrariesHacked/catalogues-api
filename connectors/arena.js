@@ -5,6 +5,7 @@ console.log('durham connector loading...');
 // Request (for HTTP calls)
 ///////////////////////////////////////////
 var request = require('request'),
+    xml2js = require('xml2js'),
     cheerio = require('cheerio');
 
 ///////////////////////////////////////////
@@ -40,7 +41,12 @@ exports.searchByISBN = function (isbn, lib, callback) {
                 url = lib.Url + 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=%2FcrDetailWicket%2F%3Fwicket%3Ainterface%3D%3A0%3ArecordPanel%3AholdingsPanel%3A%3AIBehaviorListener%3A0%3A&p_p_cacheability=cacheLevelPage&p_p_col_id=column-2&p_p_col_pos=1&p_p_col_count=3';
                 request.get({ forever: true, url: url, headers: headers, timeout: 10000, jar: true }, function (error, message, response) {
                     if (handleError(error)) return;
-                    console.log(response);
+                    xml2js.parseString(response, function (err, res) {
+                        
+                        console.log(res['ajax-response'].component);
+                        //$ = cheerio.load(res['ajax-response']);
+                      
+                    });
                 });
             });
         } else {
