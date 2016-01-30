@@ -29,6 +29,7 @@
     {
       "Name": "Barking and Dagenham",
       "Type": "arena",
+      "ISBNAlias": "number",
       "OrganisationId": "AUK000226|6",
       "OrganisationName": "Barking & Dagenham",
       "Id": "226006",
@@ -54,13 +55,19 @@
     },
     {
       "Name": "Bedford",
-      "Type": "viewpoint2",
+      "Type": "arena",
+      "OrganisationId": "AUK000022|3",
+      "OrganisationName": "Bedford",
+      "ISBNAlias": "recordControlNumber",
+      "ISBN": 10,
       "Id": "220001",
       "Url": "https://beds-arena.culturalservices.net/web/arena/"
     },
     {
       "Name": "Bexley",
       "Type": "arena",
+      "OrganisationId": "AUK000226|18",
+      "OrganisationName": "Bexley",
       "Id": "226018",
       "Url": "https://arena.yourlondonlibrary.net/web/bexley/"
     },

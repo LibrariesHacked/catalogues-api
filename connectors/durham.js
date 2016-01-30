@@ -97,13 +97,11 @@ exports.searchByISBN = function (isbn, lib, callback) {
                                     ctl00$cph1$ucItem$lvTitle$ctrl0$btLibraryList: 'Libraries'
                                 };
                                 // Request 7: Get the item availability table
-                                //console.log(response);
                                 request.post({ url: lib.Url + resultLocation, gzip: true, form: aspNetForm, jar: true, headers: headers, timeout: 10000 }, function (error, message, response) {
                                     if (handleError(error)) return;
                                     $ = cheerio.load(response);
                                     var libs = {};
                                     $('table.viewgrid tr').slice(1).each(function () {
-                                        
                                         var name = $(this).find('td').eq(0).text().trim();
                                         var status = $(this).find('td').eq(1).text().trim();
                                         if (!libs[name]) libs[name] = { available: 0, unavailable: 0 }

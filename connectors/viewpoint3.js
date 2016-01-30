@@ -1,4 +1,4 @@
-console.log('viewpoint connector loading...');
+console.log('viewpoint3 connector loading...');
 
 //////////////////////////
 // Requires
