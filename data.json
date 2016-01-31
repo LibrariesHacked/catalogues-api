@@ -68,6 +68,7 @@
       "Type": "arena",
       "OrganisationId": "AUK000226|18",
       "OrganisationName": "Bexley",
+      "ISBNAlias": "number",
       "Id": "226018",
       "Url": "https://arena.yourlondonlibrary.net/web/bexley/"
     },

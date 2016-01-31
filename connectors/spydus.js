@@ -31,6 +31,13 @@ exports.searchByISBN = function (isbn, lib, callback) {
     request.get({ url: lib.Url + searchUrl + isbn, timeout: 20000 }, function (error, msg, res) {
         if (handleError(error)) return;
         $ = cheerio.load(res);
+      
+      
+        // The search may not find any record, or it may find multiple records
+        // If multiple records found, need to trigger the full display
+      
+      
+      
         var libs = {};
         $('div.holdings table tr').slice(1).each(function (i, elem) {
             var name = $(this).find('td').eq(0).text().trim();
