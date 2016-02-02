@@ -103,21 +103,27 @@
     {
       "Name": "Bournemouth",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/bournemouth/"
     },
     {
       "Name": "Bracknell Forest",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/bracknellforest/"
     },
     {
       "Name": "Bradford",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/bradford/"
     },
     {
       "Name": "Brent",
-      "Type": "viewpoint2",
+      "Type": "arena",
+      "OrganisationId": "AUK000226|11",
+      "OrganisationName": "Brent",
+      "ISBNAlias": "number",
       "Id": "226011",
       "Url": "https://arena.yourlondonlibrary.net/web/brent/"
     },

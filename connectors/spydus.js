@@ -11,7 +11,7 @@ var request = require('request'),
 ///////////////////////////////////////////
 // VARIABLES
 ///////////////////////////////////////////
-var searchUrl = 'cgi-bin/spydus.exe/ENQ/OPAC/BIBENQ?NRECS=1&ISBN=';
+var searchUrl = 'cgi-bin/spydus.exe/ENQ/OPAC/BIBENQ?NRECS=2&ISBN=';
 
 ///////////////////////////////////////////
 // Function: searchByISBN
@@ -27,17 +27,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
         }
     };
 
-    // Request 1: Deep link to item page by ISBN.
-    request.get({ url: lib.Url + searchUrl + isbn, timeout: 20000 }, function (error, msg, res) {
-        if (handleError(error)) return;
-        $ = cheerio.load(res);
-      
-      
-        // The search may not find any record, or it may find multiple records
-        // If multiple records found, need to trigger the full display
-      
-      
-      
+    var getAvailability = function ($) {
         var libs = {};
         $('div.holdings table tr').slice(1).each(function (i, elem) {
             var name = $(this).find('td').eq(0).text().trim();
@@ -48,5 +38,26 @@ exports.searchByISBN = function (isbn, lib, callback) {
         for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
         responseHoldings.end = new Date();
         callback(responseHoldings);
+    };
+
+    // Request 1: Deep link to item page by ISBN.
+    request.get({ url: lib.Url + searchUrl + isbn, timeout: 20000 }, function (error, msg, res) {
+        if (handleError(error)) return;
+        $ = cheerio.load(res);
+        // The search may not find any record, or it may find multiple records
+        // If multiple records found, need to trigger the full display
+        if ($('.holdings').length > 1) {
+            var url = $('.holdings').first().find('a').attr('href');
+            request.get({ url: lib.Url + url, timeout: 20000 }, function (error, msg, res) {
+                if (handleError(error)) return;
+                $ = cheerio.load(res);
+                getAvailability($);
+            });
+        } else if ($('.holdings').length == 1) {
+            getAvailability($);
+        } else {
+            responseHoldings.end = new Date();
+            callback(responseHoldings);
+        }
     });
 };

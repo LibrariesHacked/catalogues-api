@@ -49,15 +49,17 @@ exports.searchByISBN = function (isbn, lib, callback) {
                     xml2js.parseString(response, function (err, res) {
                         $ = cheerio.load(res['ajax-response'].component[0]._);
                         // There's gotta be a better way of doing this
-                        $('.arena-holding-container a').each(function (index1) {
+                        $('.arena-holding-container a span').each(function (index1) {
+
                             // Details can return multiple organisation for joint services -- want to just get the right one.
                             if ($(this).text().trim() == lib.OrganisationName) {
                                 headers['Wicket-FocusedElementId'] = 'id__crDetailWicket__WAR__arenaportlets____2a';
-                                resourceId = '/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel:content:holdingsView:' + (index1) + ':holdingContainer:togglableLink::IBehaviorListener:0:';
+                                resourceId = '/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel:content:holdingsView:' + (index1 + 1) + ':holdingContainer:togglableLink::IBehaviorListener:0:';
                                 url = lib.Url + 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + resourceId + '&p_p_cacheability=';
 
                                 // Request 4: (Looped) Get the holdings details for that organisation. 
                                 request.get({ forever: true, headers: headers, url: url, timeout: 10000, jar: true }, function (error, message, response) {
+                                    
                                     xml2js.parseString(response, function (err, res) {
                                         $ = cheerio.load(res['ajax-response'].component[0]._);
                                         var libsData = $('.arena-holding-container');
@@ -65,7 +67,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
                                         libsData.each(function (index2) {
 
                                             var libName = $(this).find('span.arena-holding-link').text();
-                                            resourceId = '/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel:content:holdingsView:' + (index1) + ':childContainer:childView:' + index2 + ':holdingPanel:holdingContainer:togglableLink::IBehaviorListener:0:';
+                                            resourceId = '/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel:content:holdingsView:' + (index1 + 1) + ':childContainer:childView:' + index2 + ':holdingPanel:holdingContainer:togglableLink::IBehaviorListener:0:';
                                             url = lib.Url + 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + resourceId + '&p_p_cacheability=';
                                             // Request 5: (Looped) Get the libraries availability
                                             request.get({ forever: true, headers: headers, url: url, timeout: 10000, jar: true }, function (error, message, response) {

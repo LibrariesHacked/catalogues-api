@@ -11,7 +11,7 @@ var request = require('request'),
 ///////////////////////////////////////////
 // VARIABLES
 ///////////////////////////////////////////
-var searchUrl = 'List.csp?Index1=Keywords&Database=1&Location=NoPreference&Language=NoPreference&PublicationType=NoPreference&OpacLanguage=eng&NumberToRetrieve=50&SearchMethod=Find_1&SearchTerm1=[ISBN]&Profile=Default&PreviousList=Start&PageType=Start&WebPageNr=1&WebAction=NewSearch&StartValue=1&RowRepeat=0&MyChannelCount=&SearchT1=';
+var searchUrl = 'List.csp?Index1=Isbn&Database=1&Location=NoPreference&Language=NoPreference&PublicationType=NoPreference&OpacLanguage=eng&NumberToRetrieve=50&SearchMethod=Find_1&SearchTerm1=[ISBN]&Profile=Default&PreviousList=Start&PageType=Start&WebPageNr=1&WebAction=NewSearch&StartValue=1&RowRepeat=0&MyChannelCount=&SearchT1=';
 ///////////////////////////////////////////
 // Function: searchByISBN
 // This is a horrible chain of requests.  Particularly as the data returned is always within 
@@ -21,11 +21,11 @@ var searchUrl = 'List.csp?Index1=Keywords&Database=1&Location=NoPreference&Langu
 exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
     var handleError = function (error) {
-        if(error) {
+        if (error) {
             responseHoldings.error = error;
             responseHoldings.end = new Date();
             callback(responseHoldings);
-            return true;  
+            return true;
         }
     };
     // Declaring this here to use later on
@@ -50,29 +50,29 @@ exports.searchByISBN = function (isbn, lib, callback) {
 
     // Request 1: Kick off a session
     request.get({ url: lib.Url + 'vubis.csp', timeout: 10000 }, function (error, message, response) {
-        handleError(error);
+        if (handleError(error)) return;
         $ = cheerio.load(response);
         var link = $('FRAME[Title="Vubis.Body"]').attr('src');
         // Request 2: Should now have the StartBody link - do it!
         request.get({ url: lib.Url + link, timeout: 10000 }, function (error, message, response) {
-            handleError(error);
+            if (handleError(error)) return;
             $ = cheerio.load(response);
             // Get the encoded value to perform the search.
             var enc = $('input[name=EncodedRequest]').attr('value');
             var url = lib.Url + searchUrl.replace('[ISBN]', isbn) + isbn + '&EncodedRequest=' + enc;
             // Request 3: Get the search frameset (*voms*)
             request.get({ url: url, timeout: 20000 }, function (error, msg, response) {
-                handleError(error);
+                if (handleError(error)) return;
                 $ = cheerio.load(response);
                 // In some (but not all) cases this will redirect to the relevant item page
                 var link = $('FRAME[title="List.Body"]').attr('src');
                 if (link && link.indexOf('ListBody') != -1) {
                     request.get({ url: lib.Url + link, timeout: 20000 }, function (error, msg, response) {
-                        handleError(error);
+                        if (handleError(error)) return;
                         $ = cheerio.load(response);
-                        var link = $('td.listitemOdd').last().find('a');
-                        request.get(lib.Url + link.attr('href'), function (error, message, response) {
-                            handleError(error);
+                        var link = $('td.listitemOdd').last().find('a').attr('href');
+                        request.get(lib.Url + link, function (error, message, response) {
+                            if (handleError(error)) return;
                             $ = cheerio.load(response);
                             var link = $('frame').eq(1).attr('src');
                             itemRequest(lib.Url + link);
