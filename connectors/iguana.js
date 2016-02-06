@@ -20,10 +20,12 @@ var reqHeader = { "Content-Type": "application/x-www-form-urlencoded" };
 exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
     var handleError = function (error) {
-        responseHoldings.error = error;
-        responseHoldings.end = new Date();
-        callback(responseHoldings);
-        return true;
+        if (error) {
+            responseHoldings.error = error;
+            responseHoldings.end = new Date();
+            callback(responseHoldings);
+            return true;
+        }
     };
 
     // Request 1: Post to the search web service

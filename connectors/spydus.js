@@ -11,7 +11,7 @@ var request = require('request'),
 ///////////////////////////////////////////
 // VARIABLES
 ///////////////////////////////////////////
-var searchUrl = 'cgi-bin/spydus.exe/ENQ/OPAC/BIBENQ?NRECS=2&ISBN=';
+var searchUrl = 'cgi-bin/spydus.exe/ENQ/OPAC/BIBENQ?NRECS=1&ISBN=';
 
 ///////////////////////////////////////////
 // Function: searchByISBN
@@ -46,18 +46,21 @@ exports.searchByISBN = function (isbn, lib, callback) {
         $ = cheerio.load(res);
         // The search may not find any record, or it may find multiple records
         // If multiple records found, need to trigger the full display
-        if ($('.holdings').length > 1) {
-            var url = $('.holdings').first().find('a').attr('href');
-            request.get({ url: lib.Url + url, timeout: 20000 }, function (error, msg, res) {
-                if (handleError(error)) return;
-                $ = cheerio.load(res);
-                getAvailability($);
-            });
-        } else if ($('.holdings').length == 1) {
-            getAvailability($);
-        } else {
+
+        if ($('.holdings').length == 0) {
             responseHoldings.end = new Date();
             callback(responseHoldings);
+        } else {
+            if ($('.holdings').text().indexOf('see full display for details') != -1) {
+                var url = $('.holdings').first().find('a').attr('href');
+                request.get({ url: lib.Url + url, timeout: 20000 }, function (error, msg, res) {
+                    if (handleError(error)) return;
+                    $ = cheerio.load(res);
+                    getAvailability($);
+                });
+            } else {
+                getAvailability($);
+            }
         }
     });
 };

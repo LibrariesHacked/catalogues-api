@@ -23,10 +23,12 @@ var itemRequest = '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xs
 exports.searchByISBN = function (isbn, libraryService, callback) {
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
     var handleError = function (error) {
-        responseHoldings.error = error;
-        responseHoldings.end = new Date();
-        callback(responseHoldings);
-        return true;
+        if (error) {
+            responseHoldings.error = error;
+            responseHoldings.end = new Date();
+            callback(responseHoldings);
+            return true;
+        }
     };
 
     var soapXML = isbnRequest.replace('[ISBN]', isbn).replace('[APPID]', libraryService.Id);

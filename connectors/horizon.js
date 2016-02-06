@@ -19,10 +19,12 @@ var catUrl = 'ipac20/ipac.jsp?menu=search&index=ISBNEX&term=';
 exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
     var handleError = function (error) {
-        responseHoldings.error = error;
-        responseHoldings.end = new Date();
-        callback(responseHoldings);
-        return true;
+        if (error) {
+            responseHoldings.error = error;
+            responseHoldings.end = new Date();
+            callback(responseHoldings);
+            return true;
+        }
     };
 
     // Request 1: Use the item deep link URL

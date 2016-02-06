@@ -139,15 +139,18 @@
     },
     {
       "Name": "Bristol City",
-      "Type": "viewpoint2",
+      "Type": "viewpoint3",
       "Id": "280001",
       "Url": "https://www.librarieswest.org.uk/"
     },
     {
       "Name": "Bromley",
-      "Type": "viewpoint2",
+      "Type": "arena",
+      "OrganisationId": "AUK000226|19",
+      "OrganisationName": "Bromley",
+      "ISBNAlias": "number",
       "Id": "226019",
-      "Url": "http://arena.yourlondonlibrary.net/web/bromley/"
+      "Url": "https://arena.yourlondonlibrary.net/web/barking-and-dagenham/"
     },
     {
       "Name": "Buckinghamshire",
@@ -211,22 +214,26 @@
     },
     {
       "Name": "City of London",
-      "Type": "prism3",
-      "Url": "https://capitadiscovery.co.uk/cityoflondon/"
+      "Type": "enterprise",
+      "Available": [ "In stock" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+      "Url": "https://col.ent.sirsidynix.net.uk/client/en_GB/default/"
     },
     {
       "Name": "Clackmannanshire",
       "Type": "vufind",
-      "Url": "http://vufind-cl.sedar.org.uk/vufind/"
+      "Url": "https://vufind-cl.sedar.org.uk/vufind/"
     },
     {
       "Name": "Conwy",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/conwy/"
     },
     {
       "Name": "Cornwall",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/cornwall/"
     },
     {
@@ -251,7 +258,8 @@
     },
     {
       "Name": "Darlington",
-      "Type": "viewpoint2",
+      "Type": "arena",
+      "ISBNAlias": "number",
       "Id": "230001",
       "Url": "http://www2.darlington.gov.uk/web/arena/"
     },

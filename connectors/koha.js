@@ -19,10 +19,12 @@ var catUrl = 'cgi-bin/koha/opac-search.pl?format=rss2&idx=nb&q=';
 exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
     var handleError = function (error) {
-        responseHoldings.error = error;
-        responseHoldings.end = new Date();
-        callback(responseHoldings);
-        return true;
+        if (error) {
+            responseHoldings.error = error;
+            responseHoldings.end = new Date();
+            callback(responseHoldings);
+            return true;
+        }
     };
 
     // Request 1: The ISBN search

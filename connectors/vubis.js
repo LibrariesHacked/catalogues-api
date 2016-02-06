@@ -39,6 +39,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
             $('table[summary="FullBB.HoldingDetails"] tr').slice(2).each(function () {
                 var status = $(this).find('td').eq(availIndex).text().trim();
                 var name = $(this).find('td').eq(shelfMarkIndex).text().trim();
+                if (name.indexOf(':') != -1) name = name.split(':')[0];
                 if (!libs[name]) libs[name] = { available: 0, unavailable: 0 };
                 status == 'Available' ? libs[name].available++ : libs[name].unavailable++;
             });
@@ -60,6 +61,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
             // Get the encoded value to perform the search.
             var enc = $('input[name=EncodedRequest]').attr('value');
             var url = lib.Url + searchUrl.replace('[ISBN]', isbn) + isbn + '&EncodedRequest=' + enc;
+            
             // Request 3: Get the search frameset (*voms*)
             request.get({ url: url, timeout: 20000 }, function (error, msg, response) {
                 if (handleError(error)) return;
@@ -71,12 +73,23 @@ exports.searchByISBN = function (isbn, lib, callback) {
                         if (handleError(error)) return;
                         $ = cheerio.load(response);
                         var link = $('td.listitemOdd').last().find('a').attr('href');
-                        request.get(lib.Url + link, function (error, message, response) {
-                            if (handleError(error)) return;
-                            $ = cheerio.load(response);
-                            var link = $('frame').eq(1).attr('src');
-                            itemRequest(lib.Url + link);
-                        });
+                        if (link) {
+                            request.get(lib.Url + link, function (error, message, response) {
+                                if (handleError(error)) return;
+                                $ = cheerio.load(response);
+                                var link = $('frame').eq(1).attr('src');
+                                if (link) {
+                                    link = link.substring(link.indexOf('FullBBBody'));
+                                    itemRequest(lib.Url + link);
+                                } else {
+                                    responseHoldings.end = new Date();
+                                    callback(responseHoldings);
+                                }
+                            });
+                        } else {
+                            responseHoldings.end = new Date();
+                            callback(responseHoldings);
+                        }
                     });
                 } else if (link && link.indexOf('FullBBBody') != -1) {
                     itemRequest(lib.Url + link);
