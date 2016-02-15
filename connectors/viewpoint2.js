@@ -28,7 +28,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
 
     // Request 1: Perform the search.
     request.get({ url: lib.Url + searchUrl + isbn, timeout: 10000 }, function (error, message, response) {
-        console.log(response);
+
         if (handleError(error)) return;
         $ = cheerio.load(response);
         // Get the more details link - ah some more horrific code :-)

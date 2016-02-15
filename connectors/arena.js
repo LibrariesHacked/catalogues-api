@@ -37,15 +37,17 @@ exports.searchByISBN = function (isbn, lib, callback) {
         if (handleError(error)) return;
         // Mega Hack! Find occurence of search_item_id= and then &agency_name=, and get item ID inbetween
         if (response.lastIndexOf("search_item_id=") != -1) {
-            var itemId = response.substring(response.lastIndexOf("search_item_id=") + 15, response.lastIndexOf("&agency_name="));
-            var url = lib.Url + 'results?p_p_state=normal&p_p_lifecycle=1&p_p_action=1&p_p_id=crDetailWicket_WAR_arenaportlets&p_p_col_count=4&p_p_col_id=column-2&p_p_col_pos=1&p_p_mode=view&search_item_no=0&search_item_id=' + itemId + '&search_type=solr';
-            console.log(url);
+            var agencyNameInd = response.lastIndexOf("&agency_name=");
+            if (agencyNameInd == -1) agencyNameInd = response.lastIndexOf("&amp;agency_name=");
+            var itemId = response.substring(response.lastIndexOf("search_item_id=") + 15, agencyNameInd);
+            var url = lib.Url + 'results?p_p_state=normal&p_p_lifecycle=1&p_p_action=1&p_p_id=crDetailWicket_WAR_arenaportlets&p_p_col_count=4&p_p_col_id=column-2&p_p_col_pos=1&p_p_mode=view&search_item_no=0&search_type=solr&search_item_id=' + itemId;
+
             // Request: Get the item page.
             request.get({ forever: true, url: url, timeout: 10000, headers: { 'Connection': 'keep-alive' }, jar: true }, function (error, message, response) {              
                 var resourceId = '/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel::IBehaviorListener:0:';
                 var headers = { 'Accept': 'text/xml', 'Wicket-Ajax': true };
                 url = lib.Url + 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + resourceId + '&p_p_cacheability=cacheLevelPage&p_p_col_id=column-2&p_p_col_pos=1&p_p_col_count=3';
-                
+
                 // Request 3: After triggering the item page, we should then be able to get the availability container XML data
                 request.get({ forever: true, url: url, headers: headers, timeout: 10000, jar: true }, function (error, message, response) {
                     if (handleError(error)) return;

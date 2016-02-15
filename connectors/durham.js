@@ -83,7 +83,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
                             // Request 6: Get the item details
                             request.post({ url: lib.Url + resultLocation, gzip: true, form: aspNetForm, jar: true, headers: headers, timeout: 10000 }, function (error, message, response) {
                                 if (handleError(error)) return;
-                                //console.log(response);
+
                                 // That returns a button to get the availability - very tedious!  Hit the button.
                                 $ = cheerio.load(response);
                                 var aspNetForm = {

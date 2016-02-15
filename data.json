@@ -342,11 +342,13 @@
     {
       "Name": "East Lothian",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/eastlothian/"
     },
     {
       "Name": "East Renfrewshire",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/eastrenfrewshire/"
     },
     {
@@ -363,6 +365,7 @@
     {
       "Name": "Edinburgh",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/edinburgh/"
     },
     {
@@ -386,6 +389,7 @@
     {
       "Name": "Fife",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/fife/"
     },
     {
@@ -396,6 +400,7 @@
     {
       "Name": "Gateshead",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/gateshead/"
     },
     {
@@ -407,21 +412,25 @@
     {
       "Name": "Gloucestershire",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/gloslibraries/"
     },
     {
       "Name": "Greenwich",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "http://capitadiscovery.co.uk/royalgreenwich/"
     },
     {
       "Name": "Guernsey",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/guernsey/"
     },
     {
       "Name": "Gwynedd",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "http://capitadiscovery.co.uk/gwynedd/"
     },
     {
@@ -450,6 +459,7 @@
     {
       "Name": "Haringey",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "http://capitadiscovery.co.uk/haringey/"
     },
     {
@@ -461,6 +471,7 @@
     {
       "Name": "Hartlepool",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/hartlepool/"
     },
     {
@@ -472,6 +483,7 @@
     {
       "Name": "Herefordshire",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/herefordshire/"
     },
     {
@@ -482,6 +494,7 @@
     {
       "Name": "Highland",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/highland/"
     },
     {
@@ -523,11 +536,13 @@
     {
       "Name": "Islington",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/islington/"
     },
     {
       "Name": "Jersey",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/jersey/"
     },
     {
@@ -565,16 +580,19 @@
     {
       "Name": "Lambeth",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/lambeth/"
     },
     {
       "Name": "Lancashire",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/lancashire/"
     },
     {
       "Name": "Leeds",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/leeds/"
     },
     {
@@ -604,6 +622,7 @@
     {
       "Name": "Liverpool",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/liverpool/"
     },
     {
@@ -625,6 +644,7 @@
     {
       "Name": "Merthyr Tydfil",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/merthyr/"
     },
     {
@@ -658,6 +678,7 @@
     {
       "Name": "Moray",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/moray/"
     },
     {
@@ -691,6 +712,7 @@
     {
       "Name": "North Ayrshire",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/north-ayrshire/"
     },
     {
@@ -719,11 +741,13 @@
     {
       "Name": "North Tyneside",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/northtyneside/"
     },
     {
       "Name": "North Yorkshire",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/northyorkshire/"
     },
     {
@@ -775,6 +799,7 @@
     {
       "Name": "Orkney",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/orkney/"
     },
     {
@@ -789,8 +814,8 @@
     },
     {
       "Name": "Perth and Kinross",
-      "Type": "prism3",
-      "Url": "https://capitadiscovery.co.uk/perthandkinross/"
+      "Type": "spydus",
+      "Url": "https://pkc.spydus.co.uk/"
     },
     {
       "Name": "Peterborough",
@@ -805,6 +830,7 @@
     {
       "Name": "Poole",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/poole/"
     },
     {
@@ -843,6 +869,7 @@
     {
       "Name": "Rhondda Cynon Taf",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/rhondda/"
     },
     {
@@ -858,6 +885,7 @@
     {
       "Name": "Rotherham",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/rotherham/"
     },
     {
@@ -896,6 +924,7 @@
     {
       "Name": "Shetland",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/shetland/"
     },
     {
@@ -911,6 +940,7 @@
     {
       "Name": "Solihull",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/solihull/"
     },
     {
@@ -938,6 +968,7 @@
     {
       "Name": "South Tyneside",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/southtyneside/"
     },
     {
@@ -953,6 +984,7 @@
     {
       "Name": "Southwark",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/southwark/"
     },
     {
@@ -981,6 +1013,7 @@
     {
       "Name": "Stockton",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/stockton/"
     },
     {
@@ -1026,6 +1059,7 @@
     {
       "Name": "Swindon",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/swindon/"
     },
     {
@@ -1052,6 +1086,7 @@
     {
       "Name": "Torfaen",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/torfaen/"
     },
     {
@@ -1091,6 +1126,7 @@
     {
       "Name": "Wandsworth",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "http://capitadiscovery.co.uk/wandsworth/"
     },
     {
@@ -1144,6 +1180,7 @@
     {
       "Name": "Wigan",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/wigan/"
     },
     {
@@ -1160,6 +1197,7 @@
     {
       "Name": "Wirral",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/wirral/"
     },
     {
@@ -1170,11 +1208,13 @@
     {
       "Name": "Wolverhampton",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/wolverhampton/"
     },
     {
       "Name": "Worcestershire",
       "Type": "prism3",
+      "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/worcs/"
     },
     {
