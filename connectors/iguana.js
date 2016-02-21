@@ -33,12 +33,16 @@ exports.searchByISBN = function (isbn, lib, callback) {
         if (handleError(error)) return;
         xml2js.parseString(response, function (err, res) {
             if (handleError(err)) return;
+            var record = res["zs:searchRetrieveResponse"]["zs:records"][0]["zs:record"];
+            if (record) var recordData = record[0]["zs:recordData"];
             // Loop through all the holdings records.
-            res["zs:searchRetrieveResponse"]["zs:records"][0]["zs:record"][0]["zs:recordData"][0].BibDocument[0].HoldingsSummary[0].ShelfmarkData.forEach(function (item) {
-                responseHoldings.availability.push({ library: item.Shelfmark[0], available: item.Available[0], unavailable: item.Available == "0" ? 1 : 0 });
-            });
+            if (recordData && recordData[0] && recordData[0].BibDocument && recordData[0].BibDocument[0] && recordData[0].BibDocument[0].HoldingsSummary && recordData[0].BibDocument[0].HoldingsSummary[0]) {
+                recordData[0].BibDocument[0].HoldingsSummary[0].ShelfmarkData.forEach(function (item) {
+                    if (item.Shelfmark) responseHoldings.availability.push({ library: item.Shelfmark[0], available: item.Available[0], unavailable: item.Available == "0" ? 1 : 0 });
+                });
+            }
+            responseHoldings.end = new Date();
+            callback(responseHoldings);
         });
-        responseHoldings.end = new Date();
-        callback(responseHoldings);
     });
 };

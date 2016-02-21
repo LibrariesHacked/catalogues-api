@@ -16,12 +16,20 @@ data.LibraryServices.forEach(function (service) {
 /////////////////////////////////////////////////////////////////
 // Function: getAllLibraries
 // Route: /services
-// Returns the contents of the data.json
+// Returns a filtered contents of the data.json
 // in order to list services.
 // Test: http://localhost:3000/services
 /////////////////////////////////////////////////////////////////
 exports.getAllLibraries = function (req, res) {
-    res.send(data.LibraryServices);
+    var services = data.LibraryServices
+        // Could put a filter here e.g. if filter by area (North East) or even spatial. 
+        .filter(function (service) {
+            return service;
+        })
+        .map(function (service) {
+            return {};
+        });
+    res.send(services);
 };
 
 /////////////////////////////////////////////////////////////////
@@ -30,18 +38,23 @@ exports.getAllLibraries = function (req, res) {
 // Test: http://localhost:3000/availabilityByISBN/9780747532743?service=Wiltshire
 /////////////////////////////////////////////////////////////////
 exports.isbnSearch = function (req, res) {
+
+    // Create a list of the searches to perform.
     var searches = data.LibraryServices
         .filter(function (service) {
             return (service.Type != "" && (!req.query.service || service.Name.indexOf(req.query.service) > -1));
         })
         .map(function (service) {
             return function (callback) {
+                console.log(service);
                 serviceFunctions[service.Type].searchByISBN(req.params.isbn, service, function (response) {
                     callback(null, response);
                 });
             }
         });
-    async.parallel(searches, function (err, response) {
+
+    // The searches object will be a list of searches to run against the various library systems.  
+    async.series(searches, function (err, response) {
         res.send(response);
     });
 };

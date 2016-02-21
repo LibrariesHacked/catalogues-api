@@ -32,6 +32,8 @@
       "ISBNAlias": "number",
       "OrganisationId": "AUK000226|6",
       "OrganisationName": "Barking & Dagenham",
+      "ArenaName": "AUK000226",
+      "ArenaMemberId": "",
       "Id": "226006",
       "Url": "https://arena.yourlondonlibrary.net/web/barking-and-dagenham/"
     },
@@ -261,6 +263,8 @@
       "Type": "arena",
       "ISBNAlias": "number",
       "Id": "230001",
+      "ArenaName": "AUK000023",
+      "ArenaMemberId": "28980569",
       "Url": "http://www2.darlington.gov.uk/web/arena/"
     },
     {
