@@ -46,7 +46,6 @@ exports.isbnSearch = function (req, res) {
         })
         .map(function (service) {
             return function (callback) {
-                console.log(service);
                 serviceFunctions[service.Type].searchByISBN(req.params.isbn, service, function (response) {
                     callback(null, response);
                 });
@@ -54,7 +53,7 @@ exports.isbnSearch = function (req, res) {
         });
 
     // The searches object will be a list of searches to run against the various library systems.  
-    async.series(searches, function (err, response) {
+    async.parallel(searches, function (err, response) {
         res.send(response);
     });
 };

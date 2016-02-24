@@ -60,9 +60,10 @@
       "Type": "arena",
       "OrganisationId": "AUK000022|3",
       "OrganisationName": "Bedford",
+      "ArenaName": "AUK000022",
       "ISBNAlias": "recordControlNumber",
-      "ISBN": 10,
       "Id": "220001",
+      "SearchType": "Keyword",
       "Url": "https://beds-arena.culturalservices.net/web/arena/"
     },
     {
