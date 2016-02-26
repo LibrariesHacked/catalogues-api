@@ -34,7 +34,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     // Or after a second request to go to the item page.
     var getItemAvailability = function (ils, itemPage) {
         // Request 2: A post request returns the data used to show the availability information
-        request.post({ url: lib.Url + lib.AvailabilityUrl + ils.split('/').join('$002f'), headers: header2, timeout: 20000 }, function (error, msg, resp2) {
+        request.post({ url: lib.Url + lib.AvailabilityUrl + ils.split('/').join('$002f'), headers: header2, timeout: 30000 }, function (error, msg, resp2) {
             var avail = null;
             // This could fail from not returning JSON - stick in a try/catch
             try {
@@ -62,7 +62,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     };
 
     // Request 1: Call the deep link to the item by ISBN
-    request.get({ url: lib.Url + searchUrl + isbn, headers: header1, timeout: 20000 }, function (error, msg, resp1) {
+    request.get({ url: lib.Url + searchUrl + isbn, headers: header1, timeout: 30000 }, function (error, msg, resp1) {
         if (handleError(error)) return;
 
         var uri = msg.request.uri.path
@@ -78,7 +78,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
             if ($('#da0').attr('value')) ils = $('#da0').attr('value').substring($('#da0').attr('value').lastIndexOf("ent:") + 4);
             // Get the item page
             if (ils != null) {
-                request.get({ url: lib.Url + itemUrl.replace('[ILS]', ils.split('/').join('$002f')), timeout: 20000 }, function (error, message, response) {
+                request.get({ url: lib.Url + itemUrl.replace('[ILS]', ils.split('/').join('$002f')), timeout: 30000 }, function (error, message, response) {
                     if (handleError(error)) return;
                     getItemAvailability(ils, response);
                 });

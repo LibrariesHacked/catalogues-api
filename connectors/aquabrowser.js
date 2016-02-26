@@ -31,7 +31,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     };
 
     // Request 1: call the search control for the ISBN
-    request.get({ url: lib.Url + searchUrl + isbn, timeout: 10000 }, function (error, msg, response) {
+    request.get({ url: lib.Url + searchUrl + isbn, timeout: 30000 }, function (error, msg, response) {
         if (handleError(error)) return;
         xml2js.parseString(response, function (err, res) {
             if (handleError(err)) return;

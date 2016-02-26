@@ -31,14 +31,14 @@ exports.searchByISBN = function (isbn, lib, callback) {
     };
 
     // Request 1: web service to search for item
-    request.get({ url: lib.Url + searchUrl + isbn, headers: reqHeader, timeout: 20000 }, function (error, msg, response) {
+    request.get({ url: lib.Url + searchUrl + isbn, headers: reqHeader, timeout: 30000 }, function (error, msg, response) {
         if (handleError(error)) return;
         xml2js.parseString(response, function (err, res) {
             handleError(err);
             if (res.searchCatalog.TotalCount[0] > 0) {
                 var bibId = res.searchCatalog.Bib[0].BcId[0];
                 // Request 2: web service to get availability
-                request.get({ url: lib.Url + 'currentItems/' + bibId, headers: reqHeader, timeout: 20000 }, function (error, msg, response) {
+                request.get({ url: lib.Url + 'currentItems/' + bibId, headers: reqHeader, timeout: 30000 }, function (error, msg, response) {
                     if (handleError(error)) return;
                     xml2js.parseString(response, function (err, result) {
                         if (handleError(err)) return;

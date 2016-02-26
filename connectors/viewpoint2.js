@@ -27,7 +27,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     };
 
     // Request 1: Perform the search.
-    request.get({ url: lib.Url + searchUrl + isbn, timeout: 10000 }, function (error, message, response) {
+    request.get({ url: lib.Url + searchUrl + isbn, timeout: 30000 }, function (error, message, response) {
 
         if (handleError(error)) return;
         $ = cheerio.load(response);
@@ -38,7 +38,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
         });
         if (moreDetails) {
             // Request 2: Return the item details.
-            request.get({ url: moreDetails, timeout: 20000 }, function (error, message, response) {
+            request.get({ url: moreDetails, timeout: 30000 }, function (error, message, response) {
                 if (handleError(error)) return;
                 // Now parse through the availability table
                 $ = cheerio.load(response);

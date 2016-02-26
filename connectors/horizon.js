@@ -28,7 +28,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     };
 
     // Request 1: Use the item deep link URL
-    request.get({ url: lib.Url + catUrl + isbn, timeout: 20000 }, function (error, msg, response) {
+    request.get({ url: lib.Url + catUrl + isbn, timeout: 30000 }, function (error, msg, response) {
         if (handleError(error)) return;
         var libs = {};
         $('table.bibItems tr.bibItemsEntry').each(function (index, elem) {

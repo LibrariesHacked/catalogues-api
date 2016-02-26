@@ -39,13 +39,13 @@ exports.searchByISBN = function (isbn, lib, callback) {
     };
 
     // Request 1: Initialise the session - go to home page.
-    request.get({ url: lib.Url, timeout: 10000, jar: true }, function (error, message, response) {
+    request.get({ url: lib.Url, timeout: 20000, jar: true }, function (error, message, response) {
         if (handleError(error)) return;
         // Request 2: Enter the library catalogue as a guest
-        request.post({ url: lib.Url + 'pgLogin.aspx?CheckJavascript=1', jar: true, timeout: 10000 }, function (error, message, response) {
+        request.post({ url: lib.Url + 'pgLogin.aspx?CheckJavascript=1', jar: true, timeout: 20000 }, function (error, message, response) {
             if (handleError(error)) return;
             // Request 3: Go to catalogue page
-            request.post({ url: lib.Url + 'pgCatKeywordSearch.aspx', jar: true, timeout: 10000 }, function (error, message, response) {
+            request.post({ url: lib.Url + 'pgCatKeywordSearch.aspx', jar: true, timeout: 20000 }, function (error, message, response) {
                 if (handleError(error)) return;
                 $ = cheerio.load(response);
                 var aspNetForm = getAspNetForm($);
@@ -62,11 +62,11 @@ exports.searchByISBN = function (isbn, lib, callback) {
                     ctl00$cph1$btSearch:'Search'
                 };
                 // Request 4: Perform the search.
-                request.post({ url: lib.Url + 'pgCatKeywordSearch.aspx', gzip: true, form: aspNetForm, jar: true, headers: headers, timeout: 10000 }, function (error, message, response) {
+                request.post({ url: lib.Url + 'pgCatKeywordSearch.aspx', gzip: true, form: aspNetForm, jar: true, headers: headers, timeout: 20000 }, function (error, message, response) {
                     if (handleError(error)) return;
                     // Request 5: Process the redirect that should be returned.
                     var resultLocation = message.headers.location;
-                    request.get({ url: lib.Url + resultLocation, gzip: true, jar: true, headers: headers, timeout: 10000 }, function (error, message, response) {
+                    request.get({ url: lib.Url + resultLocation, gzip: true, jar: true, headers: headers, timeout: 20000 }, function (error, message, response) {
                         if (handleError(error)) return;
                         // That should bring back the results list.
                         $ = cheerio.load(response);
@@ -81,7 +81,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
                                 ctl00$cph1$lvResults$DataPagerEx2$ctl00$ctl00: 10
                             };
                             // Request 6: Get the item details
-                            request.post({ url: lib.Url + resultLocation, gzip: true, form: aspNetForm, jar: true, headers: headers, timeout: 10000 }, function (error, message, response) {
+                            request.post({ url: lib.Url + resultLocation, gzip: true, form: aspNetForm, jar: true, headers: headers, timeout: 20000 }, function (error, message, response) {
                                 if (handleError(error)) return;
 
                                 // That returns a button to get the availability - very tedious!  Hit the button.
@@ -97,7 +97,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
                                     ctl00$cph1$ucItem$lvTitle$ctrl0$btLibraryList: 'Libraries'
                                 };
                                 // Request 7: Get the item availability table
-                                request.post({ url: lib.Url + resultLocation, gzip: true, form: aspNetForm, jar: true, headers: headers, timeout: 10000 }, function (error, message, response) {
+                                request.post({ url: lib.Url + resultLocation, gzip: true, form: aspNetForm, jar: true, headers: headers, timeout: 20000 }, function (error, message, response) {
                                     if (handleError(error)) return;
                                     $ = cheerio.load(response);
                                     var libs = {};

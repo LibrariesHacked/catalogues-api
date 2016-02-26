@@ -35,7 +35,8 @@ exports.getAllLibraries = function (req, res) {
 /////////////////////////////////////////////////////////////////
 // Function: isbnSearch
 // Route: /availabilityByISBN/:isbn
-// Test: http://localhost:3000/availabilityByISBN/9780747532743?service=Wiltshire
+// Test: http://localhost:3000/availabilityByISBN/9780747532699?service=Wiltshire
+// (Harry Potter and the Philosopher's Stone).
 /////////////////////////////////////////////////////////////////
 exports.isbnSearch = function (req, res) {
 

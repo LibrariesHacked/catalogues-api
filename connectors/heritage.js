@@ -28,7 +28,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     };
 
     // Request 1: Gte the deep link URL
-    request.get({ url: lib.Url + searchUrl + isbn, jar: true, timeout: 20000 }, function (error, message, response) {
+    request.get({ url: lib.Url + searchUrl + isbn, jar: true, timeout: 30000 }, function (error, message, response) {
         if (handleError(error)) return;
         $ = cheerio.load(response);
         var libs = {};

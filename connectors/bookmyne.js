@@ -33,13 +33,13 @@ exports.searchByISBN = function (isbn, lib, callback) {
     headers["SD-Region"] = lib.Region;
 
     // Request 1: Call web service to get the item ID
-    request.get({ url: lib.Url + searchUrl.replace('[ISBN]', isbn).replace('[PROFILE]', lib.Profile).replace('[LIBID]', lib.Id), headers: headers, timeout: 20000 }, function (error, msg, response) {
+    request.get({ url: lib.Url + searchUrl.replace('[ISBN]', isbn).replace('[PROFILE]', lib.Profile).replace('[LIBID]', lib.Id), headers: headers, timeout: 30000 }, function (error, msg, response) {
         if (handleError(error)) return;
         var jsonResponse = JSON.parse(response);
         if (jsonResponse.totalResults && jsonResponse.totalResults > 0) {
             var id = jsonResponse.entry[0].id;
             // Request 2: Call web service to get the holdings
-            request.get({ url: lib.Url + itemUrl + id, headers: headers, timeout: 20000 }, function (error, msg, response) {
+            request.get({ url: lib.Url + itemUrl + id, headers: headers, timeout: 30000 }, function (error, msg, response) {
                 if (handleError(error)) return;
                 var libs = {};
                 JSON.parse(response).holdingList.forEach(function (holding) {
