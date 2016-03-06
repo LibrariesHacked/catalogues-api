@@ -14,6 +14,40 @@ var host = "bookmyne.bc.sirsidynix.net";
 var searchUrl = "/search/os?q=GENERAL%3A[ISBN]&qf=GENERAL&rw=0&ct=10&pr=[PROFILE]&ext=dss&library_id=[LIBID]";
 var itemUrl = '/title/holdings?title_id=';
 
+///////////////////////////////////////////
+// Function: getLibraries
+///////////////////////////////////////////
+exports.getLibraries = function (service, callback) {
+    var responseLibraries = { service: service.Name, libs: [], start: new Date() };
+    var handleError = function (error) {
+        if (error) {
+            responseLibraries.error = error;
+            responseLibraries.end = new Date();
+            callback(responseLibraries);
+            return true;
+        }
+    };
+    var reqStatusCheck = function (message) {
+        if (message.statusCode != 200) {
+            responseLibraries.error = "Web request error.";
+            responseLibraries.end = new Date();
+            callback(responseLibraries);
+            return true;
+        }
+    };
+
+    var headers = { "Accept": "application/json", "Accept-Language": "en-gb", "Host": host, "Referer": "https://" + host + "/bookmyne/app.html#extendedDetail" };
+    headers["ILS-Profile"] = service.Profile;
+    headers["SD-Institution"] = service.InstitutionId;
+    headers["SD-Region"] = service.Region;
+
+    // Request 1: Get advanced search page
+    request.get({ forever: true, url: service.Url + 'advanced-search', timeout: 20000, jar: true }, function (error, message, response) {
+        if (handleError(error)) return;
+	if (reqStatusCheck(message)) return;
+    });
+};
+
 //////////////////////////
 // Function: searchByISBN
 //////////////////////////

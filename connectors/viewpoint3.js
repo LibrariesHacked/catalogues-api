@@ -12,6 +12,37 @@ var request = require('request'),
 var searchUrl = '02_Catalogue/02_004_TitleResults.aspx?page=1&searchType=5&searchTerm=';
 var container = '#ctl00_ContentPlaceCenterContent_copyAvailabilityContainer';
 
+///////////////////////////////////////////
+// Function: getLibraries
+///////////////////////////////////////////
+exports.getLibraries = function (service, callback) {
+    var responseLibraries = { service: service.Name, libs: [], start: new Date() };
+    var handleError = function (error) {
+        if (error) {
+            responseLibraries.error = error;
+            responseLibraries.end = new Date();
+            callback(responseLibraries);
+            return true;
+        }
+    };
+    var reqStatusCheck = function (message) {
+        if (message.statusCode != 200) {
+            responseLibraries.error = "Web request error.";
+            responseLibraries.end = new Date();
+            callback(responseLibraries);
+            return true;
+        }
+    };
+
+    // Request 1: Get advanced search page
+    request.get({ url: service.Url + 'advanced-search', timeout: 30000 }, function (error, message, response) {
+	if (handleError(error)) return;
+        if (reqStatusCheck(message)) return;
+        responseLibraries.end = new Date();
+        callback(responseLibraries);
+    });
+};
+
 //////////////////////////
 // Function: searchByISBN
 //////////////////////////
@@ -28,7 +59,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
 
     // Request 1: Deep link to the item by ISBN
     // Really wouldn't wanna use rejectUnauthorised for serious calls - query with Denbighshire about their certificate
-    request.get({ url: lib.Url + searchUrl + isbn, rejectUnauthorized: false, timeout: 20000 }, function (error, msg, res) {
+    request.get({ url: lib.Url + searchUrl + isbn, rejectUnauthorized: false, timeout: 60000 }, function (error, msg, res) {
         if (handleError(error)) return;
         $ = cheerio.load(res);
         var libs = {};

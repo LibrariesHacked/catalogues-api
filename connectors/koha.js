@@ -13,6 +13,37 @@ var request = require('request'),
 //////////////////////////
 var catUrl = 'cgi-bin/koha/opac-search.pl?format=rss2&idx=nb&q=';
 
+///////////////////////////////////////////
+// Function: getLibraries
+///////////////////////////////////////////
+exports.getLibraries = function (service, callback) {
+    var responseLibraries = { service: service.Name, libs: [], start: new Date() };
+    var handleError = function (error) {
+        if (error) {
+            responseLibraries.error = error;
+            responseLibraries.end = new Date();
+            callback(responseLibraries);
+            return true;
+        }
+    };
+    var reqStatusCheck = function (message) {
+        if (message.statusCode != 200) {
+            responseLibraries.error = "Web request error.";
+            responseLibraries.end = new Date();
+            callback(responseLibraries);
+            return true;
+        }
+    };
+
+    // Request 1: Get advanced search page
+    request.get({ forever: true, url: service.Url + 'advanced-search', timeout: 30000 }, function (error, message, response) {
+	if (handleError(error)) return;
+	if (reqStatusCheck(message)) return;
+	responseLibraries.end = new Date();
+        callback(responseLibraries);
+    });
+};
+
 //////////////////////////
 // Function: searchByISBN
 //////////////////////////
@@ -28,12 +59,12 @@ exports.searchByISBN = function (isbn, lib, callback) {
     };
 
     // Request 1: The ISBN search
-    request.get({ url: lib.Url + catUrl + isbn, timeout: 10000 }, function (error, msg, res) {
+    request.get({ url: lib.Url + catUrl + isbn, timeout: 30000 }, function (error, msg, res) {
         if (handleError(error)) return;
         $ = cheerio.load(res, { normalizeWhitespace: true, xmlMode: true });
         var bibLink = $('guid').text();
         if (bibLink) {
-            request.get({ url: bibLink + '&viewallitems=1', timeout: 10000 }, function (error, msg, res) {
+            request.get({ url: bibLink + '&viewallitems=1', timeout: 30000 }, function (error, msg, res) {
                 if (handleError(error)) return;
                 $ = cheerio.load(res);
                 var libs = {};

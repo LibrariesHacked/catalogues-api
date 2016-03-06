@@ -3,28 +3,33 @@
     {
       "Name": "Aberdeen City",
       "Type": "spydus",
-      "Url": "https://aberdeencity.spydus.co.uk/"
+      "Url": "https://aberdeencity.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Aberdeenshire",
       "Type": "spydus",
-      "Url": "https://aberdeenshire.spydus.co.uk/"
+      "Url": "https://aberdeenshire.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Anglesey",
       "Type": "prism3",
       "Available": [ "Ar gael" ],
-      "Url": "http://capitadiscovery.co.uk/ynysmon/"
+      "Url": "http://capitadiscovery.co.uk/ynysmon/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Angus",
       "Type": "spydus",
-      "Url": "https://angus.spydus.co.uk/"
+      "Url": "https://angus.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Argyll and Bute",
       "Type": "spydus",
-      "Url": "https://argyll-bute.spydus.co.uk/"
+      "Url": "https://argyll-bute.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Barking and Dagenham",
@@ -35,25 +40,29 @@
       "ArenaName": "AUK000226",
       "ArenaMemberId": "",
       "Id": "226006",
-      "Url": "https://arena.yourlondonlibrary.net/web/barking-and-dagenham/"
+      "Url": "https://arena.yourlondonlibrary.net/web/barking-and-dagenham/",
+      "TestISBN": "9780747538486"
     },
     {
       "Name": "Barnet",
       "Type": "aquabrowser",
       "Id": "|library/vubissmart-marc|220344",
-      "Url": "http://www.libraries.barnet.gov.uk/abl/"
+      "Url": "http://www.libraries.barnet.gov.uk/abl/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Barnsley",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/barnsleymbc/"
+      "Url": "https://capitadiscovery.co.uk/barnsleymbc/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Bath and North East Somerset",
       "Type": "viewpoint3",
       "Id": "280001",
-      "Url": "https://www.librarieswest.org.uk/"
+      "Url": "https://www.librarieswest.org.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Bedford",
@@ -64,7 +73,8 @@
       "ISBNAlias": "recordControlNumber",
       "Id": "220001",
       "SearchType": "Keyword",
-      "Url": "https://beds-arena.culturalservices.net/web/arena/"
+      "Url": "https://beds-arena.culturalservices.net/web/arena/",
+      "TestISBN": "9780747595830"
     },
     {
       "Name": "Bexley",
@@ -73,53 +83,62 @@
       "OrganisationName": "Bexley",
       "ISBNAlias": "number",
       "Id": "226018",
-      "Url": "https://arena.yourlondonlibrary.net/web/bexley/"
+      "Url": "https://arena.yourlondonlibrary.net/web/bexley/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Birmingham",
       "Type": "spydus",
-      "Url": "https://library-opac.birmingham.gov.uk/"
+      "Url": "https://library-opac.birmingham.gov.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Blackburn with Darwen",
       "Type": "spydus",
-      "Url": "https://bwdlibraries.spydus.co.uk/"
+      "Url": "https://bwdlibraries.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Blackpool",
       "Type": "enterprise",
       "Available": [ "Standard shelving location" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-      "Url": "http://libraries.blackpool.gov.uk/client/default/"
+      "Url": "http://libraries.blackpool.gov.uk/client/default/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Blaenau Gwent",
       "Type": "ibistro",
       "Available": [ "On Shelf" ],
-      "Url": "http://bglibcat.blaenau-gwent.gov.uk/uhtbin/cgisirsi.exe/x/0/0/5"
+      "Url": "http://bglibcat.blaenau-gwent.gov.uk/uhtbin/cgisirsi.exe/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Bolton",
       "Type": "spydus",
-      "Url": "https://bolton.spydus.co.uk/"
+      "Url": "https://bolton.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Bournemouth",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/bournemouth/"
+      "Url": "https://capitadiscovery.co.uk/bournemouth/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Bracknell Forest",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/bracknellforest/"
+      "Url": "https://capitadiscovery.co.uk/bracknellforest/",
+      "TestISBN": "9780747562184"
     },
     {
       "Name": "Bradford",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/bradford/"
+      "Url": "https://capitadiscovery.co.uk/bradford/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Brent",
@@ -128,23 +147,27 @@
       "OrganisationName": "Brent",
       "ISBNAlias": "number",
       "Id": "226011",
-      "Url": "https://arena.yourlondonlibrary.net/web/brent/"
+      "Url": "https://arena.yourlondonlibrary.net/web/brent/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Bridgend",
       "Type": "vubis",
-      "Url": "https://opac.awen-wales.com/bvs-app/"
+      "Url": "https://opac.awen-wales.com/bvs-app/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Brighton and Hove",
       "Type": "spydus",
-      "Url": "http://brighton-hove.spydus.co.uk/"
+      "Url": "http://brighton-hove.spydus.co.uk/",
+      "TestISBN": "9780747562184"
     },
     {
       "Name": "Bristol City",
       "Type": "viewpoint3",
       "Id": "280001",
-      "Url": "https://www.librarieswest.org.uk/"
+      "Url": "https://www.librarieswest.org.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Bromley",
@@ -153,38 +176,45 @@
       "OrganisationName": "Bromley",
       "ISBNAlias": "number",
       "Id": "226019",
-      "Url": "https://arena.yourlondonlibrary.net/web/barking-and-dagenham/"
+      "Url": "https://arena.yourlondonlibrary.net/web/barking-and-dagenham/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Buckinghamshire",
       "Type": "spydus",
-      "Url": "https://buckinghamshire.spydus.co.uk/"
+      "Url": "https://buckinghamshire.spydus.co.uk/",
+      "TestISBN": "9780747591061"
     },
     {
       "Name": "Bury",
       "Type": "webpac",
-      "Url": "https://library.bury.gov.uk/"
+      "Url": "https://library.bury.gov.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Caerphilly",
       "Type": "iguana",
       "Database": "1_LIBS",
-      "Url": "http://libraries.caerphilly.gov.uk/iguana/"
+      "Url": "http://libraries.caerphilly.gov.uk/iguana/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Calderdale",
       "Type": "spydus",
-      "Url": "http://online.calderdale.gov.uk/"
+      "Url": "http://online.calderdale.gov.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Cambridgeshire",
       "Type": "spydus",
-      "Url": "https://cambridgeshire.spydus.co.uk/"
+      "Url": "https://cambridgeshire.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Camden",
       "Type": "spydus",
-      "Url": "https://camden.spydus.co.uk/"
+      "Url": "https://camden.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Cardiff",
@@ -193,62 +223,73 @@
       "Region": "3",
       "InstitutionId": "163",
       "Profile": "ALL_LIBS",
-      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1"
+      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Carmarthenshire",
       "Type": "vubis",
-      "Url": "http://212.219.142.126/carvs/"
+      "Url": "http://212.219.142.126/carvs/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Ceredigion",
       "Type": "vubis",
-      "Url": "http://libraries.ceredigion.gov.uk/vs/"
+      "Url": "http://libraries.ceredigion.gov.uk/vs/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Cheshire West and Chester",
       "Type": "koha",
-      "Url": "https://cheslive.koha-ptfs.co.uk/"
+      "Url": "https://cheslive.koha-ptfs.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Cheshire East",
       "Type": "koha",
-      "Url": "https://cheslive.koha-ptfs.co.uk/"
+      "Url": "https://cheslive.koha-ptfs.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "City of London",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-      "Url": "https://col.ent.sirsidynix.net.uk/client/en_GB/default/"
+      "Url": "https://col.ent.sirsidynix.net.uk/client/en_GB/default/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Clackmannanshire",
       "Type": "vufind",
-      "Url": "https://vufind-cl.sedar.org.uk/vufind/"
+      "Url": "https://vufind-cl.sedar.org.uk/vufind/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Conwy",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/conwy/"
+      "Url": "https://capitadiscovery.co.uk/conwy/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Cornwall",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/cornwall/"
+      "Url": "https://capitadiscovery.co.uk/cornwall/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Coventry",
       "Type": "iguana",
       "Database": "1",
-      "Url": "https://librarycatalogue.coventry.gov.uk/iguana/"
+      "Url": "https://librarycatalogue.coventry.gov.uk/iguana/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Croydon",
       "Type": "vubis",
-      "Url": "http://catalogue.croydonlibraries.com/vs/"
+      "Url": "http://catalogue.croydonlibraries.com/vs/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Cumbria",
@@ -257,7 +298,8 @@
       "Region": "3",
       "InstitutionId": "768",
       "Profile": "ALL_LIBS",
-      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1"
+      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Darlington",
@@ -266,19 +308,22 @@
       "Id": "230001",
       "ArenaName": "AUK000023",
       "ArenaMemberId": "28980569",
-      "Url": "http://www2.darlington.gov.uk/web/arena/"
+      "Url": "http://www2.darlington.gov.uk/web/arena/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Denbighshire",
       "Type": "viewpoint3",
-      "Url": "https://onlinelibrary.denbighshire.gov.uk/"
+      "Url": "https://onlinelibrary.denbighshire.gov.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Derby City",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-      "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/derby/"
+      "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/derby/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Derbyshire",
@@ -287,220 +332,258 @@
       "Region": "3",
       "InstitutionId": "860",
       "Profile": "DANDD-SRCH",
-      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1"
+      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Devon",
       "Type": "viewpoint2",
       "Available": "Check Shelves",
-      "Url": "http://www.devon.gov.uk/library/catalogue/cgi-bin/vps2.5_viewpoint.sh"
+      "Url": "http://www.devon.gov.uk/library/catalogue/cgi-bin/vps2.5_viewpoint.sh",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Doncaster",
       "Type": "viewpoint2",
       "Id": "243001",
-      "Url": "http://library.doncaster.gov.uk/web/arena/"
+      "Url": "http://library.doncaster.gov.uk/web/arena/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Dorset",
       "Type": "webpac",
-      "Url": "http://libcat.dorsetforyou.com/"
+      "Url": "http://libcat.dorsetforyou.com/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Dudley",
       "Type": "viewpoint3",
-      "Url": "https://libcat.dudley.gov.uk/"
+      "Url": "https://libcat.dudley.gov.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Dumfries and Galloway",
       "Type": "iguana",
       "Database": "1_LIBS",
-      "Url": "http://library.dumgal.gov.uk/iguana/"
+      "Url": "http://library.dumgal.gov.uk/iguana/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Dundee City",
       "Type": "spydus",
-      "Url": "http://opac.dundeecity.gov.uk/"
+      "Url": "http://opac.dundeecity.gov.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Durham",
       "Type": "durham",
-      "Url": "https://libraryonline.durham.gov.uk/"
+      "Url": "https://libraryonline.durham.gov.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Ealing",
       "Type": "viewpoint2",
       "Id": "226014",
-      "Url": "https://arena.yourlondonlibrary.net/web/ealing/"
+      "Url": "https://arena.yourlondonlibrary.net/web/ealing/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "East Ayrshire",
       "Type": "ibistro",
       "Available": [ "SHELVES", "RESERVES" ],
-      "Url": "http://libcatalogue.east-ayrshire.gov.uk/uhtbin/cgisirsi/x/0/0/5"
+      "Url": "http://libcatalogue.east-ayrshire.gov.uk/uhtbin/cgisirsi/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "East Dunbartonshire",
       "Type": "vufind",
-      "Url": "http://vufind-ed.sedar.org.uk/"
+      "Url": "http://vufind-ed.sedar.org.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "East Lothian",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/eastlothian/"
+      "Url": "https://capitadiscovery.co.uk/eastlothian/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "East Renfrewshire",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/eastrenfrewshire/"
+      "Url": "https://capitadiscovery.co.uk/eastrenfrewshire/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "East Riding",
       "Type": "viewpoint2",
       "Id": "205001",
-      "Url": "https://library.eastriding.gov.uk/web/arena/"
+      "Url": "https://library.eastriding.gov.uk/web/arena/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "East Sussex",
       "Type": "spydus",
-      "Url": "https://e-library.eastsussex.gov.uk/"
+      "Url": "https://e-library.eastsussex.gov.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Edinburgh",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/edinburgh/"
+      "Url": "https://capitadiscovery.co.uk/edinburgh/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Enfield",
       "Type": "viewpoint2",
       "Id": "226012",
-      "Url": "http://arena.yourlondonlibrary.net/web/enfield/"
+      "Url": "http://arena.yourlondonlibrary.net/web/enfield/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Essex",
       "Type": "vubis",
-      "Url": "http://classiccatalogue.essex.gov.uk/vs/"
+      "Url": "http://classiccatalogue.essex.gov.uk/vs/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Falkirk",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-      "Url": "http://fct.ent.sirsidynix.net.uk/client/en_GB/libraries/"
+      "Url": "http://fct.ent.sirsidynix.net.uk/client/en_GB/libraries/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Fife",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/fife/"
+      "Url": "https://capitadiscovery.co.uk/fife/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Flintshire",
       "Type": "viewpoint3",
-      "Url": "http://libraryonline.flintshire.gov.uk/"
+      "Url": "http://libraryonline.flintshire.gov.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Gateshead",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/gateshead/"
+      "Url": "https://capitadiscovery.co.uk/gateshead/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Glasgow",
       "Type": "viewpoint2",
       "Id": "480001",
-      "Url": "http://libcat.csglasgow.org/web/arena/"
+      "Url": "http://libcat.csglasgow.org/web/arena/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Gloucestershire",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/gloslibraries/"
+      "Url": "https://capitadiscovery.co.uk/gloslibraries/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Greenwich",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "http://capitadiscovery.co.uk/royalgreenwich/"
+      "Url": "http://capitadiscovery.co.uk/royalgreenwich/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Guernsey",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/guernsey/"
+      "Url": "https://capitadiscovery.co.uk/guernsey/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Gwynedd",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "http://capitadiscovery.co.uk/gwynedd/"
+      "Url": "http://capitadiscovery.co.uk/gwynedd/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Hackney",
       "Type": "viewpoint2",
       "Id": "226013",
-      "Url": "https://arena.yourlondonlibrary.net/web/hackney/"
+      "Url": "https://arena.yourlondonlibrary.net/web/hackney/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Halton",
       "Type": "koha",
-      "Url": "http://hpl.koha-ptfs.eu/"
+      "Url": "http://hpl.koha-ptfs.eu/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Hammersmith and Fulham",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-      "Url": "https://trib.ent.sirsidynix.net.uk/client/en_GB/lbhf/"
+      "Url": "https://trib.ent.sirsidynix.net.uk/client/en_GB/lbhf/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Hampshire",
       "Type": "spydus",
-      "Url": "https://librarycat.hants.gov.uk/"
+      "Url": "https://librarycat.hants.gov.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Haringey",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "http://capitadiscovery.co.uk/haringey/"
+      "Url": "http://capitadiscovery.co.uk/haringey/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Harrow",
       "Type": "viewpoint2",
       "Id": "226020",
-      "Url": "https://arena.yourlondonlibrary.net/web/harrow/"
+      "Url": "https://arena.yourlondonlibrary.net/web/harrow/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Hartlepool",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/hartlepool/"
+      "Url": "https://capitadiscovery.co.uk/hartlepool/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Havering",
       "Type": "viewpoint2",
       "Id": "226001",
-      "Url": "http://arena.yourlondonlibrary.net/web/havering/"
+      "Url": "http://arena.yourlondonlibrary.net/web/havering/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Herefordshire",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/herefordshire/"
+      "Url": "https://capitadiscovery.co.uk/herefordshire/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Hertfordshire",
       "Type": "spydus",
-      "Url": "https://herts.spydus.co.uk/"
+      "Url": "https://herts.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Highland",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/highland/"
+      "Url": "https://capitadiscovery.co.uk/highland/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Hillingdon",
@@ -509,263 +592,309 @@
       "Region": "3",
       "InstitutionId": "55",
       "Profile": "ALL_BRANCH",
-      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1"
+      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Hounslow",
       "Type": "viewpoint2",
       "Id": "219001",
-      "Url": "http://www.hounslowlibraries.org/web/arena/"
+      "Url": "http://www.hounslowlibraries.org/web/arena/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Hull",
       "Type": "ibistro",
       "Available": [ "Item on shelves" ],
-      "Url": "http://prismcollect.hullcc.gov.uk/uhtbin/cgisirsi.exe/x/0/0/5"
+      "Url": "http://prismcollect.hullcc.gov.uk/uhtbin/cgisirsi.exe/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Inverclyde",
       "Type": "spydus",
-      "Url": "http://ipac.inverclyde-libraries.org/"
+      "Url": "http://ipac.inverclyde-libraries.org/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Isle of Wight",
       "Type": "spydus",
-      "Url": "http://iow.spydus.co.uk/"
+      "Url": "http://iow.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Isle of Man",
       "Type": "heritage",
-      "Url": "http://www.douglas.gov.im/HeritageScripts/Hapi.dll/"
+      "Url": "http://www.douglas.gov.im/HeritageScripts/Hapi.dll/",
+      "TestISBN": "9780747538493",
+      "Libraries": [ "Isle of Man" ]
     },
     {
       "Name": "Islington",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/islington/"
+      "Url": "https://capitadiscovery.co.uk/islington/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Jersey",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/jersey/"
+      "Url": "https://capitadiscovery.co.uk/jersey/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Kensington and Chelsea",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-      "Url": "https://trib.ent.sirsidynix.net.uk/client/en_GB/rbkc/"
+      "Url": "https://trib.ent.sirsidynix.net.uk/client/en_GB/rbkc/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Kent",
       "Type": "spydus",
-      "Url": "https://kent.spydus.co.uk/"
+      "Url": "https://kent.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Kingston",
       "Type": "viewpoint2",
       "Id": "226016",
-      "Url": "https://arena.yourlondonlibrary.net/web/kingston/"
+      "Url": "https://arena.yourlondonlibrary.net/web/kingston/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Kirklees",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-      "Url": "http://kir.ent.sirsidynix.net.uk/client/en_GB/default/"
+      "Url": "http://kir.ent.sirsidynix.net.uk/client/en_GB/default/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Knowsley",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/results.displaypanel.displaycell.detail.detailitemstable:loadAvailability/en_GB/Unknown/0/DEFAULT/ent:",
-      "Url": "http://kmbc.sdp.sirsidynix.net.uk/client/default/"
+      "Url": "http://kmbc.sdp.sirsidynix.net.uk/client/default/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Lambeth",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/lambeth/"
+      "Url": "https://capitadiscovery.co.uk/lambeth/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Lancashire",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/lancashire/"
+      "Url": "https://capitadiscovery.co.uk/lancashire/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Leeds",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/leeds/"
+      "Url": "https://capitadiscovery.co.uk/leeds/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Leicester City",
       "Type": "viewpoint2",
       "Id": "201001",
-      "Url": "https://bookfinder.leicester.gov.uk/web/arena/"
+      "Url": "https://bookfinder.leicester.gov.uk/web/arena/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Leicestershire",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-      "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/leics/"
+      "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/leics/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Lewisham",
       "Type": "viewpoint2",
       "Id": "226015",
-      "Url": "https://arena.yourlondonlibrary.net/web/lewisham/"
+      "Url": "https://arena.yourlondonlibrary.net/web/lewisham/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Lincolnshire",
       "Type": "spydus",
-      "Url": "https://lincolnshire.spydus.co.uk/"
+      "Url": "https://lincolnshire.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Liverpool",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/liverpool/"
+      "Url": "https://capitadiscovery.co.uk/liverpool/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Luton",
       "Type": "viewpoint2",
       "Id": "220002",
-      "Url": "https://beds-arena.culturalservices.net/web/arena/"
+      "Url": "https://beds-arena.culturalservices.net/web/arena/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Manchester",
       "Type": "spydus",
-      "Url": "https://manchester.spydus.co.uk/"
+      "Url": "https://manchester.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Medway",
       "Type": "spydus",
-      "Url": "https://medway.spydus.co.uk/"
+      "Url": "https://medway.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Merthyr Tydfil",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/merthyr/"
+      "Url": "https://capitadiscovery.co.uk/merthyr/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Merton",
       "Type": "viewpoint2",
       "Id": "226017",
-      "Url": "https://arena.yourlondonlibrary.net/web/merton/"
+      "Url": "https://arena.yourlondonlibrary.net/web/merton/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Middlesbrough",
       "Type": "viewpoint3",
-      "Url": "http://libraries.middlesbrough.gov.uk/"
+      "Url": "http://libraries.middlesbrough.gov.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Midlothian",
       "Type": "viewpoint2",
       "Id": "750001",
-      "Url": "https://libraries.midlothian.gov.uk/web/arena/"
+      "Url": "https://libraries.midlothian.gov.uk/web/arena/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Milton Keynes",
       "Type": "spydus",
-      "Url": "https://miltonkeynes.spydus.co.uk/"
+      "Url": "https://miltonkeynes.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Monmouthshire",
       "Type": "ibistro",
       "Available": [ "SHELVES", "RESERVES" ],
-      "Url": "http://catalogue.monmouthshire.gov.uk/uhtbin/cgisirsi.exe/x/0/0/5"
+      "Url": "http://catalogue.monmouthshire.gov.uk/uhtbin/cgisirsi.exe/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Moray",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/moray/"
+      "Url": "https://capitadiscovery.co.uk/moray/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Neath Port Talbot",
       "Type": "vubis",
-      "Url": "http://212.219.142.126/nptvs/"
+      "Url": "http://212.219.142.126/nptvs/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Newcastle",
       "Type": "viewpoint2",
       "Id": "224001",
-      "Url": "http://library.newcastle.gov.uk/arena.pa.palma/catalogue"
+      "Url": "http://library.newcastle.gov.uk/arena.pa.palma/catalogue",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Newham",
       "Type": "viewpoint2",
       "Id": "226008",
-      "Url": "https://arena.yourlondonlibrary.net/web/newham/"
+      "Url": "https://arena.yourlondonlibrary.net/web/newham/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Newport",
       "Type": "iguana",
       "Database": "1",
-      "Url": "https://opac.newport.gov.uk/iguana/"
+      "Url": "https://opac.newport.gov.uk/iguana/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Norfolk",
       "Type": "spydus",
-      "Url": "https://norfolk.spydus.co.uk/"
+      "Url": "https://norfolk.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "North Ayrshire",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/north-ayrshire/"
+      "Url": "https://capitadiscovery.co.uk/north-ayrshire/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "North East Lincolnshire",
       "Type": "viewpoint2",
       "Id": "252001",
-      "Url": "http://library.nelincs.gov.uk/web/arena/"
+      "Url": "http://library.nelincs.gov.uk/web/arena/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "North Lanarkshire",
       "Type": "vubis",
-      "Url": "https://librariesnl.northlan.gov.uk/vs/"
+      "Url": "https://librariesnl.northlan.gov.uk/vs/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "North Lincolnshire",
       "Type": "viewpoint2",
       "Url": "http://www.opac.northlincs.gov.uk/web/arena/",
-      "Id": "221001"
+      "Id": "221001",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "North Somerset",
       "Type": "viewpoint2",
       "Id": "280001",
-      "Url": "https://www.librarieswest.org.uk/"
+      "Url": "https://www.librarieswest.org.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "North Tyneside",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/northtyneside/"
+      "Url": "https://capitadiscovery.co.uk/northtyneside/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "North Yorkshire",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/northyorkshire/"
+      "Url": "https://capitadiscovery.co.uk/northyorkshire/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Northamptonshire",
       "Type": "viewpoint2",
       "Id": "256001",
-      "Url": "http://www.librarycatalogue.northamptonshire.gov.uk/web/arena/"
+      "Url": "http://www.librarycatalogue.northamptonshire.gov.uk/web/arena/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Northumberland",
       "Type": "ibistro",
       "Available": [ "SHELVES", "RESERVES" ],
-      "Url": "http://library.northumberland.gov.uk/uhtbin/cgisirsi.exe/x/0/0/5"
+      "Url": "http://library.northumberland.gov.uk/uhtbin/cgisirsi.exe/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Nottingham City",
@@ -776,7 +905,8 @@
       "Profile": "GROUP51",
       "Available": [ "" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-      "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/nottcity/"
+      "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/nottcity/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Nottinghamshire",
@@ -787,261 +917,308 @@
       "Profile": "GROUP31",
       "Available": [ "" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-      "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/nelib/"
+      "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/nelib/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Northern Ireland",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-      "Url": "http://lni.ent.sirsidynix.net.uk/client/en_GB/default/"
+      "Url": "http://lni.ent.sirsidynix.net.uk/client/en_GB/default/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Oldham",
       "Type": "spydus",
-      "Url": "https://oldham.spydus.co.uk/"
+      "Url": "https://oldham.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Orkney",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/orkney/"
+      "Url": "https://capitadiscovery.co.uk/orkney/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Oxfordshire",
       "Type": "viewpoint3",
-      "Url": "https://www.libcat.oxfordshire.gov.uk/"
+      "Url": "https://www.libcat.oxfordshire.gov.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Pembrokeshire",
       "Type": "vubis",
-      "Url": "http://libraryonline.pembrokeshire.gov.uk/pemvs/"
+      "Url": "http://libraryonline.pembrokeshire.gov.uk/pemvs/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Perth and Kinross",
       "Type": "spydus",
-      "Url": "https://pkc.spydus.co.uk/"
+      "Url": "https://pkc.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Peterborough",
       "Type": "spydus",
-      "Url": "http://peterborough.spydus.co.uk/"
+      "Url": "http://peterborough.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Plymouth",
       "Type": "viewpoint3",
-      "Url": "http://www.webopac.plymouth.gov.uk/"
+      "Url": "http://www.webopac.plymouth.gov.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Poole",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/poole/"
+      "Url": "https://capitadiscovery.co.uk/poole/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Portsmouth",
       "Type": "spydus",
-      "Url": "https://librarycat.portsmouth.gov.uk/"
+      "Url": "https://librarycat.portsmouth.gov.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Powys",
       "Type": "ibistro",
       "Available": [ "Adult Fiction" ],
-      "Url": "http://powys.sirsidynix.net.uk/uhtbin/cgisirsi.exe/x/0/0/5"
+      "Url": "http://powys.sirsidynix.net.uk/uhtbin/cgisirsi/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Reading",
       "Type": "horizon",
-      "Url": "http://reading-hip.epixtech.co.uk/"
+      "Url": "http://reading-hip.epixtech.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Redbridge",
       "Type": "viewpoint2",
       "Id": "226002",
-      "Url": "https://arena.yourlondonlibrary.net/web/redbridge/"
+      "Url": "https://arena.yourlondonlibrary.net/web/redbridge/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Redcar & Cleveland",
       "Type": "viewpoint3",
-      "Url": "https://libraries.redcar-cleveland.gov.uk/"
+      "Url": "https://libraries.redcar-cleveland.gov.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Renfrewshire",
       "Type": "iguana",
       "Database": "1",
-      "Url": "https://libcat.renfrewshire.gov.uk/iguana/"
+      "Url": "https://libcat.renfrewshire.gov.uk/iguana/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Rhondda Cynon Taf",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/rhondda/"
+      "Url": "https://capitadiscovery.co.uk/rhondda/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Richmond",
       "Type": "spydus",
-      "Url": "https://richmond.spydus.co.uk/"
+      "Url": "https://richmond.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Rochdale",
       "Type": "spydus",
-      "Url": "https://rochdale.spydus.co.uk/"
+      "Url": "https://rochdale.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Rotherham",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/rotherham/"
+      "Url": "https://capitadiscovery.co.uk/rotherham/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Rutland",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-      "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/rutland/"
+      "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/rutland/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Salford",
       "Type": "spydus",
-      "Url": "https://salfordlibraries.spydus.co.uk/"
+      "Url": "https://salfordlibraries.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Sandwell",
       "Type": "spydus",
-      "Url": "https://opac-lib.smbc.sandwell.gov.uk/"
+      "Url": "https://opac-lib.smbc.sandwell.gov.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Scottish Borders",
       "Type": "vubis",
-      "Url": "http://librarysearch.scotborders.gov.uk/vs/"
+      "Url": "http://librarysearch.scotborders.gov.uk/vs/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Sefton",
       "Type": "koha",
-      "Url": "https://www.catalogue.sefton.gov.uk/cgi-bin/koha"
+      "Url": "https://catalogue2.sefton.gov.uk/cgi-bin/koha",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Sheffield",
       "Type": "ibistro",
       "Available": [ "SHELVES", "RESERVES" ],
-      "Url": "http://library.sheffield.gov.uk/uhtbin/cgisirsi.exe/x/0/0/5"
+      "Url": "http://library.sheffield.gov.uk/uhtbin/cgisirsi.exe/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Shetland",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/shetland/"
+      "Url": "https://capitadiscovery.co.uk/shetland/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Shropshire",
       "Type": "viewpoint3",
-      "Url": "http://libraries.shropshire.gov.uk/"
+      "Url": "http://libraries.shropshire.gov.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Slough",
       "Type": "spydus",
-      "Url": "http://slough.spydus.co.uk/"
+      "Url": "http://slough.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Solihull",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/solihull/"
+      "Url": "https://capitadiscovery.co.uk/solihull/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Somerset",
       "Type": "viewpoint2",
       "Id": "280001",
-      "Url": "https://www.librarieswest.org.uk/"
+      "Url": "https://www.librarieswest.org.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "South Ayrshire",
       "Type": "webpac",
-      "Url": "https://library.south-ayrshire.gov.uk/"
+      "Url": "https://library.south-ayrshire.gov.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "South Gloucestershire",
       "Type": "viewpoint2",
       "Id": "280001",
-      "Url": "https://www.librarieswest.org.uk/"
+      "Url": "https://www.librarieswest.org.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "South Lanarkshire",
       "Type": "spydus",
-      "Url": "https://www.sllclibrary.co.uk/"
+      "Url": "https://www.sllclibrary.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "South Tyneside",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/southtyneside/"
+      "Url": "https://capitadiscovery.co.uk/southtyneside/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Southampton",
       "Type": "spydus",
-      "Url": "https://library.southampton.gov.uk/"
+      "Url": "https://southampton.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Southend on Sea",
       "Type": "vubis",
-      "Url": "http://classiccatalogue.essex.gov.uk/vs/"
+      "Url": "http://classiccatalogue.essex.gov.uk/vs/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Southwark",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/southwark/"
+      "Url": "https://capitadiscovery.co.uk/southwark/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "St Helens",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-      "Url": "https://enterprise.sthelens.gov.uk/client/en_GB/mylibrary/"
+      "Url": "https://enterprise.sthelens.gov.uk/client/en_GB/mylibrary/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Staffordshire",
       "Type": "viewpoint2",
       "Id": "250001",
-      "Url": "https://www.yourlibcat.staffordshire.gov.uk/web/arena/"
+      "Url": "https://www.yourlibcat.staffordshire.gov.uk/web/arena/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Stirling",
       "Type": "vufind",
-      "Url": "https://vufind-st.sedar.org.uk/"
+      "Url": "https://vufind-st.sedar.org.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Stockport",
       "Type": "spydus",
-      "Url": "https://stockport.spydus.co.uk/"
+      "Url": "https://stockport.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Stockton",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/stockton/"
+      "Url": "https://capitadiscovery.co.uk/stockton/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Stoke on Trent",
       "Type": "vubis",
-      "Url": "http://www.librariesonline.stoke.gov.uk/vs/"
+      "Url": "http://www.librariesonline.stoke.gov.uk/vs/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Suffolk",
       "Type": "spydus",
-      "Url": "https://suffolk.spydus.co.uk/"
+      "Url": "https://suffolk.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Sunderland",
       "Type": "ibistro",
       "Available": [ "Item is on the shelf" ],
-      "Url": "http://www.sunderland.gov.uk/uhtbin/cgisirsi.exe/x/0/0/5"
+      "Url": "http://www.sunderland.gov.uk/uhtbin/cgisirsi.exe/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Surrey",
       "Type": "viewpoint2",
       "Id": "210002",
-      "Url": "http://arena.surreylibraries.org/web/arena/"
+      "Url": "http://arena.surreylibraries.org/web/arena/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Sutton",
@@ -1059,174 +1236,204 @@
       "Region": "3",
       "InstitutionId": "74",
       "Profile": "ALLLIBSG",
-      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1"
+      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Swindon",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/swindon/"
+      "Url": "https://capitadiscovery.co.uk/swindon/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Tameside",
       "Type": "vubis",
-      "Url": "http://intouch.tameside.gov.uk/vubis/"
+      "Url": "http://intouch.tameside.gov.uk/vubis/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Telford and Wrekin",
       "Type": "viewpoint2",
       "Id": "320001",
-      "Url": "https://library.telford.gov.uk/web/arena"
+      "Url": "https://library.telford.gov.uk/web/arena",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Thurrock",
       "Type": "vubis",
-      "Url": "http://classiccatalogue.essex.gov.uk/vs/"
+      "Url": "http://classiccatalogue.essex.gov.uk/vs/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Torbay",
       "Type": "viewpoint3",
-      "Url": "https://libraries.torbay.gov.uk/"
+      "Url": "https://libraries.torbay.gov.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Torfaen",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/torfaen/"
+      "Url": "https://capitadiscovery.co.uk/torfaen/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Tower Hamlets",
       "Type": "viewpoint2",
       "Id": "226010",
-      "Url": "https://arena.yourlondonlibrary.net/web/tower-hamlets/"
+      "Url": "https://arena.yourlondonlibrary.net/web/tower-hamlets/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Trafford",
       "Type": "spydus",
-      "Url": "https://trafford.spydus.co.uk/"
+      "Url": "https://trafford.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Vale of Glamorgan",
       "Type": "vubis",
-      "Url": "http://libhip.valeofglamorgan.gov.uk/vs/"
+      "Url": "http://libhip.valeofglamorgan.gov.uk/vs/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Wakefield",
       "Type": "viewpoint2",
       "Id": "212001",
-      "Url": "https://libraries.wakefield.gov.uk/web/arena/"
+      "Url": "https://libraries.wakefield.gov.uk/web/arena/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Walsall",
       "Type": "viewpoint2",
       "Id": "140001",
-      "Url": "https://libcat.walsall.gov.uk/web/arena/"
+      "Url": "https://libcat.walsall.gov.uk/web/arena/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Waltham Forest",
       "Type": "viewpoint2",
       "Id": "226004",
-      "Url": "https://arena.yourlondonlibrary.net/web/walthamforest/"
+      "Url": "https://arena.yourlondonlibrary.net/web/walthamforest/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Wandsworth",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "http://capitadiscovery.co.uk/wandsworth/"
+      "Url": "http://capitadiscovery.co.uk/wandsworth/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Warrington",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-      "Url": "http://warc.ent.sirsidynix.net.uk/client/en_GB/libonline/"
+      "Url": "http://warc.ent.sirsidynix.net.uk/client/en_GB/libonline/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Warwickshire",
       "Type": "iguana",
       "Database": "1",
-      "Url": "http://library.warwickshire.gov.uk/iguana/"
+      "Url": "http://library.warwickshire.gov.uk/iguana/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "West Berkshire",
       "Type": "spydus",
-      "Url": "https://westberks.spydus.co.uk/"
+      "Url": "https://westberks.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "West Dunbartonshire",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-      "Url": "http://wd.ent.sirsidynix.net.uk/client/wd/"
+      "Url": "http://wd.ent.sirsidynix.net.uk/client/wd/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "West Lothian",
       "Type": "horizon",
-      "Url": "http://webpac.westlothian.gov.uk/"
+      "Url": "http://webpac.westlothian.gov.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "West Sussex",
       "Type": "viewpoint2",
       "Id": "380001",
-      "Url": "https://arena.westsussex.gov.uk/web/arena/"
+      "Url": "https://arena.westsussex.gov.uk/web/arena/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Western Isles",
       "Type": "vufind",
-      "Url": "https://vufind-wi.sedar.org.uk/"
+      "Url": "https://vufind-wi.sedar.org.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Westminster",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-      "Url": "https://elibrary.westminster.gov.uk/client/en_GB/wcc/"
+      "Url": "https://elibrary.westminster.gov.uk/client/en_GB/wcc/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Wigan",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/wigan/"
+      "Url": "https://capitadiscovery.co.uk/wigan/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Wiltshire",
       "Type": "viewpoint2",
       "Id": "400001",
-      "Url": "https://libraries.wiltshire.gov.uk/web/arena/"
+      "Url": "https://libraries.wiltshire.gov.uk/web/arena/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Windsor & Maidenhead",
       "Type": "spydus",
-      "Url": "https://rbwm.spydus.co.uk/"
+      "Url": "https://rbwm.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Wirral",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/wirral/"
+      "Url": "https://capitadiscovery.co.uk/wirral/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Wokingham",
       "Type": "spydus",
-      "Url": "https://wokingham.spydus.co.uk/"
+      "Url": "https://wokingham.spydus.co.uk/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Wolverhampton",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/wolverhampton/"
+      "Url": "https://capitadiscovery.co.uk/wolverhampton/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Worcestershire",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/worcs/"
+      "Url": "https://capitadiscovery.co.uk/worcs/",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "Wrexham",
       "Type": "viewpoint2",
       "Available": "On shelf",
-      "Url": "https://www.wrexham.gov.uk/Library-Online-Catalogue/cgi-bin/vps2_viewpoint.sh"
+      "Url": "https://www.wrexham.gov.uk/Library-Online-Catalogue/cgi-bin/vps2_viewpoint.sh",
+      "TestISBN": "9780747538493"
     },
     {
       "Name": "York City",
@@ -1235,7 +1442,8 @@
       "Region": "3",
       "InstitutionId": "174",
       "Profile": "YORKPUB",
-      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1"
+      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1",
+      "TestISBN": "9780747538493"
     }
   ]
 }

@@ -13,6 +13,51 @@ var xml2js = require('xml2js'),
 ///////////////////////////////////////////
 var searchUrl = 'result.ashx?output=xml&q=';
 var itemUrl = 'availability.ashx?output=xml&hreciid=';
+var libsUrl = 'result.ashx?inlibrary=false&noext=false&uilang=en&searchmode=assoc&skin=barnet&c_over=1&i_fk=&mxdk=-1&curpage=1&cmd=find&output=xml';
+
+///////////////////////////////////////////
+// Function: getLibraries
+// For Aquabrowser just need to do a basic
+// and then parse back the library select
+///////////////////////////////////////////
+exports.getLibraries = function (service, callback) {
+    var responseLibraries = { service: service.Name, libs: [], start: new Date() };
+    var handleError = function (error) {
+        if (error) {
+            responseLibraries.error = error;
+            responseLibraries.end = new Date();
+            callback(responseLibraries);
+            return true;
+        }
+    };
+    var reqStatusCheck = function (message) {
+        if (message.statusCode != 200) {
+            responseLibraries.error = "Web request error.";
+            responseLibraries.end = new Date();
+            callback(responseLibraries);
+            return true;
+        }
+    };
+
+    // Request 1: call a basic search which should return xml with the branch filter.
+    request.get({ url: service.Url + libsUrl, timeout: 30000 }, function (error, msg, response) {
+        if (handleError(error)) return;
+        if (reqStatusCheck(msg)) return;
+        xml2js.parseString(response, function (err, res) {
+            if (handleError(err)) return;
+            if (res.root.branchselection && res.root.branchselection[0].navoptions) {
+                res.root.branchselection[0].navoptions[0].opt.forEach(function (item) {
+                    if (item.$.val != '' && item.$.val != 'Unavailable') responseLibraries.libs.push(item.$.val);
+                });
+                responseLibraries.end = new Date();
+                callback(responseLibraries);
+            } else {
+                responseLibraries.end = new Date();
+                callback(responseLibraries);
+            }
+        });
+    });
+};
 
 ///////////////////////////////////////////
 // Function: searchByISBN
@@ -31,13 +76,14 @@ exports.searchByISBN = function (isbn, lib, callback) {
     };
 
     // Request 1: call the search control for the ISBN
-    request.get({ url: lib.Url + searchUrl + isbn, timeout: 30000 }, function (error, msg, response) {
+    request.get({ url: service.Url + searchUrl + isbn, timeout: 30000 }, function (error, msg, response) {
         if (handleError(error)) return;
         xml2js.parseString(response, function (err, res) {
             if (handleError(err)) return;
             if (res.root.results && res.root.results[0].record) {
+
                 // Request 2: call the availability control for the record Id
-                request.get({ url: lib.Url + itemUrl + res.root.results[0].record[0].$.extID, timeout: 10000 }, function (error, msg, response) {
+                request.get({ url: lib.Url + itemUrl + res.root.results[0].record[0].$.extID, timeout: 30000 }, function (error, msg, response) {
                     if (handleError(error)) return;
                     xml2js.parseString(response, function (err, res) {
                         if (handleError(err)) return;

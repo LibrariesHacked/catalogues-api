@@ -10,8 +10,12 @@ var libraries = require('./libraries');
 // The web service routes
 ///////////////////////////////////////////
 var app = express();
-app.get('/services', libraries.getAllLibraries);
+app.get('/services', libraries.getServices);
+app.get('/libraries', libraries.getLibraries);
 app.get('/availabilityByISBN/:isbn', libraries.isbnSearch);
+
+// For testing
+app.get('/test', libraries.test);
 
 ///////////////////////////////////////////
 // Startup

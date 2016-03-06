@@ -12,6 +12,45 @@ var request = require('request'),
 // VARIABLES
 ///////////////////////////////////////////
 var searchUrl = 'cgi-bin/spydus.exe/ENQ/OPAC/BIBENQ?NRECS=1&ISBN=';
+var libsUrl = 'cgi-bin/spydus.exe/MSGTRN/OPAC/COMB?HOMEPRMS=COMBPARAMS';
+
+///////////////////////////////////////////
+// Function: getLibraries
+///////////////////////////////////////////
+exports.getLibraries = function (service, callback) {
+    var responseLibraries = { service: service.Name, libs: [], start: new Date() };
+    var handleError = function (error) {
+        if (error) {
+            responseLibraries.error = error;
+            responseLibraries.end = new Date();
+            callback(responseLibraries);
+            return true;
+        }
+    };
+    var reqStatusCheck = function (message) {
+        if (message.statusCode != 200) {
+            responseLibraries.error = "Web request error.";
+            responseLibraries.end = new Date();
+            callback(responseLibraries);
+            return true;
+        }
+    };
+
+    // Request 1: Get advanced search page
+    request.get({ forever: true, url: service.Url + libsUrl, timeout: 30000 }, function (error, message, response) {
+        if (handleError(error)) return;
+        if (reqStatusCheck(message)) return;
+
+        // This may have thrown up 
+
+        $ = cheerio.load(response);
+        $('select#LOC option').each(function () {
+            if ($(this).text() != 'All Locations') responseLibraries.libs.push($(this).text());
+        });
+        responseLibraries.end = new Date();
+        callback(responseLibraries);
+    });
+};
 
 ///////////////////////////////////////////
 // Function: searchByISBN
@@ -41,7 +80,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     };
 
     // Request 1: Deep link to item page by ISBN.
-    request.get({ url: lib.Url + searchUrl + isbn, timeout: 20000 }, function (error, msg, res) {
+    request.get({ url: lib.Url + searchUrl + isbn, timeout: 30000 }, function (error, msg, res) {
         if (handleError(error)) return;
         $ = cheerio.load(res);
         // The search may not find any record, or it may find multiple records
@@ -53,7 +92,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
         } else {
             if ($('.holdings').text().indexOf('see full display for details') != -1) {
                 var url = $('.holdings').first().find('a').attr('href');
-                request.get({ url: lib.Url + url, timeout: 20000 }, function (error, msg, res) {
+                request.get({ url: lib.Url + url, timeout: 30000 }, function (error, msg, res) {
                     if (handleError(error)) return;
                     $ = cheerio.load(res);
                     getAvailability($);

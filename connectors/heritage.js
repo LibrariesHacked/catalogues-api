@@ -14,6 +14,14 @@ var cheerio = require('cheerio'),
 var searchUrl = 'search2?searchTerm0=';
 
 ///////////////////////////////////////////
+// Function: getLibraries
+// Placeholder
+///////////////////////////////////////////
+exports.getLibraries = function (service, callback) {
+    callback({ service: service.Name, libs: service.Libraries, start: new Date(), end: new Date() });
+};
+
+///////////////////////////////////////////
 // Function: searchByISBN
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
@@ -26,9 +34,17 @@ exports.searchByISBN = function (isbn, lib, callback) {
             return true;
         }
     };
+    var reqStatusCheck = function (message) {
+        if (message.statusCode != 200) {
+            responseLibraries.error = "Web request error.";
+            responseLibraries.end = new Date();
+            callback(responseLibraries);
+            return true;
+        }
+    };
 
-    // Request 1: Gte the deep link URL
-    request.get({ url: lib.Url + searchUrl + isbn, jar: true, timeout: 30000 }, function (error, message, response) {
+    // Request 1: Get the deep link URL
+    request.get({ url: lib.Url + searchUrl + isbn, jar: true, timeout: 60000 }, function (error, message, response) {
         if (handleError(error)) return;
         $ = cheerio.load(response);
         var libs = {};

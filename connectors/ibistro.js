@@ -11,7 +11,43 @@ var request = require('request'),
 ///////////////////////////////////////////
 // VARIABLES
 ///////////////////////////////////////////
-var searchUrl = '?searchdata1=';
+var searchUrl = 'x/0/0/5?searchdata1=';
+var home = '/x/x/0/49/';
+
+///////////////////////////////////////////
+// Function: getLibraries
+///////////////////////////////////////////
+exports.getLibraries = function (service, callback) {
+    var responseLibraries = { service: service.Name, libs: [], start: new Date() };
+    var handleError = function (error) {
+        if (error) {
+            responseLibraries.error = error;
+            responseLibraries.end = new Date();
+            callback(responseLibraries);
+            return true;
+        }
+    };
+    var reqStatusCheck = function (message) {
+        if (message.statusCode != 200) {
+            responseLibraries.error = "Web request error.";
+            responseLibraries.end = new Date();
+            callback(responseLibraries);
+            return true;
+        }
+    };
+
+    // Request 1: Get advanced search page
+    request.get({ forever: true, url: service.Url + home, timeout: 30000 }, function (error, message, response) {
+        if (handleError(error)) return;
+        if (reqStatusCheck(message)) return;
+        $ = cheerio.load(response);
+        $('#library option').each(function () {
+            if ($(this).text() != 'ALL') responseLibraries.libs.push($(this).text());
+        });
+        responseLibraries.end = new Date();
+        callback(responseLibraries);
+    });
+};
 
 //////////////////////////
 // Function: searchByISBN

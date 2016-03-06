@@ -16,6 +16,37 @@ var detailsRequest = '<x:Envelope xmlns:x="http://schemas.xmlsoap.org/soap/envel
 var reqHeader = { "Content-Type": "text/xml; charset=utf-8" };
 
 ///////////////////////////////////////////
+// Function: getLibraries
+///////////////////////////////////////////
+exports.getLibraries = function (service, callback) {
+    var responseLibraries = { service: service.Name, libs: [], start: new Date() };
+    var handleError = function (error) {
+        if (error) {
+            responseLibraries.error = error;
+            responseLibraries.end = new Date();
+            callback(responseLibraries);
+            return true;
+        }
+    };
+    var reqStatusCheck = function (message) {
+        if (message.statusCode != 200) {
+            responseLibraries.error = "Web request error.";
+            responseLibraries.end = new Date();
+            callback(responseLibraries);
+            return true;
+        }
+    };
+
+    // Request 1: Get advanced search page
+    request.get({ forever: true, url: service.Url + 'advanced-search', timeout: 30000 }, function (error, message, response) {
+        if (handleError(error)) return;
+	if (reqStatusCheck(message)) return;
+        responseLibraries.end = new Date();
+        callback(responseLibraries);
+    });
+};
+
+///////////////////////////////////////////
 // Function searchByISBN
 // Implementing the search by ISBN - in this case calls a SOAP webservice 
 // that is otherwise used by the axiell mobile app.
@@ -35,7 +66,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     var soapSearchXML = searchRequest.replace('[ISBN]', isbn).replace('[SERVICEID]', lib.Id);
     // Request 1: Search for the item ID from ISBN
     // RejectUnauthorised used again (for Leicester City).  Investigate.
-    request.post({ url: lib.Url, body: soapSearchXML, headers: reqHeader, rejectUnauthorized: false, timeout: 20000 }, function (error, msg, response) {
+    request.post({ url: lib.Url, body: soapSearchXML, headers: reqHeader, rejectUnauthorized: false, timeout: 30000 }, function (error, msg, response) {
         if (handleError(error)) return;
         xml2js.parseString(response, function (err, res) {
             if (handleError(err)) return;
@@ -44,7 +75,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
                 var crId = soapResponse[0].catalogueRecords[0].catalogueRecord[0].id;
                 var soapDetailXML = detailsRequest.replace('[CRID]', crId).replace('[SERVICEID]', lib.Id);
                 // Request 2: Search for item details (which will include availability holdings information.
-                request.post({ url: lib.Url, body: soapDetailXML, headers: reqHeader, rejectUnauthorized: false, timeout: 20000 }, function (error, msg, response) {
+                request.post({ url: lib.Url, body: soapDetailXML, headers: reqHeader, rejectUnauthorized: false, timeout: 30000 }, function (error, msg, response) {
                     if (handleError(error)) return;
                     xml2js.parseString(response, function (err, res) {
                         if (handleError(err)) return;

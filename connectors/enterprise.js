@@ -16,6 +16,41 @@ var itemUrl = 'search/detailnonmodal/ent:[ILS]/one';
 var header1 = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586' };
 var header2 = { 'X-Requested-With': 'XMLHttpRequest' };
 
+///////////////////////////////////////////
+// Function: getLibraries
+///////////////////////////////////////////
+exports.getLibraries = function (service, callback) {
+    var responseLibraries = { service: service.Name, libs: [], start: new Date() };
+    var handleError = function (error) {
+        if (error) {
+            responseLibraries.error = error;
+            responseLibraries.end = new Date();
+            callback(responseLibraries);
+            return true;
+        }
+    };
+    var reqStatusCheck = function (message) {
+        if (message.statusCode != 200) {
+            responseLibraries.error = "Web request error.";
+            responseLibraries.end = new Date();
+            callback(responseLibraries);
+            return true;
+        }
+    };
+
+    // Request 1: Get advanced search page
+    request.get({ forever: true, url: service.Url + 'search/advanced', timeout: 30000 }, function (error, message, response) {
+        if (handleError(error)) return;
+	if (reqStatusCheck(message)) return;
+        $ = cheerio.load(response);
+        $('#libraryDropDown option').each(function () {
+            if ($(this).text() != 'Any Library') responseLibraries.libs.push($(this).text());
+        });
+        responseLibraries.end = new Date();
+        callback(responseLibraries);
+    });
+};
+
 //////////////////////////
 // Function: searchByISBN
 //////////////////////////

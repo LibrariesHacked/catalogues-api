@@ -12,6 +12,42 @@ var cheerio = require('cheerio'),
 // VARIABLES
 ///////////////////////////////////////////
 var catUrl = 'ipac20/ipac.jsp?menu=search&index=ISBNEX&term=';
+var libsUrl = 'ipac20/ipac.jsp?menu=search&submenu=subtab14';
+
+///////////////////////////////////////////
+// Function: getLibraries
+///////////////////////////////////////////
+exports.getLibraries = function (service, callback) {
+    var responseLibraries = { service: service.Name, libs: [], start: new Date() };
+    var handleError = function (error) {
+        if (error) {
+            responseLibraries.error = error;
+            responseLibraries.end = new Date();
+            callback(responseLibraries);
+            return true;
+        }
+    };
+    var reqStatusCheck = function (message) {
+        if (message.statusCode != 200) {
+            responseLibraries.error = "Web request error.";
+            responseLibraries.end = new Date();
+            callback(responseLibraries);
+            return true;
+        }
+    };
+
+    // Request 1: Get advanced search page
+    request.get({ forever: true, url: service.Url + libsUrl, timeout: 30000 }, function (error, message, response) {
+        if (handleError(error)) return;
+	if (reqStatusCheck(message)) return;
+        $ = cheerio.load(response);
+        $('select[name=limitbox_1] option').each(function () {
+            if ($(this).text().indexOf('Exclude') == -1) responseLibraries.libs.push($(this).text().replace('Loc: ', ''));
+        });
+        responseLibraries.end = new Date();
+        callback(responseLibraries);
+    });
+};
 
 //////////////////////////
 // Function: searchByISBN
@@ -28,7 +64,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     };
 
     // Request 1: Use the item deep link URL
-    request.get({ url: lib.Url + catUrl + isbn, timeout: 30000 }, function (error, msg, response) {
+    request.get({ url: lib.Url + catUrl + isbn, timeout: 60000 }, function (error, msg, response) {
         if (handleError(error)) return;
         var libs = {};
         $('table.bibItems tr.bibItemsEntry').each(function (index, elem) {

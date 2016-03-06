@@ -12,6 +12,39 @@ var request = require('request'),
 // VARIABLES
 ///////////////////////////////////////////
 var searchUrl = 'List.csp?Index1=Isbn&Database=1&Location=NoPreference&Language=NoPreference&PublicationType=NoPreference&OpacLanguage=eng&NumberToRetrieve=50&SearchMethod=Find_1&SearchTerm1=[ISBN]&Profile=Default&PreviousList=Start&PageType=Start&WebPageNr=1&WebAction=NewSearch&StartValue=1&RowRepeat=0&MyChannelCount=&SearchT1=';
+
+///////////////////////////////////////////
+// Function: getLibraries
+///////////////////////////////////////////
+exports.getLibraries = function (service, callback) {
+    var responseLibraries = { service: service.Name, libs: [], start: new Date() };
+    var handleError = function (error) {
+        if (error) {
+            responseLibraries.error = error;
+            responseLibraries.end = new Date();
+            callback(responseLibraries);
+            return true;
+        }
+    };
+    var reqStatusCheck = function (message) {
+        if (message.statusCode != 200) {
+            responseLibraries.error = "Web request error.";
+            responseLibraries.end = new Date();
+            callback(responseLibraries);
+            return true;
+        }
+    };
+
+    // Request 1: Get advanced search page
+    request.get({ forever: true, url: service.Url + 'advanced-search', timeout: 30000 }, function (error, message, response) {
+        if (handleError(error)) return;
+	if (reqStatusCheck(message)) return;
+        responseLibraries.end = new Date();
+        callback(responseLibraries);
+    });
+};
+
+
 ///////////////////////////////////////////
 // Function: searchByISBN
 // This is a horrible chain of requests.  Particularly as the data returned is always within 
@@ -30,7 +63,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     };
     // Declaring this here to use later on
     var itemRequest = function (link) {
-        request.get({ url: link, timeout: 10000 }, function (error, msg, response) {
+        request.get({ url: link, timeout: 20000 }, function (error, msg, response) {
             if (handleError(error)) return;
             var libs = {};
             $ = cheerio.load(response);
@@ -40,6 +73,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
                 var status = $(this).find('td').eq(availIndex).text().trim();
                 var name = $(this).find('td').eq(shelfMarkIndex).text().trim();
                 if (name.indexOf(':') != -1) name = name.split(':')[0];
+                if (name.indexOf('/') != -1) name = name.split('/')[0];
                 if (!libs[name]) libs[name] = { available: 0, unavailable: 0 };
                 status == 'Available' ? libs[name].available++ : libs[name].unavailable++;
             });
@@ -50,12 +84,12 @@ exports.searchByISBN = function (isbn, lib, callback) {
     };
 
     // Request 1: Kick off a session
-    request.get({ url: lib.Url + 'vubis.csp', timeout: 10000 }, function (error, message, response) {
+    request.get({ url: lib.Url + 'vubis.csp', timeout: 20000 }, function (error, message, response) {
         if (handleError(error)) return;
         $ = cheerio.load(response);
         var link = $('FRAME[Title="Vubis.Body"]').attr('src');
         // Request 2: Should now have the StartBody link - do it!
-        request.get({ url: lib.Url + link, timeout: 10000 }, function (error, message, response) {
+        request.get({ url: lib.Url + link, timeout: 20000 }, function (error, message, response) {
             if (handleError(error)) return;
             $ = cheerio.load(response);
             // Get the encoded value to perform the search.
