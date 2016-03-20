@@ -37,7 +37,7 @@ exports.getLibraries = function (service, callback) {
     };
 
     // Request 1: Get advanced search page
-    request.get({ forever: true, url: service.Url + libsUrl, timeout: 30000 }, function (error, message, response) {
+    request.get({ headers: { Cookie: 'ALLOWCOOKIES_443=1' }, url: service.Url + libsUrl, timeout: 30000 }, function (error, message, response) {
         if (handleError(error)) return;
         if (reqStatusCheck(message)) return;
 
