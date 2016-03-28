@@ -44,7 +44,7 @@ exports.getLibraries = function (service, callback) {
     // Request 1: Get advanced search page
     request.get({ forever: true, url: service.Url + 'advanced-search', timeout: 20000, jar: true }, function (error, message, response) {
         if (handleError(error)) return;
-	if (reqStatusCheck(message)) return;
+        if (reqStatusCheck(message)) return;
     });
 };
 

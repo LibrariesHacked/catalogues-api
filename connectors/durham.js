@@ -36,7 +36,7 @@ exports.getLibraries = function (service, callback) {
     // Request 1: Get advanced search page
     request.get({ forever: true, url: service.Url + 'advanced-search', timeout: 20000, jar: true }, function (error, message, response) {
         if (handleError(error)) return;
-	if (reqStatusCheck(message)) return;
+        if (reqStatusCheck(message)) return;
         responseLibraries.end = new Date();
         callback(responseLibraries);
     });
@@ -88,9 +88,9 @@ exports.searchByISBN = function (isbn, lib, callback) {
                     __VIEWSTATEGENERATOR: $('input[name=____VIEWSTATEGENERATOR]').val(),
                     __EVENTVALIDATION: $('input[name=__EVENTVALIDATION]').val(),
                     ctl00$cph1$lvResults$DataPagerEx2$ctl00$ctl00: 10,
-                    ctl00$cph1$cbBooks:'on',
-                    ctl00$cph1$Keywords:isbn,
-                    ctl00$cph1$btSearch:'Search'
+                    ctl00$cph1$cbBooks: 'on',
+                    ctl00$cph1$Keywords: isbn,
+                    ctl00$cph1$btSearch: 'Search'
                 };
                 // Request 4: Perform the search.
                 request.post({ url: lib.Url + 'pgCatKeywordSearch.aspx', gzip: true, form: aspNetForm, jar: true, headers: headers, timeout: 20000 }, function (error, message, response) {

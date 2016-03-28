@@ -41,7 +41,7 @@ exports.getLibraries = function (service, callback) {
     // Request 1: Get advanced search page
     request.get({ forever: true, url: service.Url + 'search/advanced', timeout: 30000 }, function (error, message, response) {
         if (handleError(error)) return;
-	if (reqStatusCheck(message)) return;
+        if (reqStatusCheck(message)) return;
         $ = cheerio.load(response);
         $('#libraryDropDown option').each(function () {
             if ($(this).text() != 'Any Library') responseLibraries.libs.push($(this).text());
@@ -57,7 +57,7 @@ exports.getLibraries = function (service, callback) {
 exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
     var handleError = function (error) {
-        if (error){
+        if (error) {
             responseHoldings.error = error;
             responseHoldings.end = new Date();
             callback(responseHoldings);

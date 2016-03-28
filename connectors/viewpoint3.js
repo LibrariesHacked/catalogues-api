@@ -10,6 +10,7 @@ var request = require('request'),
 // Variables
 //////////////////////////
 var searchUrl = '02_Catalogue/02_004_TitleResults.aspx?page=1&searchType=5&searchTerm=';
+var advSearch = '02_Catalogue/02_002_AdvancedSearch.aspx';
 var container = '#ctl00_ContentPlaceCenterContent_copyAvailabilityContainer';
 
 ///////////////////////////////////////////
@@ -35,11 +36,33 @@ exports.getLibraries = function (service, callback) {
     };
 
     // Request 1: Get advanced search page
-    request.get({ url: service.Url + 'advanced-search', timeout: 30000 }, function (error, message, response) {
-	if (handleError(error)) return;
+    request.get({ url: service.Url + advSearch, rejectUnauthorized: false, timeout: 20000, jar: true }, function (error, message, response) {
+        if (handleError(error)) return;
         if (reqStatusCheck(message)) return;
-        responseLibraries.end = new Date();
-        callback(responseLibraries);
+        $ = cheerio.load(response);
+        var aspNetForm = {
+            __EVENTARGUMENT: '',
+            __EVENTTARGET: 'ctl00$ContentPlaceCenterContent$authorityLimit',
+            __EVENTVALIDATION: $('input[name=__EVENTVALIDATION]').val(),
+            __LASTFOCUS: '',
+            __VIEWSTATE: $('input[name=__VIEWSTATE]').val(),
+            __VIEWSTATEGENERATOR: $('input[name=____VIEWSTATEGENERATOR]').val(),
+            ctl00$ContentPlaceCenterContent$authorityLimit: service.MultiAuthorityId,
+            ctl00$ContentPlaceCenterContent$branchLimit: 0,
+            ctl00$ContentPlaceCenterContent$languageLimit: 0,
+            ctl00$ContentPlaceCenterContent$searchTerm: '',
+            ctl00$ContentPlaceCenterContent$searchType: 0
+        };
+        request.post({ url: service.Url + advSearch, rejectUnauthorized: false, form: aspNetForm, timeout: 20000, jar: true }, function (error, message, response) {
+            if (handleError(error)) return;
+            if (reqStatusCheck(message)) return;
+            $ = cheerio.load(response);
+            $('select#ctl00_ContentPlaceCenterContent_branchLimit option').each(function () {
+                if ($(this).text() != 'All libraries') responseLibraries.libs.push($(this).text());
+            });
+            responseLibraries.end = new Date();
+            callback(responseLibraries);
+        });
     });
 };
 

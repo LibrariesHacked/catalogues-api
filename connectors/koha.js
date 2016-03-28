@@ -12,6 +12,7 @@ var request = require('request'),
 // VARIABLES
 //////////////////////////
 var catUrl = 'cgi-bin/koha/opac-search.pl?format=rss2&idx=nb&q=';
+var libsUrl = 'opac-search.pl?multibranchlimit=[MULTILIMIT]&do=Search&expand=holdingbranch#holdingbranch_id'
 
 ///////////////////////////////////////////
 // Function: getLibraries
@@ -35,11 +36,15 @@ exports.getLibraries = function (service, callback) {
         }
     };
 
-    // Request 1: Get advanced search page
-    request.get({ forever: true, url: service.Url + 'advanced-search', timeout: 30000 }, function (error, message, response) {
-	if (handleError(error)) return;
-	if (reqStatusCheck(message)) return;
-	responseLibraries.end = new Date();
+    // Request 1.
+    request.get({ forever: true, url: service.Url + libsUrl.replace('[MULTILIMIT]', service.MultiBranchLimit), timeout: 30000 }, function (error, message, response) {
+        if (handleError(error)) return;
+        if (reqStatusCheck(message)) return;
+        $ = cheerio.load(response);
+        $('li#holdingbranch_id ul li span.facet-label').each(function () {
+            responseLibraries.libs.push($(this).text());
+        });
+        responseLibraries.end = new Date();
         callback(responseLibraries);
     });
 };

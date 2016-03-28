@@ -46,7 +46,6 @@ exports.searchByISBN = function (isbn, lib, callback) {
             handleError(err);
             if (res.searchCatalog.TotalCount[0] > 0) {
                 var bibId = res.searchCatalog.Bib[0].BcId[0];
-
                 // Request 2: web service to get availability
                 request.get({ url: lib.Url + 'currentItems/' + bibId, headers: reqHeader, timeout: 30000 }, function (error, msg, response) {
                     if (handleError(error)) return;

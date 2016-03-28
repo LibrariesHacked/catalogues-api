@@ -38,9 +38,13 @@ exports.getLibraries = function (service, callback) {
     };
 
     // Request 1: Get advanced search page
-    request.get({ forever: true, url: service.Url + 'advanced-search', timeout: 30000 }, function (error, message, response) {
+    request.get({ forever: true, url: service.Url + 'Search/Advanced', timeout: 60000 }, function (error, message, response) {
         if (handleError(error)) return;
-	if (reqStatusCheck(message)) return;
+        if (reqStatusCheck(message)) return;
+        $ = cheerio.load(response);
+        $('option[value*="building"]').each(function () {
+            responseLibraries.libs.push($(this).text());
+        });
         responseLibraries.end = new Date();
         callback(responseLibraries);
     });

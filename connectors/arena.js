@@ -36,13 +36,13 @@ exports.getLibraries = function (service, callback) {
     };
 
     // Request 1: Get advanced search page
-    request.get({ forever: true, url: service.Url + 'advanced-search', timeout: 20000, jar: true }, function (error, message, response) {
+    request.get({ forever: true, url: service.Url + service.Advanced, timeout: 20000, jar: true }, function (error, message, response) {
         if (handleError(error)) return;
         if (reqStatusCheck(message)) return;
         $ = cheerio.load(response);
         var headers = { 'Accept': 'text/xml', 'Wicket-Ajax': true, 'Wicket-FocusedElementId': 'id__extendedSearch__WAR__arenaportlets____d' };
         if ($('#id__extendedSearch__WAR__arenaportlets____e option')) {
-            request.post({ jar: true, forever: true, headers: headers, form: { 'organisationHierarchyPanel:organisationContainer:organisationChoice': 'AUK000226|6' }, url: service.Url + 'advanced-search?p_p_id=extendedSearch_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=/extendedSearch/?wicket:interface=:0:extendedSearchPanel:extendedSearchForm:organisationHierarchyPanel:organisationContainer:organisationChoice::IBehaviorListener:0:&p_p_cacheability=cacheLevelPage&p_p_col_id=column-2&p_p_col_count=1&random=0.1554477137741876' }, function (error, message, response) {
+            request.post({ jar: true, forever: true, headers: headers, form: { 'organisationHierarchyPanel:organisationContainer:organisationChoice': service.OrganisationId }, url: service.Url + service.Advanced + '?p_p_id=extendedSearch_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=/extendedSearch/?wicket:interface=:0:extendedSearchPanel:extendedSearchForm:organisationHierarchyPanel:organisationContainer:organisationChoice::IBehaviorListener:0:&p_p_cacheability=cacheLevelPage&p_p_col_id=column-2&p_p_col_count=1&random=0.1554477137741876' }, function (error, message, response) {
                 if (handleError(error)) return;
                 if (reqStatusCheck(message)) return;
                 xml2js.parseString(response, function (err, res) {

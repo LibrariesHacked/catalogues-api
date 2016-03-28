@@ -59,7 +59,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
             responseHoldings.error = error;
             responseHoldings.end = new Date();
             callback(responseHoldings);
-            return true; 
+            return true;
         }
     };
 

@@ -39,7 +39,7 @@ exports.getLibraries = function (service, callback) {
     // Request 1: Get advanced search page
     request.get({ forever: true, url: service.Url + libsUrl, timeout: 30000 }, function (error, message, response) {
         if (handleError(error)) return;
-	if (reqStatusCheck(message)) return;
+        if (reqStatusCheck(message)) return;
         $ = cheerio.load(response);
         $('select[name=limitbox_1] option').each(function () {
             if ($(this).text().indexOf('Exclude') == -1) responseLibraries.libs.push($(this).text().replace('Loc: ', ''));

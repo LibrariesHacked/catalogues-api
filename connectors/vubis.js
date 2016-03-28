@@ -35,20 +35,28 @@ exports.getLibraries = function (service, callback) {
         }
     };
 
-    // Request 1: Get advanced search page
-    request.get({ forever: true, url: service.Url + 'advanced-search', timeout: 30000 }, function (error, message, response) {
+    // Request 1. This gets the frameset
+    request.get({ url: service.Url + 'vubis.csp', timeout: 20000 }, function (error, message, response) {
         if (handleError(error)) return;
-	if (reqStatusCheck(message)) return;
-        responseLibraries.end = new Date();
-        callback(responseLibraries);
+        $ = cheerio.load(response);
+        var link = $('FRAME[Title="Vubis.Body"]').attr('src');
+        // Request 2. Get the internal body page.
+        request.get({ url: service.Url + link, timeout: 20000 }, function (error, message, response) {
+            if (handleError(error)) return;
+            $ = cheerio.load(response);
+            $('select[name=Location] option').each(function () {
+                if ($(this).text().trim() != 'No preference') responseLibraries.libs.push($(this).text().trim());
+            });
+            responseLibraries.end = new Date();
+            callback(responseLibraries);
+        });
     });
 };
-
 
 ///////////////////////////////////////////
 // Function: searchByISBN
 // This is a horrible chain of requests.  Particularly as the data returned is always within 
-// framesets (framesets!) (so you need to get the url from the relevant frame).
+// framesets (in 2016!) - so you need to get the url from the relevant frame.
 // Probably can do all this from a single call - will investigate
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
@@ -95,7 +103,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
             // Get the encoded value to perform the search.
             var enc = $('input[name=EncodedRequest]').attr('value');
             var url = lib.Url + searchUrl.replace('[ISBN]', isbn) + isbn + '&EncodedRequest=' + enc;
-            
+
             // Request 3: Get the search frameset (*voms*)
             request.get({ url: url, timeout: 20000 }, function (error, msg, response) {
                 if (handleError(error)) return;

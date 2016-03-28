@@ -41,6 +41,7 @@
       "ArenaMemberId": "",
       "Id": "226006",
       "Url": "https://arena.yourlondonlibrary.net/web/barking-and-dagenham/",
+      "Advanced": "advanced-search",
       "TestISBN": "9780747538486"
     },
     {
@@ -62,6 +63,7 @@
       "Type": "viewpoint3",
       "Id": "280001",
       "Url": "https://www.librarieswest.org.uk/",
+      "MultiAuthorityId": 4,
       "TestISBN": "9780747538493"
     },
     {
@@ -74,6 +76,7 @@
       "Id": "220001",
       "SearchType": "Keyword",
       "Url": "https://beds-arena.culturalservices.net/web/arena/",
+      "Advanced": "extended-search",
       "TestISBN": "9780747595830"
     },
     {
@@ -81,9 +84,11 @@
       "Type": "arena",
       "OrganisationId": "AUK000226|18",
       "OrganisationName": "Bexley",
+      "ArenaName": "AUK000226",
       "ISBNAlias": "number",
       "Id": "226018",
       "Url": "https://arena.yourlondonlibrary.net/web/bexley/",
+      "Advanced": "extended-search",
       "TestISBN": "9780747538493"
     },
     {
@@ -145,9 +150,11 @@
       "Type": "arena",
       "OrganisationId": "AUK000226|11",
       "OrganisationName": "Brent",
+      "ArenaName": "AUK000226",
       "ISBNAlias": "number",
       "Id": "226011",
       "Url": "https://arena.yourlondonlibrary.net/web/brent/",
+      "Advanced": "extended-search",
       "TestISBN": "9780747538493"
     },
     {
@@ -159,7 +166,7 @@
     {
       "Name": "Brighton and Hove",
       "Type": "spydus",
-      "Url": "http://brighton-hove.spydus.co.uk/",
+      "Url": "https://brighton-hove.spydus.co.uk/",
       "TestISBN": "9780747562184"
     },
     {
@@ -177,6 +184,7 @@
       "ISBNAlias": "number",
       "Id": "226019",
       "Url": "https://arena.yourlondonlibrary.net/web/barking-and-dagenham/",
+      "Advanced": "advanced-search",
       "TestISBN": "9780747538493"
     },
     {
@@ -195,6 +203,7 @@
       "Name": "Caerphilly",
       "Type": "iguana",
       "Database": "1_LIBS",
+      "Faceted": false,
       "Url": "http://libraries.caerphilly.gov.uk/iguana/",
       "TestISBN": "9780747538493"
     },
@@ -242,12 +251,14 @@
       "Name": "Cheshire West and Chester",
       "Type": "koha",
       "Url": "https://cheslive.koha-ptfs.co.uk/",
+      "MultiBranchLimit": "WEST",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Cheshire East",
       "Type": "koha",
       "Url": "https://cheslive.koha-ptfs.co.uk/",
+      "MultiBranchLimit": "EAST",
       "TestISBN": "9780747538493"
     },
     {
@@ -282,6 +293,7 @@
       "Name": "Coventry",
       "Type": "iguana",
       "Database": "1",
+      "Faceted": true,
       "Url": "https://librarycatalogue.coventry.gov.uk/iguana/",
       "TestISBN": "9780747538493"
     },
@@ -309,6 +321,7 @@
       "ArenaName": "AUK000023",
       "ArenaMemberId": "28980569",
       "Url": "http://www2.darlington.gov.uk/web/arena/",
+      "Advanced": "extended-search",
       "TestISBN": "9780747538493"
     },
     {
@@ -344,7 +357,7 @@
     },
     {
       "Name": "Doncaster",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "243001",
       "Url": "http://library.doncaster.gov.uk/web/arena/",
       "TestISBN": "9780747538493"
@@ -365,6 +378,7 @@
       "Name": "Dumfries and Galloway",
       "Type": "iguana",
       "Database": "1_LIBS",
+      "Faceted": true,
       "Url": "http://library.dumgal.gov.uk/iguana/",
       "TestISBN": "9780747538493"
     },
@@ -382,7 +396,7 @@
     },
     {
       "Name": "Ealing",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "226014",
       "Url": "https://arena.yourlondonlibrary.net/web/ealing/",
       "TestISBN": "9780747538493"
@@ -416,7 +430,7 @@
     },
     {
       "Name": "East Riding",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "205001",
       "Url": "https://library.eastriding.gov.uk/web/arena/",
       "TestISBN": "9780747538493"
@@ -436,7 +450,7 @@
     },
     {
       "Name": "Enfield",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "226012",
       "Url": "http://arena.yourlondonlibrary.net/web/enfield/",
       "TestISBN": "9780747538493"
@@ -477,7 +491,7 @@
     },
     {
       "Name": "Glasgow",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "480001",
       "Url": "http://libcat.csglasgow.org/web/arena/",
       "TestISBN": "9780747538493"
@@ -512,7 +526,7 @@
     },
     {
       "Name": "Hackney",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "226013",
       "Url": "https://arena.yourlondonlibrary.net/web/hackney/",
       "TestISBN": "9780747538493"
@@ -546,7 +560,7 @@
     },
     {
       "Name": "Harrow",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "226020",
       "Url": "https://arena.yourlondonlibrary.net/web/harrow/",
       "TestISBN": "9780747538493"
@@ -560,7 +574,7 @@
     },
     {
       "Name": "Havering",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "226001",
       "Url": "http://arena.yourlondonlibrary.net/web/havering/",
       "TestISBN": "9780747538493"
@@ -597,7 +611,7 @@
     },
     {
       "Name": "Hounslow",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "219001",
       "Url": "http://www.hounslowlibraries.org/web/arena/",
       "TestISBN": "9780747538493"
@@ -658,7 +672,7 @@
     },
     {
       "Name": "Kingston",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "226016",
       "Url": "https://arena.yourlondonlibrary.net/web/kingston/",
       "TestISBN": "9780747538493"
@@ -702,7 +716,7 @@
     },
     {
       "Name": "Leicester City",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "201001",
       "Url": "https://bookfinder.leicester.gov.uk/web/arena/",
       "TestISBN": "9780747538493"
@@ -717,7 +731,7 @@
     },
     {
       "Name": "Lewisham",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "226015",
       "Url": "https://arena.yourlondonlibrary.net/web/lewisham/",
       "TestISBN": "9780747538493"
@@ -737,7 +751,7 @@
     },
     {
       "Name": "Luton",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "220002",
       "Url": "https://beds-arena.culturalservices.net/web/arena/",
       "TestISBN": "9780747538493"
@@ -763,7 +777,7 @@
     },
     {
       "Name": "Merton",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "226017",
       "Url": "https://arena.yourlondonlibrary.net/web/merton/",
       "TestISBN": "9780747538493"
@@ -776,7 +790,7 @@
     },
     {
       "Name": "Midlothian",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "750001",
       "Url": "https://libraries.midlothian.gov.uk/web/arena/",
       "TestISBN": "9780747538493"
@@ -809,14 +823,14 @@
     },
     {
       "Name": "Newcastle",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "224001",
-      "Url": "http://library.newcastle.gov.uk/arena.pa.palma/catalogue",
+      "Url": "http://library.newcastle.gov.uk/web/arena/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Newham",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "226008",
       "Url": "https://arena.yourlondonlibrary.net/web/newham/",
       "TestISBN": "9780747538493"
@@ -825,6 +839,7 @@
       "Name": "Newport",
       "Type": "iguana",
       "Database": "1",
+      "Faceted": true,
       "Url": "https://opac.newport.gov.uk/iguana/",
       "TestISBN": "9780747538493"
     },
@@ -843,7 +858,7 @@
     },
     {
       "Name": "North East Lincolnshire",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "252001",
       "Url": "http://library.nelincs.gov.uk/web/arena/",
       "TestISBN": "9780747538493"
@@ -856,14 +871,14 @@
     },
     {
       "Name": "North Lincolnshire",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Url": "http://www.opac.northlincs.gov.uk/web/arena/",
       "Id": "221001",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "North Somerset",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "280001",
       "Url": "https://www.librarieswest.org.uk/",
       "TestISBN": "9780747538493"
@@ -884,7 +899,7 @@
     },
     {
       "Name": "Northamptonshire",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "256001",
       "Url": "http://www.librarycatalogue.northamptonshire.gov.uk/web/arena/",
       "TestISBN": "9780747538493"
@@ -943,7 +958,7 @@
     },
     {
       "Name": "Oxfordshire",
-      "Type": "viewpoint3",
+      "Type": "arena",
       "Url": "https://www.libcat.oxfordshire.gov.uk/",
       "TestISBN": "9780747538493"
     },
@@ -999,14 +1014,14 @@
     },
     {
       "Name": "Redbridge",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "226002",
       "Url": "https://arena.yourlondonlibrary.net/web/redbridge/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Redcar & Cleveland",
-      "Type": "viewpoint3",
+      "Type": "arena",
       "Url": "https://libraries.redcar-cleveland.gov.uk/",
       "TestISBN": "9780747538493"
     },
@@ -1014,6 +1029,7 @@
       "Name": "Renfrewshire",
       "Type": "iguana",
       "Database": "1",
+      "Faceted": true,
       "Url": "https://libcat.renfrewshire.gov.uk/iguana/",
       "TestISBN": "9780747538493"
     },
@@ -1091,8 +1107,8 @@
     },
     {
       "Name": "Shropshire",
-      "Type": "viewpoint3",
-      "Url": "http://libraries.shropshire.gov.uk/",
+      "Type": "arena",
+      "Url": "http://libraries.shropshire.gov.uk/web/arena/",
       "TestISBN": "9780747538493"
     },
     {
@@ -1110,7 +1126,7 @@
     },
     {
       "Name": "Somerset",
-      "Type": "viewpoint2",
+      "Type": "viewpoint3",
       "Id": "280001",
       "Url": "https://www.librarieswest.org.uk/",
       "TestISBN": "9780747538493"
@@ -1123,7 +1139,7 @@
     },
     {
       "Name": "South Gloucestershire",
-      "Type": "viewpoint2",
+      "Type": "viewpoint3",
       "Id": "280001",
       "Url": "https://www.librarieswest.org.uk/",
       "TestISBN": "9780747538493"
@@ -1170,7 +1186,7 @@
     },
     {
       "Name": "Staffordshire",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "250001",
       "Url": "https://www.yourlibcat.staffordshire.gov.uk/web/arena/",
       "TestISBN": "9780747538493"
@@ -1215,7 +1231,7 @@
     },
     {
       "Name": "Surrey",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "210002",
       "Url": "http://arena.surreylibraries.org/web/arena/",
       "TestISBN": "9780747538493"
@@ -1254,7 +1270,7 @@
     },
     {
       "Name": "Telford and Wrekin",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "320001",
       "Url": "https://library.telford.gov.uk/web/arena",
       "TestISBN": "9780747538493"
@@ -1280,7 +1296,7 @@
     },
     {
       "Name": "Tower Hamlets",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "226010",
       "Url": "https://arena.yourlondonlibrary.net/web/tower-hamlets/",
       "TestISBN": "9780747538493"
@@ -1299,21 +1315,21 @@
     },
     {
       "Name": "Wakefield",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "212001",
       "Url": "https://libraries.wakefield.gov.uk/web/arena/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Walsall",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "140001",
       "Url": "https://libcat.walsall.gov.uk/web/arena/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Waltham Forest",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "226004",
       "Url": "https://arena.yourlondonlibrary.net/web/walthamforest/",
       "TestISBN": "9780747538493"
@@ -1337,6 +1353,7 @@
       "Name": "Warwickshire",
       "Type": "iguana",
       "Database": "1",
+      "Faceted": true,
       "Url": "http://library.warwickshire.gov.uk/iguana/",
       "TestISBN": "9780747538493"
     },
@@ -1362,7 +1379,7 @@
     },
     {
       "Name": "West Sussex",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "380001",
       "Url": "https://arena.westsussex.gov.uk/web/arena/",
       "TestISBN": "9780747538493"
@@ -1390,7 +1407,7 @@
     },
     {
       "Name": "Wiltshire",
-      "Type": "viewpoint2",
+      "Type": "arena",
       "Id": "400001",
       "Url": "https://libraries.wiltshire.gov.uk/web/arena/",
       "TestISBN": "9780747538493"

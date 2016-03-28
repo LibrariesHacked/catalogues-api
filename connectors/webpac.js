@@ -31,9 +31,13 @@ exports.getLibraries = function (service, callback) {
     };
 
     // Request 1: Get advanced search page
-    request.get({ forever: true, url: service.Url + 'advanced-search', timeout: 30000 }, function (error, message, response) {
+    request.get({ forever: true, url: service.Url + 'search/X', timeout: 30000 }, function (error, message, response) {
         if (handleError(error)) return;
-	if (reqStatusCheck(message)) return;
+        if (reqStatusCheck(message)) return;
+        $ = cheerio.load(response);
+        $('#branch_select select[Name=b] option').each(function () {
+            if ($(this).text() != 'ANY') responseLibraries.libs.push($(this).text());
+        });
         responseLibraries.end = new Date();
         callback(responseLibraries);
     });
@@ -54,7 +58,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     };
 
     // Request 1: Use the item deep link URL
-    request.get({ url: lib.Url + 'search~S1?/i' + isbn + '/i' + isbn + '/1,1,1,E/holdings&FF=i' + isbn + '&1,1,', timeout:60000 }, function (error, msg, response) {
+    request.get({ url: lib.Url + 'search~S1?/i' + isbn + '/i' + isbn + '/1,1,1,E/holdings&FF=i' + isbn + '&1,1,', timeout: 60000 }, function (error, msg, response) {
         if (handleError(error)) return;
         var libs = {};
         $ = cheerio.load(response);

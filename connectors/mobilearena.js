@@ -40,7 +40,7 @@ exports.getLibraries = function (service, callback) {
     // Request 1: Get advanced search page
     request.get({ forever: true, url: service.Url + 'advanced-search', timeout: 30000 }, function (error, message, response) {
         if (handleError(error)) return;
-	if (reqStatusCheck(message)) return;
+        if (reqStatusCheck(message)) return;
         responseLibraries.end = new Date();
         callback(responseLibraries);
     });

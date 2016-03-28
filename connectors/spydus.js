@@ -37,12 +37,10 @@ exports.getLibraries = function (service, callback) {
     };
 
     // Request 1: Get advanced search page
+    // They've begun to throw up a full page for allowing cookies (which needs a cookie to get round).
     request.get({ headers: { Cookie: 'ALLOWCOOKIES_443=1' }, url: service.Url + libsUrl, timeout: 30000 }, function (error, message, response) {
         if (handleError(error)) return;
         if (reqStatusCheck(message)) return;
-
-        // This may have thrown up 
-
         $ = cheerio.load(response);
         $('select#LOC option').each(function () {
             if ($(this).text() != 'All Locations') responseLibraries.libs.push($(this).text());
