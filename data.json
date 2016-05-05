@@ -173,6 +173,7 @@
       "Name": "Bristol City",
       "Type": "viewpoint3",
       "Id": "280001",
+      "MultiAuthorityId": 10,
       "Url": "https://www.librarieswest.org.uk/",
       "TestISBN": "9780747538493"
     },
@@ -227,12 +228,13 @@
     },
     {
       "Name": "Cardiff",
-      "Type": "bookmyne",
+      "Type": "ibistro",
+      "Available": [ "Item on shelves" ],
       "Id": "446",
       "Region": "3",
       "InstitutionId": "163",
       "Profile": "ALL_LIBS",
-      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1",
+      "Url": "http://ibistro.cardiff.gov.uk/uhtbin/cgisirsi/",
       "TestISBN": "9780747538493"
     },
     {
@@ -305,12 +307,14 @@
     },
     {
       "Name": "Cumbria",
-      "Type": "bookmyne",
+      "Type": "enterprise",
+      "Available": [ "In stock" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "Id": "8348",
       "Region": "3",
       "InstitutionId": "768",
       "Profile": "ALL_LIBS",
-      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1",
+      "Url": "http://cmbr.ent.sirsidynix.net.uk/client/en_GB/default/",
       "TestISBN": "9780747538493"
     },
     {
@@ -321,7 +325,8 @@
       "ArenaName": "AUK000023",
       "ArenaMemberId": "28980569",
       "Url": "http://www2.darlington.gov.uk/web/arena/",
-      "Advanced": "extended-search",
+      "Libraries": [ "Central Library", "Cockerton Library", "Mobile Library" ],
+      "Advanced": "advanced-search",
       "TestISBN": "9780747538493"
     },
     {

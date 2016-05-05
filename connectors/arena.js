@@ -1,3 +1,7 @@
+///////////////////////////////////////////
+// ARENA
+// 
+///////////////////////////////////////////
 console.log('arena connector loading...');
 
 ///////////////////////////////////////////
@@ -6,7 +10,8 @@ console.log('arena connector loading...');
 ///////////////////////////////////////////
 var request = require('request'),
     xml2js = require('xml2js'),
-    cheerio = require('cheerio');
+    cheerio = require('cheerio'),
+    common = require('../connectors/common');
 
 ///////////////////////////////////////////
 // VARIABLES
@@ -17,49 +22,31 @@ var searchUrl = 'search?p_p_state=normal&p_p_lifecycle=1&p_p_action=1&p_p_id=sea
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
-    var responseLibraries = { service: service.Name, libs: [], start: new Date() };
-    var handleError = function (error) {
-        if (error) {
-            responseLibraries.error = error;
-            responseLibraries.end = new Date();
-            callback(responseLibraries);
-            return true;
-        }
-    };
-    var reqStatusCheck = function (message) {
-        if (message.statusCode != 200) {
-            responseLibraries.error = "Web request error.";
-            responseLibraries.end = new Date();
-            callback(responseLibraries);
-            return true;
-        }
-    };
+    var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
     // Request 1: Get advanced search page
     request.get({ forever: true, url: service.Url + service.Advanced, timeout: 20000, jar: true }, function (error, message, response) {
-        if (handleError(error)) return;
-        if (reqStatusCheck(message)) return;
+        if (common.handleErrors(callback, responseLibraries, error, message)) return;
         $ = cheerio.load(response);
         var headers = { 'Accept': 'text/xml', 'Wicket-Ajax': true, 'Wicket-FocusedElementId': 'id__extendedSearch__WAR__arenaportlets____d' };
-        if ($('#id__extendedSearch__WAR__arenaportlets____e option')) {
-            request.post({ jar: true, forever: true, headers: headers, form: { 'organisationHierarchyPanel:organisationContainer:organisationChoice': service.OrganisationId }, url: service.Url + service.Advanced + '?p_p_id=extendedSearch_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=/extendedSearch/?wicket:interface=:0:extendedSearchPanel:extendedSearchForm:organisationHierarchyPanel:organisationContainer:organisationChoice::IBehaviorListener:0:&p_p_cacheability=cacheLevelPage&p_p_col_id=column-2&p_p_col_count=1&random=0.1554477137741876' }, function (error, message, response) {
-                if (handleError(error)) return;
-                if (reqStatusCheck(message)) return;
-                xml2js.parseString(response, function (err, res) {
-                    if (res['ajax-response'] && res['ajax-response'].component) {
-                        $ = cheerio.load(res['ajax-response'].component[0]._);
-                        $('option').each(function () {
-                            responseLibraries.libs.push($(this).text());
-                        });
-                    }
-                    responseLibraries.end = new Date();
-                    callback(responseLibraries);
-                });
-            });
-        } else {
-            responseLibraries.end = new Date();
-            callback(responseLibraries);
+        if (!$('#id__extendedSearch__WAR__arenaportlets____e option')) {
+            common.completeCallback(callback, responseLibraries);
+            return;
         }
+
+        // Request 2: The select list for libraries is retrieved with a POST request.
+        request.post({ jar: true, forever: true, headers: headers, form: { 'organisationHierarchyPanel:organisationContainer:organisationChoice': service.OrganisationId }, url: service.Url + service.Advanced + '?p_p_id=extendedSearch_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=/extendedSearch/?wicket:interface=:0:extendedSearchPanel:extendedSearchForm:organisationHierarchyPanel:organisationContainer:organisationChoice::IBehaviorListener:0:&p_p_cacheability=cacheLevelPage&p_p_col_id=column-2&p_p_col_count=1&random=0.1554477137741876' }, function (error, message, response) {
+            if (common.handleErrors(callback, responseLibraries, error, message)) return;
+            xml2js.parseString(response, function (err, res) {
+                if (res['ajax-response'] && res['ajax-response'].component) {
+                    $ = cheerio.load(res['ajax-response'].component[0]._);
+                    $('option').each(function () {
+                        if ($(this).text() != 'Select library') responseLibraries.libraries.push($(this).text());
+                    });
+                }
+                common.completeCallback(callback, responseLibraries);
+            });
+        });
     });
 };
 
@@ -69,14 +56,6 @@ exports.getLibraries = function (service, callback) {
 exports.searchByISBN = function (isbn, lib, callback) {
     if (lib.ISBN == 10) isbn = isbn.substring(3);
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
-    var handleError = function (error) {
-        if (error) {
-            responseHoldings.error = error;
-            responseHoldings.end = new Date();
-            callback(responseHoldings);
-            return true;
-        }
-    };
 
     var orgQuery = '';
     if (lib.OrganisationId) orgQuery = 'organisationId_index:' + lib.OrganisationId + '+AND+';
@@ -86,7 +65,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
 
     // Request 1: Perform the search.
     request.get({ forever: true, url: url, timeout: 20000, jar: true }, function (error, message, response) {
-        if (handleError(error)) return;
+        if (common.handleErrors(callback, responseHoldings, error, message)) return;
         // Mega Hack! Find occurence of search_item_id= and then &agency_name=, and get item ID inbetween
         if (response.lastIndexOf("search_item_id=") != -1) {
             var agencyNameInd = response.lastIndexOf("&agency_name=");
@@ -96,7 +75,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
             // Request 2: Get the item page.
             request.get({ forever: true, url: url, timeout: 20000, headers: { 'Connection': 'keep-alive' }, jar: true }, function (error, message, response) {
 
-                if (handleError(error)) return;
+                if (common.handleErrors(callback, responseHoldings, error, message)) return;
                 // After getting the item page we may then already have the availability holdings data.
                 $ = cheerio.load(response);
                 if ($('.arena-availability-viewbranch').length > 0) {
@@ -117,9 +96,9 @@ exports.searchByISBN = function (isbn, lib, callback) {
                     url = lib.Url + 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + resourceId + '&p_p_cacheability=cacheLevelPage&p_p_col_id=column-2&p_p_col_pos=1&p_p_col_count=3';
                     // Request 3: After triggering the item page, we should then be able to get the availability container XML data
                     request.get({ forever: true, url: url, headers: headers, timeout: 20000, jar: true }, function (error, message, response) {
-                        if (handleError(error)) return;
+                        if (common.handleErrors(callback, responseHoldings, error, message)) return;
                         xml2js.parseString(response, function (err, res) {
-                            if (handleError(err)) return;
+                            if (common.handleErrors(callback, responseHoldings, err)) return;
                             if (res['ajax-response'].component) {
                                 $ = cheerio.load(res['ajax-response'].component[0]._);
 
@@ -148,9 +127,9 @@ exports.searchByISBN = function (isbn, lib, callback) {
                                             url = lib.Url + 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + resourceId + '&p_p_cacheability=';
                                             // Request 4: (Looped) Get the holdings details for that organisation. 
                                             request.get({ forever: true, headers: headers, url: url, timeout: 20000, jar: true }, function (error, message, response) {
-                                                if (handleError(error)) return;
+                                                if (common.handleErrors(callback, responseHoldings, error, message)) return;
                                                 xml2js.parseString(response, function (err, res) {
-                                                    if (handleError(err)) return;
+                                                    if (common.handleErrors(callback, responseHoldings, err)) return;
                                                     $ = cheerio.load(res['ajax-response'].component[0]._);
                                                     var libsData = $('.arena-holding-container');
                                                     var noLibs = libsData.length;
@@ -165,10 +144,10 @@ exports.searchByISBN = function (isbn, lib, callback) {
                                                         url = lib.Url + 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + resourceId + '&p_p_cacheability=';
                                                         // Request 5: (Looped) Get the libraries availability
                                                         request.get({ forever: true, headers: headers, url: url, timeout: 20000, jar: true }, function (error, message, response) {
-                                                            if (handleError(error)) return;
+                                                            if (common.handleErrors(callback, responseHoldings, error, message)) return;
                                                             xml2js.parseString(response, function (err, res) {
 
-                                                                if (handleError(err)) return;
+                                                                if (common.handleErrors(callback, responseHoldings, err)) return;
                                                                 $ = cheerio.load(res['ajax-response'].component[0]._);
                                                                 var totalAvailable = $('td.arena-holding-nof-total span.arena-value').text();
                                                                 var checkedOut = $('td.arena-holding-nof-checked-out span.arena-value').text();

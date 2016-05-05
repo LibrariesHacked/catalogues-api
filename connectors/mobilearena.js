@@ -1,3 +1,7 @@
+///////////////////////////////////////////
+// MOBILEARENA
+// 
+///////////////////////////////////////////
 console.log('mobilearena connector loading...');
 
 ///////////////////////////////////////////
@@ -6,7 +10,8 @@ console.log('mobilearena connector loading...');
 // converting xml response to JSON
 ///////////////////////////////////////////
 var xml2js = require('xml2js'),
-    request = require('request');
+    request = require('request'),
+    common = request('../connectors/common');
 
 ///////////////////////////////////////////
 // VARIABLES
@@ -19,30 +24,15 @@ var reqHeader = { "Content-Type": "text/xml; charset=utf-8" };
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
-    var responseLibraries = { service: service.Name, libs: [], start: new Date() };
-    var handleError = function (error) {
-        if (error) {
-            responseLibraries.error = error;
-            responseLibraries.end = new Date();
-            callback(responseLibraries);
-            return true;
-        }
-    };
-    var reqStatusCheck = function (message) {
-        if (message.statusCode != 200) {
-            responseLibraries.error = "Web request error.";
-            responseLibraries.end = new Date();
-            callback(responseLibraries);
-            return true;
-        }
-    };
+    var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
     // Request 1: Get advanced search page
     request.get({ forever: true, url: service.Url + 'advanced-search', timeout: 30000 }, function (error, message, response) {
-        if (handleError(error)) return;
-        if (reqStatusCheck(message)) return;
-        responseLibraries.end = new Date();
-        callback(responseLibraries);
+        if (common.handleErrors(callback, responseLibraries, error, msg)) return;
+
+        // To do: implement.
+
+        common.completeCallback(callback, responseLibraries);
     });
 };
 
@@ -54,44 +44,36 @@ exports.getLibraries = function (service, callback) {
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
-    var handleError = function (error) {
-        if (error) {
-            responseHoldings.error = error;
-            responseHoldings.end = new Date();
-            callback(responseHoldings);
-            return true;
-        }
-    };
 
     var soapSearchXML = searchRequest.replace('[ISBN]', isbn).replace('[SERVICEID]', lib.Id);
     // Request 1: Search for the item ID from ISBN
-    // RejectUnauthorised used again (for Leicester City).  Investigate.
+    // RejectUnauthorised used (for Leicester City).  What's up with that SSL certificate?
     request.post({ url: lib.Url, body: soapSearchXML, headers: reqHeader, rejectUnauthorized: false, timeout: 30000 }, function (error, msg, response) {
-        if (handleError(error)) return;
+        if (common.handleErrors(callback, responseHoldings, error, msg)) return;
         xml2js.parseString(response, function (err, res) {
-            if (handleError(err)) return;
+            if (common.handleErrors(callback, responseHoldings, err)) return;
             var soapResponse = res['soap:Envelope']['soap:Body'][0]['ns1:SearchResponse'][0]['searchResponse'];
-            if (soapResponse[0] && soapResponse[0].catalogueRecords && soapResponse[0].catalogueRecords[0]) {
-                var crId = soapResponse[0].catalogueRecords[0].catalogueRecord[0].id;
-                var soapDetailXML = detailsRequest.replace('[CRID]', crId).replace('[SERVICEID]', lib.Id);
-                // Request 2: Search for item details (which will include availability holdings information.
-                request.post({ url: lib.Url, body: soapDetailXML, headers: reqHeader, rejectUnauthorized: false, timeout: 30000 }, function (error, msg, response) {
-                    if (handleError(error)) return;
-                    xml2js.parseString(response, function (err, res) {
-                        if (handleError(err)) return;
-                        var soapResponse = res['soap:Envelope']['soap:Body'][0]['ns1:GetCatalogueRecordDetailResponse'][0]['catalogueRecordDetailResponse'];
-                        if (soapResponse[0] && soapResponse[0].holdings) {
-                            var holdings = soapResponse[0].holdings[0].holding;
-                            for (var i = 0; i < holdings.length ; i++) responseHoldings.availability.push({ library: holdings[i].$.branch, available: parseInt(holdings[i].$.nofAvailableForLoan), unavailable: parseInt(holdings[i].$.nofCheckedOut) });
-                        }
-                        responseHoldings.end = new Date();
-                        callback(responseHoldings);
-                    });
-                });
-            } else {
-                responseHoldings.end = new Date();
-                callback(responseHoldings);
+
+            if (!soapResponse[0] && soapResponse[0].catalogueRecords && soapResponse[0].catalogueRecords[0]) {
+                common.completeCallback(callback, responseHoldings);
+                return;
             }
+
+            var crId = soapResponse[0].catalogueRecords[0].catalogueRecord[0].id;
+            var soapDetailXML = detailsRequest.replace('[CRID]', crId).replace('[SERVICEID]', lib.Id);
+            // Request 2: Search for item details (which will include availability holdings information.
+            request.post({ url: lib.Url, body: soapDetailXML, headers: reqHeader, rejectUnauthorized: false, timeout: 30000 }, function (error, msg, response) {
+                if (common.handleErrors(callback, responseHoldings, error, msg)) return;
+                xml2js.parseString(response, function (err, res) {
+                    if (common.handleErrors(callback, responseHoldings, err)) return;
+                    var soapResponse = res['soap:Envelope']['soap:Body'][0]['ns1:GetCatalogueRecordDetailResponse'][0]['catalogueRecordDetailResponse'];
+                    if (soapResponse[0] && soapResponse[0].holdings) {
+                        var holdings = soapResponse[0].holdings[0].holding;
+                        for (var i = 0; i < holdings.length ; i++) responseHoldings.availability.push({ library: holdings[i].$.branch, available: parseInt(holdings[i].$.nofAvailableForLoan), unavailable: parseInt(holdings[i].$.nofCheckedOut) });
+                    }
+                    common.completeCallback(callback, responseHoldings);
+                });
+            });
         });
     });
 };

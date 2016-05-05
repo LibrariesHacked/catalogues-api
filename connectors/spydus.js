@@ -1,3 +1,7 @@
+///////////////////////////////////////////
+// SPYDUS
+// 
+///////////////////////////////////////////
 console.log('spydus connector loading...');
 
 ///////////////////////////////////////////
@@ -6,7 +10,8 @@ console.log('spydus connector loading...');
 // querying the HTML returned.
 ///////////////////////////////////////////
 var request = require('request'),
-    cheerio = require('cheerio');
+    cheerio = require('cheerio'),
+    common = require('../connectors/common');
 
 ///////////////////////////////////////////
 // VARIABLES
@@ -18,35 +23,17 @@ var libsUrl = 'cgi-bin/spydus.exe/MSGTRN/OPAC/COMB?HOMEPRMS=COMBPARAMS';
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
-    var responseLibraries = { service: service.Name, libs: [], start: new Date() };
-    var handleError = function (error) {
-        if (error) {
-            responseLibraries.error = error;
-            responseLibraries.end = new Date();
-            callback(responseLibraries);
-            return true;
-        }
-    };
-    var reqStatusCheck = function (message) {
-        if (message.statusCode != 200) {
-            responseLibraries.error = "Web request error.";
-            responseLibraries.end = new Date();
-            callback(responseLibraries);
-            return true;
-        }
-    };
+    var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
     // Request 1: Get advanced search page
-    // They've begun to throw up a full page for allowing cookies (which needs a cookie to get round).
+    // They've begun to throw up a full page to agree to cookies (which needs a cookie set to get round).
     request.get({ headers: { Cookie: 'ALLOWCOOKIES_443=1' }, url: service.Url + libsUrl, timeout: 30000 }, function (error, message, response) {
-        if (handleError(error)) return;
-        if (reqStatusCheck(message)) return;
+        if (common.handleErrors(callback, responseLibraries, error, message)) return;
         $ = cheerio.load(response);
         $('select#LOC option').each(function () {
-            if ($(this).text() != 'All Locations') responseLibraries.libs.push($(this).text());
+            if ($(this).text() != 'All Locations') responseLibraries.libraries.push($(this).text());
         });
-        responseLibraries.end = new Date();
-        callback(responseLibraries);
+        common.completeCallback(callback, responseLibraries);
     });
 };
 
@@ -55,14 +42,6 @@ exports.getLibraries = function (service, callback) {
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
-    var handleError = function (error) {
-        if (error) {
-            responseHoldings.error = error;
-            responseHoldings.end = new Date();
-            callback(responseHoldings);
-            return true;
-        }
-    };
 
     var getAvailability = function ($) {
         var libs = {};
@@ -73,31 +52,28 @@ exports.searchByISBN = function (isbn, lib, callback) {
             status == 'Available' ? libs[name].available++ : libs[name].unavailable++;
         });
         for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
-        responseHoldings.end = new Date();
-        callback(responseHoldings);
+        common.completeCallback(callback, responseHoldings);
     };
 
     // Request 1: Deep link to item page by ISBN.
     request.get({ url: lib.Url + searchUrl + isbn, timeout: 30000 }, function (error, msg, res) {
-        if (handleError(error)) return;
+        if (common.handleErrors(callback, responseHoldings, error, msg)) return;
         $ = cheerio.load(res);
-        // The search may not find any record, or it may find multiple records
-        // If multiple records found, need to trigger the full display
-
+        // If nothing found return.
         if ($('.holdings').length == 0) {
-            responseHoldings.end = new Date();
-            callback(responseHoldings);
+            common.completeCallback(callback, responseHoldings);
+            return;
+        }
+
+        // In some cases (multiple records) there is another page request required to get full details (availability).
+        if ($('.holdings').text().indexOf('see full display for details') != -1) {
+            // Request 2: Get the full details page for the first record returned.
+            request.get({ url: lib.Url + $('.holdings').first().find('a').attr('href'), timeout: 30000 }, function (error, msg, res) {
+                if (common.handleErrors(callback, responseHoldings, error, msg)) return;
+                getAvailability(cheerio.load(res));
+            });
         } else {
-            if ($('.holdings').text().indexOf('see full display for details') != -1) {
-                var url = $('.holdings').first().find('a').attr('href');
-                request.get({ url: lib.Url + url, timeout: 30000 }, function (error, msg, res) {
-                    if (handleError(error)) return;
-                    $ = cheerio.load(res);
-                    getAvailability($);
-                });
-            } else {
-                getAvailability($);
-            }
+            getAvailability($);
         }
     });
 };

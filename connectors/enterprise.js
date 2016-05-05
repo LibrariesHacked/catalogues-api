@@ -1,3 +1,7 @@
+///////////////////////////////////////////
+// ENTERPRISE
+// 
+///////////////////////////////////////////
 console.log('enterprise connector loading...');
 
 ///////////////////////////////////////////
@@ -6,7 +10,8 @@ console.log('enterprise connector loading...');
 // querying the HTML returned.
 ///////////////////////////////////////////
 var request = require('request'),
-    cheerio = require('cheerio');
+    cheerio = require('cheerio'),
+    common = require('../connectors/common');
 
 ///////////////////////////////////////////
 // VARIABLES
@@ -20,34 +25,16 @@ var header2 = { 'X-Requested-With': 'XMLHttpRequest' };
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
-    var responseLibraries = { service: service.Name, libs: [], start: new Date() };
-    var handleError = function (error) {
-        if (error) {
-            responseLibraries.error = error;
-            responseLibraries.end = new Date();
-            callback(responseLibraries);
-            return true;
-        }
-    };
-    var reqStatusCheck = function (message) {
-        if (message.statusCode != 200) {
-            responseLibraries.error = "Web request error.";
-            responseLibraries.end = new Date();
-            callback(responseLibraries);
-            return true;
-        }
-    };
+    var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
     // Request 1: Get advanced search page
     request.get({ forever: true, url: service.Url + 'search/advanced', timeout: 30000 }, function (error, message, response) {
-        if (handleError(error)) return;
-        if (reqStatusCheck(message)) return;
+        if (common.handleErrors(callback, responseLibraries, error, message)) return;
         $ = cheerio.load(response);
         $('#libraryDropDown option').each(function () {
-            if ($(this).text() != 'Any Library') responseLibraries.libs.push($(this).text());
+            if ($(this).text() != 'Any Library') responseLibraries.libraries.push($(this).text());
         });
-        responseLibraries.end = new Date();
-        callback(responseLibraries);
+        common.completeCallback(callback, responseLibraries);
     });
 };
 
@@ -56,57 +43,52 @@ exports.getLibraries = function (service, callback) {
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
-    var handleError = function (error) {
-        if (error) {
-            responseHoldings.error = error;
-            responseHoldings.end = new Date();
-            callback(responseHoldings);
-            return true;
-        }
-    };
 
-    // Internal function to get availability - called either immediately (if redirected onto the main item page)
+    // Function to get availability - called either immediately (if redirected onto the main item page)
     // Or after a second request to go to the item page.
     var getItemAvailability = function (ils, itemPage) {
-        // Request 2: A post request returns the data used to show the availability information
+
+        if (ils.indexOf('SD_ILS' == -1)) {
+            common.completeCallback(callback, responseHoldings);
+            return;
+        }
+
+        // Request: A post request returns the data used to show the availability information
         request.post({ url: lib.Url + lib.AvailabilityUrl + ils.split('/').join('$002f'), headers: header2, timeout: 30000 }, function (error, msg, resp2) {
-            var avail = null;
-            // This could fail from not returning JSON - stick in a try/catch
-            try {
-                avail = JSON.parse(resp2);
-                $ = cheerio.load(itemPage);
-                var libs = {};
-                $('.detailItemsTableRow').each(function (index, elem) {
-                    var name = $(this).find('td').eq(0).text().trim();
-                    var bc = $(this).find('td div').attr('id').replace('availabilityDiv', '');
-                    // The status search can go down (while item details are still returned.  in this case just have to bail out.
-                    // -- should in future be able to return a bit more info
-                    if (avail.ids && avail.ids.length > 0) {
-                        var status = avail.strings[avail.ids.indexOf(bc)].trim();
-                        if (!libs[name]) libs[name] = { available: 0, unavailable: 0 };
-                        lib.Available.indexOf(status) > 0 ? libs[name].available++ : libs[name].unavailable++;
-                    }
-                });
-                for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
-                responseHoldings.end = new Date();
-                callback(responseHoldings);
-            } catch (e) {
-                handleError(e.message);
-            }
+            if (common.handleErrors(callback, responseHoldings, error, msg)) return;
+
+            var avail = JSON.parse(resp2);
+            $ = cheerio.load(itemPage);
+            var libs = {};
+            $('.detailItemsTableRow').each(function (index, elem) {
+                var name = $(this).find('td').eq(0).text().trim();
+                var bc = $(this).find('td div').attr('id').replace('availabilityDiv', '');
+                // The status search can go down (while item details are still returned.  in this case just have to bail out.
+                // -- should in future be able to return a bit more info
+                if (avail.ids && avail.ids.length > 0) {
+                    var status = avail.strings[avail.ids.indexOf(bc)].trim();
+                    if (!libs[name]) libs[name] = { available: 0, unavailable: 0 };
+                    lib.Available.indexOf(status) > 0 ? libs[name].available++ : libs[name].unavailable++;
+                }
+            });
+            for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
+            common.completeCallback(callback, responseHoldings);
         });
     };
 
     // Request 1: Call the deep link to the item by ISBN
     request.get({ url: lib.Url + searchUrl + isbn, headers: header1, timeout: 30000 }, function (error, msg, resp1) {
-        if (handleError(error)) return;
-
-        var uri = msg.request.uri.path
+        if (common.handleErrors(callback, responseHoldings, error, msg)) return;
+        var uri = msg.request.uri.path;
         var ils = uri.substring(uri.lastIndexOf("ent:") + 4, uri.lastIndexOf("/one;"));
 
         // Bail out here if we don't get back an ID.
         if (!ils) {
+            common.completeCallback(callback, responseHoldings);
+            return;
+        }
 
-        } else if (ils == '/cl') {
+        if (ils == '/cl') {
             // In this situation need to call the item page.
             ils = null;
             $ = cheerio.load(resp1);
@@ -114,14 +96,17 @@ exports.searchByISBN = function (isbn, lib, callback) {
             // Get the item page
             if (ils != null) {
                 request.get({ url: lib.Url + itemUrl.replace('[ILS]', ils.split('/').join('$002f')), timeout: 30000 }, function (error, message, response) {
-                    if (handleError(error)) return;
+                    if (common.handleErrors(callback, responseHoldings, error, message)) return;
                     getItemAvailability(ils, response);
                 });
             } else {
-                responseHoldings.end = new Date();
-                callback(responseHoldings);
+                common.completeCallback(callback, responseHoldings);
             }
         } else {
+
+            
+
+            console.log(ils);
             getItemAvailability(ils, resp1);
         }
     });

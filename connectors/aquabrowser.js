@@ -1,3 +1,7 @@
+///////////////////////////////////////////
+// AQUABROWSER
+// 
+///////////////////////////////////////////
 console.log('aquabrowser connector loading...');
 
 ///////////////////////////////////////////
@@ -6,10 +10,11 @@ console.log('aquabrowser connector loading...');
 // converting xml response to JSON
 ///////////////////////////////////////////
 var xml2js = require('xml2js'),
-    request = require('request');
+    request = require('request'),
+    common = require('../connectors/common');
 
 ///////////////////////////////////////////
-// VARIABLES
+// AQUA VARIABLES
 ///////////////////////////////////////////
 var searchUrl = 'result.ashx?output=xml&q=';
 var itemUrl = 'availability.ashx?output=xml&hreciid=';
@@ -17,44 +22,25 @@ var libsUrl = 'result.ashx?inlibrary=false&noext=false&uilang=en&searchmode=asso
 
 ///////////////////////////////////////////
 // Function: getLibraries
-// For Aquabrowser just need to do a basic
+// For Aquabrowser just need to launch the search page
 // and then parse back the library select
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
-    var responseLibraries = { service: service.Name, libs: [], start: new Date() };
-    var handleError = function (error) {
-        if (error) {
-            responseLibraries.error = error;
-            responseLibraries.end = new Date();
-            callback(responseLibraries);
-            return true;
-        }
-    };
-    var reqStatusCheck = function (message) {
-        if (message.statusCode != 200) {
-            responseLibraries.error = "Web request error.";
-            responseLibraries.end = new Date();
-            callback(responseLibraries);
-            return true;
-        }
-    };
+    // Set up the response object e.g. { service: 'Barnet', libraries: [ '', '' ], start: '', end: '' )
+    var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
-    // Request 1: call a basic search which should return xml with the branch filter.
-    request.get({ url: service.Url + libsUrl, timeout: 30000 }, function (error, msg, response) {
-        if (handleError(error)) return;
-        if (reqStatusCheck(msg)) return;
+    // Request 1: call a basic search which should return XML with the branch filter.
+    request.get({ url: service.Url + libsUrl, timeout: 60000 }, function (error, msg, response) {
+        if(common.handleErrors(callback, responseLibraries, error, msg)) return;
         xml2js.parseString(response, function (err, res) {
-            if (handleError(err)) return;
-            if (res.root.branchselection && res.root.branchselection[0].navoptions) {
-                res.root.branchselection[0].navoptions[0].opt.forEach(function (item) {
-                    if (item.$.val != '' && item.$.val != 'Unavailable') responseLibraries.libs.push(item.$.val);
+            if (common.handleErrors(callback, responseLibraries, err)) return;
+            var sel = res.root.branchselection;
+            if (sel && sel[0] && sel[0].navoptions) {
+                sel[0].navoptions[0].opt.forEach(function (item) {
+                    if (item.$.val != '' && item.$.val != 'Unavailable') responseLibraries.libraries.push(item.$.val);
                 });
-                responseLibraries.end = new Date();
-                callback(responseLibraries);
-            } else {
-                responseLibraries.end = new Date();
-                callback(responseLibraries);
             }
+            common.completeCallback(callback, responseLibraries);
         });
     });
 };
@@ -64,43 +50,34 @@ exports.getLibraries = function (service, callback) {
 // Aquabrowser returns XML, firstly from a control to search
 // for the ID, then to get availability.
 ///////////////////////////////////////////
-exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
-    var handleError = function (error) {
-        if (error) {
-            responseHoldings.error = error;
-            responseHoldings.end = new Date();
-            callback(responseHoldings);
-            return true;
-        }
-    };
+exports.searchByISBN = function (isbn, service, callback) {
+    var responseHoldings = { service: service.Name, availability: [], start: new Date() };
 
     // Request 1: call the search control for the ISBN
     request.get({ url: service.Url + searchUrl + isbn, timeout: 30000 }, function (error, msg, response) {
-        if (handleError(error)) return;
+        if (common.handleErrors(callback, responseHoldings, error, msg)) return;
         xml2js.parseString(response, function (err, res) {
-            if (handleError(err)) return;
+            if (common.handleErrors(callback, responseHoldings, err)) return;
             if (res.root.results && res.root.results[0].record) {
-
                 // Request 2: call the availability control for the record Id
-                request.get({ url: lib.Url + itemUrl + res.root.results[0].record[0].$.extID, timeout: 30000 }, function (error, msg, response) {
-                    if (handleError(error)) return;
+                request.get({ url: service.Url + itemUrl + res.root.results[0].record[0].$.extID, timeout: 30000 }, function (error, msg, response) {
+                    if (common.handleErrors(callback, responseHoldings, error, msg)) return;
                     xml2js.parseString(response, function (err, res) {
-                        if (handleError(err)) return;
+                        if (common.handleErrors(callback, responseHoldings, err)) return;
                         var libs = {};
-                        res.root.vubissmartmarcavail[0].loc.forEach(function (item) {
-                            var libName = item.$.loc;
-                            if (!libs[libName]) libs[libName] = { available: 0, unavailable: 0 };
-                            item.$.available == "true" ? libs[libName].available++ : libs[libName].unavailable++;
-                        });
+                        if (res.root.vubissmartmarcavail[0].loc) {
+                            res.root.vubissmartmarcavail[0].loc.forEach(function (item) {
+                                var libName = item.$.loc;
+                                if (!libs[libName]) libs[libName] = { available: 0, unavailable: 0 };
+                                item.$.available == "true" ? libs[libName].available++ : libs[libName].unavailable++;
+                            });
+                        }
                         for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
-                        responseHoldings.end = new Date();
-                        callback(responseHoldings);
+                        common.completeCallback(callback, responseHoldings);
                     });
                 });
             } else {
-                responseHoldings.end = new Date();
-                callback(responseHoldings);
+                common.completeCallback(callback, responseHoldings);
             }
         });
     });

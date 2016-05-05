@@ -1,3 +1,7 @@
+///////////////////////////////////////////
+// BOOKMYNE
+// 
+///////////////////////////////////////////
 console.log('bookmyne connector loading...');
 
 ///////////////////////////////////////////
@@ -5,7 +9,8 @@ console.log('bookmyne connector loading...');
 // Request (for HTTP calls)
 ///////////////////////////////////////////
 var request = require('request'),
-    http = require('http');
+    http = require('http'),
+    common = require('../connectors/common');
 
 ///////////////////////////////////////////
 // VARIABLES
@@ -18,23 +23,7 @@ var itemUrl = '/title/holdings?title_id=';
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
-    var responseLibraries = { service: service.Name, libs: [], start: new Date() };
-    var handleError = function (error) {
-        if (error) {
-            responseLibraries.error = error;
-            responseLibraries.end = new Date();
-            callback(responseLibraries);
-            return true;
-        }
-    };
-    var reqStatusCheck = function (message) {
-        if (message.statusCode != 200) {
-            responseLibraries.error = "Web request error.";
-            responseLibraries.end = new Date();
-            callback(responseLibraries);
-            return true;
-        }
-    };
+    var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
     var headers = { "Accept": "application/json", "Accept-Language": "en-gb", "Host": host, "Referer": "https://" + host + "/bookmyne/app.html#extendedDetail" };
     headers["ILS-Profile"] = service.Profile;
@@ -43,8 +32,8 @@ exports.getLibraries = function (service, callback) {
 
     // Request 1: Get advanced search page
     request.get({ forever: true, url: service.Url + 'advanced-search', timeout: 20000, jar: true }, function (error, message, response) {
-        if (handleError(error)) return;
-        if (reqStatusCheck(message)) return;
+        if (common.handleErrors(callback, responseLibraries, error, message)) return;
+        common.completeCallback(callback, responseLibraries);
     });
 };
 

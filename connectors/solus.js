@@ -1,3 +1,7 @@
+///////////////////////////////////////////
+// AQUABROWSER
+// 
+///////////////////////////////////////////
 console.log('solus connector loading...');
 
 ///////////////////////////////////////////
@@ -6,7 +10,8 @@ console.log('solus connector loading...');
 // converting xml response to JSON
 ///////////////////////////////////////////
 var xml2js = require('xml2js'),
-    request = require('request');
+    request = require('request'),
+    common = require('../connectors/common');
 
 ///////////////////////////////////////////
 // VARIABLES
@@ -18,30 +23,12 @@ var itemRequest = '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xs
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
-    var responseLibraries = { service: service.Name, libs: [], start: new Date() };
-    var handleError = function (error) {
-        if (error) {
-            responseLibraries.error = error;
-            responseLibraries.end = new Date();
-            callback(responseLibraries);
-            return true;
-        }
-    };
-    var reqStatusCheck = function (message) {
-        if (message.statusCode != 200) {
-            responseLibraries.error = "Web request error.";
-            responseLibraries.end = new Date();
-            callback(responseLibraries);
-            return true;
-        }
-    };
+    var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
     // Request 1: Get advanced search page
     request.get({ forever: true, url: service.Url + 'advanced-search', timeout: 30000 }, function (error, message, response) {
-        if (handleError(error)) return;
-        if (reqStatusCheck(message)) return;
-        responseLibraries.end = new Date();
-        callback(responseLibraries);
+        if (common.handleErrors(callback, responseLibraries, error, message)) return;
+        common.completeCallback(callback, responseLibraries);
     });
 };
 
@@ -53,47 +40,36 @@ exports.getLibraries = function (service, callback) {
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, libraryService, callback) {
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
-    var handleError = function (error) {
-        if (error) {
-            responseHoldings.error = error;
-            responseHoldings.end = new Date();
-            callback(responseHoldings);
-            return true;
-        }
-    };
 
     var soapXML = isbnRequest.replace('[ISBN]', isbn).replace('[APPID]', libraryService.Id);
+    // Request 1: Search for the item by ISBN
     request.post({ url: libraryService.Url + '?op=SearchISBN', body: soapXML, headers: { "Content-Type": "text/xml; charset=utf-8", "Content-Length": soapXML.length, "SOAPAction": "http://mobile.solus.co.uk/SearchISBN" }, timeout: 30000 }, function (error, msg, response) {
-        if (handleError(error)) return;
+        if (common.handleErrors(callback, responseHoldings, error, msg)) return;
         xml2js.parseString(response, function (err, result) {
-            if (handleError(err)) return;
-            var soapResponse = result['soap:Envelope']['soap:Body'][0]['SearchISBNResponse'][0]['SearchISBNResult'];
-            var resultString = soapResponse[0];
-            xml2js.parseString(resultString, function (err, res) {
-                if (handleError(err)) return;
-                if (res.items.item) {
-                    var itemId = res.items.item[0].$.recordID;
-                    var soapXML = itemRequest.replace('[RECORDID]', itemId).replace('[APPID]', libraryService.Id);
-                    request.post({ url: libraryService.Url + '?op=GetDetails', body: soapXML, headers: { "Content-Type": "text/xml; charset=utf-8", "Content-Length": soapXML.length, "SOAPAction": "http://mobile.solus.co.uk/GetDetails" }, timeout: 30000 }, function (error, msg, res) {
-                        if (handleError(error)) return;
-                        xml2js.parseString(res, function (err, details) {
-                            if (handleError(err)) return;
-                            var soapDetailsResponse = details['soap:Envelope']['soap:Body'][0]['GetDetailsResponse'][0]['GetDetailsResult'];
-                            var resultDetailsString = soapDetailsResponse[0];
-                            xml2js.parseString(resultDetailsString, function (err, holdings) {
-                                if (handleError(err)) return;
-                                holdings.items.availability.forEach(function (item) {
-                                    responseHoldings.availability.push({ library: item.$.location, available: item.$.status == 'Available for loan' ? 1 : 0, unavailable: item.$.status == 'Available for loan' ? 0 : 1 });
-                                });
-                                responseHoldings.end = new Date();
-                                callback(responseHoldings);
+            if (common.handleErrors(callback, responseHoldings, err)) return;
+
+            xml2js.parseString(result['soap:Envelope']['soap:Body'][0]['SearchISBNResponse'][0]['SearchISBNResult'][0], function (err, res) {
+                if (common.handleErrors(callback, responseHoldings, err)) return;
+                if (!res.items.item) {
+                    common.completeCallback(callback, responseHoldings);
+                    return;
+                }
+
+                var soapXML = itemRequest.replace('[RECORDID]', res.items.item[0].$.recordID).replace('[APPID]', libraryService.Id);
+                // Request 2: Get the item details using the returned ItemId
+                request.post({ url: libraryService.Url + '?op=GetDetails', body: soapXML, headers: { "Content-Type": "text/xml; charset=utf-8", "Content-Length": soapXML.length, "SOAPAction": "http://mobile.solus.co.uk/GetDetails" }, timeout: 30000 }, function (error, msg, res) {
+                    if (common.handleErrors(callback, responseHoldings, error, msg)) return;
+                    xml2js.parseString(res, function (err, details) {
+                        if (common.handleErrors(callback, responseHoldings, err)) return;
+                        xml2js.parseString(details['soap:Envelope']['soap:Body'][0]['GetDetailsResponse'][0]['GetDetailsResult'][0], function (err, holdings) {
+                            if (common.handleErrors(callback, responseHoldings, err)) return;
+                            holdings.items.availability.forEach(function (item) {
+                                responseHoldings.availability.push({ library: item.$.location, available: item.$.status == 'Available for loan' ? 1 : 0, unavailable: item.$.status == 'Available for loan' ? 0 : 1 });
                             });
+                            common.completeCallback(callback, responseHoldings);
                         });
                     });
-                } else {
-                    responseHoldings.end = new Date();
-                    callback(responseHoldings);
-                }
+                });
             });
         });
     });

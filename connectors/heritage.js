@@ -1,3 +1,7 @@
+///////////////////////////////////////////
+// HERITAGE
+// 
+///////////////////////////////////////////
 console.log('heritage connector loading...');
 
 ///////////////////////////////////////////
@@ -6,7 +10,8 @@ console.log('heritage connector loading...');
 // converting xml response to JSON
 ///////////////////////////////////////////
 var cheerio = require('cheerio'),
-    request = require('request');
+    request = require('request'),
+    common = require('../connectors/common');
 
 ///////////////////////////////////////////
 // VARIABLES
@@ -26,26 +31,10 @@ exports.getLibraries = function (service, callback) {
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
-    var handleError = function (error) {
-        if (error) {
-            responseHoldings.error = error;
-            responseHoldings.end = new Date();
-            callback(responseHoldings);
-            return true;
-        }
-    };
-    var reqStatusCheck = function (message) {
-        if (message.statusCode != 200) {
-            responseLibraries.error = "Web request error.";
-            responseLibraries.end = new Date();
-            callback(responseLibraries);
-            return true;
-        }
-    };
 
     // Request 1: Get the deep link URL
     request.get({ url: lib.Url + searchUrl + isbn, jar: true, timeout: 60000 }, function (error, message, response) {
-        if (handleError(error)) return;
+        if (common.handleErrors(callback, responseHoldings, error, message)) return;
         $ = cheerio.load(response);
         var libs = {};
         $('tbody.faccs tr').each(function () {
@@ -55,7 +44,6 @@ exports.searchByISBN = function (isbn, lib, callback) {
             status != 'On Loan' ? libs[name].available++ : libs[name].unavailable++;
         });
         for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
-        responseHoldings.end = new Date();
-        callback(responseHoldings);
+        common.completeCallback(callback, responseHoldings);
     });
 };

@@ -1,3 +1,7 @@
+///////////////////////////////////////////
+// DURHAM
+// 
+///////////////////////////////////////////
 console.log('durham connector loading...');
 
 ///////////////////////////////////////////
@@ -5,7 +9,8 @@ console.log('durham connector loading...');
 // Request (for HTTP calls)
 ///////////////////////////////////////////
 var request = require('request'),
-    cheerio = require('cheerio');
+    cheerio = require('cheerio'),
+    common = require('../connectors/common');
 
 ///////////////////////////////////////////
 // VARIABLES
@@ -15,30 +20,11 @@ var request = require('request'),
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
-    var responseLibraries = { service: service.Name, libs: [], start: new Date() };
-    var handleError = function (error) {
-        if (error) {
-            responseLibraries.error = error;
-            responseLibraries.end = new Date();
-            callback(responseLibraries);
-            return true;
-        }
-    };
-    var reqStatusCheck = function (message) {
-        if (message.statusCode != 200) {
-            responseLibraries.error = "Web request error.";
-            responseLibraries.end = new Date();
-            callback(responseLibraries);
-            return true;
-        }
-    };
+    var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
     // Request 1: Get advanced search page
     request.get({ forever: true, url: service.Url + 'advanced-search', timeout: 20000, jar: true }, function (error, message, response) {
-        if (handleError(error)) return;
-        if (reqStatusCheck(message)) return;
-        responseLibraries.end = new Date();
-        callback(responseLibraries);
+        if (common.handleErrors(callback, responseLibraries, error, message)) return;
     });
 };
 
@@ -50,14 +36,6 @@ exports.searchByISBN = function (isbn, lib, callback) {
     var headers = {
         'Accept-Encoding': 'gzip, deflate',
         'Content-Type': 'application/x-www-form-urlencoded'
-    };
-    var handleError = function (error) {
-        if (error) {
-            responseHoldings.error = error;
-            responseHoldings.end = new Date();
-            callback(responseHoldings);
-            return true;
-        }
     };
 
     // Function for getting the basic aspNetForm details for postbacks.
@@ -71,13 +49,13 @@ exports.searchByISBN = function (isbn, lib, callback) {
 
     // Request 1: Initialise the session - go to home page.
     request.get({ url: lib.Url, timeout: 20000, jar: true }, function (error, message, response) {
-        if (handleError(error)) return;
+        if (common.handleErrors(callback, responseHoldings, error, message)) return;
         // Request 2: Enter the library catalogue as a guest
         request.post({ url: lib.Url + 'pgLogin.aspx?CheckJavascript=1', jar: true, timeout: 20000 }, function (error, message, response) {
-            if (handleError(error)) return;
+            if (common.handleErrors(callback, responseHoldings, error, message)) return;
             // Request 3: Go to catalogue page
             request.post({ url: lib.Url + 'pgCatKeywordSearch.aspx', jar: true, timeout: 20000 }, function (error, message, response) {
-                if (handleError(error)) return;
+                if (common.handleErrors(callback, responseHoldings, error, message)) return;
                 $ = cheerio.load(response);
                 var aspNetForm = getAspNetForm($);
                 aspNetForm.ctl00$cph1$cbBooks = 'on';
@@ -94,11 +72,11 @@ exports.searchByISBN = function (isbn, lib, callback) {
                 };
                 // Request 4: Perform the search.
                 request.post({ url: lib.Url + 'pgCatKeywordSearch.aspx', gzip: true, form: aspNetForm, jar: true, headers: headers, timeout: 20000 }, function (error, message, response) {
-                    if (handleError(error)) return;
+                    if (common.handleErrors(callback, responseHoldings, error, message)) return;
                     // Request 5: Process the redirect that should be returned.
                     var resultLocation = message.headers.location;
                     request.get({ url: lib.Url + resultLocation, gzip: true, jar: true, headers: headers, timeout: 20000 }, function (error, message, response) {
-                        if (handleError(error)) return;
+                        if (common.handleErrors(callback, responseHoldings, error, message)) return;
                         // That should bring back the results list.
                         $ = cheerio.load(response);
                         if ($('#ct100_cph1_lvResults_ctr10_lnkbtnTitle')) {
@@ -113,7 +91,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
                             };
                             // Request 6: Get the item details
                             request.post({ url: lib.Url + resultLocation, gzip: true, form: aspNetForm, jar: true, headers: headers, timeout: 20000 }, function (error, message, response) {
-                                if (handleError(error)) return;
+                                if (common.handleErrors(callback, responseHoldings, error, message)) return;
 
                                 // That returns a button to get the availability - very tedious!  Hit the button.
                                 $ = cheerio.load(response);
@@ -129,7 +107,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
                                 };
                                 // Request 7: Get the item availability table
                                 request.post({ url: lib.Url + resultLocation, gzip: true, form: aspNetForm, jar: true, headers: headers, timeout: 20000 }, function (error, message, response) {
-                                    if (handleError(error)) return;
+                                    if (common.handleErrors(callback, responseHoldings, error, message)) return;
                                     $ = cheerio.load(response);
                                     var libs = {};
                                     $('table.viewgrid tr').slice(1).each(function () {
@@ -139,13 +117,11 @@ exports.searchByISBN = function (isbn, lib, callback) {
                                         status != 'Yes' ? libs[name].available++ : libs[name].unavailable++;
                                     });
                                     for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
-                                    responseHoldings.end = new Date();
-                                    callback(responseHoldings);
+                                    common.completeCallback(callback, responseHoldings);
                                 });
                             });
                         } else { // If it isn't listed then presumably it hasn't been found - exit.
-                            responseHoldings.end = new Date();
-                            callback(responseHoldings);
+                            common.completeCallback(callback, responseHoldings);
                         }
                     });
                 });

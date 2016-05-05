@@ -1,10 +1,15 @@
+///////////////////////////////////////////
+// VIEWPOINT2
+// 
+///////////////////////////////////////////
 console.log('viewpoint3 connector loading...');
 
 //////////////////////////
 // Requires
 //////////////////////////
 var request = require('request'),
-    cheerio = require('cheerio');
+    cheerio = require('cheerio'),
+    common = require('../connectors/common');
 
 //////////////////////////
 // Variables
@@ -17,28 +22,12 @@ var container = '#ctl00_ContentPlaceCenterContent_copyAvailabilityContainer';
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
-    var responseLibraries = { service: service.Name, libs: [], start: new Date() };
-    var handleError = function (error) {
-        if (error) {
-            responseLibraries.error = error;
-            responseLibraries.end = new Date();
-            callback(responseLibraries);
-            return true;
-        }
-    };
-    var reqStatusCheck = function (message) {
-        if (message.statusCode != 200) {
-            responseLibraries.error = "Web request error.";
-            responseLibraries.end = new Date();
-            callback(responseLibraries);
-            return true;
-        }
-    };
+    var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
     // Request 1: Get advanced search page
-    request.get({ url: service.Url + advSearch, rejectUnauthorized: false, timeout: 20000, jar: true }, function (error, message, response) {
-        if (handleError(error)) return;
-        if (reqStatusCheck(message)) return;
+    request.get({ url: service.Url + advSearch, rejectUnauthorized: false, timeout: 30000, jar: true }, function (error, message, response) {
+        if (common.handleErrors(callback, responseLibraries, error, message)) return;
+        
         $ = cheerio.load(response);
         var aspNetForm = {
             __EVENTARGUMENT: '',
@@ -53,15 +42,15 @@ exports.getLibraries = function (service, callback) {
             ctl00$ContentPlaceCenterContent$searchTerm: '',
             ctl00$ContentPlaceCenterContent$searchType: 0
         };
-        request.post({ url: service.Url + advSearch, rejectUnauthorized: false, form: aspNetForm, timeout: 20000, jar: true }, function (error, message, response) {
-            if (handleError(error)) return;
-            if (reqStatusCheck(message)) return;
+
+        // Request 2:
+        request.post({ url: service.Url + advSearch, rejectUnauthorized: false, form: aspNetForm, timeout: 30000, jar: true }, function (error, message, response) {
+            if (common.handleErrors(callback, responseLibraries, error, message)) return;
             $ = cheerio.load(response);
             $('select#ctl00_ContentPlaceCenterContent_branchLimit option').each(function () {
-                if ($(this).text() != 'All libraries') responseLibraries.libs.push($(this).text());
+                if ($(this).text() != 'All libraries') responseLibraries.libraries.push($(this).text().trim());
             });
-            responseLibraries.end = new Date();
-            callback(responseLibraries);
+            common.completeCallback(callback, responseLibraries);
         });
     });
 };
@@ -71,19 +60,11 @@ exports.getLibraries = function (service, callback) {
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
-    var handleError = function (error) {
-        if (error) {
-            responseHoldings.error = error;
-            responseHoldings.end = new Date();
-            callback(responseHoldings);
-            return true;
-        }
-    };
 
     // Request 1: Deep link to the item by ISBN
-    // Really wouldn't wanna use rejectUnauthorised for serious calls - query with Denbighshire about their certificate
+    // Really wouldn't want to disable rejectUnauthorised for production system - query with Denbighshire about their certificate
     request.get({ url: lib.Url + searchUrl + isbn, rejectUnauthorized: false, timeout: 60000 }, function (error, msg, res) {
-        if (handleError(error)) return;
+        if (common.handleErrors(callback, responseHoldings, error, msg)) return;
         $ = cheerio.load(res);
         var libs = {};
         $(container).find('table tr').slice(1).each(function (i, elem) {
@@ -93,7 +74,6 @@ exports.searchByISBN = function (isbn, lib, callback) {
             status == '' ? libs[name].available++ : libs[name].unavailable++;
         });
         for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
-        responseHoldings.end = new Date();
-        callback(responseHoldings);
+        common.completeCallback(callback, responseHoldings);
     });
 };
