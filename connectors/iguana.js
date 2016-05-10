@@ -41,8 +41,12 @@ exports.getLibraries = function (service, callback) {
                 request.post({ url: service.Url + 'Proxy.SearchRequest.cls', jar: true, body: facetSearch.replace('[RESULTID]', resultId), headers: reqHeader, timeout: 30000 }, function (error, msg, response) {
                     if (common.handleErrors(callback, responseLibraries, error, msg)) return;
                     xml2js.parseString(response, function (err, res) {
-                        console.log(res.VubisFacetedSearchResponse.Facets[0].Facet[0].FacetEntry);
                         if (common.handleErrors(callback, responseLibraries, err)) return;
+                        consol.log(res.VubisFacetedSearchResponse.Facets[0].Facet);
+                        res.VubisFacetedSearchResponse.Facets[0].Facet[0].FacetEntry.forEach(function (entry) {
+
+
+                        });
                         common.completeCallback(callback, responseLibraries);
                     });
                 });
