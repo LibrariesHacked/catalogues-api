@@ -17,18 +17,20 @@ var request = require('request'),
 // VARIABLES
 //////////////////////////
 var catUrl = 'cgi-bin/koha/opac-search.pl?format=rss2&idx=nb&q=';
-var libsUrl = 'opac-search.pl?multibranchlimit=[MULTILIMIT]&do=Search&expand=holdingbranch#holdingbranch_id'
+var libsUrl = 'cgi-bin/koha/opac-search.pl?[MULTIBRANCH]do=Search&expand=holdingbranch#holdingbranch_id'
 
 ///////////////////////////////////////////
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
     var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
-
     // Request 1: Call search page with option set to expand branches.
-    request.get({ forever: true, url: service.Url + libsUrl.replace('[MULTILIMIT]', service.MultiBranchLimit), timeout: 60000 }, function (error, message, response) {
+    request.get({ forever: true, url: service.Url + (service.MultiBranchLimit ? libsUrl.replace('[MULTIBRANCH]', 'multibranchlimit=' + service.MultiBranchLimit + '&') : libsUrl.replace('[MULTIBRANCH]', '')), timeout: 60000 }, function (error, message, response) {
         if (common.handleErrors(callback, responseLibraries, error, message)) return;
         $ = cheerio.load(response);
+        $('div#location select#branchloop option').each(function () {
+            if ($(this).text() != 'All libraries') responseLibraries.libraries.push($(this).text().trim());
+        });
         $('li#holdingbranch_id ul li span.facet-label').each(function () {
             responseLibraries.libraries.push($(this).text().trim());
         });

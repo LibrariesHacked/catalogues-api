@@ -42,11 +42,12 @@ exports.getLibraries = function (service, callback) {
                     if (common.handleErrors(callback, responseLibraries, error, msg)) return;
                     xml2js.parseString(response, function (err, res) {
                         if (common.handleErrors(callback, responseLibraries, err)) return;
-                        consol.log(res.VubisFacetedSearchResponse.Facets[0].Facet);
-                        res.VubisFacetedSearchResponse.Facets[0].Facet[0].FacetEntry.forEach(function (entry) {
-
-
-                        });
+                        var facets = res.VubisFacetedSearchResponse.Facets[0].Facet;
+                        if (facets && facets[0]) {
+                            facets[0].FacetEntry.forEach(function (entry) {
+                                responseLibraries.libraries.push(entry.Display[0]);
+                            });
+                        }
                         common.completeCallback(callback, responseLibraries);
                     });
                 });

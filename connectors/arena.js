@@ -24,21 +24,33 @@ var searchUrl = 'search?p_p_state=normal&p_p_lifecycle=1&p_p_action=1&p_p_id=sea
 exports.getLibraries = function (service, callback) {
     var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
+    // A few instances just don't seem to give an option of filtering by library.
+    // Hardcode these exceptions (for now)
+    if (service.Libraries) {
+        for (lib in service.Libraries) responseLibraries.libraries.push(lib);
+        common.completeCallback(callback, responseLibraries);
+        return;
+    }
+
     // Request 1: Get advanced search page
-    request.get({ forever: true, url: service.Url + service.Advanced, timeout: 20000, jar: true }, function (error, message, response) {
+    request.get({ forever: true, url: service.Url + service.Advanced, timeout: 30000, jar: true, rejectUnauthorised: false }, function (error, message, response) {
         if (common.handleErrors(callback, responseLibraries, error, message)) return;
         $ = cheerio.load(response);
         var headers = { 'Accept': 'text/xml', 'Wicket-Ajax': true, 'Wicket-FocusedElementId': 'id__extendedSearch__WAR__arenaportlets____d' };
-        if (!$('#id__extendedSearch__WAR__arenaportlets____e option')) {
+        if ($('.arena-extended-search-branch-choice option').length > 1) {
+            $('.arena-extended-search-branch-choice option').each(function () {
+                if ($(this).text() != 'Select library') responseLibraries.libraries.push($(this).text());
+            });
             common.completeCallback(callback, responseLibraries);
             return;
         }
 
         // Request 2: The select list for libraries is retrieved with a POST request.
-        request.post({ jar: true, forever: true, headers: headers, form: { 'organisationHierarchyPanel:organisationContainer:organisationChoice': service.OrganisationId }, url: service.Url + service.Advanced + '?p_p_id=extendedSearch_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=/extendedSearch/?wicket:interface=:0:extendedSearchPanel:extendedSearchForm:organisationHierarchyPanel:organisationContainer:organisationChoice::IBehaviorListener:0:&p_p_cacheability=cacheLevelPage&p_p_col_id=column-2&p_p_col_count=1&random=0.1554477137741876' }, function (error, message, response) {
+        request.post({ jar: true, rejectUnauthorised: false, forever: true, timeout: 30000, headers: headers, form: { 'organisationHierarchyPanel:organisationContainer:organisationChoice': service.OrganisationId }, url: service.Url + service.Advanced + '?p_p_id=extendedSearch_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=/extendedSearch/?wicket:interface=:0:extendedSearchPanel:extendedSearchForm:organisationHierarchyPanel:organisationContainer:organisationChoice::IBehaviorListener:0:&p_p_cacheability=cacheLevelPage&p_p_col_id=column-2&p_p_col_count=1&random=0.1554477137741876' }, function (error, message, response) {
             if (common.handleErrors(callback, responseLibraries, error, message)) return;
             xml2js.parseString(response, function (err, res) {
-                if (res['ajax-response'] && res['ajax-response'].component) {
+                if (common.handleErrors(callback, responseLibraries, err)) return;
+                if (res && res['ajax-response'] && res['ajax-response'].component) {
                     $ = cheerio.load(res['ajax-response'].component[0]._);
                     $('option').each(function () {
                         if ($(this).text() != 'Select library') responseLibraries.libraries.push($(this).text());

@@ -46,9 +46,10 @@
     },
     {
       "Name": "Barnet",
-      "Type": "aquabrowser",
+      "Type": "vubis",
       "Id": "|library/vubissmart-marc|220344",
-      "Url": "http://www.libraries.barnet.gov.uk/abl/",
+      "Url": "http://www.libraries.barnet.gov.uk/vs/",
+      "Profile": "Default",
       "TestISBN": "9780747538493"
     },
     {
@@ -69,7 +70,6 @@
     {
       "Name": "Bedford",
       "Type": "arena",
-      "OrganisationId": "AUK000022|3",
       "OrganisationName": "Bedford",
       "ArenaName": "AUK000022",
       "ISBNAlias": "recordControlNumber",
@@ -77,6 +77,7 @@
       "SearchType": "Keyword",
       "Url": "https://beds-arena.culturalservices.net/web/arena/",
       "Advanced": "extended-search",
+      "OrganisationId": "AUK000022|3",
       "TestISBN": "9780747595830"
     },
     {
@@ -115,7 +116,9 @@
       "Name": "Blaenau Gwent",
       "Type": "ibistro",
       "Available": [ "On Shelf" ],
-      "Url": "http://bglibcat.blaenau-gwent.gov.uk/uhtbin/cgisirsi.exe/",
+      "Url": "http://bglibcat.blaenau-gwent.gov.uk/",
+      "Home": "uhtbin/cgisirsi.exe/x/x/0/49/",
+      "Search": "uhtbin/cgisirsi.exe/x/0/0/5?searchdata1=",
       "TestISBN": "9780747538493"
     },
     {
@@ -234,7 +237,9 @@
       "Region": "3",
       "InstitutionId": "163",
       "Profile": "ALL_LIBS",
-      "Url": "http://ibistro.cardiff.gov.uk/uhtbin/cgisirsi/",
+      "Url": "http://ibistro.cardiff.gov.uk/",
+      "Home": "uhtbin/cgisirsi/x/x/0/49/",
+      "Search": "uhtbin/cgisirsi/x/0/0/5?searchdata1=",
       "TestISBN": "9780747538493"
     },
     {
@@ -345,12 +350,12 @@
     },
     {
       "Name": "Derbyshire",
-      "Type": "bookmyne",
+      "Type": "enterprise",
       "Id": "8757",
       "Region": "3",
       "InstitutionId": "860",
       "Profile": "DANDD-SRCH",
-      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1",
+      "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/derbyshire/",
       "TestISBN": "9780747538493"
     },
     {
@@ -365,6 +370,8 @@
       "Type": "arena",
       "Id": "243001",
       "Url": "http://library.doncaster.gov.uk/web/arena/",
+      "Advanced": "extended-search",
+      "OrganisationId": "AUK000243|1",
       "TestISBN": "9780747538493"
     },
     {
@@ -397,6 +404,7 @@
       "Name": "Durham",
       "Type": "durham",
       "Url": "https://libraryonline.durham.gov.uk/",
+      "Libraries": "pgLib.aspx",
       "TestISBN": "9780747538493"
     },
     {
@@ -404,13 +412,17 @@
       "Type": "arena",
       "Id": "226014",
       "Url": "https://arena.yourlondonlibrary.net/web/ealing/",
+      "Advanced": "advanced-search",
+      "OrganisationId": "AUK000226|14",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "East Ayrshire",
       "Type": "ibistro",
       "Available": [ "SHELVES", "RESERVES" ],
-      "Url": "http://libcatalogue.east-ayrshire.gov.uk/uhtbin/cgisirsi/",
+      "Url": "http://libcatalogue.east-ayrshire.gov.uk/",
+      "Home": "uhtbin/webcat",
+      "Search": "uhtbin/cgisirsi/x/0/0/5?searchdata1=",
       "TestISBN": "9780747538493"
     },
     {
@@ -438,6 +450,8 @@
       "Type": "arena",
       "Id": "205001",
       "Url": "https://library.eastriding.gov.uk/web/arena/",
+      "Advanced": "advanced-search",
+      "OrganisationId": "AUK000205|1",
       "TestISBN": "9780747538493"
     },
     {
@@ -457,13 +471,17 @@
       "Name": "Enfield",
       "Type": "arena",
       "Id": "226012",
-      "Url": "http://arena.yourlondonlibrary.net/web/enfield/",
+      "Url": "https://arena.yourlondonlibrary.net/web/enfield/",
+      "Advanced": "extended-search",
+      "OrganisationId": "AUK000226|12",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Essex",
-      "Type": "vubis",
-      "Url": "http://classiccatalogue.essex.gov.uk/vs/",
+      "Type": "iguana",
+      "Database": "1",
+      "Faceted": true,
+      "Url": "https://librarycatalogue.essex.gov.uk/iguana/",
       "TestISBN": "9780747538493"
     },
     {
@@ -499,6 +517,8 @@
       "Type": "arena",
       "Id": "480001",
       "Url": "http://libcat.csglasgow.org/web/arena/",
+      "Advanced": "extended-search",
+      "OrganisationId": "AUK000048|1",
       "TestISBN": "9780747538493"
     },
     {
@@ -534,6 +554,8 @@
       "Type": "arena",
       "Id": "226013",
       "Url": "https://arena.yourlondonlibrary.net/web/hackney/",
+      "Advanced": "extended-search",
+      "OrganisationId": "AUK000226|13",
       "TestISBN": "9780747538493"
     },
     {
@@ -568,6 +590,8 @@
       "Type": "arena",
       "Id": "226020",
       "Url": "https://arena.yourlondonlibrary.net/web/harrow/",
+      "Advanced": "advanced-search",
+      "OrganisationId": "AUK000226|20",
       "TestISBN": "9780747538493"
     },
     {
@@ -581,7 +605,9 @@
       "Name": "Havering",
       "Type": "arena",
       "Id": "226001",
-      "Url": "http://arena.yourlondonlibrary.net/web/havering/",
+      "Url": "https://arena.yourlondonlibrary.net/web/havering/",
+      "Advanced": "extended-search",
+      "OrganisationId": "AUK000226|1",
       "TestISBN": "9780747538493"
     },
     {
@@ -606,12 +632,12 @@
     },
     {
       "Name": "Hillingdon",
-      "Type": "bookmyne",
+      "Type": "enterprise",
       "Id": "622",
       "Region": "3",
       "InstitutionId": "55",
       "Profile": "ALL_BRANCH",
-      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1",
+      "Url": "http://hldn.ent.sirsidynix.net.uk/client/en_GB/public/",
       "TestISBN": "9780747538493"
     },
     {
@@ -619,13 +645,17 @@
       "Type": "arena",
       "Id": "219001",
       "Url": "http://www.hounslowlibraries.org/web/arena/",
+      "Advanced": "advanced-search",
+      "OrganisationId": "AUK000219|0",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Hull",
       "Type": "ibistro",
       "Available": [ "Item on shelves" ],
-      "Url": "http://prismcollect.hullcc.gov.uk/uhtbin/cgisirsi.exe/",
+      "Url": "http://prismcollect.hullcc.gov.uk/",
+      "Home": "uhtbin/cgisirsi.exe/",
+      "Search": "uhtbin/cgisirsi.exe/x/0/0/5?searchdata1=",
       "TestISBN": "9780747538493"
     },
     {
@@ -680,6 +710,8 @@
       "Type": "arena",
       "Id": "226016",
       "Url": "https://arena.yourlondonlibrary.net/web/kingston/",
+      "Advanced": "extended-search",
+      "OrganisationId": "AUK000226|16",
       "TestISBN": "9780747538493"
     },
     {
@@ -724,6 +756,8 @@
       "Type": "arena",
       "Id": "201001",
       "Url": "https://bookfinder.leicester.gov.uk/web/arena/",
+      "Advanced": "advanced-search",
+      "OrganisationId": "AUK000201|1",
       "TestISBN": "9780747538493"
     },
     {
@@ -739,6 +773,8 @@
       "Type": "arena",
       "Id": "226015",
       "Url": "https://arena.yourlondonlibrary.net/web/lewisham/",
+      "Advanced": "extended-search",
+      "OrganisationId": "AUK000226|15",
       "TestISBN": "9780747538493"
     },
     {
@@ -758,7 +794,9 @@
       "Name": "Luton",
       "Type": "arena",
       "Id": "220002",
-      "Url": "https://beds-arena.culturalservices.net/web/arena/",
+      "Url": "https://arena.yourlondonlibrary.net/web/luton/",
+      "Advanced": "extended-search",
+      "OrganisationId": "AUK000226|22",
       "TestISBN": "9780747538493"
     },
     {
@@ -785,12 +823,16 @@
       "Type": "arena",
       "Id": "226017",
       "Url": "https://arena.yourlondonlibrary.net/web/merton/",
+      "Advanced": "extended-search",
+      "OrganisationId": "AUK000226|17",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Middlesbrough",
-      "Type": "viewpoint3",
-      "Url": "http://libraries.middlesbrough.gov.uk/",
+      "Type": "arena",
+      "Url": "https://libraries.middlesbrough.gov.uk/web/arena/",
+      "Advanced": "extended-search",
+      "OrganisationId": "AUK000054|0",
       "TestISBN": "9780747538493"
     },
     {
@@ -798,6 +840,8 @@
       "Type": "arena",
       "Id": "750001",
       "Url": "https://libraries.midlothian.gov.uk/web/arena/",
+      "Advanced": "extended-search",
+      "OrganisationId": "AUK000075|0",
       "TestISBN": "9780747538493"
     },
     {
@@ -810,7 +854,9 @@
       "Name": "Monmouthshire",
       "Type": "ibistro",
       "Available": [ "SHELVES", "RESERVES" ],
-      "Url": "http://catalogue.monmouthshire.gov.uk/uhtbin/cgisirsi.exe/",
+      "Url": "http://catalogue.monmouthshire.gov.uk/",
+      "Home": "uhtbin/cgisirsi.exe/x/x/0/49/",
+      "Search": "uhtbin/cgisirsi.exe/x/0/0/5?searchdata1=",
       "TestISBN": "9780747538493"
     },
     {
@@ -831,6 +877,8 @@
       "Type": "arena",
       "Id": "224001",
       "Url": "http://library.newcastle.gov.uk/web/arena/",
+      "Advanced": "extended-search",
+      "OrganisationId": "AUK000224|0",
       "TestISBN": "9780747538493"
     },
     {
@@ -838,6 +886,8 @@
       "Type": "arena",
       "Id": "226008",
       "Url": "https://arena.yourlondonlibrary.net/web/newham/",
+      "Advanced": "advanced-search",
+      "OrganisationId": "AUK000226|8",
       "TestISBN": "9780747538493"
     },
     {
@@ -865,7 +915,9 @@
       "Name": "North East Lincolnshire",
       "Type": "arena",
       "Id": "252001",
-      "Url": "http://library.nelincs.gov.uk/web/arena/",
+      "Url": "http://www.lincsinspirelibraries.com/web/arena/",
+      "Advanced": "advanced-search",
+      "OrganisationId": "AUK000252|1",
       "TestISBN": "9780747538493"
     },
     {
@@ -878,12 +930,14 @@
       "Name": "North Lincolnshire",
       "Type": "arena",
       "Url": "http://www.opac.northlincs.gov.uk/web/arena/",
+      "Advanced": "extended-search",
+      "OrganisationId": "AUK000221|0",
       "Id": "221001",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "North Somerset",
-      "Type": "arena",
+      "Type": "viewpoint3",
       "Id": "280001",
       "Url": "https://www.librarieswest.org.uk/",
       "TestISBN": "9780747538493"
@@ -906,14 +960,18 @@
       "Name": "Northamptonshire",
       "Type": "arena",
       "Id": "256001",
-      "Url": "http://www.librarycatalogue.northamptonshire.gov.uk/web/arena/",
+      "Url": "https://www.librarycatalogue.northamptonshire.gov.uk/web/arena/",
+      "Advanced": "extended-search",
+      "OrganisationId": "AUK000256|1",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Northumberland",
       "Type": "ibistro",
       "Available": [ "SHELVES", "RESERVES" ],
-      "Url": "http://library.northumberland.gov.uk/uhtbin/cgisirsi.exe/",
+      "Url": "http://library.northumberland.gov.uk/",
+      "Home": "uhtbin/cgisirsi.exe/",
+      "Search": "uhtbin/cgisirsi.exe/x/0/0/5?searchdata1=",
       "TestISBN": "9780747538493"
     },
     {
@@ -964,7 +1022,9 @@
     {
       "Name": "Oxfordshire",
       "Type": "arena",
-      "Url": "https://www.libcat.oxfordshire.gov.uk/",
+      "Url": "https://libcat.oxfordshire.gov.uk/web/arena/",
+      "Advanced": "extended-search",
+      "OrganisationId": "AUK000217|0",
       "TestISBN": "9780747538493"
     },
     {
@@ -988,7 +1048,7 @@
     {
       "Name": "Plymouth",
       "Type": "viewpoint3",
-      "Url": "http://www.webopac.plymouth.gov.uk/",
+      "Url": "https://www.webopac.plymouth.gov.uk/",
       "TestISBN": "9780747538493"
     },
     {
@@ -1008,7 +1068,9 @@
       "Name": "Powys",
       "Type": "ibistro",
       "Available": [ "Adult Fiction" ],
-      "Url": "http://powys.sirsidynix.net.uk/uhtbin/cgisirsi/",
+      "Url": "http://powys.sirsidynix.net.uk/",
+      "Home": "uhtbin/cgisirsi/",
+      "Search": "uhtbin/cgisirsi/x/0/0/5?searchdata1=",
       "TestISBN": "9780747538493"
     },
     {
@@ -1022,12 +1084,16 @@
       "Type": "arena",
       "Id": "226002",
       "Url": "https://arena.yourlondonlibrary.net/web/redbridge/",
+      "Advanced": "advanced-search",
+      "OrganisationId": "AUK000226|2",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Redcar & Cleveland",
       "Type": "arena",
-      "Url": "https://libraries.redcar-cleveland.gov.uk/",
+      "Url": "https://libraries.redcar-cleveland.gov.uk/web/arena/",
+      "Advanced": "extended-search",
+      "OrganisationId": "AUK000215|1",
       "TestISBN": "9780747538493"
     },
     {
@@ -1093,14 +1159,16 @@
     {
       "Name": "Sefton",
       "Type": "koha",
-      "Url": "https://catalogue2.sefton.gov.uk/cgi-bin/koha",
+      "Url": "https://catalogue2.sefton.gov.uk/cgi-bin/koha/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Sheffield",
       "Type": "ibistro",
       "Available": [ "SHELVES", "RESERVES" ],
-      "Url": "http://library.sheffield.gov.uk/uhtbin/cgisirsi.exe/",
+      "Url": "http://library.sheffield.gov.uk/",
+      "Home": "uhtbin/webcat",
+      "Search": "uhtbin/cgisirsi.exe/x/0/0/5?searchdata1=",
       "TestISBN": "9780747538493"
     },
     {
@@ -1113,7 +1181,9 @@
     {
       "Name": "Shropshire",
       "Type": "arena",
-      "Url": "http://libraries.shropshire.gov.uk/web/arena/",
+      "Url": "https://libraries.shropshire.gov.uk/web/arena/",
+      "Advanced": "extended-search",
+      "OrganisationId": "AUK000034|1",
       "TestISBN": "9780747538493"
     },
     {
@@ -1171,7 +1241,9 @@
     {
       "Name": "Southend on Sea",
       "Type": "vubis",
-      "Url": "http://classiccatalogue.essex.gov.uk/vs/",
+      "Database": "1",
+      "Faceted": true,
+      "Url": "https://librarycatalogue.essex.gov.uk/iguana",
       "TestISBN": "9780747538493"
     },
     {
@@ -1183,10 +1255,8 @@
     },
     {
       "Name": "St Helens",
-      "Type": "enterprise",
-      "Available": [ "In stock" ],
-      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-      "Url": "https://enterprise.sthelens.gov.uk/client/en_GB/mylibrary/",
+      "Type": "koha",
+      "Url": "https://sthlibraries.koha-ptfs.co.uk/",
       "TestISBN": "9780747538493"
     },
     {
@@ -1194,6 +1264,8 @@
       "Type": "arena",
       "Id": "250001",
       "Url": "https://www.yourlibcat.staffordshire.gov.uk/web/arena/",
+      "Advanced": "advanced-search",
+      "OrganisationId": "AUK000250|1",
       "TestISBN": "9780747538493"
     },
     {
@@ -1231,7 +1303,9 @@
       "Name": "Sunderland",
       "Type": "ibistro",
       "Available": [ "Item is on the shelf" ],
-      "Url": "http://www.sunderland.gov.uk/uhtbin/cgisirsi.exe/",
+      "Url": "http://www.sunderland.gov.uk/",
+      "Home": "uhtbin/cgisirsi.exe/",
+      "Search": "uhtbin/cgisirsi.exe/x/0/0/5?searchdata1=",
       "TestISBN": "9780747538493"
     },
     {
@@ -1239,25 +1313,29 @@
       "Type": "arena",
       "Id": "210002",
       "Url": "http://arena.surreylibraries.org/web/arena/",
+      "Advanced": "extended-search",
+      "OrganisationId": "AUK000021|0",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Sutton",
-      "Type": "bookmyne",
+      "Type": "ibistro",
       "Id": "383",
       "Region": "3",
       "InstitutionId": "263",
       "Profile": "ALL_LIBS",
-      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1"
+      "Url": "http://www.sutton-libraries.gov.uk/",
+      "Home": "uhtbin/webcat",
+      "Search": "uhtbin/cgisirsi.exe/x/0/0/5?searchdata1="
     },
     {
       "Name": "Swansea",
-      "Type": "bookmyne",
+      "Type": "enterprise",
       "Id": "406",
       "Region": "3",
       "InstitutionId": "74",
       "Profile": "ALLLIBSG",
-      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1",
+      "Url": "https://swan.ent.sirsidynix.net.uk/client/en_GB/default/",
       "TestISBN": "9780747538493"
     },
     {
@@ -1277,13 +1355,17 @@
       "Name": "Telford and Wrekin",
       "Type": "arena",
       "Id": "320001",
-      "Url": "https://library.telford.gov.uk/web/arena",
+      "Url": "https://library.telford.gov.uk/web/arena/",
+      "Advanced": "extended-search",
+      "OrganisationId": "AUK000032|0",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Thurrock",
       "Type": "vubis",
-      "Url": "http://classiccatalogue.essex.gov.uk/vs/",
+      "Database": "1",
+      "Faceted": true,
+      "Url": "https://librarycatalogue.essex.gov.uk/iguana",
       "TestISBN": "9780747538493"
     },
     {
@@ -1304,6 +1386,8 @@
       "Type": "arena",
       "Id": "226010",
       "Url": "https://arena.yourlondonlibrary.net/web/tower-hamlets/",
+      "Advanced": "extended-search",
+      "OrganisationId": "AUK000226|10",
       "TestISBN": "9780747538493"
     },
     {
@@ -1316,6 +1400,7 @@
       "Name": "Vale of Glamorgan",
       "Type": "vubis",
       "Url": "http://libhip.valeofglamorgan.gov.uk/vs/",
+      "Profile": "Default",
       "TestISBN": "9780747538493"
     },
     {
@@ -1323,6 +1408,8 @@
       "Type": "arena",
       "Id": "212001",
       "Url": "https://libraries.wakefield.gov.uk/web/arena/",
+      "Advanced": "advanced-search",
+      "OrganisationId": "AUK000212|1",
       "TestISBN": "9780747538493"
     },
     {
@@ -1330,6 +1417,8 @@
       "Type": "arena",
       "Id": "140001",
       "Url": "https://libcat.walsall.gov.uk/web/arena/",
+      "Advanced": "advanced-search",
+      "OrganisationId": "AUK000014|0",
       "TestISBN": "9780747538493"
     },
     {
@@ -1337,6 +1426,8 @@
       "Type": "arena",
       "Id": "226004",
       "Url": "https://arena.yourlondonlibrary.net/web/walthamforest/",
+      "Advanced": "extended-search",
+      "OrganisationId": "AUK000226|4",
       "TestISBN": "9780747538493"
     },
     {
@@ -1387,6 +1478,8 @@
       "Type": "arena",
       "Id": "380001",
       "Url": "https://arena.westsussex.gov.uk/web/arena/",
+      "Advanced": "extended-search",
+      "OrganisationId": "AUK000038|0",
       "TestISBN": "9780747538493"
     },
     {
@@ -1415,6 +1508,8 @@
       "Type": "arena",
       "Id": "400001",
       "Url": "https://libraries.wiltshire.gov.uk/web/arena/",
+      "Advanced": "advanced-search",
+      "OrganisationId": "AUK000040|0",
       "TestISBN": "9780747538493"
     },
     {
@@ -1459,12 +1554,12 @@
     },
     {
       "Name": "York City",
-      "Type": "bookmyne",
+      "Type": "enterprise",
       "Id": "474",
       "Region": "3",
       "InstitutionId": "174",
       "Profile": "YORKPUB",
-      "Url": "https://bookmyne.bc.sirsidynix.net/bookmyne/v1/firehoop/v1",
+      "Url": "https://www.exploreyork.org.uk/client/en_GB/",
       "TestISBN": "9780747538493"
     }
   ]

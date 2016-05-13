@@ -24,7 +24,7 @@ exports.getLibraries = function (service, callback) {
     var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
     // Request 1: Get advanced search page
-    request.get({ forever: true, url: service.Url + 'advanced-search', timeout: 30000 }, function (error, message, response) {
+    request.get({ forever: true, url: service.Url + '', timeout: 60000 }, function (error, message, response) {
         if (common.handleErrors(callback, responseLibraries, error, message)) return;
         common.completeCallback(callback, responseLibraries);
     });

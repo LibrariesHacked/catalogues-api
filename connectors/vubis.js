@@ -25,7 +25,7 @@ exports.getLibraries = function (service, callback) {
     var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
     // Request 1. This gets the frameset
-    request.get({ url: service.Url + 'vubis.csp?Profile=Iguana', timeout: 30000 }, function (error, message, response) {
+    request.get({ url: service.Url + 'Vubis.csp?Profile=' + service.Profile + '&SearchMethod=Find_2', timeout: 30000 }, function (error, message, response) {
         if (common.handleErrors(callback, responseLibraries, error, message)) return;
         $ = cheerio.load(response);
         var link = $('FRAME[Title="Vubis.Body"]').attr('src');
@@ -33,10 +33,29 @@ exports.getLibraries = function (service, callback) {
         request.get({ url: service.Url + link, timeout: 30000 }, function (error, message, response) {
             if (common.handleErrors(callback, responseLibraries, error, message)) return;
             $ = cheerio.load(response);
-            $('select[name=Location] option').each(function () {
-                if ($(this).text().trim() != 'No preference') responseLibraries.libraries.push($(this).text().trim());
-            });
-            common.completeCallback(callback, responseLibraries);
+
+            if ($('select[name=Location] option').length > 0) {
+                $('select[name=Location] option').each(function () {
+                    if ($(this).text().trim() != 'No preference' && $(this).text().trim() != 'All options') responseLibraries.libraries.push($(this).text().trim());
+                });
+                common.completeCallback(callback, responseLibraries);
+            } else {
+                var link = $("a:contains('Advanced Search')").attr('href');
+                // Request 2. Get the internal body page.
+                request.get({ url: service.Url + link, timeout: 30000 }, function (error, message, response) {
+                    if (common.handleErrors(callback, responseLibraries, error, message)) return;
+                    $ = cheerio.load(response);
+                    var link = $('FRAME[Title="Vubis.Body"]').attr('src');
+                    request.get({ url: service.Url + link, timeout: 30000 }, function (error, message, response) {
+                        if (common.handleErrors(callback, responseLibraries, error, message)) return;
+                        $ = cheerio.load(response);
+                        $('select[name=Location] option').each(function () {
+                            if ($(this).text().trim() != 'No preference' && $(this).text().trim() != 'All options') responseLibraries.libraries.push($(this).text().trim());
+                        });
+                        common.completeCallback(callback, responseLibraries);
+                    });
+                });
+            }
         });
     });
 };
@@ -73,7 +92,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     };
 
     // Request 1: Kick off a session
-    request.get({ url: lib.Url + 'vubis.csp', timeout: 20000 }, function (error, message, response) {
+    request.get({ url: lib.Url + 'Vubis.csp', timeout: 20000 }, function (error, message, response) {
         if (common.handleErrors(callback, responseHoldings, error, message)) return;
         $ = cheerio.load(response);
         var link = $('FRAME[Title="Vubis.Body"]').attr('src');

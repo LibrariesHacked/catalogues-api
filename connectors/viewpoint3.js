@@ -29,29 +29,39 @@ exports.getLibraries = function (service, callback) {
         if (common.handleErrors(callback, responseLibraries, error, message)) return;
         
         $ = cheerio.load(response);
-        var aspNetForm = {
-            __EVENTARGUMENT: '',
-            __EVENTTARGET: 'ctl00$ContentPlaceCenterContent$authorityLimit',
-            __EVENTVALIDATION: $('input[name=__EVENTVALIDATION]').val(),
-            __LASTFOCUS: '',
-            __VIEWSTATE: $('input[name=__VIEWSTATE]').val(),
-            __VIEWSTATEGENERATOR: $('input[name=____VIEWSTATEGENERATOR]').val(),
-            ctl00$ContentPlaceCenterContent$authorityLimit: service.MultiAuthorityId,
-            ctl00$ContentPlaceCenterContent$branchLimit: 0,
-            ctl00$ContentPlaceCenterContent$languageLimit: 0,
-            ctl00$ContentPlaceCenterContent$searchTerm: '',
-            ctl00$ContentPlaceCenterContent$searchType: 0
-        };
+        // May already have all the libraries
+        var libSelector = $('select#ctl00_ContentPlaceCenterContent_branchLimit option');
 
-        // Request 2:
-        request.post({ url: service.Url + advSearch, rejectUnauthorized: false, form: aspNetForm, timeout: 30000, jar: true }, function (error, message, response) {
-            if (common.handleErrors(callback, responseLibraries, error, message)) return;
-            $ = cheerio.load(response);
+        if (libSelector) {
             $('select#ctl00_ContentPlaceCenterContent_branchLimit option').each(function () {
-                if ($(this).text() != 'All libraries') responseLibraries.libraries.push($(this).text().trim());
+                if ($(this).text() != 'All libraries' && $(this).text() != 'All Branches') responseLibraries.libraries.push($(this).text().trim());
             });
             common.completeCallback(callback, responseLibraries);
-        });
+        } else {
+            var aspNetForm = {
+                __EVENTARGUMENT: '',
+                __EVENTTARGET: 'ctl00$ContentPlaceCenterContent$authorityLimit',
+                __EVENTVALIDATION: $('input[name=__EVENTVALIDATION]').val(),
+                __LASTFOCUS: '',
+                __VIEWSTATE: $('input[name=__VIEWSTATE]').val(),
+                __VIEWSTATEGENERATOR: $('input[name=____VIEWSTATEGENERATOR]').val(),
+                ctl00$ContentPlaceCenterContent$authorityLimit: service.MultiAuthorityId,
+                ctl00$ContentPlaceCenterContent$branchLimit: 0,
+                ctl00$ContentPlaceCenterContent$languageLimit: 0,
+                ctl00$ContentPlaceCenterContent$searchTerm: '',
+                ctl00$ContentPlaceCenterContent$searchType: 0
+            };
+
+            // Request 2:
+            request.post({ url: service.Url + advSearch, rejectUnauthorized: false, form: aspNetForm, timeout: 30000, jar: true }, function (error, message, response) {
+                if (common.handleErrors(callback, responseLibraries, error, message)) return;
+                $ = cheerio.load(response);
+                $('select#ctl00_ContentPlaceCenterContent_branchLimit option').each(function () {
+                    if ($(this).text() != 'All libraries') responseLibraries.libraries.push($(this).text().trim());
+                });
+                common.completeCallback(callback, responseLibraries);
+            });
+        }
     });
 };
 

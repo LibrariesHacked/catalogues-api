@@ -16,21 +16,18 @@ var request = require('request'),
 ///////////////////////////////////////////
 // VARIABLES
 ///////////////////////////////////////////
-var searchUrl = 'x/0/0/5?searchdata1=';
-var home = '/x/x/0/49/';
 
 ///////////////////////////////////////////
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
     var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
-
     // Request 1: Get advanced search page
-    request.get({ forever: true, url: service.Url + home, timeout: 30000 }, function (error, message, response) {
+    request.get({ forever: true, url: service.Url + service.Home, timeout: 30000 }, function (error, message, response) {
         if (common.handleErrors(callback, responseLibraries, error, message)) return;
         $ = cheerio.load(response);
         $('#library option').each(function () {
-            if ($(this).text() != 'ALL') responseLibraries.libraries.push($(this).text());
+            if ($(this).text().indexOf('ALL') == -1 && $(this).text().indexOf('HERE') == -1) responseLibraries.libraries.push($(this).text());
         });
         common.completeCallback(callback, responseLibraries);
     });
@@ -66,7 +63,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     };
 
     // Request 1: 
-    request.get({ url: lib.Url + searchUrl + isbn, timeout: 30000 }, function (error, msg, response) {
+    request.get({ url: lib.Url + lib.Search + isbn, timeout: 30000 }, function (error, msg, response) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;
         $ = cheerio.load(response);
         // Could be multiple copies held - check for a hitlist form

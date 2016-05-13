@@ -22,9 +22,22 @@ var request = require('request'),
 exports.getLibraries = function (service, callback) {
     var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
-    // Request 1: Get advanced search page
-    request.get({ forever: true, url: service.Url + 'advanced-search', timeout: 20000, jar: true }, function (error, message, response) {
+    // Request 1: Initialise the session - go to home page.
+    request.get({ url: service.Url, timeout: 20000, jar: true }, function (error, message, response) {
         if (common.handleErrors(callback, responseLibraries, error, message)) return;
+        // Request 2: Enter the library catalogue as a guest
+        request.post({ url: service.Url + 'pgLogin.aspx?CheckJavascript=1', jar: true, timeout: 20000 }, function (error, message, response) {
+            if (common.handleErrors(callback, responseLibraries, error, message)) return;
+            // Request 3: Go to libraries page
+            request.get({ forever: true, url: service.Url + service.Libraries, timeout: 20000, jar: true }, function (error, message, response) {
+                if (common.handleErrors(callback, responseLibraries, error, message)) return;
+                $ = cheerio.load(response);
+                $('ol.list-unstyled li').each(function () {
+                    responseLibraries.libraries.push($(this).text().trim());
+                });
+                common.completeCallback(callback, responseLibraries);
+            });
+        });
     });
 };
 

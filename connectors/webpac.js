@@ -20,11 +20,11 @@ exports.getLibraries = function (service, callback) {
     var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
     // Request 1: Get advanced search page
-    request.get({ forever: true, url: service.Url + 'search/X', timeout: 30000 }, function (error, message, response) {
+    request.get({ forever: true, url: service.Url + 'search/X', timeout: 60000 }, function (error, message, response) {
         if (common.handleErrors(callback, responseLibraries, error, message)) return;
         $ = cheerio.load(response);
-        $('#branch_select select[Name=b] option').each(function () {
-            if ($(this).text() != 'ANY') responseLibraries.libraries.push($(this).text());
+        $('select[Name=b] option').each(function () {
+            if ($(this).text() != 'ANY') responseLibraries.libraries.push($(this).text().trim());
         });
         common.completeCallback(callback, responseLibraries);
     });
