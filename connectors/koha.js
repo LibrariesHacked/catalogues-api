@@ -20,12 +20,20 @@ var catUrl = 'cgi-bin/koha/opac-search.pl?format=rss2&idx=nb&q=';
 var libsUrl = 'cgi-bin/koha/opac-search.pl?[MULTIBRANCH]do=Search&expand=holdingbranch#holdingbranch_id'
 
 ///////////////////////////////////////////
+// Function: getService
+///////////////////////////////////////////
+exports.getService = function (svc, callback) {
+    var service = common.getService(svc);
+    callback(service);
+};
+
+///////////////////////////////////////////
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
     var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
     // Request 1: Call search page with option set to expand branches.
-    request.get({ forever: true, url: service.Url + (service.MultiBranchLimit ? libsUrl.replace('[MULTIBRANCH]', 'multibranchlimit=' + service.MultiBranchLimit + '&') : libsUrl.replace('[MULTIBRANCH]', '')), timeout: 60000 }, function (error, message, response) {
+    request.get({ url: service.Url + (service.MultiBranchLimit ? libsUrl.replace('[MULTIBRANCH]', 'multibranchlimit=' + service.MultiBranchLimit + '&') : libsUrl.replace('[MULTIBRANCH]', '')), timeout: 60000 }, function (error, message, response) {
         if (common.handleErrors(callback, responseLibraries, error, message)) return;
         $ = cheerio.load(response);
         $('div#location select#branchloop option').each(function () {

@@ -21,17 +21,22 @@ var detailsRequest = '<x:Envelope xmlns:x="http://schemas.xmlsoap.org/soap/envel
 var reqHeader = { "Content-Type": "text/xml; charset=utf-8" };
 
 ///////////////////////////////////////////
+// Function: getService
+///////////////////////////////////////////
+exports.getService = function (svc, callback) {
+    var service = common.getService(svc);
+    callback(service);
+};
+
+///////////////////////////////////////////
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
     var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
     // Request 1: Get advanced search page
-    request.get({ forever: true, url: service.Url + 'advanced-search', timeout: 30000 }, function (error, message, response) {
+    request.get({ url: service.Url + 'advanced-search', timeout: 60000 }, function (error, message, response) {
         if (common.handleErrors(callback, responseLibraries, error, msg)) return;
-
-        // To do: implement.
-
         common.completeCallback(callback, responseLibraries);
     });
 };
@@ -48,7 +53,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     var soapSearchXML = searchRequest.replace('[ISBN]', isbn).replace('[SERVICEID]', lib.Id);
     // Request 1: Search for the item ID from ISBN
     // RejectUnauthorised used (for Leicester City).  What's up with that SSL certificate?
-    request.post({ url: lib.Url, body: soapSearchXML, headers: reqHeader, rejectUnauthorized: false, timeout: 30000 }, function (error, msg, response) {
+    request.post({ url: lib.Url, body: soapSearchXML, headers: reqHeader, timeout: 30000 }, function (error, msg, response) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;
         xml2js.parseString(response, function (err, res) {
             if (common.handleErrors(callback, responseHoldings, err)) return;
@@ -62,7 +67,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
             var crId = soapResponse[0].catalogueRecords[0].catalogueRecord[0].id;
             var soapDetailXML = detailsRequest.replace('[CRID]', crId).replace('[SERVICEID]', lib.Id);
             // Request 2: Search for item details (which will include availability holdings information.
-            request.post({ url: lib.Url, body: soapDetailXML, headers: reqHeader, rejectUnauthorized: false, timeout: 30000 }, function (error, msg, response) {
+            request.post({ url: lib.Url, body: soapDetailXML, headers: reqHeader, timeout: 30000 }, function (error, msg, response) {
                 if (common.handleErrors(callback, responseHoldings, error, msg)) return;
                 xml2js.parseString(response, function (err, res) {
                     if (common.handleErrors(callback, responseHoldings, err)) return;

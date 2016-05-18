@@ -14,6 +14,11 @@ app.get('/services', libraries.getServices);
 app.get('/libraries', libraries.getLibraries);
 app.get('/availabilityByISBN/:isbn', libraries.isbnSearch);
 
+// For maintenance
+// app.get('/refreshbranches', libraries.refreshBranches)
+// app.get('/refreshservicetwitters', libraries.refreshServiceTwitters);
+// app.get('/refreshbranchtwitters', libraries.refreshBranchTwitters);
+
 // For testing
 app.get('/test', libraries.test);
 

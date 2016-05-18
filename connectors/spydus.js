@@ -20,6 +20,14 @@ var searchUrl = 'cgi-bin/spydus.exe/ENQ/OPAC/BIBENQ?NRECS=1&ISBN=';
 var libsUrl = 'cgi-bin/spydus.exe/MSGTRN/OPAC/COMB?HOMEPRMS=COMBPARAMS';
 
 ///////////////////////////////////////////
+// Function: getService
+///////////////////////////////////////////
+exports.getService = function (svc, callback) {
+    var service = common.getService(svc);
+    callback(service);
+};
+
+///////////////////////////////////////////
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
@@ -27,7 +35,7 @@ exports.getLibraries = function (service, callback) {
 
     // Request 1: Get advanced search page
     // They've begun to throw up a full page to agree to cookies (which needs a cookie set to get round).
-    request.get({ headers: { Cookie: 'ALLOWCOOKIES_443=1' }, url: service.Url + libsUrl, timeout: 30000 }, function (error, message, response) {
+    request.get({ headers: { Cookie: 'ALLOWCOOKIES_443=1' }, url: service.Url + libsUrl, timeout: 60000 }, function (error, message, response) {
         if (common.handleErrors(callback, responseLibraries, error, message)) return;
         $ = cheerio.load(response);
         $('select#LOC option').each(function () {

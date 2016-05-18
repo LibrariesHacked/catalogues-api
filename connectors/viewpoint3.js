@@ -19,15 +19,25 @@ var advSearch = '02_Catalogue/02_002_AdvancedSearch.aspx';
 var container = '#ctl00_ContentPlaceCenterContent_copyAvailabilityContainer';
 
 ///////////////////////////////////////////
+// Function: getService
+///////////////////////////////////////////
+exports.getService = function (svc, callback) {
+    var service = common.getService(svc);
+    callback(service);
+};
+
+///////////////////////////////////////////
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
     var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
+    var options = { url: service.Url + advSearch, timeout: 30000, jar: true };
+    if (service.IgnoreSSL) options.rejectUnauthorized = false;
     // Request 1: Get advanced search page
-    request.get({ url: service.Url + advSearch, rejectUnauthorized: false, timeout: 30000, jar: true }, function (error, message, response) {
+    request.get(options, function (error, message, response) {
         if (common.handleErrors(callback, responseLibraries, error, message)) return;
-        
+
         $ = cheerio.load(response);
         // May already have all the libraries
         var libSelector = $('select#ctl00_ContentPlaceCenterContent_branchLimit option');
@@ -52,8 +62,10 @@ exports.getLibraries = function (service, callback) {
                 ctl00$ContentPlaceCenterContent$searchType: 0
             };
 
+            var options = { url: service.Url + advSearch, form: aspNetForm, timeout: 30000, jar: true };
+            if (service.IgnoreSSL) options.rejectUnauthorized = false;
             // Request 2:
-            request.post({ url: service.Url + advSearch, rejectUnauthorized: false, form: aspNetForm, timeout: 30000, jar: true }, function (error, message, response) {
+            request.post(options, function (error, message, response) {
                 if (common.handleErrors(callback, responseLibraries, error, message)) return;
                 $ = cheerio.load(response);
                 $('select#ctl00_ContentPlaceCenterContent_branchLimit option').each(function () {
@@ -73,7 +85,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
 
     // Request 1: Deep link to the item by ISBN
     // Really wouldn't want to disable rejectUnauthorised for production system - query with Denbighshire about their certificate
-    request.get({ url: lib.Url + searchUrl + isbn, rejectUnauthorized: false, timeout: 60000 }, function (error, msg, res) {
+    request.get({ url: lib.Url + searchUrl + isbn, timeout: 60000 }, function (error, msg, res) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;
         $ = cheerio.load(res);
         var libs = {};

@@ -16,10 +16,19 @@ var xml2js = require('xml2js'),
 ///////////////////////////////////////////
 // VARIABLES
 ///////////////////////////////////////////
-var itemSearch = 'Application=Bib&BestMatch=99&FacetedSearch=Yes&Associations=Also&Database=[DB]&ExportByTemplate=Brief&fu=BibSearch&Index=Isbn&Language=eng&NumberToRetrieve=1000&RequestType=ResultSet_DisplayList&SearchTechnique=Find&WithoutRestrictions=Yes&TemplateId=[TID]&Profile=Iguana&Request=[ISBN]';
+var itemSearch = 'Application=Bib&BestMatch=99&FacetedSearch=Yes&Associations=Also&Database=[DB]&ExportByTemplate=Brief&fu=BibSearch&Index=Isbn&Language=eng&NumberToRetrieve=10&RequestType=ResultSet_DisplayList&SearchTechnique=Find&WithoutRestrictions=Yes&TemplateId=[TID]&Profile=Iguana&Request=[ISBN]';
 var facetSearch = 'FacetedSearch=[RESULTID]&FacetsFound=&fu=BibSearch';
 var reqHeader = { "Content-Type": "application/x-www-form-urlencoded" };
 var home = 'www.main.cls';
+
+///////////////////////////////////////////
+// Function: getService
+///////////////////////////////////////////
+exports.getService = function (svc, callback) {
+    var service = common.getService(svc);
+    service.CatalogueUrl = svc.Url + home;
+    callback(service);
+};
 
 ///////////////////////////////////////////
 // Function: getLibraries
@@ -30,36 +39,41 @@ var home = 'www.main.cls';
 exports.getLibraries = function (service, callback) {
     var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
+    var getFacets = function (resultId) {
+        // Request 2:
+        request.post({ url: service.Url + 'Proxy.SearchRequest.cls', jar: true, body: facetSearch.replace('[RESULTID]', resultId), headers: reqHeader, timeout: 30000 }, function (error, msg, response) {
+            if (common.handleErrors(callback, responseLibraries, error, msg)) return;
+            xml2js.parseString(response, function (err, res) {
+                if (common.handleErrors(callback, responseLibraries, err)) return;
+                var facets = res.VubisFacetedSearchResponse.Facets[0].Facet;
+                if (facets && facets[0]) {
+                    for (var facet in facets[0].FacetEntry) {
+                        if (facet.Display && facet.Display[0]) responseLibraries.libraries.push(facet.Display[0]);
+                    }
+                }
+                common.completeCallback(callback, responseLibraries);
+            });
+        });
+    };
+
+    // Request 1: 
     request.post({ url: service.Url + 'Proxy.SearchRequest.cls', jar: true, body: itemSearch.replace('[ISBN]', 'a').replace('Index=Isbn', 'Index=Keywords').replace('[DB]', service.Database).replace('[TID]', 'Iguana_Brief'), headers: reqHeader, timeout: 30000 }, function (error, msg, response) {
         if (common.handleErrors(callback, responseLibraries, error, msg)) return;
         xml2js.parseString(response, function (err, res) {
             if (common.handleErrors(callback, responseLibraries, err, msg)) return;
-            // Some installations seem to support faceted searching and filtering
-            // while others don't bring anything back.
+            // Some installations support faceted searching and filtering
             if (service.Faceted) {
                 var resultId = res["zs:searchRetrieveResponse"]["zs:resultSetId"][0];
-                request.post({ url: service.Url + 'Proxy.SearchRequest.cls', jar: true, body: facetSearch.replace('[RESULTID]', resultId), headers: reqHeader, timeout: 30000 }, function (error, msg, response) {
-                    if (common.handleErrors(callback, responseLibraries, error, msg)) return;
-                    xml2js.parseString(response, function (err, res) {
-                        if (common.handleErrors(callback, responseLibraries, err)) return;
-                        var facets = res.VubisFacetedSearchResponse.Facets[0].Facet;
-                        if (facets && facets[0]) {
-                            facets[0].FacetEntry.forEach(function (entry) {
-                                responseLibraries.libraries.push(entry.Display[0]);
-                            });
-                        }
-                        common.completeCallback(callback, responseLibraries);
-                    });
-                });
+                getFacets(resultId);
             } else {
-                // Loop through the search results and try to get unique entries from 
-                // the holdings data.
+                // Loop through the search results and try to get unique entries from holdings data.
                 var records = res['zs:searchRetrieveResponse']['zs:records'][0]['zs:record'];
                 // Loop through all the records
                 records.forEach(function (record) {
                     // Loop through all the holdings records.
-                    if (record['zs:recordData'] && record['zs:recordData'][0] && record['zs:recordData'][0].BibDocument && record['zs:recordData'][0].BibDocument[0] && record['zs:recordData'][0].BibDocument[0].HoldingsSummary && record['zs:recordData'][0].BibDocument[0].HoldingsSummary[0]) {
-                        record['zs:recordData'][0].BibDocument[0].HoldingsSummary[0].ShelfmarkData.forEach(function (item) {
+                    var recData = record['zs:recordData'];
+                    if (recData && recData[0] && recData[0].BibDocument && recData[0].BibDocument[0] && recData[0].BibDocument[0].HoldingsSummary && recData[0].BibDocument[0].HoldingsSummary[0]) {
+                        recData[0].BibDocument[0].HoldingsSummary[0].ShelfmarkData.forEach(function (item) {
                             var lib = item.Shelfmark[0].split(' : ')[0];
                             if (responseLibraries.libraries.indexOf(lib) == -1) responseLibraries.libraries.push(lib);
                         });

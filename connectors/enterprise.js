@@ -22,13 +22,21 @@ var header1 = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWe
 var header2 = { 'X-Requested-With': 'XMLHttpRequest' };
 
 ///////////////////////////////////////////
+// Function: getService
+///////////////////////////////////////////
+exports.getService = function (svc, callback) {
+    var service = common.getService(svc);
+    callback(service);
+};
+
+///////////////////////////////////////////
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
     var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
     // Request 1: Get advanced search page
-    request.get({ forever: true, url: service.Url + 'search/advanced', timeout: 30000 }, function (error, message, response) {
+    request.get({ url: service.Url + 'search/advanced', timeout: 30000 }, function (error, message, response) {
         if (common.handleErrors(callback, responseLibraries, error, message)) return;
         $ = cheerio.load(response);
         $('#libraryDropDown option').each(function () {

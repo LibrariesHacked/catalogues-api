@@ -24,12 +24,19 @@ exports.getServices = function (req, res) {
     var services = data.LibraryServices
         // Could put a filter here e.g. if filter by area (North East) or even spatial. 
         .filter(function (service) {
-            return service;
+            return (service.Type != '' && (!req.query.service || service.Name.indexOf(req.query.service) > -1));
         })
         .map(function (service) {
-            return {};
+            return function (callback) {
+                serviceFunctions[service.Type].getService(service, function (response) {
+                    callback(null, response);
+                });
+            }
         });
-    res.send(services);
+    // The searches object will be a list of searches to run against the various library systems.  
+    async.parallel(services, function (err, response) {
+        res.send(response);
+    });
 };
 
 /////////////////////////////////////////////////////////////////
@@ -42,7 +49,7 @@ exports.getLibraries = function (req, res) {
     // Create a list of the searches to perform.
     var searches = data.LibraryServices
         .filter(function (service) {
-            return (service.Type != "" && (!req.query.service || service.Name.indexOf(req.query.service) > -1));
+            return (service.Type != '' && (!req.query.service || service.Name.indexOf(req.query.service) > -1));
         })
         .map(function (service) {
             return function (callback) {

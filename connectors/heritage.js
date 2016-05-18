@@ -19,6 +19,15 @@ var cheerio = require('cheerio'),
 var searchUrl = 'search2?searchTerm0=';
 
 ///////////////////////////////////////////
+// Function: getService
+///////////////////////////////////////////
+exports.getService = function (svc, callback) {
+    var service = common.getService(svc);
+    service.CatalogueUrl = svc.Url + 'search1';
+    callback(service);
+};
+
+///////////////////////////////////////////
 // Function: getLibraries
 // Placeholder
 ///////////////////////////////////////////

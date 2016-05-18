@@ -18,12 +18,21 @@ var request = require('request'),
 ///////////////////////////////////////////
 
 ///////////////////////////////////////////
+// Function: getService
+///////////////////////////////////////////
+exports.getService = function (svc, callback) {
+    var service = common.getService(svc);
+    service.CatalogueUrl = svc.Url + svc.Home;
+    callback(service);
+};
+
+///////////////////////////////////////////
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
     var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
     // Request 1: Get advanced search page
-    request.get({ forever: true, url: service.Url + service.Home, timeout: 30000 }, function (error, message, response) {
+    request.get({ url: service.Url + service.Home, timeout: 60000 }, function (error, message, response) {
         if (common.handleErrors(callback, responseLibraries, error, message)) return;
         $ = cheerio.load(response);
         $('#library option').each(function () {

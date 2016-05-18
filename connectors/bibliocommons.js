@@ -19,6 +19,14 @@ var searchUrl = 'SearchCatalog/KEYWORD/';
 var reqHeader = { "Content-Type": "text/xml; charset=utf-8" };
 
 ///////////////////////////////////////////
+// Function: getService
+///////////////////////////////////////////
+exports.getService = function (svc, callback) {
+    var service = common.getService(svc);
+    callback(service);
+};
+
+///////////////////////////////////////////
 // Function: searchByISBN
 // Not actually used for current set of libs
 // Maybe one day...
@@ -35,8 +43,8 @@ exports.searchByISBN = function (isbn, lib, callback) {
                 common.completeCallback(callback, responseHoldings);
                 return;
             }
-            var bibId = res.searchCatalog.Bib[0].BcId[0];
 
+            var bibId = res.searchCatalog.Bib[0].BcId[0];
             // Request 2: web service to get availability
             request.get({ url: lib.Url + 'currentItems/' + bibId, headers: reqHeader, timeout: 30000 }, function (error, msg, response) {
                 if (common.handleErrors(callback, responseHoldings, error, msg)) return;

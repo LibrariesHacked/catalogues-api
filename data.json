@@ -16,7 +16,7 @@
       "Name": "Anglesey",
       "Type": "prism3",
       "Available": [ "Ar gael" ],
-      "Url": "http://capitadiscovery.co.uk/ynysmon/",
+      "Url": "https://capitadiscovery.co.uk/ynysmon/",
       "TestISBN": "9780747538493"
     },
     {
@@ -64,6 +64,7 @@
       "Type": "viewpoint3",
       "Id": "280001",
       "Url": "https://www.librarieswest.org.uk/",
+      "IgnoreSSL": true,
       "MultiAuthorityId": 4,
       "TestISBN": "9780747538493"
     },
@@ -116,7 +117,7 @@
       "Name": "Blaenau Gwent",
       "Type": "ibistro",
       "Available": [ "On Shelf" ],
-      "Url": "http://bglibcat.blaenau-gwent.gov.uk/",
+      "Url": "http://librarycatalogue.aneurinleisure.org.uk/",
       "Home": "uhtbin/cgisirsi.exe/x/x/0/49/",
       "Search": "uhtbin/cgisirsi.exe/x/0/0/5?searchdata1=",
       "TestISBN": "9780747538493"
@@ -178,6 +179,8 @@
       "Id": "280001",
       "MultiAuthorityId": 10,
       "Url": "https://www.librarieswest.org.uk/",
+      "IgnoreSSL": true,
+      "MultiAuthorityId": 3,
       "TestISBN": "9780747538493"
     },
     {
@@ -251,7 +254,7 @@
     {
       "Name": "Ceredigion",
       "Type": "vubis",
-      "Url": "http://libraries.ceredigion.gov.uk/vs/",
+      "Url": "https://libraries.ceredigion.gov.uk/vs/",
       "TestISBN": "9780747538493"
     },
     {
@@ -329,7 +332,7 @@
       "Id": "230001",
       "ArenaName": "AUK000023",
       "ArenaMemberId": "28980569",
-      "Url": "http://www2.darlington.gov.uk/web/arena/",
+      "Url": "https://www2.darlington.gov.uk/web/arena/",
       "Libraries": [ "Central Library", "Cockerton Library", "Mobile Library" ],
       "Advanced": "advanced-search",
       "TestISBN": "9780747538493"
@@ -377,7 +380,7 @@
     {
       "Name": "Dorset",
       "Type": "webpac",
-      "Url": "http://libcat.dorsetforyou.com/",
+      "Url": "https://libcat.dorsetforyou.com/",
       "TestISBN": "9780747538493"
     },
     {
@@ -389,7 +392,7 @@
     {
       "Name": "Dumfries and Galloway",
       "Type": "iguana",
-      "Database": "1_LIBS",
+      "Database": "1",
       "Faceted": true,
       "Url": "http://library.dumgal.gov.uk/iguana/",
       "TestISBN": "9780747538493"
@@ -428,7 +431,7 @@
     {
       "Name": "East Dunbartonshire",
       "Type": "vufind",
-      "Url": "http://vufind-ed.sedar.org.uk/",
+      "Url": "https://vufind-ed.sedar.org.uk/",
       "TestISBN": "9780747538493"
     },
     {
@@ -532,7 +535,7 @@
       "Name": "Greenwich",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "http://capitadiscovery.co.uk/royalgreenwich/",
+      "Url": "https://capitadiscovery.co.uk/royalgreenwich/",
       "TestISBN": "9780747538493"
     },
     {
@@ -546,7 +549,7 @@
       "Name": "Gwynedd",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "http://capitadiscovery.co.uk/gwynedd/",
+      "Url": "https://capitadiscovery.co.uk/gwynedd/",
       "TestISBN": "9780747538493"
     },
     {
@@ -561,7 +564,7 @@
     {
       "Name": "Halton",
       "Type": "koha",
-      "Url": "http://hpl.koha-ptfs.eu/",
+      "Url": "https://hpl.koha-ptfs.eu/",
       "TestISBN": "9780747538493"
     },
     {
@@ -582,7 +585,7 @@
       "Name": "Haringey",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "http://capitadiscovery.co.uk/haringey/",
+      "Url": "https://capitadiscovery.co.uk/haringey/",
       "TestISBN": "9780747538493"
     },
     {
@@ -654,7 +657,7 @@
       "Type": "ibistro",
       "Available": [ "Item on shelves" ],
       "Url": "http://prismcollect.hullcc.gov.uk/",
-      "Home": "uhtbin/cgisirsi.exe/",
+      "Home": "uhtbin/cgisirsi.exe/x/0/0/57/49?user_id=HULLWEB&password=",
       "Search": "uhtbin/cgisirsi.exe/x/0/0/5?searchdata1=",
       "TestISBN": "9780747538493"
     },
@@ -667,7 +670,7 @@
     {
       "Name": "Isle of Wight",
       "Type": "spydus",
-      "Url": "http://iow.spydus.co.uk/",
+      "Url": "https://iow.spydus.co.uk/",
       "TestISBN": "9780747538493"
     },
     {
@@ -831,6 +834,7 @@
       "Name": "Middlesbrough",
       "Type": "arena",
       "Url": "https://libraries.middlesbrough.gov.uk/web/arena/",
+      "IgnoreSSL": true,
       "Advanced": "extended-search",
       "OrganisationId": "AUK000054|0",
       "TestISBN": "9780747538493"
@@ -940,6 +944,8 @@
       "Type": "viewpoint3",
       "Id": "280001",
       "Url": "https://www.librarieswest.org.uk/",
+      "IgnoreSSL": true,
+      "MultiAuthorityId": 2,
       "TestISBN": "9780747538493"
     },
     {
@@ -970,7 +976,7 @@
       "Type": "ibistro",
       "Available": [ "SHELVES", "RESERVES" ],
       "Url": "http://library.northumberland.gov.uk/",
-      "Home": "uhtbin/cgisirsi.exe/",
+      "Home": "uhtbin/cgisirsi.exe/x/0/0/49",
       "Search": "uhtbin/cgisirsi.exe/x/0/0/5?searchdata1=",
       "TestISBN": "9780747538493"
     },
@@ -1042,7 +1048,7 @@
     {
       "Name": "Peterborough",
       "Type": "spydus",
-      "Url": "http://peterborough.spydus.co.uk/",
+      "Url": "https://peterborough.spydus.co.uk/",
       "TestISBN": "9780747538493"
     },
     {
@@ -1069,7 +1075,7 @@
       "Type": "ibistro",
       "Available": [ "Adult Fiction" ],
       "Url": "http://powys.sirsidynix.net.uk/",
-      "Home": "uhtbin/cgisirsi/",
+      "Home": "uhtbin/cgisirsi/x/x/0/49/",
       "Search": "uhtbin/cgisirsi/x/0/0/5?searchdata1=",
       "TestISBN": "9780747538493"
     },
@@ -1100,7 +1106,7 @@
       "Name": "Renfrewshire",
       "Type": "iguana",
       "Database": "1",
-      "Faceted": true,
+      "Faceted": false,
       "Url": "https://libcat.renfrewshire.gov.uk/iguana/",
       "TestISBN": "9780747538493"
     },
@@ -1153,13 +1159,13 @@
     {
       "Name": "Scottish Borders",
       "Type": "vubis",
-      "Url": "http://librarysearch.scotborders.gov.uk/vs/",
+      "Url": "https://librarysearch.scotborders.gov.uk/vs/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Sefton",
       "Type": "koha",
-      "Url": "https://catalogue2.sefton.gov.uk/cgi-bin/koha/",
+      "Url": "https://catalogue2.sefton.gov.uk/",
       "TestISBN": "9780747538493"
     },
     {
@@ -1189,7 +1195,7 @@
     {
       "Name": "Slough",
       "Type": "spydus",
-      "Url": "http://slough.spydus.co.uk/",
+      "Url": "https://slough.spydus.co.uk/",
       "TestISBN": "9780747538493"
     },
     {
@@ -1204,6 +1210,8 @@
       "Type": "viewpoint3",
       "Id": "280001",
       "Url": "https://www.librarieswest.org.uk/",
+      "IgnoreSSL": true,
+      "MultiAuthorityId": 1,
       "TestISBN": "9780747538493"
     },
     {
@@ -1217,6 +1225,8 @@
       "Type": "viewpoint3",
       "Id": "280001",
       "Url": "https://www.librarieswest.org.uk/",
+      "IgnoreSSL": true,
+      "MultiAuthorityId": 5,
       "TestISBN": "9780747538493"
     },
     {
@@ -1303,7 +1313,7 @@
       "Name": "Sunderland",
       "Type": "ibistro",
       "Available": [ "Item is on the shelf" ],
-      "Url": "http://www.sunderland.gov.uk/",
+      "Url": "https://www.sunderland.gov.uk/",
       "Home": "uhtbin/cgisirsi.exe/",
       "Search": "uhtbin/cgisirsi.exe/x/0/0/5?searchdata1=",
       "TestISBN": "9780747538493"
@@ -1312,7 +1322,7 @@
       "Name": "Surrey",
       "Type": "arena",
       "Id": "210002",
-      "Url": "http://arena.surreylibraries.org/web/arena/",
+      "Url": "https://arena.surreylibraries.org/web/arena/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000021|0",
       "TestISBN": "9780747538493"
@@ -1434,7 +1444,7 @@
       "Name": "Wandsworth",
       "Type": "prism3",
       "Available": [ "Available" ],
-      "Url": "http://capitadiscovery.co.uk/wandsworth/",
+      "Url": "https://capitadiscovery.co.uk/wandsworth/",
       "TestISBN": "9780747538493"
     },
     {
@@ -1450,7 +1460,7 @@
       "Type": "iguana",
       "Database": "1",
       "Faceted": true,
-      "Url": "http://library.warwickshire.gov.uk/iguana/",
+      "Url": "https://library.warwickshire.gov.uk/iguana/",
       "TestISBN": "9780747538493"
     },
     {

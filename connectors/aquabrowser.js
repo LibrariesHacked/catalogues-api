@@ -21,15 +21,22 @@ var itemUrl = 'availability.ashx?output=xml&hreciid=';
 var libsUrl = 'result.ashx?inlibrary=false&noext=false&uilang=en&searchmode=assoc&skin=barnet&c_over=1&i_fk=&mxdk=-1&curpage=1&cmd=find&output=xml';
 
 ///////////////////////////////////////////
+// Function: getService
+///////////////////////////////////////////
+exports.getService = function (svc, callback) {
+    var service = common.getService(svc);
+    callback(service);
+};
+
+///////////////////////////////////////////
 // Function: getLibraries
 // For Aquabrowser just need to launch the search page
 // and then parse back the library select
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
-    // Set up the response object e.g. { service: 'Barnet', libraries: [ '', '' ], start: '', end: '' )
     var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
-    // Request 1: call a basic search which should return XML with the branch filter.
+    // Request 1: Call a basic search which should return XML with the branch filter.
     request.get({ url: service.Url + libsUrl, timeout: 60000 }, function (error, msg, response) {
         if(common.handleErrors(callback, responseLibraries, error, msg)) return;
         xml2js.parseString(response, function (err, res) {

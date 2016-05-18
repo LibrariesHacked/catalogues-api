@@ -18,13 +18,21 @@ var request = require('request'),
 var searchUrl = '?enqtype=ISBNQUERY&authpara1=';
 
 ///////////////////////////////////////////
+// Function: getService
+///////////////////////////////////////////
+exports.getService = function (svc, callback) {
+    var service = common.getService(svc);
+    callback(service);
+};
+
+///////////////////////////////////////////
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
     var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
     // Request 1: Get advanced search page
-    request.get({ forever: true, url: service.Url + '', timeout: 60000 }, function (error, message, response) {
+    request.get({ url: service.Url + '', timeout: 60000 }, function (error, message, response) {
         if (common.handleErrors(callback, responseLibraries, error, message)) return;
         common.completeCallback(callback, responseLibraries);
     });

@@ -17,6 +17,14 @@ var request = require('request'),
 ///////////////////////////////////////////
 
 ///////////////////////////////////////////
+// Function: getService
+///////////////////////////////////////////
+exports.getService = function (svc, callback) {
+    var service = common.getService(svc);
+    callback(service);
+};
+
+///////////////////////////////////////////
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
@@ -29,7 +37,7 @@ exports.getLibraries = function (service, callback) {
         request.post({ url: service.Url + 'pgLogin.aspx?CheckJavascript=1', jar: true, timeout: 20000 }, function (error, message, response) {
             if (common.handleErrors(callback, responseLibraries, error, message)) return;
             // Request 3: Go to libraries page
-            request.get({ forever: true, url: service.Url + service.Libraries, timeout: 20000, jar: true }, function (error, message, response) {
+            request.get({ url: service.Url + service.Libraries, timeout: 20000, jar: true }, function (error, message, response) {
                 if (common.handleErrors(callback, responseLibraries, error, message)) return;
                 $ = cheerio.load(response);
                 $('ol.list-unstyled li').each(function () {

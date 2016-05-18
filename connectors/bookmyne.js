@@ -15,9 +15,17 @@ var request = require('request'),
 ///////////////////////////////////////////
 // VARIABLES
 ///////////////////////////////////////////
-var host = "bookmyne.bc.sirsidynix.net";
-var searchUrl = "/search/os?q=GENERAL%3A[ISBN]&qf=GENERAL&rw=0&ct=10&pr=[PROFILE]&ext=dss&library_id=[LIBID]";
+var host = 'bookmyne.bc.sirsidynix.net';
+var searchUrl = '/search/os?q=GENERAL%3A[ISBN]&qf=GENERAL&rw=0&ct=10&pr=[PROFILE]&ext=dss&library_id=[LIBID]';
 var itemUrl = '/title/holdings?title_id=';
+
+///////////////////////////////////////////
+// Function: getService
+///////////////////////////////////////////
+exports.getService = function (svc, callback) {
+    var service = common.getService(svc);
+    callback(service);
+};
 
 ///////////////////////////////////////////
 // Function: getLibraries
@@ -31,7 +39,7 @@ exports.getLibraries = function (service, callback) {
     headers["SD-Region"] = service.Region;
 
     // Request 1: Get advanced search page
-    request.get({ forever: true, url: service.Url + 'advanced-search', timeout: 20000, jar: true }, function (error, message, response) {
+    request.get({ url: service.Url + 'advanced-search', timeout: 20000, jar: true }, function (error, message, response) {
         if (common.handleErrors(callback, responseLibraries, error, message)) return;
         common.completeCallback(callback, responseLibraries);
     });

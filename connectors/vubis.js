@@ -17,6 +17,16 @@ var request = require('request'),
 // VARIABLES
 ///////////////////////////////////////////
 var searchUrl = 'List.csp?Index1=Isbn&Database=1&Location=NoPreference&Language=NoPreference&PublicationType=NoPreference&OpacLanguage=eng&NumberToRetrieve=50&SearchMethod=Find_1&SearchTerm1=[ISBN]&Profile=Default&PreviousList=Start&PageType=Start&WebPageNr=1&WebAction=NewSearch&StartValue=1&RowRepeat=0&MyChannelCount=&SearchT1=';
+var home = 'vubis.csp';
+
+///////////////////////////////////////////
+// Function: getService
+///////////////////////////////////////////
+exports.getService = function (svc, callback) {
+    var service = common.getService(svc);
+    service.CatalogueUrl = svc.Url + home;
+    callback(service);
+};
 
 ///////////////////////////////////////////
 // Function: getLibraries
@@ -41,11 +51,12 @@ exports.getLibraries = function (service, callback) {
                 common.completeCallback(callback, responseLibraries);
             } else {
                 var link = $("a:contains('Advanced Search')").attr('href');
-                // Request 2. Get the internal body page.
+                // Request 3: Get the internal body page.
                 request.get({ url: service.Url + link, timeout: 30000 }, function (error, message, response) {
                     if (common.handleErrors(callback, responseLibraries, error, message)) return;
                     $ = cheerio.load(response);
                     var link = $('FRAME[Title="Vubis.Body"]').attr('src');
+                    // Request 4: 
                     request.get({ url: service.Url + link, timeout: 30000 }, function (error, message, response) {
                         if (common.handleErrors(callback, responseLibraries, error, message)) return;
                         $ = cheerio.load(response);
@@ -58,6 +69,13 @@ exports.getLibraries = function (service, callback) {
             }
         });
     });
+};
+
+///////////////////////////////////////////
+// Function: getWebsite
+///////////////////////////////////////////
+exports.getWebsite = function (service, callback) {
+    callback({ service: service.Name, website: service.Url + home, https: (service.Url.indexOf('https') != -1) })
 };
 
 ///////////////////////////////////////////
