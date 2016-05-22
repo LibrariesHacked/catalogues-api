@@ -17,6 +17,7 @@ var request = require('request'),
 // VARIABLES
 ///////////////////////////////////////////
 var searchUrl = 'search?p_p_state=normal&p_p_lifecycle=1&p_p_action=1&p_p_id=searchResult_WAR_arenaportlets&p_p_col_count=5&p_p_col_id=column-1&p_p_col_pos=1&p_p_mode=view&search_item_no=0&search_type=solr&search_query=[ORGQUERY][BOOKQUERY]';
+var itemUrl = 'results?p_p_state=normal&p_p_lifecycle=1&p_p_action=1&p_p_id=crDetailWicket_WAR_arenaportlets&p_p_col_count=3&p_p_col_id=column-2&p_p_col_pos=1&p_p_mode=view&search_item_no=0&search_type=solr&agency_name=[ARENANAME]&search_item_id=[ITEMID]';
 
 ///////////////////////////////////////////
 // Function: getService
@@ -80,27 +81,20 @@ exports.searchByISBN = function (isbn, lib, callback) {
     if (lib.ISBN == 10) isbn = isbn.substring(3);
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
 
-    var orgQuery = '';
-    if (lib.OrganisationId) orgQuery = 'organisationId_index:' + lib.OrganisationId + '+AND+';
-    var bookQuery = '';
-    lib.SearchType != 'Keyword' ? bookQuery = lib.ISBNAlias + '_index:' + isbn : bookQuery = isbn;
-    var url = lib.Url + searchUrl.replace('[BOOKQUERY]', bookQuery).replace('[ORGQUERY]', orgQuery);
+    var url = lib.Url + searchUrl.replace('[BOOKQUERY]', (lib.SearchType != 'Keyword' ? lib.ISBNAlias + '_index:' + isbn : isbn)).replace('[ORGQUERY]', (lib.OrganisationId ? 'organisationId_index:' + lib.OrganisationId + '+AND+' : ''));
 
     // Request 1: Perform the search.
-    request.get({ forever: true, url: url, timeout: 20000, jar: true }, function (error, message, response) {
+    request.get({ forever: true, url: url, timeout: 20000, jar: true, rejectUnauthorized: !lib.IgnoreSSL }, function (error, message, response) {
         if (common.handleErrors(callback, responseHoldings, error, message)) return;
-        // Mega Hack! Find occurence of search_item_id= and then &agency_name=, and get item ID inbetween
         if (response.lastIndexOf('search_item_id=') == -1) {
             common.completeCallback(callback, responseHoldings);
             return;
         }
 
-        var agencyNameInd = response.lastIndexOf("&agency_name=");
-        if (agencyNameInd == -1) agencyNameInd = response.lastIndexOf("&amp;agency_name=");
-        var itemId = response.substring(response.lastIndexOf("search_item_id=") + 15, agencyNameInd);
-        var url = lib.Url + 'results?p_p_state=normal&p_p_lifecycle=1&p_p_action=1&p_p_id=crDetailWicket_WAR_arenaportlets&p_p_col_count=3&p_p_col_id=column-2&p_p_col_pos=1&p_p_mode=view&search_item_no=0&search_type=solr&agency_name=' + lib.ArenaName + '&search_item_id=' + itemId;
+        // Mega Hack! Find occurence of search_item_id= and then &agency_name=, and get item ID inbetween
+        var itemId = response.substring(response.lastIndexOf("search_item_id=") + 15, response.lastIndexOf("agency_name="));
         // Request 2: Get the item page.
-        request.get({ forever: true, url: url, timeout: 20000, headers: { 'Connection': 'keep-alive' }, jar: true }, function (error, message, response) {
+        request.get({ forever: true, rejectUnauthorized: !lib.IgnoreSSL, url: lib.Url + itemUrl.replace('[ARENANAME]', lib.ArenaName).replace('[ITEMID]', itemId), timeout: 20000, headers: { 'Connection': 'keep-alive' }, jar: true }, function (error, message, response) {
             if (common.handleErrors(callback, responseHoldings, error, message)) return;
 
             // After getting the item page we may then already have the availability holdings data.
@@ -122,7 +116,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
             var headers = { 'Accept': 'text/xml', 'Wicket-Ajax': true };
             url = lib.Url + 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + resourceId + '&p_p_cacheability=cacheLevelPage&p_p_col_id=column-2&p_p_col_pos=1&p_p_col_count=3';
             // Request 3: After triggering the item page, we should then be able to get the availability container XML data
-            request.get({ forever: true, url: url, headers: headers, timeout: 20000, jar: true }, function (error, message, response) {
+            request.get({ forever: true, rejectUnauthorized: !lib.IgnoreSSL, url: url, headers: headers, timeout: 20000, jar: true }, function (error, message, response) {
                 if (common.handleErrors(callback, responseHoldings, error, message)) return;
                 xml2js.parseString(response, function (err, res) {
                     if (common.handleErrors(callback, responseHoldings, err)) return;
@@ -136,20 +130,12 @@ exports.searchByISBN = function (isbn, lib, callback) {
                     var found = false;
                     var numServices = $('.arena-holding-hyper-container .arena-holding-container a span').length;
                     $('.arena-holding-hyper-container .arena-holding-container a span').each(function (index1) {
-
-                        if ($(this).text().trim() != lib.OrganisationName && (index1 + 1) == numServices && !found) {
-                            common.completeCallback(callback, responseHoldings);
-                            return;
-                        }
-
-                        // Details can return multiple organisations for joint services -- want to just get the right one.
-                        if ($(this).text().trim() == lib.OrganisationName) {
+                        if ($(this).text().trim() == lib.OrganisationName && !found) {
+                            // We have matching results for this library service.
                             found = true;
                             // Sometimes at this point this is enough to get the availability
                             if ($('td.arena-holding-nof-total').length > 0) {
-                                var libsData = $('.arena-holding-child-container');
-                                var noLibs = libsData.length;
-                                libsData.each(function (idx) {
+                                $('.arena-holding-child-container').each(function (idx) {
                                     var libName = $(this).find('span.arena-holding-link').text();
                                     var totalAvailable = $(this).find('td.arena-holding-nof-total span.arena-value').text();
                                     var checkedOut = $(this).find('td.arena-holding-nof-checked-out span.arena-value').text();
@@ -157,11 +143,12 @@ exports.searchByISBN = function (isbn, lib, callback) {
                                 });
                                 common.completeCallback(callback, responseHoldings);
                             } else {
+                                // Else we need to make an additional call to get the data for that library service
                                 headers['Wicket-FocusedElementId'] = 'id__crDetailWicket__WAR__arenaportlets____2a';
                                 resourceId = '/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel:content:holdingsView:' + (index1 + 1) + ':holdingContainer:togglableLink::IBehaviorListener:0:';
                                 url = lib.Url + 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + resourceId + '&p_p_cacheability=';
-                                // Request 4: (Looped) Get the holdings details for that organisation. 
-                                request.get({ forever: true, headers: headers, url: url, timeout: 20000, jar: true }, function (error, message, response) {
+                                // Request 4: (Looped) Get the holdings details for that branch. 
+                                request.get({ forever: true, rejectUnauthorized: !lib.IgnoreSSL, headers: headers, url: url, timeout: 20000, jar: true }, function (error, message, response) {
                                     if (common.handleErrors(callback, responseHoldings, error, message)) return;
                                     xml2js.parseString(response, function (err, res) {
                                         if (common.handleErrors(callback, responseHoldings, err)) return;
@@ -178,7 +165,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
                                             url = lib.Url + 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + resourceId + '&p_p_cacheability=';
 
                                             // Request 5: (Looped) Get the libraries availability
-                                            request.get({ forever: true, headers: headers, url: url, timeout: 20000, jar: true }, function (error, message, response) {
+                                            request.get({ forever: true, rejectUnauthorized: !lib.IgnoreSSL, headers: headers, url: url, timeout: 20000, jar: true }, function (error, message, response) {
                                                 if (common.handleErrors(callback, responseHoldings, error, message)) return;
                                                 xml2js.parseString(response, function (err, res) {
                                                     if (common.handleErrors(callback, responseHoldings, err)) return;
@@ -197,6 +184,11 @@ exports.searchByISBN = function (isbn, lib, callback) {
                                     });
                                 });
                             }
+                        }
+                        if ($(this).text().trim() != lib.OrganisationName && (index1 + 1) == numServices && !found) {
+                            // In this case we've gone through all results and there are none for this library service.
+                            common.completeCallback(callback, responseHoldings);
+                            return;
                         }
                     });
                 });

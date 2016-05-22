@@ -303,7 +303,7 @@
       "Name": "Coventry",
       "Type": "iguana",
       "Database": "1",
-      "Faceted": true,
+      "Faceted": false,
       "Url": "https://librarycatalogue.coventry.gov.uk/iguana/",
       "TestISBN": "9780747538493"
     },
@@ -332,7 +332,7 @@
       "Id": "230001",
       "ArenaName": "AUK000023",
       "ArenaMemberId": "28980569",
-      "Url": "https://www2.darlington.gov.uk/web/arena/",
+      "Url": "http://www2.darlington.gov.uk/web/arena/",
       "Libraries": [ "Central Library", "Cockerton Library", "Mobile Library" ],
       "Advanced": "advanced-search",
       "TestISBN": "9780747538493"

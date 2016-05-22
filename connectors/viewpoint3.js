@@ -83,9 +83,11 @@ exports.getLibraries = function (service, callback) {
 exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
 
+    var options = { url: lib.Url + searchUrl + isbn, timeout: 60000 };
+    if (lib.IgnoreSSL) options.rejectUnauthorized = false;
     // Request 1: Deep link to the item by ISBN
     // Really wouldn't want to disable rejectUnauthorised for production system - query with Denbighshire about their certificate
-    request.get({ url: lib.Url + searchUrl + isbn, timeout: 60000 }, function (error, msg, res) {
+    request.get(options, function (error, msg, res) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;
         $ = cheerio.load(res);
         var libs = {};
