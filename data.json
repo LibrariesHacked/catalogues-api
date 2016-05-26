@@ -366,7 +366,8 @@
       "Type": "viewpoint2",
       "Available": "Check Shelves",
       "Url": "http://www.devon.gov.uk/library/catalogue/cgi-bin/vps2.5_viewpoint.sh",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747538493",
+      "TestRCN": "1780892896"
     },
     {
       "Name": "Doncaster",
@@ -1560,7 +1561,8 @@
       "Type": "viewpoint2",
       "Available": "On shelf",
       "Url": "https://www.wrexham.gov.uk/Library-Online-Catalogue/cgi-bin/vps2_viewpoint.sh",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747538493",
+      "TestRCN": "1780892853"
     },
     {
       "Name": "York City",
@@ -1569,7 +1571,7 @@
       "Region": "3",
       "InstitutionId": "174",
       "Profile": "YORKPUB",
-      "Url": "https://www.exploreyork.org.uk/client/en_GB/",
+      "Url": "https://cyc.sdp.sirsidynix.net.uk/client/en_GB/",
       "TestISBN": "9780747538493"
     }
   ]

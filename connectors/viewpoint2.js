@@ -31,9 +31,17 @@ exports.getService = function (svc, callback) {
 exports.getLibraries = function (service, callback) {
     var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
-    // Request 1: Get advanced search page
-    request.get({ url: service.Url + '', timeout: 60000 }, function (error, message, response) {
+    // Request 1: There's no obvious listing of libraries or search filter.  Just get a record where we know it has lots of copies
+    request.get({ url: service.Url + '?enqtype=SECOND&enqpara1=RESULT&rcn=' + service.TestRCN, timeout: 30000 }, function (error, message, response) {
         if (common.handleErrors(callback, responseLibraries, error, message)) return;
+        // Now parse through the availability table
+        $ = cheerio.load(response);
+        var libs = {};
+        $('table.viewpointdisplaybottomavailablebox tr').slice(1).each(function (row) {
+            var name = $(this).find('td').eq(0).text().trim();
+            if (!libs[name]) libs[name] = name;
+        });
+        for (var l in libs) responseLibraries.libraries.push(l);
         common.completeCallback(callback, responseLibraries);
     });
 };
