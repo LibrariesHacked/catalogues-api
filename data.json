@@ -61,10 +61,11 @@
     },
     {
       "Name": "Bath and North East Somerset",
-      "Type": "viewpoint3",
+      "Type": "enterprise",
       "Id": "280001",
-      "Url": "https://www.librarieswest.org.uk/",
-      "IgnoreSSL": true,
+      "Url": "https://www.librarieswest.org.uk/client/en_GB/default/",
+      "Available": [ "In stock" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "MultiAuthorityId": 4,
       "TestISBN": "9780747538493"
     },
@@ -175,11 +176,11 @@
     },
     {
       "Name": "Bristol City",
-      "Type": "viewpoint3",
+      "Type": "enterprise",
       "Id": "280001",
-      "MultiAuthorityId": 10,
-      "Url": "https://www.librarieswest.org.uk/",
-      "IgnoreSSL": true,
+      "Url": "https://www.librarieswest.org.uk/client/en_GB/default/",
+      "Available": [ "In stock" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "MultiAuthorityId": 3,
       "TestISBN": "9780747538493"
     },
@@ -380,8 +381,10 @@
     },
     {
       "Name": "Dorset",
-      "Type": "webpac",
-      "Url": "https://libcat.dorsetforyou.com/",
+      "Type": "enterprise",
+      "Url": "https://www.librarieswest.org.uk/client/en_GB/default/",
+      "Available": [ "In stock" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "TestISBN": "9780747538493"
     },
     {
@@ -942,10 +945,11 @@
     },
     {
       "Name": "North Somerset",
-      "Type": "viewpoint3",
+      "Type": "enterprise",
       "Id": "280001",
-      "Url": "https://www.librarieswest.org.uk/",
-      "IgnoreSSL": true,
+      "Url": "https://www.librarieswest.org.uk/client/en_GB/default/",
+      "Available": [ "In stock" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "MultiAuthorityId": 2,
       "TestISBN": "9780747538493"
     },
@@ -1060,9 +1064,10 @@
     },
     {
       "Name": "Poole",
-      "Type": "prism3",
-      "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/poole/",
+      "Type": "enterprise",
+      "Url": "https://www.librarieswest.org.uk/client/en_GB/default/",
+      "Available": [ "In stock" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "TestISBN": "9780747538493"
     },
     {
@@ -1208,10 +1213,11 @@
     },
     {
       "Name": "Somerset",
-      "Type": "viewpoint3",
+      "Type": "enterprise",
       "Id": "280001",
-      "Url": "https://www.librarieswest.org.uk/",
-      "IgnoreSSL": true,
+      "Url": "https://www.librarieswest.org.uk/client/en_GB/default/",
+      "Available": [ "In stock" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "MultiAuthorityId": 1,
       "TestISBN": "9780747538493"
     },
@@ -1223,10 +1229,11 @@
     },
     {
       "Name": "South Gloucestershire",
-      "Type": "viewpoint3",
+      "Type": "enterprise",
       "Id": "280001",
-      "Url": "https://www.librarieswest.org.uk/",
-      "IgnoreSSL": true,
+      "Url": "https://www.librarieswest.org.uk/client/en_GB/default/",
+      "Available": [ "In stock" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "MultiAuthorityId": 5,
       "TestISBN": "9780747538493"
     },

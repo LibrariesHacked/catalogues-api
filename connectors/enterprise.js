@@ -56,15 +56,15 @@ exports.searchByISBN = function (isbn, lib, callback) {
     // Or after a second request to go to the item page.
     var getItemAvailability = function (ils, itemPage) {
 
-        if (ils.indexOf('SD_ILS' == -1)) {
+        if (ils.indexOf('SD_ILS') == -1) {
             common.completeCallback(callback, responseHoldings);
             return;
         }
 
+        var url = lib.Url + lib.AvailabilityUrl + ils.split('/').join('$002f');
         // Request: A post request returns the data used to show the availability information
-        request.post({ url: lib.Url + lib.AvailabilityUrl + ils.split('/').join('$002f'), headers: header2, timeout: 30000 }, function (error, msg, resp2) {
+        request.post({ url: url, headers: header2, timeout: 30000 }, function (error, msg, resp2) {
             if (common.handleErrors(callback, responseHoldings, error, msg)) return;
-
             var avail = JSON.parse(resp2);
             $ = cheerio.load(itemPage);
             var libs = {};
@@ -89,7 +89,6 @@ exports.searchByISBN = function (isbn, lib, callback) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;
         var uri = msg.request.uri.path;
         var ils = uri.substring(uri.lastIndexOf("ent:") + 4, uri.lastIndexOf("/one;"));
-
         // Bail out here if we don't get back an ID.
         if (!ils) {
             common.completeCallback(callback, responseHoldings);
@@ -111,10 +110,6 @@ exports.searchByISBN = function (isbn, lib, callback) {
                 common.completeCallback(callback, responseHoldings);
             }
         } else {
-
-            
-
-            console.log(ils);
             getItemAvailability(ils, resp1);
         }
     });
