@@ -205,7 +205,7 @@
       "Name": "Bury",
       "Type": "webpac",
       "Url": "https://library.bury.gov.uk/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747538486"
     },
     {
       "Name": "Caerphilly",
@@ -250,6 +250,7 @@
       "Name": "Carmarthenshire",
       "Type": "vubis",
       "Url": "http://212.219.142.126/carvs/",
+      "SubDir": "/carvs/",
       "TestISBN": "9780747538493"
     },
     {
@@ -1180,7 +1181,7 @@
       "Available": [ "SHELVES", "RESERVES" ],
       "Url": "http://library.sheffield.gov.uk/",
       "Home": "uhtbin/webcat",
-      "Search": "uhtbin/cgisirsi.exe/x/0/0/5?searchdata1=",
+      "Search": "uhtbin/cgisirsi/x/0/0/5?searchdata1=",
       "TestISBN": "9780747538493"
     },
     {

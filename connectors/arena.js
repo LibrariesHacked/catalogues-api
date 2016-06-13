@@ -11,7 +11,8 @@ console.log('arena connector loading...');
 var request = require('request'),
     xml2js = require('xml2js'),
     cheerio = require('cheerio'),
-    common = require('../connectors/common');
+    common = require('../connectors/common'),
+    forever = require('forever-agent');
 
 ///////////////////////////////////////////
 // VARIABLES
@@ -31,6 +32,7 @@ exports.getService = function (svc, callback) {
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
+
     var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
     // Hardcoded returns.  A few instances just don't seem to give an option of filtering by library.
@@ -40,7 +42,7 @@ exports.getLibraries = function (service, callback) {
         return;
     }
 
-    var options = { url: service.Url + service.Advanced, timeout: 30000, jar: true };
+    var options = { url: service.Url + service.Advanced, timeout: 30000, jar: true, agent: agent };
     if (service.IgnoreSSL) options.rejectUnauthorized = false;
     // Request 1: Get advanced search page
     request.get(options, function (error, message, response) {
@@ -55,7 +57,7 @@ exports.getLibraries = function (service, callback) {
             return;
         }
 
-        var options = { jar: true, timeout: 30000, headers: headers, form: { 'organisationHierarchyPanel:organisationContainer:organisationChoice': service.OrganisationId }, url: service.Url + service.Advanced + '?p_p_id=extendedSearch_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=/extendedSearch/?wicket:interface=:0:extendedSearchPanel:extendedSearchForm:organisationHierarchyPanel:organisationContainer:organisationChoice::IBehaviorListener:0:&p_p_cacheability=cacheLevelPage&p_p_col_id=column-2&p_p_col_count=1&random=0.1554477137741876' };
+        var options = { jar: true, agent: agent, timeout: 30000, headers: headers, form: { 'organisationHierarchyPanel:organisationContainer:organisationChoice': service.OrganisationId }, url: service.Url + service.Advanced + '?p_p_id=extendedSearch_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=/extendedSearch/?wicket:interface=:0:extendedSearchPanel:extendedSearchForm:organisationHierarchyPanel:organisationContainer:organisationChoice::IBehaviorListener:0:&p_p_cacheability=cacheLevelPage&p_p_col_id=column-2&p_p_col_count=1&random=0.1554477137741876' };
         if (service.IgnoreSSL) options.rejectUnauthorized = false;
         // Request 2: The select list for libraries is retrieved with a POST request.
         request.post(options, function (error, message, response) {
@@ -78,25 +80,24 @@ exports.getLibraries = function (service, callback) {
 // Function: searchByISBN
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
+    var agent = forever.ForeverAgent;
+
     if (lib.ISBN == 10) isbn = isbn.substring(3);
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
-
     var url = lib.Url + searchUrl.replace('[BOOKQUERY]', (lib.SearchType != 'Keyword' ? lib.ISBNAlias + '_index:' + isbn : isbn)).replace('[ORGQUERY]', (lib.OrganisationId ? 'organisationId_index:' + lib.OrganisationId + '+AND+' : ''));
-
     // Request 1: Perform the search.
-    request.get({ forever: true, url: url, timeout: 20000, jar: true, rejectUnauthorized: !lib.IgnoreSSL }, function (error, message, response) {
+    request.get({ url: url, timeout: 20000, jar: true, agent: agent, rejectUnauthorized: !lib.IgnoreSSL }, function (error, message, response) {
         if (common.handleErrors(callback, responseHoldings, error, message)) return;
         if (response.lastIndexOf('search_item_id=') == -1) {
             common.completeCallback(callback, responseHoldings);
             return;
         }
-
         // Mega Hack! Find occurence of search_item_id= and then &agency_name=, and get item ID inbetween
-        var itemId = response.substring(response.lastIndexOf("search_item_id=") + 15, response.lastIndexOf("agency_name="));
+        var itemId = response.substring(response.lastIndexOf("search_item_id=") + 15, response.lastIndexOf("agency_name=") - 1);
         // Request 2: Get the item page.
-        request.get({ forever: true, rejectUnauthorized: !lib.IgnoreSSL, url: lib.Url + itemUrl.replace('[ARENANAME]', lib.ArenaName).replace('[ITEMID]', itemId), timeout: 20000, headers: { 'Connection': 'keep-alive' }, jar: true }, function (error, message, response) {
-            if (common.handleErrors(callback, responseHoldings, error, message)) return;
+        request.get({ agent: agent, rejectUnauthorized: !lib.IgnoreSSL, url: lib.Url + itemUrl.replace('[ARENANAME]', lib.ArenaName).replace('[ITEMID]', itemId), timeout: 20000, headers: { 'Connection': 'keep-alive' }, jar: true }, function (error, message, response) {
 
+            if (common.handleErrors(callback, responseHoldings, error, message)) return;
             // After getting the item page we may then already have the availability holdings data.
             $ = cheerio.load(response);
             if ($('.arena-availability-viewbranch').length > 0) {
@@ -116,7 +117,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
             var headers = { 'Accept': 'text/xml', 'Wicket-Ajax': true };
             url = lib.Url + 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + resourceId + '&p_p_cacheability=cacheLevelPage&p_p_col_id=column-2&p_p_col_pos=1&p_p_col_count=3';
             // Request 3: After triggering the item page, we should then be able to get the availability container XML data
-            request.get({ forever: true, rejectUnauthorized: !lib.IgnoreSSL, url: url, headers: headers, timeout: 20000, jar: true }, function (error, message, response) {
+            request.get({ agent: agent, rejectUnauthorized: !lib.IgnoreSSL, url: url, headers: headers, timeout: 20000, jar: true }, function (error, message, response) {
                 if (common.handleErrors(callback, responseHoldings, error, message)) return;
                 xml2js.parseString(response, function (err, res) {
                     if (common.handleErrors(callback, responseHoldings, err)) return;
@@ -148,7 +149,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
                                 resourceId = '/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel:content:holdingsView:' + (index1 + 1) + ':holdingContainer:togglableLink::IBehaviorListener:0:';
                                 url = lib.Url + 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + resourceId + '&p_p_cacheability=';
                                 // Request 4: (Looped) Get the holdings details for that branch. 
-                                request.get({ forever: true, rejectUnauthorized: !lib.IgnoreSSL, headers: headers, url: url, timeout: 20000, jar: true }, function (error, message, response) {
+                                request.get({ agent: agent, rejectUnauthorized: !lib.IgnoreSSL, headers: headers, url: url, timeout: 20000, jar: true }, function (error, message, response) {
                                     if (common.handleErrors(callback, responseHoldings, error, message)) return;
                                     xml2js.parseString(response, function (err, res) {
                                         if (common.handleErrors(callback, responseHoldings, err)) return;
@@ -165,7 +166,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
                                             url = lib.Url + 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + resourceId + '&p_p_cacheability=';
 
                                             // Request 5: (Looped) Get the libraries availability
-                                            request.get({ forever: true, rejectUnauthorized: !lib.IgnoreSSL, headers: headers, url: url, timeout: 20000, jar: true }, function (error, message, response) {
+                                            request.get({ agent: agent, rejectUnauthorized: !lib.IgnoreSSL, headers: headers, url: url, timeout: 20000, jar: true }, function (error, message, response) {
                                                 if (common.handleErrors(callback, responseHoldings, error, message)) return;
                                                 xml2js.parseString(response, function (err, res) {
                                                     if (common.handleErrors(callback, responseHoldings, err)) return;

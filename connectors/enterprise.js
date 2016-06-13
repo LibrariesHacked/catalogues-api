@@ -65,6 +65,10 @@ exports.searchByISBN = function (isbn, lib, callback) {
         // Request: A post request returns the data used to show the availability information
         request.post({ url: url, headers: header2, timeout: 30000 }, function (error, msg, resp2) {
             if (common.handleErrors(callback, responseHoldings, error, msg)) return;
+            if (!common.isJsonString(resp2)) {
+                common.completeCallback(callback, responseHoldings);
+                return;
+            }
             var avail = JSON.parse(resp2);
             $ = cheerio.load(itemPage);
             var libs = {};

@@ -78,8 +78,9 @@ exports.searchByISBN = function (isbn, lib, callback) {
         // Could be multiple copies held - check for a hitlist form
         if ($('form[name=hitlist]').length > 0) {
             // By default we'll get the first item - will probably extend this to loop through and get them all.
+            var url = msg.request.uri.protocol + '//' + msg.request.uri.host + $('form[name=hitlist]').attr('action');
             // Request 2: 
-            request.post({ url: msg.request.uri.protocol + '//' + msg.request.uri.host + $('#hitlist').attr('action'), body: "first_hit=1&form_type=&last_hit=2&VIEW%5E1=Details", timeout: 30000 }, function (error, message, response) {
+            request.post({ url: url, body: "first_hit=1&form_type=&last_hit=2&VIEW%5E1=Details", timeout: 30000 }, function (error, message, response) {
                 if (common.handleErrors(callback, responseHoldings, error, message)) return;
                 getAvailability(response);
             });

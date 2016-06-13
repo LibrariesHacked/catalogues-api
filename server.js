@@ -20,7 +20,7 @@ app.get('/availabilityByISBN/:isbn', libraries.isbnSearch);
 // app.get('/refreshbranchtwitters', libraries.refreshBranchTwitters);
 
 // For testing
-app.get('/test', libraries.test);
+app.get('/testAvailabilityByISBN', libraries.testIsbnSearch);
 
 ///////////////////////////////////////////
 // Startup

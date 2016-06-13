@@ -4,7 +4,7 @@
 // can be done in parallel, and the data file.
 ///////////////////////////////////////////
 var async = require('async');
-var data = require('./data');
+var data = require('./data/data');
 
 // On first run this sets up all the library service connectors
 // that are currently referred to in the data.json file.
@@ -99,7 +99,7 @@ exports.isbnSearch = function (req, res) {
 // Tests using an ISBN that is known to be in the relevant catalogues
 // Does some logging to the console.
 /////////////////////////////////////////////////////////////////
-exports.test = function (req, res) {
+exports.testIsbnSearch = function (req, res) {
 
     // For the browser just send a standard response but then run the tests.
     res.send('Tests starting, check console window.')

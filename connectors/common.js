@@ -66,6 +66,17 @@ exports.handleErrors = function (callback, callbackObj, error, httpMessage) {
 };
 
 /////////////////////
+// isJsonString
+exports.isJsonString = function(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+};
+
+/////////////////////
 // completeCallback
 // Just adds the current timestamp to a callback
 exports.completeCallback = function (callback, callbackObj) {
