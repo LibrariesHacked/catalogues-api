@@ -6,7 +6,7 @@ A web service project for searching multiple UK public library catalogues.
 
 In the UK there are around 200 public library authorities, each one with their own Library Management System (LMS) and associated Online Public Access Catalogue (OPAC).
 
-Despite being so many authorities, there are relatively few types of library systems (and fewer suppliers).  This project aims to define the interactions with each **type** of public access catalogue in order to automate these into a single web service for all UK library services.
+Despite being so many authorities, there are relatively few types of library systems, and fewer suppliers.  This project aims to define the interactions with each **type** of web catalogue in order to automate these into a single web service for all UK library services.
 
 This will provide data aggregation opportunities such as being able to query the UK for the availability of a particular book, or manage a user's account across all their library services.
 
@@ -55,6 +55,10 @@ The project implements the following web services.
 ### Services
 
 Returns selected contents of the data.json file for each service.  This can be useful if wanting to create an interface that lists the library authorities to then be used in a search filter for retrieving other data.
+
+| URL Route | Description | Example |
+| ----- | ----------- | ------- |
+| */libraries* | Returns a list of library authorities | http://localhost:3000/services |
 
 ### Libraries
 

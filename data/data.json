@@ -885,7 +885,7 @@
       "Name": "Newcastle",
       "Type": "arena",
       "Id": "224001",
-      "Url": "http://library.newcastle.gov.uk/web/arena/",
+      "Url": "https://library.newcastle.gov.uk/web/arena/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000224|0",
       "TestISBN": "9780747538493"
