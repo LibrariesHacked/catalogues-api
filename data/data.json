@@ -633,9 +633,9 @@
     },
     {
       "Name": "Highland",
-      "Type": "prism3",
+      "Type": "spydus",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/highland/",
+      "Url": "https://hlh.spydus.co.uk",
       "TestISBN": "9780747538493"
     },
     {
@@ -1042,7 +1042,7 @@
     {
       "Name": "Pembrokeshire",
       "Type": "vubis",
-      "Url": "http://libraryonline.pembrokeshire.gov.uk/pemvs/",
+      "Url": "http://212.219.142.126/pemvs/",
       "TestISBN": "9780747538493"
     },
     {
@@ -1308,8 +1308,8 @@
     },
     {
       "Name": "Stoke on Trent",
-      "Type": "vubis",
-      "Url": "http://www.librariesonline.stoke.gov.uk/vs/",
+      "Type": "iguana",
+      "Url": "https://librariesonline.stoke.gov.uk/iguana/",
       "TestISBN": "9780747538493"
     },
     {
