@@ -32,3 +32,5 @@ Catalogue-WS.sln
 Catalogue-WS.v12.suo
 obj/Debug/Catalogue-WS.njsproj.FileListAbsolute.txt
 *.cache
+
+/public/
