@@ -38,12 +38,12 @@ exports.getLibraries = function (service, callback) {
 
     // Request 1: Call a basic search which should return XML with the branch filter.
     request.get({ url: service.Url + libsUrl, timeout: 60000 }, function (error, msg, response) {
-        if(common.handleErrors(callback, responseLibraries, error, msg)) return;
+        if (common.handleErrors(callback, responseLibraries, error, msg)) return;
         xml2js.parseString(response, function (err, res) {
             if (common.handleErrors(callback, responseLibraries, err)) return;
-            var sel = res.root.branchselection;
-            if (sel && sel[0] && sel[0].navoptions) {
-                sel[0].navoptions[0].opt.forEach(function (item) {
+            var branches = res.root.branchselection;
+            if (branches && branches[0] && branches[0].navoptions) {
+                branches[0].navoptions[0].opt.forEach(function (item) {
                     if (item.$.val != '' && item.$.val != 'Unavailable') responseLibraries.libraries.push(item.$.val);
                 });
             }
@@ -59,33 +59,34 @@ exports.getLibraries = function (service, callback) {
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, service, callback) {
     var responseHoldings = { service: service.Name, availability: [], start: new Date() };
-
     // Request 1: call the search control for the ISBN
     request.get({ url: service.Url + searchUrl + isbn, timeout: 30000 }, function (error, msg, response) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;
         xml2js.parseString(response, function (err, res) {
             if (common.handleErrors(callback, responseHoldings, err)) return;
-            if (res.root.results && res.root.results[0].record) {
-                // Request 2: call the availability control for the record Id
-                request.get({ url: service.Url + itemUrl + res.root.results[0].record[0].$.extID, timeout: 30000 }, function (error, msg, response) {
-                    if (common.handleErrors(callback, responseHoldings, error, msg)) return;
-                    xml2js.parseString(response, function (err, res) {
-                        if (common.handleErrors(callback, responseHoldings, err)) return;
-                        var libs = {};
-                        if (res.root.vubissmartmarcavail[0].loc) {
-                            res.root.vubissmartmarcavail[0].loc.forEach(function (item) {
-                                var libName = item.$.loc;
-                                if (!libs[libName]) libs[libName] = { available: 0, unavailable: 0 };
-                                item.$.available == "true" ? libs[libName].available++ : libs[libName].unavailable++;
-                            });
-                        }
-                        for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
-                        common.completeCallback(callback, responseHoldings);
-                    });
-                });
-            } else {
+            var results = res.root.results;
+            if (!results || !results[0].record) {
                 common.completeCallback(callback, responseHoldings);
+                return;
             }
+            // Request 2: call the availability control for the record Id
+            request.get({ url: service.Url + itemUrl + results[0].record[0].$.extID, timeout: 30000 }, function (error, msg, response) {
+                if (common.handleErrors(callback, responseHoldings, error, msg)) return;
+                xml2js.parseString(response, function (err, res) {
+                    var avail = res.root.vubissmartmarcavail[0];
+                    if (common.handleErrors(callback, responseHoldings, err)) return;
+                    var libs = {};
+                    if (avail && avail.loc && avail.loc[0]) {
+                        avail.loc.forEach(function (item) {
+                            var libName = item.$.loc;
+                            if (!libs[libName]) libs[libName] = { available: 0, unavailable: 0 };
+                            item.$.available == "true" ? libs[libName].available++ : libs[libName].unavailable++;
+                        });
+                    }
+                    for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
+                    common.completeCallback(callback, responseHoldings);
+                });
+            });
         });
     });
 };

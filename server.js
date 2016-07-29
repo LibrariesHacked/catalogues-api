@@ -16,7 +16,7 @@ app.use(express.static('public'));
 // Template engine
 // Using pug as a basic templating engine
 ///////////////////////////////////////////
-app.set('views', './views')
+app.set('views', './views');
 app.set('view engine', 'pug');
 
 ///////////////////////////////////////////

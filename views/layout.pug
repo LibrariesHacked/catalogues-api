@@ -1,0 +1,21 @@
+﻿doctype html
+html
+	head
+		meta(charset='utf-8')
+		title find a book | { libraries: hacked }
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+		link(rel='stylesheet', href="/css/bootstrap.min.css")
+		link(rel='stylesheet', href="/css/site.css")
+	body
+		.container
+			block content
+		footer
+			.container
+				hr
+				p a #[a( href='https://www.librarieshacked.org' ) { libraries: hacked }] project, available on #[a( href='https://www.github.com/librarieshacked/catalogue-nodews' ) GitHub].
+	script(src="/js/jquery.min.js")
+	script(src="/js/bootstrap.min.js")
+	script(src="/js/bootstrap3-typeahead.min.js")
+	script(src="/js/config.js")
+	script(src="/js/site.js")
+	block scripts

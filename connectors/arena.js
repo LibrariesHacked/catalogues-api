@@ -35,7 +35,7 @@ exports.getLibraries = function (service, callback) {
 
     var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
-    // Hardcoded returns.  A few instances just don't seem to give an option of filtering by library.
+    // Hardcoded returns.  A few instances don't seem to give an option of filtering by library.
     if (service.Libraries) {
         for (lib in service.Libraries) responseLibraries.libraries.push(lib);
         common.completeCallback(callback, responseLibraries);

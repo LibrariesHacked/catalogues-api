@@ -1,26 +1,11 @@
-﻿doctype html
-html
-	head
-		meta(charset='utf-8')
-		title find a book | { libraries: hacked }
-		meta(name='viewport', content='width=device-width, initial-scale=1.0')
-		link(rel='stylesheet', href="/css/bootstrap.min.css")
-		link(rel='stylesheet', href="/css/site.css")
-	body
-		.container
-			h1 Find a book
-			p Searching UK public library catalogues for book availability.
-			form(class='form-horizontal')
-				fieldset
-				legend search for a book
-				.form-group
-					label(class='col-lg-2 control-label', for='inputEmail') ISBN
-					div(class='col-lg-10')
-						input(class='form-control', id='inputEmail', type='text', placeholder='ISBN')
-		footer
-			.container
-				hr
-				p a #[a( href='https://www.librarieshacked.org' ) { libraries: hacked }] project, available on #[a( href='https://www.github.com/librarieshacked/catalogue-nodews' ) GitHub].
-	script(src="/js/jquery.min.js")
-	script(src="/js/bootstrap.min.js")
-	script(src="/js/site.js")
+﻿extends layout.pug
+
+block content
+	h1 Find a book
+	p Searching UK public library catalogues for book availability.
+	form(class='form-horizontal')
+		fieldset
+			.form-group
+				label(class='col-lg-2 control-label', for='txtKeywords') Keywords
+				div(class='col-lg-10')
+					input(class='form-control', id='txtKeywords', type='text', placeholder='Search term')
