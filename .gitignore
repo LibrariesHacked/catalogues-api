@@ -33,7 +33,4 @@ Catalogue-WS.v12.suo
 obj/Debug/Catalogue-WS.njsproj.FileListAbsolute.txt
 *.cache
 
-/public/
-!/public/js/config.template.js
-!/public/js/site.js
-!/public/css/site.css
+/public/libs/

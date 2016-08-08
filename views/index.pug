@@ -1,11 +1,13 @@
 ﻿extends layout.pug
-
 block content
-	h1 Find a book
-	p Searching UK public library catalogues for book availability.
-	form(class='form-horizontal')
+	.jumbotron
+		p(class='lead') Searching UK public library catalogues for book availability
+
+		form(class='form-horizontal')
 		fieldset
 			.form-group
 				label(class='col-lg-2 control-label', for='txtKeywords') Keywords
 				div(class='col-lg-10')
-					input(class='form-control', id='txtKeywords', type='text', placeholder='Search term')
+				input(class='form-control', id='txtKeywords', type='text', placeholder='Search term')
+		
+	
