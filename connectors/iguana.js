@@ -46,10 +46,14 @@ exports.getLibraries = function (service, callback) {
             xml2js.parseString(response, function (err, res) {
                 if (common.handleErrors(callback, responseLibraries, err)) return;
                 var facets = res.VubisFacetedSearchResponse.Facets[0].Facet;
-                if (facets && facets[0]) {
-                    for (var facet in facets[0].FacetEntry) {
-                        if (facet.Display && facet.Display[0]) responseLibraries.libraries.push(facet.Display[0]);
-                    }
+                if (facets) {
+                    facets.forEach(function (facet) {
+                        if (facet.FacetWording[0] == service.LibraryFacet) {
+                            facet.FacetEntry.forEach(function (location) {
+                                responseLibraries.libraries.push(location.Display[0]);
+                            });
+                        }
+                    });
                 }
                 common.completeCallback(callback, responseLibraries);
             });
@@ -66,19 +70,19 @@ exports.getLibraries = function (service, callback) {
                 var resultId = res["zs:searchRetrieveResponse"]["zs:resultSetId"][0];
                 getFacets(resultId);
             } else {
-                // Loop through the search results and try to get unique entries from holdings data.
-                var records = res['zs:searchRetrieveResponse']['zs:records'][0]['zs:record'];
-                // Loop through all the records
-                records.forEach(function (record) {
-                    // Loop through all the holdings records.
-                    var recData = record['zs:recordData'];
-                    if (recData && recData[0] && recData[0].BibDocument && recData[0].BibDocument[0] && recData[0].BibDocument[0].HoldingsSummary && recData[0].BibDocument[0].HoldingsSummary[0]) {
-                        recData[0].BibDocument[0].HoldingsSummary[0].ShelfmarkData.forEach(function (item) {
-                            var lib = item.Shelfmark[0].split(' : ')[0];
-                            if (responseLibraries.libraries.indexOf(lib) == -1) responseLibraries.libraries.push(lib);
-                        });
-                    }
-                });
+                if (res && res['zs:searchRetrieveResponse'] && res['zs:searchRetrieveResponse']['zs:records']) {
+                    // Loop through the search results and try to get unique entries from holdings data.
+                    res['zs:searchRetrieveResponse']['zs:records'][0]['zs:record'].forEach(function (record) {
+                        // Loop through all the holdings records.
+                        var recData = record['zs:recordData'];
+                        if (recData && recData[0] && recData[0].BibDocument && recData[0].BibDocument[0] && recData[0].BibDocument[0].HoldingsSummary && recData[0].BibDocument[0].HoldingsSummary[0]) {
+                            recData[0].BibDocument[0].HoldingsSummary[0].ShelfmarkData.forEach(function (item) {
+                                var lib = item.Shelfmark[0].split(' : ')[0];
+                                if (responseLibraries.libraries.indexOf(lib) == -1) responseLibraries.libraries.push(lib);
+                            });
+                        }
+                    });
+                }
                 common.completeCallback(callback, responseLibraries);
             }
         });

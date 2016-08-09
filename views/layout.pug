@@ -2,7 +2,7 @@
 html
 	head
 		meta(charset='utf-8')
-		title find a book | { libraries: hacked }
+		title books | { libraries: hacked }
 		meta(name='viewport', content='width=device-width, initial-scale=1.0')
 		link(rel='stylesheet', href="/libs/css/bootstrap.min.css")
 		link(rel='stylesheet', href="/css/site.css")
@@ -11,17 +11,15 @@ html
 			.header.clearfix
 				nav
 					ul(class="nav nav-pills pull-right")
-						li(role="presentation" class="active")
-							a(href="#") Home
 						li(role="presentation")
-							a(href="#") Contact
+							a(href="#") info
 
 		.container
 			block content
 		footer
 			.container
 				hr
-				p a #[a( href='https://www.librarieshacked.org' ) { libraries: hacked }] project, available on #[a( href='https://www.github.com/librarieshacked/catalogue-nodews' ) GitHub].
+				p a #[a(href='https://www.librarieshacked.org') { libraries: hacked }] project, available on #[a( href='https://www.github.com/librarieshacked/catalogue-nodews' ) GitHub].
 	script(src="/libs/js/jquery.min.js")
 	script(src="/libs/js/bootstrap.min.js")
 	script(src="/libs/js/bootstrap3-typeahead.min.js")

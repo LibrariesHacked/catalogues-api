@@ -32,7 +32,7 @@ exports.getService = function (svc, callback) {
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
-
+    var agent = forever.ForeverAgent;
     var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
     // Hardcoded returns.  A few instances don't seem to give an option of filtering by library.
