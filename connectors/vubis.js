@@ -33,7 +33,6 @@ exports.getService = function (svc, callback) {
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
     var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
-
     var url = service.Url + 'Vubis.csp?Profile=' + service.Profile + '&SearchMethod=Find_2';
     // Request 1. This gets the frameset
     request.get({ url: url, timeout: 30000 }, function (error, message, response) {
@@ -87,7 +86,7 @@ exports.getWebsite = function (service, callback) {
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
-
+    if (isbn.ISBN10) isbn = isbn.substring(3);
     // Declaring this function to use later on
     var itemRequest = function (link) {
         // Request 6: Get the item availability.
@@ -100,8 +99,8 @@ exports.searchByISBN = function (isbn, lib, callback) {
             $('table[summary="FullBB.HoldingDetails"] tr').slice(2).each(function () {
                 var status = $(this).find('td').eq(availIndex).text().trim();
                 var name = $(this).find('td').eq(shelfMarkIndex).text().trim();
-                if (name.indexOf(':') != -1) name = name.split(':')[0];
-                if (name.indexOf('/') != -1) name = name.split('/')[0];
+                if (name.indexOf(':') != -1) name = name.split(':')[0].trim();
+                if (name.indexOf('/') != -1) name = name.split('/')[0].trim();
                 if (!libs[name]) libs[name] = { available: 0, unavailable: 0 };
                 status == 'Available' ? libs[name].available++ : libs[name].unavailable++;
             });

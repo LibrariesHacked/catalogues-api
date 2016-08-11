@@ -10,7 +10,7 @@ console.log('ibistro connector loading...');
 // querying the HTML returned.
 ///////////////////////////////////////////
 var request = require('request'),
-    cheerio = require('cheerio'), 
+    cheerio = require('cheerio'),
     common = require('../connectors/common');
 
 ///////////////////////////////////////////

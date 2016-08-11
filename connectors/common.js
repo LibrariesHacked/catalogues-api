@@ -67,7 +67,7 @@ exports.handleErrors = function (callback, callbackObj, error, httpMessage) {
 
 /////////////////////
 // isJsonString
-exports.isJsonString = function(str) {
+exports.isJsonString = function (str) {
     try {
         JSON.parse(str);
     } catch (e) {

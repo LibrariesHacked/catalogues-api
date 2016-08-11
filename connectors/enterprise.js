@@ -93,8 +93,6 @@ exports.searchByISBN = function (isbn, lib, callback) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;
         var uri = msg.request.uri.path;
         var ils = uri.substring(uri.lastIndexOf("ent:") + 4, uri.lastIndexOf("/one"));
-        console.log(uri);
-        console.log(ils);
         // Bail out here if we don't get back an ID.
         if (!ils) {
             common.completeCallback(callback, responseHoldings);

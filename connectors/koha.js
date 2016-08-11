@@ -61,7 +61,6 @@ exports.searchByISBN = function (isbn, lib, callback) {
             common.completeCallback(callback, responseHoldings);
             return;
         }
-
         // Request 2:
         request.get({ url: bibLink + '&viewallitems=1', timeout: 30000 }, function (error, msg, res) {
             if (common.handleErrors(callback, responseHoldings, error, msg)) return;

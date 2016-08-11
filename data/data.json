@@ -257,15 +257,16 @@
     {
       "Name": "Ceredigion",
       "Type": "vubis",
+      "ISBN10": true,
       "Url": "https://libraries.ceredigion.gov.uk/vs/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747551006"
     },
     {
       "Name": "Cheshire West and Chester",
       "Type": "koha",
       "Url": "https://cheslive.koha-ptfs.co.uk/",
       "MultiBranchLimit": "WEST",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747551006"
     },
     {
       "Name": "Cheshire East",
