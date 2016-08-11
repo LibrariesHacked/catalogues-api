@@ -115,6 +115,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
         if (common.handleErrors(callback, responseHoldings, error, message)) return;
         $ = cheerio.load(response);
         var link = $('FRAME[Title="Vubis.Body"]').attr('src');
+
         // Request 2: Should now have the StartBody link - do it!
         request.get({ url: lib.Url + link, timeout: 20000 }, function (error, message, response) {
             if (common.handleErrors(callback, responseHoldings, error, message)) return;
@@ -122,39 +123,43 @@ exports.searchByISBN = function (isbn, lib, callback) {
             // Get the encoded value to perform the search.
             var enc = $('input[name=EncodedRequest]').attr('value');
             var url = lib.Url + searchUrl.replace('[ISBN]', isbn) + isbn + '&EncodedRequest=' + enc;
+
             // Request 3: Get the search frameset (*voms*)
             request.get({ url: url, timeout: 20000 }, function (error, msg, response) {
                 if (common.handleErrors(callback, responseHoldings, error, message)) return;
                 $ = cheerio.load(response);
                 // In some (but not all) cases this will redirect to the relevant item page
                 var link = $('FRAME[title="List.Body"]').attr('src');
-                if (!link || link.indexOf('ListBody') == -1) {
-                    common.completeCallback(callback, responseHoldings);
-                    return;
-                }
-                if (link.indexOf('FullBBBody') != -1) itemRequest(lib.Url + link);
-                // Request 4:
-                request.get({ url: lib.Url + link, timeout: 20000 }, function (error, msg, response) {
-                    if (common.handleErrors(callback, responseHoldings, error, message)) return;
-                    $ = cheerio.load(response);
-                    var link = $('td.listitemOdd').last().find('a').attr('href');
-                    if (!link) {
+                if (link.indexOf('FullBBBody') != -1) {
+                    itemRequest(lib.Url + link);
+                } else {
+                    if (!link || link.indexOf('ListBody') == -1) {
                         common.completeCallback(callback, responseHoldings);
                         return;
                     }
-                    // Request 5:
-                    request.get(lib.Url + link, function (error, message, response) {
-                        //if (common.handleErrors(callback, responseHoldings, error, message)) return;
+                    // Request 4:
+                    request.get({ url: lib.Url + link, timeout: 20000 }, function (error, msg, response) {
+                        if (common.handleErrors(callback, responseHoldings, error, message)) return;
                         $ = cheerio.load(response);
-                        var link = $('frame').eq(1).attr('src');
+                        var link = $('td.listitemOdd').last().find('a').attr('href');
                         if (!link) {
                             common.completeCallback(callback, responseHoldings);
                             return;
                         }
-                        var url = lib.Url + link.replace(lib.SubDir, '');
-                        itemRequest(url);
+                        // Request 5:
+                        request.get(lib.Url + link, function (error, message, response) {
+                            //if (common.handleErrors(callback, responseHoldings, error, message)) return;
+                            $ = cheerio.load(response);
+                            var link = $('frame').eq(1).attr('src');
+                            if (!link) {
+                                common.completeCallback(callback, responseHoldings);
+                                return;
+                            }
+                            var url = lib.Url + link.replace(lib.SubDir, '');
+                            itemRequest(url);
+                        });
                     });
-                });
+                }
             });
         });
     });

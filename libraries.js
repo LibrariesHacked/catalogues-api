@@ -113,7 +113,7 @@ exports.testIsbnSearch = function (req, res) {
             return function (callback) {
                 console.log('Running test for ' + service.Name);
                 serviceFunctions[service.Type].searchByISBN(service.TestISBN, service, function (response) {
-                    console.log('Response: ' + JSON.stringify(response));
+                    if (response.availability.length == 0) console.log('None found: ' + JSON.stringify(response));
                     callback(null, response);
                 });
             }

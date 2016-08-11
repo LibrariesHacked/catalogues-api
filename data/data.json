@@ -40,6 +40,7 @@
       "ArenaName": "AUK000226",
       "ArenaMemberId": "",
       "Id": "226006",
+      "SearchType": "ISBN",
       "Url": "https://arena.yourlondonlibrary.net/web/barking-and-dagenham/",
       "Advanced": "advanced-search",
       "TestISBN": "9780747538486"
@@ -134,7 +135,7 @@
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/bournemouth/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9781408865408"
     },
     {
       "Name": "Bracknell Forest",
@@ -251,7 +252,7 @@
       "Type": "vubis",
       "Url": "http://212.219.142.126/carvs/",
       "SubDir": "/carvs/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747538486"
     },
     {
       "Name": "Ceredigion",

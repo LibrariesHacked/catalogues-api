@@ -85,8 +85,10 @@ exports.searchByISBN = function (isbn, lib, callback) {
     if (lib.ISBN == 10) isbn = isbn.substring(3);
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
     var url = lib.Url + searchUrl.replace('[BOOKQUERY]', (lib.SearchType != 'Keyword' ? lib.ISBNAlias + '_index:' + isbn : isbn)).replace('[ORGQUERY]', (lib.OrganisationId ? 'organisationId_index:' + lib.OrganisationId + '+AND+' : ''));
+    console.log(url);
     // Request 1: Perform the search.
     request.get({ url: url, timeout: 20000, jar: true, agent: agent, rejectUnauthorized: !lib.IgnoreSSL }, function (error, message, response) {
+        
         if (common.handleErrors(callback, responseHoldings, error, message)) return;
         if (response.lastIndexOf('search_item_id=') == -1) {
             common.completeCallback(callback, responseHoldings);
