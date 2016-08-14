@@ -257,9 +257,10 @@
     {
       "Name": "Ceredigion",
       "Type": "vubis",
+      "Profile": "Default",
       "ISBN10": true,
       "Url": "https://libraries.ceredigion.gov.uk/vs/",
-      "TestISBN": "9780747551006"
+      "TestISBN": "9780747538484"
     },
     {
       "Name": "Cheshire West and Chester",
@@ -800,7 +801,7 @@
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/liverpool/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747542155"
     },
     {
       "Name": "Luton",
@@ -861,7 +862,7 @@
       "Name": "Milton Keynes",
       "Type": "spydus",
       "Url": "https://miltonkeynes.spydus.co.uk/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747538484"
     },
     {
       "Name": "Monmouthshire",
@@ -877,7 +878,7 @@
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/moray/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747542155"
     },
     {
       "Name": "Neath Port Talbot",
@@ -1058,13 +1059,13 @@
       "Name": "Peterborough",
       "Type": "spydus",
       "Url": "https://peterborough.spydus.co.uk/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747573760"
     },
     {
       "Name": "Plymouth",
       "Type": "viewpoint3",
       "Url": "https://www.webopac.plymouth.gov.uk/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747562184"
     },
     {
       "Name": "Poole",
@@ -1092,6 +1093,7 @@
     {
       "Name": "Reading",
       "Type": "horizon",
+      "Available": ["On shelf"],
       "Url": "http://reading-hip.epixtech.co.uk/",
       "TestISBN": "9780747538493"
     },
@@ -1137,7 +1139,7 @@
       "Name": "Rochdale",
       "Type": "spydus",
       "Url": "https://rochdale.spydus.co.uk/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9781408855676"
     },
     {
       "Name": "Rotherham",
@@ -1152,19 +1154,19 @@
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/rutland/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9781408855706"
     },
     {
       "Name": "Salford",
       "Type": "spydus",
       "Url": "https://salfordlibraries.spydus.co.uk/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9781408855706"
     },
     {
       "Name": "Sandwell",
       "Type": "spydus",
       "Url": "https://opac-lib.smbc.sandwell.gov.uk/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9781408855706"
     },
     {
       "Name": "Scottish Borders",
@@ -1497,6 +1499,7 @@
     {
       "Name": "West Lothian",
       "Type": "horizon",
+      "Available": [ "AVAILABLE" ],
       "Url": "http://webpac.westlothian.gov.uk/",
       "TestISBN": "9780747538493"
     },

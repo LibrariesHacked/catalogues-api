@@ -58,7 +58,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
             var name = $(this).find('td').eq(0).text().trim();
             var status = $(this).find('td').eq(2).text().trim();
             if (!libs[name]) libs[name] = { available: 0, unavailable: 0 };
-            status == 'AVAILABLE' ? libs[name].available++ : libs[name].unavailable++;
+            lib.Available.indexOf(status) != -1 ? libs[name].available++ : libs[name].unavailable++;
         });
         for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
         common.completeCallback(callback, responseHoldings);

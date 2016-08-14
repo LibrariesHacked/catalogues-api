@@ -86,7 +86,7 @@ exports.getWebsite = function (service, callback) {
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
-    if (isbn.ISBN10) isbn = isbn.substring(3);
+    if (lib.ISBN10) isbn = isbn.substring(3);
     // Declaring this function to use later on
     var itemRequest = function (link) {
         // Request 6: Get the item availability.
