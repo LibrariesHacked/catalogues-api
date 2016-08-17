@@ -48,7 +48,6 @@ exports.getLibraries = function (service, callback) {
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
-
     // Request 1: 
     request.get({ url: lib.Url + "items.json?query=" + isbn, headers: reqHeader, timeout: 30000 }, function (error, msg, response) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;
@@ -58,7 +57,6 @@ exports.searchByISBN = function (isbn, lib, callback) {
             common.completeCallback(callback, responseHoldings);
             return;
         }
-
         // Request 2: 
         request.get({ url: itemUrl, headers: reqHeader, timeout: 30000 }, function (error, msg, res) {
             if (common.handleErrors(callback, responseHoldings, error, msg)) return;

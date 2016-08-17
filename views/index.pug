@@ -1,11 +1,20 @@
 ﻿extends layout.pug
 block content
+	p(class='lead') searching UK public library catalogues for books.  
 	.jumbotron
-		p(class='lead') searching UK public library catalogues for books
-
+		p(class='lead') 1. select a book by entering keywords below.
 		form(class='form-horizontal')
 		fieldset
 			.form-group
 				label(class='col-lg-2 control-label', for='txtKeywords') keywords
 				div(class='col-lg-10')
 					input(class='form-control', id='txtKeywords', type='text', placeholder='search term')
+
+	.jumbotron
+		p(class='lead') 2. select at least one library service
+		form(class='form-horizontal')
+		fieldset
+			.form-group
+				label(class='col-lg-2 control-label', for='txtKeywords') library services
+				div(class='col-lg-10')
+					input(class='form-control', id='txtKeywords', type='text', placeholder='library')

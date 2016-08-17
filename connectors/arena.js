@@ -17,8 +17,8 @@ var request = require('request'),
 ///////////////////////////////////////////
 // VARIABLES
 ///////////////////////////////////////////
-var searchUrl = 'search?p_p_state=normal&p_p_lifecycle=1&p_p_action=1&p_p_id=searchResult_WAR_arenaportlets&p_p_col_count=5&p_p_col_id=column-1&p_p_col_pos=1&p_p_mode=view&search_item_no=0&search_type=solr&search_query=[ORGQUERY][BOOKQUERY]';
-var itemUrl = 'results?p_p_state=normal&p_p_lifecycle=1&p_p_action=1&p_p_id=crDetailWicket_WAR_arenaportlets&p_p_col_count=3&p_p_col_id=column-2&p_p_col_pos=1&p_p_mode=view&search_item_no=0&search_type=solr&agency_name=[ARENANAME]&search_item_id=[ITEMID]';
+var itemUrl = 'results?p_p_state=normal&p_p_lifecycle=1&p_p_action=1&p_p_id=crDetailWicket_WAR_arenaportlets&p_p_col_count=3&p_p_col_id=column-2&p_p_col_pos=1&p_p_mode=view&search_item_no=0&search_type=solr&agency_name=[ARENANAME]&p_r_p_687834046_search_item_id=[ITEMID]';
+var searchUrl = 'search?p_auth=NJXnzkEv&p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=organisationId_index%3AAUK000226%7C6+AND+number_index%3A9780747538486';
 
 ///////////////////////////////////////////
 // Function: getService
@@ -81,24 +81,23 @@ exports.getLibraries = function (service, callback) {
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
     var agent = forever.ForeverAgent;
-
     if (lib.ISBN == 10) isbn = isbn.substring(3);
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
-    var url = lib.Url + searchUrl.replace('[BOOKQUERY]', (lib.SearchType != 'Keyword' ? lib.ISBNAlias + '_index:' + isbn : isbn)).replace('[ORGQUERY]', (lib.OrganisationId ? 'organisationId_index:' + lib.OrganisationId + '+AND+' : ''));
-    console.log(url);
-    // Request 1: Perform the search.
-    request.get({ url: url, timeout: 20000, jar: true, agent: agent, rejectUnauthorized: !lib.IgnoreSSL }, function (error, message, response) {
-        
+    var bookQuery = (lib.SearchType != 'Keyword' ? lib.ISBNAlias + '_index:' + isbn : isbn);
+    if (lib.OrganisationId) bookQuery = 'organisationId_index:' + lib.OrganisationId + '+AND+' + bookQuery;
+    // Request 1: Perform the search
+    request.get({ url: lib.Url + searchUrl, timeout: 20000, jar: true, agent: agent, rejectUnauthorized: !lib.IgnoreSSL }, function (error, message, response) {
+
         if (common.handleErrors(callback, responseHoldings, error, message)) return;
         if (response.lastIndexOf('search_item_id=') == -1) {
             common.completeCallback(callback, responseHoldings);
             return;
         }
         // Mega Hack! Find occurence of search_item_id= and then &agency_name=, and get item ID inbetween
-        var itemId = response.substring(response.lastIndexOf("search_item_id=") + 15, response.lastIndexOf("agency_name=") - 1);
+        var itemId = response.substring(response.lastIndexOf("search_item_id=") + 15);
+        itemId = itemId.substring(0, itemId.indexOf('&'));
         // Request 2: Get the item page.
         request.get({ agent: agent, rejectUnauthorized: !lib.IgnoreSSL, url: lib.Url + itemUrl.replace('[ARENANAME]', lib.ArenaName).replace('[ITEMID]', itemId), timeout: 20000, headers: { 'Connection': 'keep-alive' }, jar: true }, function (error, message, response) {
-
             if (common.handleErrors(callback, responseHoldings, error, message)) return;
             // After getting the item page we may then already have the availability holdings data.
             $ = cheerio.load(response);
@@ -113,14 +112,15 @@ exports.searchByISBN = function (isbn, lib, callback) {
                 common.completeCallback(callback, responseHoldings);
                 return;
             }
-
             // Otherwise carry on...
             var resourceId = '/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel::IBehaviorListener:0:';
             var headers = { 'Accept': 'text/xml', 'Wicket-Ajax': true };
             url = lib.Url + 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + resourceId + '&p_p_cacheability=cacheLevelPage&p_p_col_id=column-2&p_p_col_pos=1&p_p_col_count=3';
+
             // Request 3: After triggering the item page, we should then be able to get the availability container XML data
             request.get({ agent: agent, rejectUnauthorized: !lib.IgnoreSSL, url: url, headers: headers, timeout: 20000, jar: true }, function (error, message, response) {
                 if (common.handleErrors(callback, responseHoldings, error, message)) return;
+
                 xml2js.parseString(response, function (err, res) {
                     if (common.handleErrors(callback, responseHoldings, err)) return;
 
