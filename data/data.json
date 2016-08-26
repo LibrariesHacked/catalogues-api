@@ -81,7 +81,7 @@
       "Url": "https://beds-arena.culturalservices.net/web/arena/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000022|3",
-      "TestISBN": "9780747595830"
+      "TestISBN": "9780747591061"
     },
     {
       "Name": "Bexley",
@@ -93,7 +93,7 @@
       "Id": "226018",
       "Url": "https://arena.yourlondonlibrary.net/web/bexley/",
       "Advanced": "extended-search",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747591085"
     },
     {
       "Name": "Birmingham",
@@ -161,7 +161,7 @@
       "Id": "226011",
       "Url": "https://arena.yourlondonlibrary.net/web/brent/",
       "Advanced": "extended-search",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9781408855652"
     },
     {
       "Name": "Bridgend",
@@ -267,14 +267,14 @@
       "Type": "koha",
       "Url": "https://cheslive.koha-ptfs.co.uk/",
       "MultiBranchLimit": "WEST",
-      "TestISBN": "9780747551006"
+      "TestISBN": "9780747562184"
     },
     {
       "Name": "Cheshire East",
       "Type": "koha",
       "Url": "https://cheslive.koha-ptfs.co.uk/",
       "MultiBranchLimit": "EAST",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747562184"
     },
     {
       "Name": "City of London",
@@ -282,7 +282,7 @@
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "Url": "https://col.ent.sirsidynix.net.uk/client/en_GB/default/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9781408810569"
     },
     {
       "Name": "Clackmannanshire",
@@ -292,10 +292,11 @@
     },
     {
       "Name": "Conwy",
-      "Type": "prism3",
+      "Type": "enterprise",
       "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/conwy/",
-      "TestISBN": "9780747538493"
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+      "Url": "https://wales.ent.sirsidynix.net.uk/client/cy_GB/conwy_en/",
+      "TestISBN": "9781408855713"
     },
     {
       "Name": "Cornwall",
