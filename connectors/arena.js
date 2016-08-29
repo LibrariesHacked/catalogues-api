@@ -17,8 +17,8 @@ var request = require('request'),
 ///////////////////////////////////////////
 // VARIABLES
 ///////////////////////////////////////////
-var itemUrl = 'results?p_p_state=normal&p_p_lifecycle=1&p_p_action=1&p_p_id=crDetailWicket_WAR_arenaportlets&p_p_col_count=3&p_p_col_id=column-2&p_p_col_pos=1&p_p_mode=view&search_item_no=0&search_type=solr&agency_name=[ARENANAME]&p_r_p_687834046_search_item_id=[ITEMID]';
-var searchUrl = 'search?p_auth=NJXnzkEv&p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=organisationId_index%3AAUK000226%7C6+AND+number_index%3A9780747538486';
+var itemUrl = 'results?p_auth=cnJs8BK0&p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_pos=2&p_p_col_count=4&p_r_p_687834046_facet_queries=&p_r_p_687834046_search_item_no=0&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_item_id=[ITEMID]&p_r_p_687834046_agency_name=[ARENANAME]';
+var searchUrl = 'search?p_auth=NJXnzkEv&p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=[BOOKQUERY]';
 
 ///////////////////////////////////////////
 // Function: getService
@@ -86,18 +86,18 @@ exports.searchByISBN = function (isbn, lib, callback) {
     var bookQuery = (lib.SearchType != 'Keyword' ? lib.ISBNAlias + '_index:' + isbn : isbn);
     if (lib.OrganisationId) bookQuery = 'organisationId_index:' + lib.OrganisationId + '+AND+' + bookQuery;
     // Request 1: Perform the search
-    request.get({ url: lib.Url + searchUrl, timeout: 20000, jar: true, agent: agent, rejectUnauthorized: !lib.IgnoreSSL }, function (error, message, response) {
-
+    request.get({ url: lib.Url + searchUrl.replace('[BOOKQUERY]',bookQuery), timeout: 20000, jar: true, agent: agent, rejectUnauthorized: !lib.IgnoreSSL }, function (error, message, response) {
         if (common.handleErrors(callback, responseHoldings, error, message)) return;
         if (response.lastIndexOf('search_item_id=') == -1) {
             common.completeCallback(callback, responseHoldings);
             return;
         }
         // Mega Hack! Find occurence of search_item_id= and then &agency_name=, and get item ID inbetween
-        var itemId = response.substring(response.lastIndexOf("search_item_id=") + 15);
+        var itemId = response.substring(response.lastIndexOf("search_item_id=") + 15); // 1408855658
         itemId = itemId.substring(0, itemId.indexOf('&'));
         // Request 2: Get the item page.
-        request.get({ agent: agent, rejectUnauthorized: !lib.IgnoreSSL, url: lib.Url + itemUrl.replace('[ARENANAME]', lib.ArenaName).replace('[ITEMID]', itemId), timeout: 20000, headers: { 'Connection': 'keep-alive' }, jar: true }, function (error, message, response) {
+        var url = lib.Url + itemUrl.replace('[ARENANAME]', lib.ArenaName).replace('[ITEMID]', itemId);
+        request.get({ agent: agent, rejectUnauthorized: !lib.IgnoreSSL, url: url, timeout: 20000, headers: { 'Connection': 'keep-alive' }, jar: true }, function (error, message, response) {
             if (common.handleErrors(callback, responseHoldings, error, message)) return;
             // After getting the item page we may then already have the availability holdings data.
             $ = cheerio.load(response);
@@ -116,19 +116,15 @@ exports.searchByISBN = function (isbn, lib, callback) {
             var resourceId = '/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel::IBehaviorListener:0:';
             var headers = { 'Accept': 'text/xml', 'Wicket-Ajax': true };
             url = lib.Url + 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + resourceId + '&p_p_cacheability=cacheLevelPage&p_p_col_id=column-2&p_p_col_pos=1&p_p_col_count=3';
-
             // Request 3: After triggering the item page, we should then be able to get the availability container XML data
             request.get({ agent: agent, rejectUnauthorized: !lib.IgnoreSSL, url: url, headers: headers, timeout: 20000, jar: true }, function (error, message, response) {
                 if (common.handleErrors(callback, responseHoldings, error, message)) return;
-
                 xml2js.parseString(response, function (err, res) {
                     if (common.handleErrors(callback, responseHoldings, err)) return;
-
                     if (!res['ajax-response'].component) {
                         common.completeCallback(callback, responseHoldings);
                         return;
                     }
-
                     $ = cheerio.load(res['ajax-response'].component[0]._);
                     var found = false;
                     var numServices = $('.arena-holding-hyper-container .arena-holding-container a span').length;

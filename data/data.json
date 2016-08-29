@@ -295,7 +295,7 @@
       "Type": "enterprise",
       "Available": [ "Available" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-      "Url": "https://wales.ent.sirsidynix.net.uk/client/cy_GB/conwy_en/",
+      "Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/conwy_en/",
       "TestISBN": "9781408855713"
     },
     {
@@ -980,7 +980,10 @@
       "Url": "https://www.librarycatalogue.northamptonshire.gov.uk/web/arena/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000256|1",
-      "TestISBN": "9780747538493"
+      "OrganisationName": "Northamptonshire",
+      "ArenaName": "AUK000256",
+      "ISBNAlias": "recordControlNumber",
+      "TestISBN": "9780747558194"
     },
     {
       "Name": "Northumberland",
