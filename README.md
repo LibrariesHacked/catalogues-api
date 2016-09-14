@@ -72,7 +72,7 @@ Returns selected contents of the data.json file for each service.  This can be u
 | Route | Description | Example |
 | ----- | ----------- | ------- |
 | */availabilityByISBN/:isbn* | Retrieves availability of a particular book by passing in ISBN.  | http://localhost:3000/availabilityByISBN/1234567891012 |
-| */availabilityByISBN/:isbn?service=:service* | Filters the results to a particular library service. | http://localhost:3000/availabilityByISBN/1234567891012?library=Gloucestershire | 
+| */availabilityByISBN/:isbn?service=:service* | Filters the results to a particular library service. | http://localhost:3000/availabilityByISBN/1234567891012?service=Gloucestershire | 
 
 Returns data showing the number of available/unavailable copies of the relevant book in each branch, for each library service.
 

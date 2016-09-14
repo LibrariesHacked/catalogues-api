@@ -49,7 +49,7 @@ exports.getLibraries = function (service, callback) {
                 if (item.$.val != '' && item.$.val != 'Unavailable') responseLibraries.libraries.push(item.$.val);
             });
         }
-        common.completeCallback(callback, responseLibraries);
+        common.completeCallback(callback, responseLibraries); return;
     };
 
     // Request 1: Call a basic search which should return XML with the branch filter.
