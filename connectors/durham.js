@@ -30,23 +30,25 @@ exports.getService = function (svc, callback) {
 exports.getLibraries = function (service, callback) {
     var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
 
-    // Request 1: Initialise the session - go to home page.
-    request.get({ url: service.Url, timeout: 20000, jar: true }, function (error, message, response) {
+    var handleSessionRequest = function (error, message, response) {
         if (common.handleErrors(callback, responseLibraries, error, message)) return;
-        // Request 2: Enter the library catalogue as a guest
-        request.post({ url: service.Url + 'pgLogin.aspx?CheckJavascript=1', jar: true, timeout: 20000 }, function (error, message, response) {
-            if (common.handleErrors(callback, responseLibraries, error, message)) return;
-            // Request 3: Go to libraries page
-            request.get({ url: service.Url + service.Libraries, timeout: 20000, jar: true }, function (error, message, response) {
-                if (common.handleErrors(callback, responseLibraries, error, message)) return;
-                $ = cheerio.load(response);
-                $('ol.list-unstyled li').each(function () {
-                    responseLibraries.libraries.push($(this).text().trim());
-                });
-                common.completeCallback(callback, responseLibraries);
-            });
-        });
-    });
+        request.post({ url: service.Url + 'pgLogin.aspx?CheckJavascript=1', jar: true, timeout: 20000 }, handleGuestRequest);
+    };
+
+    var handleGuestRequest = function (error, message, response) {
+        if (common.handleErrors(callback, responseLibraries, error, message)) return;
+        request.get({ url: service.Url + service.Libraries, timeout: 20000, jar: true }, handleLibraryPage);
+    };
+
+    var handleLibraryPage = function (error, message, response) {
+        if (common.handleErrors(callback, responseLibraries, error, message)) return;
+        $ = cheerio.load(response);
+        $('ol.list-unstyled li').each(function () { responseLibraries.libraries.push($(this).text().trim()); });
+        common.completeCallback(callback, responseLibraries);
+    };
+
+    // Request 1: Initialise the session - go to home page.
+    request.get({ url: service.Url, timeout: 20000, jar: true }, handleSessionRequest);
 };
 
 //////////////////////////
@@ -68,85 +70,89 @@ exports.searchByISBN = function (isbn, lib, callback) {
         return aspNetForm;
     };
 
-    // Request 1: Initialise the session - go to home page.
-    request.get({ url: lib.Url, timeout: 20000, jar: true }, function (error, message, response) {
+    var handleSessionRequest = function (error, message, response) {
         if (common.handleErrors(callback, responseHoldings, error, message)) return;
         // Request 2: Enter the library catalogue as a guest
-        request.post({ url: lib.Url + 'pgLogin.aspx?CheckJavascript=1', jar: true, timeout: 20000 }, function (error, message, response) {
+        request.post({ url: lib.Url + 'pgLogin.aspx?CheckJavascript=1', jar: true, timeout: 20000 }, handleGuestRequest);
+    };
+
+    var handleGuestRequest = function (error, message, response) {
+        if (common.handleErrors(callback, responseHoldings, error, message)) return;
+        // Request 3: Go to catalogue page
+        request.post({ url: lib.Url + 'pgCatKeywordSearch.aspx', jar: true, timeout: 20000 }, function (error, message, response) {
             if (common.handleErrors(callback, responseHoldings, error, message)) return;
-            // Request 3: Go to catalogue page
-            request.post({ url: lib.Url + 'pgCatKeywordSearch.aspx', jar: true, timeout: 20000 }, function (error, message, response) {
+            $ = cheerio.load(response);
+            var aspNetForm = getAspNetForm($);
+            aspNetForm.ctl00$cph1$cbBooks = 'on';
+            aspNetForm.ctl00$cph1$Keywords = isbn;
+            aspNetForm.ctl00$cph1$btSearch = 'Search';
+            var aspNetForm = {
+                __VIEWSTATE: $('input[name=__VIEWSTATE]').val(),
+                __VIEWSTATEGENERATOR: $('input[name=____VIEWSTATEGENERATOR]').val(),
+                __EVENTVALIDATION: $('input[name=__EVENTVALIDATION]').val(),
+                ctl00$cph1$lvResults$DataPagerEx2$ctl00$ctl00: 10,
+                ctl00$cph1$cbBooks: 'on',
+                ctl00$cph1$Keywords: isbn,
+                ctl00$cph1$btSearch: 'Search'
+            };
+            // Request 4: Perform the search.
+            request.post({ url: lib.Url + 'pgCatKeywordSearch.aspx', gzip: true, form: aspNetForm, jar: true, headers: headers, timeout: 20000 }, function (error, message, response) {
                 if (common.handleErrors(callback, responseHoldings, error, message)) return;
-                $ = cheerio.load(response);
-                var aspNetForm = getAspNetForm($);
-                aspNetForm.ctl00$cph1$cbBooks = 'on';
-                aspNetForm.ctl00$cph1$Keywords = isbn;
-                aspNetForm.ctl00$cph1$btSearch = 'Search';
-                var aspNetForm = {
-                    __VIEWSTATE: $('input[name=__VIEWSTATE]').val(),
-                    __VIEWSTATEGENERATOR: $('input[name=____VIEWSTATEGENERATOR]').val(),
-                    __EVENTVALIDATION: $('input[name=__EVENTVALIDATION]').val(),
-                    ctl00$cph1$lvResults$DataPagerEx2$ctl00$ctl00: 10,
-                    ctl00$cph1$cbBooks: 'on',
-                    ctl00$cph1$Keywords: isbn,
-                    ctl00$cph1$btSearch: 'Search'
-                };
-                // Request 4: Perform the search.
-                request.post({ url: lib.Url + 'pgCatKeywordSearch.aspx', gzip: true, form: aspNetForm, jar: true, headers: headers, timeout: 20000 }, function (error, message, response) {
+                // Request 5: Process the redirect that should be returned.
+                var resultLocation = message.headers.location;
+                request.get({ url: lib.Url + resultLocation, gzip: true, jar: true, headers: headers, timeout: 20000 }, function (error, message, response) {
                     if (common.handleErrors(callback, responseHoldings, error, message)) return;
-                    // Request 5: Process the redirect that should be returned.
-                    var resultLocation = message.headers.location;
-                    request.get({ url: lib.Url + resultLocation, gzip: true, jar: true, headers: headers, timeout: 20000 }, function (error, message, response) {
-                        if (common.handleErrors(callback, responseHoldings, error, message)) return;
-                        // That should bring back the results list.
-                        $ = cheerio.load(response);
-                        if ($('#ct100_cph1_lvResults_ctr10_lnkbtnTitle')) {
+                    // That should bring back the results list.
+                    $ = cheerio.load(response);
+                    if ($('#ct100_cph1_lvResults_ctr10_lnkbtnTitle')) {
+                        var aspNetForm = {
+                            __EVENTARGUMENT: '',
+                            __EVENTTARGET: 'ctl00$cph1$lvResults$ctrl0$lnkbtnTitle',
+                            __LASTFOCUS: '',
+                            __VIEWSTATE: $('input[name=__VIEWSTATE]').val(),
+                            __VIEWSTATEENCRYPTED: '',
+                            __VIEWSTATEGENERATOR: $('input[name=____VIEWSTATEGENERATOR]').val(),
+                            ctl00$cph1$lvResults$DataPagerEx2$ctl00$ctl00: 10
+                        };
+                        // Request 6: Get the item details
+                        request.post({ url: lib.Url + resultLocation, gzip: true, form: aspNetForm, jar: true, headers: headers, timeout: 20000 }, function (error, message, response) {
+                            if (common.handleErrors(callback, responseHoldings, error, message)) return;
+
+                            // That returns a button to get the availability - very tedious!  Hit the button.
+                            $ = cheerio.load(response);
                             var aspNetForm = {
                                 __EVENTARGUMENT: '',
-                                __EVENTTARGET: 'ctl00$cph1$lvResults$ctrl0$lnkbtnTitle',
+                                __EVENTTARGET: '',
                                 __LASTFOCUS: '',
                                 __VIEWSTATE: $('input[name=__VIEWSTATE]').val(),
                                 __VIEWSTATEENCRYPTED: '',
                                 __VIEWSTATEGENERATOR: $('input[name=____VIEWSTATEGENERATOR]').val(),
-                                ctl00$cph1$lvResults$DataPagerEx2$ctl00$ctl00: 10
+                                ctl00$cph1$lvResults$DataPagerEx2$ctl00$ctl00: 10,
+                                ctl00$cph1$ucItem$lvTitle$ctrl0$btLibraryList: 'Libraries'
                             };
-                            // Request 6: Get the item details
+                            // Request 7: Get the item availability table
                             request.post({ url: lib.Url + resultLocation, gzip: true, form: aspNetForm, jar: true, headers: headers, timeout: 20000 }, function (error, message, response) {
                                 if (common.handleErrors(callback, responseHoldings, error, message)) return;
-
-                                // That returns a button to get the availability - very tedious!  Hit the button.
                                 $ = cheerio.load(response);
-                                var aspNetForm = {
-                                    __EVENTARGUMENT: '',
-                                    __EVENTTARGET: '',
-                                    __LASTFOCUS: '',
-                                    __VIEWSTATE: $('input[name=__VIEWSTATE]').val(),
-                                    __VIEWSTATEENCRYPTED: '',
-                                    __VIEWSTATEGENERATOR: $('input[name=____VIEWSTATEGENERATOR]').val(),
-                                    ctl00$cph1$lvResults$DataPagerEx2$ctl00$ctl00: 10,
-                                    ctl00$cph1$ucItem$lvTitle$ctrl0$btLibraryList: 'Libraries'
-                                };
-                                // Request 7: Get the item availability table
-                                request.post({ url: lib.Url + resultLocation, gzip: true, form: aspNetForm, jar: true, headers: headers, timeout: 20000 }, function (error, message, response) {
-                                    if (common.handleErrors(callback, responseHoldings, error, message)) return;
-                                    $ = cheerio.load(response);
-                                    var libs = {};
-                                    $('table.viewgrid tr').slice(1).each(function () {
-                                        var name = $(this).find('td').eq(0).text().trim();
-                                        var status = $(this).find('td').eq(1).text().trim();
-                                        if (!libs[name]) libs[name] = { available: 0, unavailable: 0 }
-                                        status != 'Yes' ? libs[name].available++ : libs[name].unavailable++;
-                                    });
-                                    for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
-                                    common.completeCallback(callback, responseHoldings);
+                                var libs = {};
+                                $('table.viewgrid tr').slice(1).each(function () {
+                                    var name = $(this).find('td').eq(0).text().trim();
+                                    var status = $(this).find('td').eq(1).text().trim();
+                                    if (!libs[name]) libs[name] = { available: 0, unavailable: 0 }
+                                    status != 'Yes' ? libs[name].available++ : libs[name].unavailable++;
                                 });
+                                for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
+                                common.completeCallback(callback, responseHoldings);
                             });
-                        } else { // If it isn't listed then presumably it hasn't been found - exit.
-                            common.completeCallback(callback, responseHoldings);
-                        }
-                    });
+                        });
+                    } else { // If it isn't listed then presumably it hasn't been found - exit.
+                        common.completeCallback(callback, responseHoldings);
+                    }
                 });
             });
         });
-    });
+    };
+
+    // Request 1: Initialise the session - go to home page.
+    request.get({ url: lib.Url, timeout: 20000, jar: true }, handleSessionRequest);
 };

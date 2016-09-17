@@ -34,32 +34,35 @@ exports.getService = function (svc, callback) {
 exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
 
-    // Request 1: web service to search for item
-    request.get({ url: lib.Url + searchUrl + isbn, headers: reqHeader, timeout: 30000 }, function (error, msg, response) {
+    var handleSearchRequest = function (error, msg, response) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;
-        xml2js.parseString(response, function (err, res) {
-            if (common.handleErrors(callback, responseHoldings, err)) return;
-            if (res.searchCatalog.TotalCount[0] == 0) {
-                common.completeCallback(callback, responseHoldings);
-                return;
-            }
+        xml2js.parseString(response, parseSearchResult);
+    };
 
-            var bibId = res.searchCatalog.Bib[0].BcId[0];
-            // Request 2: web service to get availability
-            request.get({ url: lib.Url + 'currentItems/' + bibId, headers: reqHeader, timeout: 30000 }, function (error, msg, response) {
-                if (common.handleErrors(callback, responseHoldings, error, msg)) return;
-                xml2js.parseString(response, function (err, result) {
-                    if (common.handleErrors(callback, responseHoldings, err)) return;
-                    var libs = {};
-                    result.CurrentItems.LibraryItem.forEach(function (item) {
-                        var libName = item.Branch[0].Name[0];
-                        if (!libs[libName]) libs[libName] = { available: 0, unavailable: 0 };
-                        item.Status[0] == 'UNAVAILABLE' ? libs[libName].unavailable++ : libs[libName].available++;
-                    });
-                    for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
-                    common.completeCallback(callback, responseHoldings);
-                });
-            });
+    var parseSearchResult = function (err, res) {
+        if (common.handleErrors(callback, responseHoldings, err)) return;
+        if (res.searchCatalog.TotalCount[0] == 0) { common.completeCallback(callback, responseHoldings); return; }
+        var bibId = res.searchCatalog.Bib[0].BcId[0];
+        request.get({ url: lib.Url + 'currentItems/' + bibId, headers: reqHeader, timeout: 30000 }, handleAvailabilityRequest);
+    };
+
+    var handleAvailabilityRequest = function (error, msg, response) {
+        if (common.handleErrors(callback, responseHoldings, error, msg)) return;
+        xml2js.parseString(response, parseAvailability);
+    };
+
+    var parseAvailability = function (err, result) {
+        if (common.handleErrors(callback, responseHoldings, err)) return;
+        var libs = {};
+        result.CurrentItems.LibraryItem.forEach(function (item) {
+            var libName = item.Branch[0].Name[0];
+            if (!libs[libName]) libs[libName] = { available: 0, unavailable: 0 };
+            item.Status[0] == 'UNAVAILABLE' ? libs[libName].unavailable++ : libs[libName].available++;
         });
-    });
+        for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
+        common.completeCallback(callback, responseHoldings);
+    };
+
+    // Request 1: web service to search for item
+    request.get({ url: lib.Url + searchUrl + isbn, headers: reqHeader, timeout: 30000 }, handleSearchRequest);
 };
