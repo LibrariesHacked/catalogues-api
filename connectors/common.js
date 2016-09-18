@@ -54,7 +54,7 @@ exports.getService = function (service) {
 // Used for error handling and checking HTTP status
 // messages.
 exports.handleErrors = function (callback, callbackObj, error, httpMessage) {
-    if (httpMessage && httpMessage.statusCode != 200) error = 'Web request error.  Status code was ' + httpMessage.statusCode;
+    if (httpMessage && (httpMessage.statusCode != 200 && httpMessage.statusCode != 302)) error = 'Web request error.  Status code was ' + httpMessage.statusCode;
     if (error) {
         console.log(callbackObj.service + ': ' + error);
         callbackObj.error = error;
