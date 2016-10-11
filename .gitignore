@@ -34,3 +34,4 @@ obj/Debug/Catalogue-WS.njsproj.FileListAbsolute.txt
 *.cache
 
 /public/libs/
+iisnode.yml
