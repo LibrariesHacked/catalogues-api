@@ -1097,7 +1097,7 @@
     {
       "Name": "Reading",
       "Type": "horizon",
-      "Available": ["On shelf"],
+      "Available": [ "On shelf" ],
       "Url": "http://reading-hip.epixtech.co.uk/",
       "TestISBN": "9780747538493"
     },

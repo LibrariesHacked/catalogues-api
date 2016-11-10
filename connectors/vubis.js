@@ -43,7 +43,6 @@ exports.getLibraries = function (service, callback) {
         request.get({ url: service.Url + link, timeout: 30000 }, function (error, message, response) {
             if (common.handleErrors(callback, responseLibraries, error, message)) return;
             $ = cheerio.load(response);
-
             if ($('select[name=Location] option').length > 0) {
                 $('select[name=Location] option').each(function () {
                     if ($(this).text().trim() != 'No preference' && $(this).text().trim() != 'All options') responseLibraries.libraries.push($(this).text().trim());

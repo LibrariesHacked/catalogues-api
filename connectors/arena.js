@@ -97,9 +97,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     ///////////////////////////////////////////////
     var handleSearchRequest = function (error, message, response) {
         if (common.handleErrors(callback, responseHoldings, error, message)) return;
-        if (response.lastIndexOf('search_item_id=') == -1) {
-            common.completeCallback(callback, responseHoldings); return;
-        }
+        if (response.lastIndexOf('search_item_id=') == -1) { common.completeCallback(callback, responseHoldings); return; }
         var itemId = response.substring(response.lastIndexOf("search_item_id=") + 15);
         var url = lib.Url + itemUrl.replace('[ARENANAME]', lib.ArenaName).replace('[ITEMID]', itemId.substring(0, itemId.indexOf('&')));
         request.get({ agent: agent, rejectUnauthorized: !lib.IgnoreSSL, url: url, timeout: 20000, headers: { 'Connection': 'keep-alive' }, jar: true }, handleItemPage);
@@ -145,7 +143,6 @@ exports.searchByISBN = function (isbn, lib, callback) {
         $ = cheerio.load(res['ajax-response'].component[0]._);
         var numServices = $('.arena-holding-hyper-container .arena-holding-container a span').length;
         $('.arena-holding-hyper-container .arena-holding-container a span').each(function (i) {
-
             if ($(this).text().trim() == lib.OrganisationName) {
                 currentOrg = i;
                 // Sometimes at this point this is enough to get the availability
@@ -158,7 +155,6 @@ exports.searchByISBN = function (isbn, lib, callback) {
                     });
                     common.completeCallback(callback, responseHoldings); return;
                 }
-
                 var headers = { 'Accept': 'text/xml', 'Wicket-Ajax': true };
                 headers['Wicket-FocusedElementId'] = 'id__crDetailWicket__WAR__arenaportlets____2a';
                 resourceId = '/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel:content:holdingsView:' + (i + 1) + ':holdingContainer:togglableLink::IBehaviorListener:0:';
@@ -188,8 +184,8 @@ exports.searchByISBN = function (isbn, lib, callback) {
         var libsData = $('.arena-holding-container');
         numLibs = libsData.length;
         if (!numLibs || numLibs == 0) { common.completeCallback(callback, responseHoldings); return; }
+        currentBranch = 0;
         libsData.each(function (i) {
-            currentBranch = i;
             currentLibName = $(this).find('span.arena-holding-link').text();
             resourceId = '/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel:content:holdingsView:' + (currentOrg + 1) + ':childContainer:childView:' + i + ':holdingPanel:holdingContainer:togglableLink::IBehaviorListener:0:';
             url = lib.Url + 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + resourceId + '&p_p_cacheability=';
@@ -213,6 +209,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     // Step 8: Parse the library availability.
     ///////////////////////////////////////////////
     var parseLibraryAvailability = function (err, res) {
+        currentBranch = currentBranch + 1;
         if (common.handleErrors(callback, responseHoldings, err)) return;
         $ = cheerio.load(res['ajax-response'].component[0]._);
         var totalAvailable = $('td.arena-holding-nof-total span.arena-value').text();
