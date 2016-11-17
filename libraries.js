@@ -120,7 +120,5 @@ exports.testIsbnSearch = function (req, res) {
         });
 
     // As it's for testing, run in serial to be able to keep track. 
-    async.series(searches, function (err, response) {
-        res.send(response);
-    });
+    async.series(searches, function (err, response) {});
 };

@@ -81,6 +81,5 @@ exports.isJsonString = function (str) {
 // Just adds the current timestamp to a callback
 exports.completeCallback = function (callback, callbackObj) {
     callbackObj.end = new Date();
-    console.log(callbackObj);
     callback(callbackObj);
 };

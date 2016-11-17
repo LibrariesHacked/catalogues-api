@@ -86,79 +86,64 @@ exports.getWebsite = function (service, callback) {
 exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
     if (lib.ISBN10) isbn = isbn.substring(3);
-    // Declaring this function to use later on
-    var itemRequest = function (link) {
-        // Request 6: Get the item availability.
-        request.get({ url: link, timeout: 20000 }, function (error, msg, response) {
-            if (common.handleErrors(callback, responseHoldings, error, msg)) return;
-            var libs = {};
-            $ = cheerio.load(response);
-            var availIndex = $('table[summary="FullBB.HoldingDetails"] tr').eq(1).find(':contains(Availability)').index();
-            var shelfMarkIndex = $('table[summary="FullBB.HoldingDetails"] tr').eq(1).find(':contains(Shelfmark)').index();
-            $('table[summary="FullBB.HoldingDetails"] tr').slice(2).each(function () {
-                var status = $(this).find('td').eq(availIndex).text().trim();
-                var name = $(this).find('td').eq(shelfMarkIndex).text().trim();
-                if (name.indexOf(':') != -1) name = name.split(':')[0].trim();
-                if (name.indexOf('/') != -1) name = name.split('/')[0].trim();
-                if (!libs[name]) libs[name] = { available: 0, unavailable: 0 };
-                status == 'Available' ? libs[name].available++ : libs[name].unavailable++;
-            });
-            for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
-            common.completeCallback(callback, responseHoldings);
-        });
-    };
 
-    // Request 1: Kick off a session
-    request.get({ url: lib.Url + 'Vubis.csp', timeout: 20000 }, function (error, message, response) {
+    var sessionResponseFrameset = function (error, message, response) {
         if (common.handleErrors(callback, responseHoldings, error, message)) return;
         $ = cheerio.load(response);
-        var link = $('FRAME[Title="Vubis.Body"]').attr('src');
+        request.get({ url: lib.Url + $('FRAME[Title="Vubis.Body"]').attr('src'), timeout: 20000 }, sessionResponseBody);
+    };
 
-        // Request 2: Should now have the StartBody link - do it!
-        request.get({ url: lib.Url + link, timeout: 20000 }, function (error, message, response) {
-            if (common.handleErrors(callback, responseHoldings, error, message)) return;
-            $ = cheerio.load(response);
-            // Get the encoded value to perform the search.
-            var enc = $('input[name=EncodedRequest]').attr('value');
-            var url = lib.Url + searchUrl.replace('[ISBN]', isbn) + isbn + '&EncodedRequest=' + enc;
+    var sessionResponseBody = function (error, message, response) {
+        if (common.handleErrors(callback, responseHoldings, error, message)) return;
+        $ = cheerio.load(response);
+        request.get({ url: lib.Url + searchUrl.replace('[ISBN]', isbn) + isbn + '&EncodedRequest=' + $('input[name=EncodedRequest]').attr('value'), timeout: 20000 }, searchResponseFrameset);
+    };
 
-            // Request 3: Get the search frameset (*voms*)
-            request.get({ url: url, timeout: 20000 }, function (error, msg, response) {
-                if (common.handleErrors(callback, responseHoldings, error, message)) return;
-                $ = cheerio.load(response);
-                // In some (but not all) cases this will redirect to the relevant item page
-                var link = $('FRAME[title="List.Body"]').attr('src');
-                if (link.indexOf('FullBBBody') != -1) {
-                    itemRequest(lib.Url + link);
-                } else {
-                    if (!link || link.indexOf('ListBody') == -1) {
-                        common.completeCallback(callback, responseHoldings);
-                        return;
-                    }
-                    // Request 4:
-                    request.get({ url: lib.Url + link, timeout: 20000 }, function (error, msg, response) {
-                        if (common.handleErrors(callback, responseHoldings, error, message)) return;
-                        $ = cheerio.load(response);
-                        var link = $('td.listitemOdd').last().find('a').attr('href');
-                        if (!link) {
-                            common.completeCallback(callback, responseHoldings);
-                            return;
-                        }
-                        // Request 5:
-                        request.get(lib.Url + link, function (error, message, response) {
-                            //if (common.handleErrors(callback, responseHoldings, error, message)) return;
-                            $ = cheerio.load(response);
-                            var link = $('frame').eq(1).attr('src');
-                            if (!link) {
-                                common.completeCallback(callback, responseHoldings);
-                                return;
-                            }
-                            var url = lib.Url + link.replace(lib.SubDir, '');
-                            itemRequest(url);
-                        });
-                    });
-                }
-            });
+    var searchResponseFrameset = function (error, message, response) {
+        if (common.handleErrors(callback, responseHoldings, error, message)) return;
+        $ = cheerio.load(response);
+        var link = $('FRAME[title="List.Body"]').attr('src');
+        if (link && link.indexOf('FullBBBody') != -1) { itemRequest(lib.Url + link); return; }
+        if (!link || link.indexOf('ListBody') == -1) { common.completeCallback(callback, responseHoldings); return; }
+        request.get({ url: lib.Url + link, timeout: 20000 }, searchResponseBody);
+    };
+
+    var searchResponseBody = function (error, msg, response) {
+        if (common.handleErrors(callback, responseHoldings, error, msg)) return;
+        $ = cheerio.load(response);
+        var link = $('td.listitemOdd').last().find('a').attr('href');
+        if (!link) { common.completeCallback(callback, responseHoldings); return; }
+        request.get(lib.Url + link, itemRequestFrameset);
+    };
+
+    var itemRequestFrameset = function (error, message, response) {
+        if (common.handleErrors(callback, responseHoldings, error, message)) return;
+        $ = cheerio.load(response);
+        var link = $('frame').eq(1).attr('src');
+        if (!link) { common.completeCallback(callback, responseHoldings); return; }
+        var url = lib.Url + link.replace(lib.SubDir, '');
+        itemRequest(url);
+    };
+
+    var itemRequest = function (link) {
+        request.get({ url: link, timeout: 20000 }, itemResponseBody);
+    };
+
+    var itemResponseBody = function (error, msg, response) {
+        if (common.handleErrors(callback, responseHoldings, error, msg)) return;
+        var libs = {};
+        $ = cheerio.load(response);
+        var availIndex = $('table[summary="FullBB.HoldingDetails"] tr').eq(1).find(':contains(Availability)').index();
+        var shelfMarkIndex = $('table[summary="FullBB.HoldingDetails"] tr').eq(1).find(':contains(Shelfmark)').index();
+        $('table[summary="FullBB.HoldingDetails"] tr').slice(2).each(function () {
+            var status = $(this).find('td').eq(availIndex).text().trim();
+            var name = $(this).find('td').eq(shelfMarkIndex).text().split(':')[0].split('/')[0].trim();
+            if (!libs[name]) libs[name] = { available: 0, unavailable: 0 };
+            status == 'Available' ? libs[name].available++ : libs[name].unavailable++;
         });
-    });
+        for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
+        common.completeCallback(callback, responseHoldings);
+    };
+
+    request.get({ url: lib.Url + 'Vubis.csp', timeout: 20000 }, sessionResponseFrameset);
 };

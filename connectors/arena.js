@@ -52,7 +52,7 @@ exports.getLibraries = function (service, callback) {
             if (res && res['ajax-response'] && res['ajax-response'].component) {
                 $ = cheerio.load(res['ajax-response'].component[0]._);
                 $('option').each(function () {
-                    if ($(this).text() != 'Select library') responseLibraries.libraries.push($(this).text());
+                    if ($(this).text() !== 'Select library') responseLibraries.libraries.push($(this).text());
                 });
             }
             common.completeCallback(callback, responseLibraries); return;
@@ -87,7 +87,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
     var agent = forever.ForeverAgent;
     var numLibs = 0;
-    var currentOrg = 0;
+    var currentOrg = null;
     var currentBranch = 0;
     var currentLibName = '';
 
@@ -97,7 +97,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     ///////////////////////////////////////////////
     var handleSearchRequest = function (error, message, response) {
         if (common.handleErrors(callback, responseHoldings, error, message)) return;
-        if (response.lastIndexOf('search_item_id=') == -1) { common.completeCallback(callback, responseHoldings); return; }
+        if (response.lastIndexOf('search_item_id=') === -1) { common.completeCallback(callback, responseHoldings); return; }
         var itemId = response.substring(response.lastIndexOf("search_item_id=") + 15);
         var url = lib.Url + itemUrl.replace('[ARENANAME]', lib.ArenaName).replace('[ITEMID]', itemId.substring(0, itemId.indexOf('&')));
         request.get({ agent: agent, rejectUnauthorized: !lib.IgnoreSSL, url: url, timeout: 20000, headers: { 'Connection': 'keep-alive' }, jar: true }, handleItemPage);
@@ -141,28 +141,23 @@ exports.searchByISBN = function (isbn, lib, callback) {
         if (common.handleErrors(callback, responseHoldings, err)) return;
         if (!res['ajax-response'].component) { common.completeCallback(callback, responseHoldings); return; }
         $ = cheerio.load(res['ajax-response'].component[0]._);
-        var numServices = $('.arena-holding-hyper-container .arena-holding-container a span').length;
-        $('.arena-holding-hyper-container .arena-holding-container a span').each(function (i) {
-            if ($(this).text().trim() == lib.OrganisationName) {
-                currentOrg = i;
-                // Sometimes at this point this is enough to get the availability
-                if ($('td.arena-holding-nof-total').length > 0) {
-                    $('.arena-holding-child-container').each(function (idx) {
-                        var libName = $(this).find('span.arena-holding-link').text();
-                        var totalAvailable = $(this).find('td.arena-holding-nof-total span.arena-value').text();
-                        var checkedOut = $(this).find('td.arena-holding-nof-checked-out span.arena-value').text();
-                        if (libName) responseHoldings.availability.push({ library: libName, available: (parseInt(totalAvailable) - (checkedOut ? parseInt(checkedOut) : 0)), unavailable: (checkedOut != "" ? parseInt(checkedOut) : 0) });
-                    });
-                    common.completeCallback(callback, responseHoldings); return;
-                }
-                var headers = { 'Accept': 'text/xml', 'Wicket-Ajax': true };
-                headers['Wicket-FocusedElementId'] = 'id__crDetailWicket__WAR__arenaportlets____2a';
-                resourceId = '/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel:content:holdingsView:' + (i + 1) + ':holdingContainer:togglableLink::IBehaviorListener:0:';
-                url = lib.Url + 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + resourceId + '&p_p_cacheability=';
-                request.get({ agent: agent, rejectUnauthorized: !lib.IgnoreSSL, headers: headers, url: url, timeout: 20000, jar: true }, getHoldings); return false;
-            }
-            if ($(this).text().trim() != lib.OrganisationName && (i + 1) == numServices) { common.completeCallback(callback, responseHoldings); return; }
-        });
+        // Sometimes at this point this is enough to get the availability
+        if ($('td.arena-holding-nof-total').length > 0) {
+            $('.arena-holding-child-container').each(function (idx) {
+                var libName = $(this).find('span.arena-holding-link').text();
+                var totalAvailable = $(this).find('td.arena-holding-nof-total span.arena-value').text();
+                var checkedOut = $(this).find('td.arena-holding-nof-checked-out span.arena-value').text();
+                if (libName) responseHoldings.availability.push({ library: libName, available: (parseInt(totalAvailable) - (checkedOut ? parseInt(checkedOut) : 0)), unavailable: (checkedOut != "" ? parseInt(checkedOut) : 0) });
+            });
+            common.completeCallback(callback, responseHoldings); return;
+        }
+        $('.arena-holding-hyper-container .arena-holding-container a span').each(function (i) { if ($(this).text().trim() === lib.OrganisationName) currentOrg = i; });
+        if (currentOrg == null) { common.completeCallback(callback, responseHoldings); return; }
+        var headers = { 'Accept': 'text/xml', 'Wicket-Ajax': true };
+        headers['Wicket-FocusedElementId'] = 'id__crDetailWicket__WAR__arenaportlets____2a';
+        resourceId = '/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel:content:holdingsView:' + (currentOrg + 1) + ':holdingContainer:togglableLink::IBehaviorListener:0:';
+        url = lib.Url + 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + resourceId + '&p_p_cacheability=';
+        request.get({ agent: agent, rejectUnauthorized: !lib.IgnoreSSL, headers: headers, url: url, timeout: 20000, jar: true }, getHoldings); return false;
     };
 
     ///////////////////////////////////////////////
@@ -215,7 +210,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
         var totalAvailable = $('td.arena-holding-nof-total span.arena-value').text();
         var checkedOut = $('td.arena-holding-nof-checked-out span.arena-value').text();
         responseHoldings.availability.push({ library: currentLibName, available: (parseInt(totalAvailable) - parseInt(checkedOut)), unavailable: parseInt(checkedOut) });
-        if ((currentBranch + 1) == numLibs) { common.completeCallback(callback, responseHoldings); return; }
+        if (currentBranch == numLibs) { common.completeCallback(callback, responseHoldings); return; }
     };
 
     if (lib.ISBN == 10) isbn = isbn.substring(3);
