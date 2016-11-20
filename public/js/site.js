@@ -31,9 +31,17 @@
     });
 
     $('#btnSearch').on('click', function () {
+        // Clear existing stuff.
+        $('#found').text(0);
+        $('#available').text(0);
+        $('#unavailable').text(0);
+        $('.progress-bar').css('width', '0%');
+        var countReturns = 0;
         if (libraryServices.length > 0 && isbn != '') {
             $.each(libraryServices, function (x, service) {
                 $.get('/availabilityByISBN/' + isbn + '?service=' + service.Name, function (data) {
+                    countReturns++;
+                    $('.progress-bar').css('width', ((countReturns / libraryServices.length) * 100) + '%');
                     if (data && data[0] && data[0].availability) {
                         $('#found').text(parseInt($('#found').text()) + data[0].availability.length);
                         $('#available').text(parseInt($('#available').text()) + data[0].availability.length);

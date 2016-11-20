@@ -16,7 +16,7 @@ var request = require('request'),
 ///////////////////////////////////////////
 // VARIABLES
 ///////////////////////////////////////////
-var searchUrl = 'List.csp?Index1=Isbn&Database=1&Location=NoPreference&Language=NoPreference&PublicationType=NoPreference&OpacLanguage=eng&NumberToRetrieve=50&SearchMethod=Find_1&SearchTerm1=[ISBN]&Profile=Default&PreviousList=Start&PageType=Start&WebPageNr=1&WebAction=NewSearch&StartValue=1&RowRepeat=0&MyChannelCount=&SearchT1=';
+var searchUrl = 'List.csp?SearchT1=[ISBN]&Index1=[INDEX]&Database=[DATABASE]&Location=NoPreference&Language=NoPreference&PublicationType=NoPreference&OpacLanguage=eng&NumberToRetrieve=50&SearchMethod=Find_1&SearchTerm1=[ISBN]&Profile=Default&PreviousList=Start&PageType=Start&WebPageNr=1&WebAction=NewSearch&StartValue=1&RowRepeat=0&MyChannelCount=';
 var home = 'vubis.csp';
 
 ///////////////////////////////////////////
@@ -96,7 +96,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     var sessionResponseBody = function (error, message, response) {
         if (common.handleErrors(callback, responseHoldings, error, message)) return;
         $ = cheerio.load(response);
-        request.get({ url: lib.Url + searchUrl.replace('[ISBN]', isbn) + isbn + '&EncodedRequest=' + $('input[name=EncodedRequest]').attr('value'), timeout: 20000 }, searchResponseFrameset);
+        request.get({ url: lib.Url + searchUrl.replace('[DATABASE]', (lib.Database || 1)).replace('[ISBN]', isbn).replace('[ISBN]', isbn).replace('[INDEX]', lib.Index) + '&EncodedRequest=' + $('input[name=EncodedRequest]').attr('value'), timeout: 20000 }, searchResponseFrameset);
     };
 
     var searchResponseFrameset = function (error, message, response) {

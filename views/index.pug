@@ -1,25 +1,29 @@
 extends layout.pug
 block content
-	form(class='form-horizontal')
-		fieldset
-			div(class='form-group')
-				label(class='col-lg-2 control-label', for="txtKeywords") keywords
-				div(class='col-lg-10')
-					input(class='form-control', id='txtKeywords', type='text', placeholder='begin typing', autocomplete='off', data-provide='typahead')
-			div(class='form-group', style='display: none')
-				label(class='col-lg-2 control-label', for='txtKeywords') library service
-				div(class='col-lg-10')
-					select(class='form-control', multiple='')
-			div(class='form-group')
-				div(class='col-lg-10 col-lg-offset-2')
-					button(class='btn btn-success btn-sm pull-right disabled', type='button', id='btnSearch') search
-	div(class='row')
-		div(class='col col-xs-4')
-			p(class='small text-muted') found
-			p(class='lead text-primary', id='found') 0
-		div(class='col col-xs-4')
-			p(class='small text-muted') available
-			p(class='lead text-success', id='available') 0
-		div(class='col col-xs-4')
-			p(class='small text-muted') unavailable
-			p(class='lead text-danger', id='unavailable') 0
+	div(class='container')
+		form(class='form-horizontal')
+			fieldset
+				div(class='form-group')
+					label(class='col-lg-2 control-label', for="txtKeywords") keywords
+					div(class='col-lg-10')
+						input(class='form-control', id='txtKeywords', type='text', placeholder='begin typing', autocomplete='off', data-provide='typahead')
+				div(class='form-group', style='display: none')
+					label(class='col-lg-2 control-label', for='txtKeywords') library service
+					div(class='col-lg-10')
+						select(class='form-control', multiple='')
+				div(class='form-group')
+					div(class='col-lg-10 col-lg-offset-2')
+						button(class='btn btn-success btn-sm pull-right disabled', type='button', id='btnSearch') search
+	div(class='container')
+		div(class="progress progress-bar-info")
+			div(class="progress-bar")
+		div(class='row')
+			div(class='col col-xs-4')
+				p(class='small text-muted') found
+				p(class='lead text-primary', id='found') 0
+			div(class='col col-xs-4')
+				p(class='small text-muted') available
+				p(class='lead text-success', id='available') 0
+			div(class='col col-xs-4')
+				p(class='small text-muted') unavailable
+				p(class='lead text-danger', id='unavailable') 0

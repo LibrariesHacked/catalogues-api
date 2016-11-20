@@ -142,7 +142,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
         if (!res['ajax-response'].component) { common.completeCallback(callback, responseHoldings); return; }
         $ = cheerio.load(res['ajax-response'].component[0]._);
         // Sometimes at this point this is enough to get the availability
-        if ($('td.arena-holding-nof-total').length > 0) {
+        if ($('.arena-holding-nof-total').length > 0) {
             $('.arena-holding-child-container').each(function (idx) {
                 var libName = $(this).find('span.arena-holding-link').text();
                 var totalAvailable = $(this).find('td.arena-holding-nof-total span.arena-value').text();
@@ -151,7 +151,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
             });
             common.completeCallback(callback, responseHoldings); return;
         }
-        $('.arena-holding-hyper-container .arena-holding-container a span').each(function (i) { if ($(this).text().trim() === lib.OrganisationName) currentOrg = i; });
+        $('.arena-holding-hyper-container .arena-holding-container a span').each(function (i) { if ($(this).text().trim() === (lib.OrganisationName || lib.Name)) currentOrg = i; });
         if (currentOrg == null) { common.completeCallback(callback, responseHoldings); return; }
         var headers = { 'Accept': 'text/xml', 'Wicket-Ajax': true };
         headers['Wicket-FocusedElementId'] = 'id__crDetailWicket__WAR__arenaportlets____2a';

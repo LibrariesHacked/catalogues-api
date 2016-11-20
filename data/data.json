@@ -49,6 +49,7 @@
     {
       "Name": "Barnet",
       "Type": "vubis",
+      "Index": "Isbn",
       "Id": "|library/vubissmart-marc|220344",
       "Url": "http://www.libraries.barnet.gov.uk/vs/",
       "SubDir": "/vs/",
@@ -168,6 +169,7 @@
     {
       "Name": "Bridgend",
       "Type": "vubis",
+      "Index": "Isbn",
       "Url": "https://opac.awen-wales.com/bvs-app/",
       "TestISBN": "9780747538493"
     },
@@ -190,6 +192,7 @@
     {
       "Name": "Bromley",
       "Type": "arena",
+      "ArenaName": "AUK000226",
       "OrganisationId": "AUK000226|19",
       "OrganisationName": "Bromley",
       "ISBNAlias": "number",
@@ -252,6 +255,7 @@
     {
       "Name": "Carmarthenshire",
       "Type": "vubis",
+      "Index": "Isbn",
       "Url": "http://212.219.142.126/carvs/",
       "SubDir": "/carvs/",
       "TestISBN": "9780747538486"
@@ -261,7 +265,10 @@
       "Type": "vubis",
       "Profile": "Default",
       "ISBN10": true,
+      "Index": "Keywords",
+      "Database": "6",
       "Url": "https://libraries.ceredigion.gov.uk/vs/",
+      "SubDir": "/vs/",
       "TestISBN": "9780747538492"
     },
     {
@@ -318,6 +325,7 @@
     {
       "Name": "Croydon",
       "Type": "vubis",
+      "Index": "Isbn",
       "Url": "http://catalogue.croydonlibraries.com/vs/",
       "TestISBN": "9780747538493"
     },
@@ -339,6 +347,7 @@
       "ISBNAlias": "number",
       "Id": "230001",
       "ArenaName": "AUK000023",
+      "SearchType": "Keyword",
       "ArenaMemberId": "28980569",
       "Url": "https://www2.darlington.gov.uk/web/arena/",
       "Libraries": [ "Central Library", "Cockerton Library", "Mobile Library" ],
@@ -381,7 +390,9 @@
     {
       "Name": "Doncaster",
       "Type": "arena",
+      "ArenaName": "AUK000243",
       "Id": "243001",
+      "ISBNAlias": "number",
       "Url": "http://library.doncaster.gov.uk/web/arena/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000243|1",
@@ -426,8 +437,10 @@
     {
       "Name": "Ealing",
       "Type": "arena",
+      "ArenaName": "AUK000226",
       "Id": "226014",
       "OrganisationName": "Ealing",
+      "ISBNAlias": "number",
       "Url": "https://arena.yourlondonlibrary.net/web/ealing/",
       "Advanced": "advanced-search",
       "OrganisationId": "AUK000226|14",
@@ -465,7 +478,9 @@
     {
       "Name": "East Riding",
       "Type": "arena",
+      "ArenaName": "AUK000205",
       "Id": "205001",
+      "ISBNAlias": "number",
       "Url": "https://library.eastriding.gov.uk/web/arena/",
       "Advanced": "advanced-search",
       "OrganisationId": "AUK000205|1",
@@ -487,7 +502,9 @@
     {
       "Name": "Enfield",
       "Type": "arena",
+      "ArenaName": "AUK000226",
       "Id": "226012",
+      "ISBNAlias": "number",
       "Url": "https://arena.yourlondonlibrary.net/web/enfield/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000226|12",
@@ -535,18 +552,20 @@
     {
       "Name": "Glasgow",
       "Type": "arena",
+      "ArenaName": "AUK000048",
       "Id": "480001",
+      "ISBNAlias": "number",
       "Url": "http://libcat.csglasgow.org/web/arena/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000048|1",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780099557739"
     },
     {
       "Name": "Gloucestershire",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/gloslibraries/",
-      "TestISBN": "9781408810583"
+      "TestISBN": "9781408855713"
     },
     {
       "Name": "Greenwich",
@@ -573,7 +592,9 @@
     {
       "Name": "Hackney",
       "Type": "arena",
+      "ArenaName": "AUK000226",
       "Id": "226013",
+      "ISBNAlias": "number",
       "Url": "https://arena.yourlondonlibrary.net/web/hackney/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000226|13",
@@ -609,11 +630,13 @@
     {
       "Name": "Harrow",
       "Type": "arena",
+      "ArenaName": "AUK000226",
       "Id": "226020",
+      "ISBNAlias": "number",
       "Url": "https://arena.yourlondonlibrary.net/web/harrow/",
       "Advanced": "advanced-search",
       "OrganisationId": "AUK000226|20",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747591061"
     },
     {
       "Name": "Hartlepool",
@@ -625,18 +648,20 @@
     {
       "Name": "Havering",
       "Type": "arena",
+      "ArenaName": "AUK000226",
       "Id": "226001",
+      "ISBNAlias": "number",
       "Url": "https://arena.yourlondonlibrary.net/web/havering/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000226|1",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9781408821572"
     },
     {
       "Name": "Herefordshire",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/herefordshire/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9781408834985"
     },
     {
       "Name": "Hertfordshire",
@@ -659,16 +684,18 @@
       "InstitutionId": "55",
       "Profile": "ALL_BRANCH",
       "Url": "http://hldn.ent.sirsidynix.net.uk/client/en_GB/public/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747595823"
     },
     {
       "Name": "Hounslow",
       "Type": "arena",
+      "ArenaName": "AUK000226",
       "Id": "219001",
+      "ISBNAlias": "number",
       "Url": "http://www.hounslowlibraries.org/web/arena/",
       "Advanced": "advanced-search",
       "OrganisationId": "AUK000219|0",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747591054"
     },
     {
       "Name": "Hull",
@@ -729,11 +756,13 @@
     {
       "Name": "Kingston",
       "Type": "arena",
+      "ArenaName": "AUK000226",
       "Id": "226016",
+      "ISBNAlias": "number",
       "Url": "https://arena.yourlondonlibrary.net/web/kingston/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000226|16",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747538486"
     },
     {
       "Name": "Kirklees",
@@ -775,7 +804,9 @@
     {
       "Name": "Leicester City",
       "Type": "arena",
+      "ArenaName": "AUK000201",
       "Id": "201001",
+      "ISBNAlias": "number",
       "Url": "https://bookfinder.leicester.gov.uk/web/arena/",
       "Advanced": "advanced-search",
       "OrganisationId": "AUK000201|1",
@@ -792,11 +823,13 @@
     {
       "Name": "Lewisham",
       "Type": "arena",
+      "ArenaName": "AUK000226",
       "Id": "226015",
+      "ISBNAlias": "number",
       "Url": "https://arena.yourlondonlibrary.net/web/lewisham/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000226|15",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747542988"
     },
     {
       "Name": "Lincolnshire",
@@ -814,11 +847,13 @@
     {
       "Name": "Luton",
       "Type": "arena",
+      "ArenaName": "AUK000226",
       "Id": "220002",
+      "ISBNAlias": "number",
       "Url": "https://arena.yourlondonlibrary.net/web/luton/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000226|22",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747546245"
     },
     {
       "Name": "Manchester",
@@ -842,7 +877,9 @@
     {
       "Name": "Merton",
       "Type": "arena",
+      "ArenaName": "AUK000226",
       "Id": "226017",
+      "ISBNAlias": "number",
       "Url": "https://arena.yourlondonlibrary.net/web/merton/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000226|17",
@@ -851,16 +888,20 @@
     {
       "Name": "Middlesbrough",
       "Type": "arena",
+      "ArenaName": "AUK000054",
+      "ISBNAlias": "number",
       "Url": "https://libraries.middlesbrough.gov.uk/web/arena/",
       "IgnoreSSL": true,
       "Advanced": "extended-search",
       "OrganisationId": "AUK000054|0",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9781408810606"
     },
     {
       "Name": "Midlothian",
       "Type": "arena",
+      "ArenaName": "AUK000075",
       "Id": "750001",
+      "ISBNAlias": "number",
       "Url": "https://libraries.midlothian.gov.uk/web/arena/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000075|0",
@@ -891,13 +932,16 @@
     {
       "Name": "Neath Port Talbot",
       "Type": "vubis",
+      "Index": "Isbn",
       "Url": "http://212.219.142.126/nptvs/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Newcastle",
       "Type": "arena",
+      "ArenaName": "AUK000224",
       "Id": "224001",
+      "ISBNAlias": "number",
       "Url": "https://library.newcastle.gov.uk/web/arena/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000224|0",
@@ -906,11 +950,13 @@
     {
       "Name": "Newham",
       "Type": "arena",
+      "ArenaName": "AUK000226",
       "Id": "226008",
+      "ISBNAlias": "number",
       "Url": "https://arena.yourlondonlibrary.net/web/newham/",
       "Advanced": "advanced-search",
       "OrganisationId": "AUK000226|8",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747550990"
     },
     {
       "Name": "Newport",
@@ -938,17 +984,20 @@
       "Url": "http://www.lincsinspirelibraries.com/web/arena/",
       "Advanced": "advanced-search",
       "OrganisationId": "AUK000252|1",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747591054"
     },
     {
       "Name": "North Lanarkshire",
       "Type": "vubis",
+      "Index": "Isbn",
       "Url": "https://librariesnl.northlan.gov.uk/vs/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "North Lincolnshire",
       "Type": "arena",
+      "ArenaName": "AUK000221",
+      "ISBNAlias": "number",
       "Url": "http://www.opac.northlincs.gov.uk/web/arena/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000221|0",
@@ -982,14 +1031,14 @@
     {
       "Name": "Northamptonshire",
       "Type": "arena",
+      "ArenaName": "AUK000256",
       "Id": "256001",
       "Url": "https://www.librarycatalogue.northamptonshire.gov.uk/web/arena/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000256|1",
       "OrganisationName": "Northamptonshire",
-      "ArenaName": "AUK000256",
       "ISBNAlias": "recordControlNumber",
-      "TestISBN": "9780747558194"
+      "TestISBN": "9781408812525"
     },
     {
       "Name": "Northumberland",
@@ -1048,6 +1097,8 @@
     {
       "Name": "Oxfordshire",
       "Type": "arena",
+      "ArenaName": "AUK000217",
+      "ISBNAlias": "number",
       "Url": "https://libcat.oxfordshire.gov.uk/web/arena/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000217|0",
@@ -1056,6 +1107,7 @@
     {
       "Name": "Pembrokeshire",
       "Type": "vubis",
+      "Index": "Isbn",
       "Url": "http://212.219.142.126/pemvs/",
       "TestISBN": "9780747538493"
     },
@@ -1110,7 +1162,9 @@
     {
       "Name": "Redbridge",
       "Type": "arena",
+      "ArenaName": "AUK000226",
       "Id": "226002",
+      "ISBNAlias": "number",
       "Url": "https://arena.yourlondonlibrary.net/web/redbridge/",
       "Advanced": "advanced-search",
       "OrganisationId": "AUK000226|2",
@@ -1119,6 +1173,8 @@
     {
       "Name": "Redcar & Cleveland",
       "Type": "arena",
+      "ArenaName": "AUK000215",
+      "ISBNAlias": "number",
       "Url": "https://libraries.redcar-cleveland.gov.uk/web/arena/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000215|1",
@@ -1181,12 +1237,14 @@
     {
       "Name": "Scottish Borders",
       "Type": "vubis",
+      "Index": "Isbn",
       "Url": "https://librarysearch.scotborders.gov.uk/vs/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Sefton",
       "Type": "koha",
+      "IgnoreSSL": true,
       "Url": "https://catalogue2.sefton.gov.uk/",
       "TestISBN": "9780747574484"
     },
@@ -1209,10 +1267,12 @@
     {
       "Name": "Shropshire",
       "Type": "arena",
+      "ArenaName": "AUK000034",
+      "ISBNAlias": "number",
       "Url": "https://libraries.shropshire.gov.uk/web/arena/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000034|1",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747591054"
     },
     {
       "Name": "Slough",
@@ -1286,7 +1346,7 @@
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/southwark/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9781408834985"
     },
     {
       "Name": "St Helens",
@@ -1297,11 +1357,13 @@
     {
       "Name": "Staffordshire",
       "Type": "arena",
+      "ArenaName": "AUK000250",
       "Id": "250001",
+      "ISBNAlias": "number",
       "Url": "https://www.yourlibcat.staffordshire.gov.uk/web/arena/",
       "Advanced": "advanced-search",
       "OrganisationId": "AUK000250|1",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9781510051317"
     },
     {
       "Name": "Stirling",
@@ -1347,20 +1409,24 @@
     {
       "Name": "Surrey",
       "Type": "arena",
+      "ArenaName": "AUK000021",
       "Id": "210002",
+      "ISBNAlias": "number",
       "Url": "https://arena.surreylibraries.org/web/arena/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000021|0",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9781408810569"
     },
     {
       "Name": "Sutton",
       "Type": "arena",
+      "ArenaName": "AUK000226",
       "Id": "210002",
+      "ISBNAlias": "number",
       "Url": "https://arena.yourlondonlibrary.net/web/sutton/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000226|0",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747591085"
     },
     {
       "Name": "Swansea",
@@ -1370,7 +1436,7 @@
       "InstitutionId": "74",
       "Profile": "ALLLIBSG",
       "Url": "https://swan.ent.sirsidynix.net.uk/client/en_GB/default/",
-      "TestISBN": "9780747538486"
+      "TestISBN": "9780747598466"
     },
     {
       "Name": "Swindon",
@@ -1388,11 +1454,13 @@
     {
       "Name": "Telford and Wrekin",
       "Type": "arena",
+      "ArenaName": "AUK000032",
       "Id": "320001",
+      "ISBNAlias": "number",
       "Url": "https://library.telford.gov.uk/web/arena/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000032|0",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9781408865279"
     },
     {
       "Name": "Thurrock",
@@ -1420,6 +1488,7 @@
       "Name": "Tower Hamlets",
       "Type": "arena",
       "Id": "226010",
+      "ISBNAlias": "number",
       "Url": "https://arena.yourlondonlibrary.net/web/tower-hamlets/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000226|10",
@@ -1434,6 +1503,7 @@
     {
       "Name": "Vale of Glamorgan",
       "Type": "vubis",
+      "Index": "Isbn",
       "Url": "http://libhip.valeofglamorgan.gov.uk/vs/",
       "Profile": "Default",
       "TestISBN": "9780747538493"
@@ -1443,28 +1513,31 @@
       "Type": "arena",
       "Id": "212001",
       "IgnoreSSL": true,
+      "ISBNAlias": "number",
       "Url": "https://libraries.wakefield.gov.uk/web/arena/",
       "Advanced": "advanced-search",
       "OrganisationId": "AUK000212|1",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9781408855669"
     },
     {
       "Name": "Walsall",
       "Type": "arena",
       "Id": "140001",
+      "ISBNAlias": "number",
       "Url": "https://libcat.walsall.gov.uk/web/arena/",
       "Advanced": "advanced-search",
       "OrganisationId": "AUK000014|0",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9781408845653"
     },
     {
       "Name": "Waltham Forest",
       "Type": "arena",
       "Id": "226004",
+      "ISBNAlias": "number",
       "Url": "https://arena.yourlondonlibrary.net/web/walthamforest/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000226|4",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747574491"
     },
     {
       "Name": "Wandsworth",
@@ -1513,10 +1586,11 @@
       "Name": "West Sussex",
       "Type": "arena",
       "Id": "380001",
+      "ISBNAlias": "number",
       "Url": "https://arena.westsussex.gov.uk/web/arena/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000038|0",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9781408810606"
     },
     {
       "Name": "Western Isles",
@@ -1543,10 +1617,11 @@
       "Name": "Wiltshire",
       "Type": "arena",
       "Id": "400001",
+      "ISBNAlias": "number",
       "Url": "https://libraries.wiltshire.gov.uk/web/arena/",
       "Advanced": "advanced-search",
       "OrganisationId": "AUK000040|0",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9781408810545"
     },
     {
       "Name": "Windsor & Maidenhead",
@@ -1597,7 +1672,7 @@
       "InstitutionId": "174",
       "Profile": "YORKPUB",
       "Url": "https://cyc.sdp.sirsidynix.net.uk/client/en_GB/default/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747591061"
     }
   ]
 }
