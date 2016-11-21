@@ -58,7 +58,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
         // Request 2/3: A post request returns the data used to show the availability information
         request.post({ url: url, headers: headerPost, timeout: 30000 }, function (error, msg, res) {
             if (common.handleErrors(callback, responseHoldings, error, msg)) return;
-            if (!common.isJsonString(res)) return common.completeCallback(callback, responseHoldings);
+            if (!common.isJsonString(res)) { common.completeCallback(callback, responseHoldings); return }
             var avail = JSON.parse(res);
             $ = cheerio.load(itemPage);
             var libs = {};
@@ -66,7 +66,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
                 var name = $(this).find('td').eq(0).text().trim();
                 var bc = $(this).find('td div').attr('id').replace('availabilityDiv', '');
                 // The status search can go down while item details are still returned.  In this case just have to bail out.
-                if (avail.ids && avail.ids.length > 0) {
+                if (bc && avail.ids && avail.ids.length > 0 && avail.strings && avail.ids.indexOf(bc) != -1) {
                     var status = avail.strings[avail.ids.indexOf(bc)].trim();
                     if (!libs[name]) libs[name] = { available: 0, unavailable: 0 };
                     lib.Available.indexOf(status) > 0 ? libs[name].available++ : libs[name].unavailable++;
@@ -83,7 +83,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
         var uri = msg.request.uri.path;
         var ils = uri.substring(uri.lastIndexOf("ent:") + 4, uri.lastIndexOf("/one"));
         // Bail out here if we don't get back an ID.
-        if (!ils) return common.completeCallback(callback, responseHoldings);
+        if (!ils) { common.completeCallback(callback, responseHoldings); return; }
         if (ils == '/cl') {
             // In this situation we're probably still on the search page (there may be duplicate results).
             ils = null;

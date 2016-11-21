@@ -100,6 +100,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
         if (response.lastIndexOf('search_item_id=') === -1) { common.completeCallback(callback, responseHoldings); return; }
         var itemId = response.substring(response.lastIndexOf("search_item_id=") + 15);
         var url = lib.Url + itemUrl.replace('[ARENANAME]', lib.ArenaName).replace('[ITEMID]', itemId.substring(0, itemId.indexOf('&')));
+        
         request.get({ agent: agent, rejectUnauthorized: !lib.IgnoreSSL, url: url, timeout: 20000, headers: { 'Connection': 'keep-alive' }, jar: true }, handleItemPage);
     };
 

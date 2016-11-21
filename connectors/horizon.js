@@ -54,6 +54,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     request.get({ url: lib.Url + catUrl + isbn, timeout: 60000 }, function (error, msg, response) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;
         var libs = {};
+        $ = cheerio.load(response);
         $('table.bibItems tr.bibItemsEntry').each(function (index, elem) {
             var name = $(this).find('td').eq(0).text().trim();
             var status = $(this).find('td').eq(2).text().trim();

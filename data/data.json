@@ -683,6 +683,9 @@
       "Region": "3",
       "InstitutionId": "55",
       "Profile": "ALL_BRANCH",
+      "Available": [ "In stock" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+      "SearchType": "Keyword",
       "Url": "http://hldn.ent.sirsidynix.net.uk/client/en_GB/public/",
       "TestISBN": "9780747595823"
     },
@@ -691,7 +694,8 @@
       "Type": "arena",
       "ArenaName": "AUK000226",
       "Id": "219001",
-      "ISBNAlias": "number",
+      "ISBNAlias": "recordControlNumber",
+      "SearchType": "Keyword",
       "Url": "http://www.hounslowlibraries.org/web/arena/",
       "Advanced": "advanced-search",
       "OrganisationId": "AUK000219|0",
@@ -776,7 +780,7 @@
       "Name": "Knowsley",
       "Type": "enterprise",
       "Available": [ "In stock" ],
-      "AvailabilityUrl": "search/results.displaypanel.displaycell.detail.detailitemstable:loadAvailability/en_GB/Unknown/0/DEFAULT/ent:",
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent",
       "Url": "http://kmbc.sdp.sirsidynix.net.uk/client/default/",
       "TestISBN": "9781408855959"
     },
@@ -829,7 +833,7 @@
       "Url": "https://arena.yourlondonlibrary.net/web/lewisham/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000226|15",
-      "TestISBN": "9780747542988"
+      "TestISBN": "9780747591061"
     },
     {
       "Name": "Lincolnshire",
@@ -890,6 +894,7 @@
       "Type": "arena",
       "ArenaName": "AUK000054",
       "ISBNAlias": "number",
+      "SearchType": "Keyword",
       "Url": "https://libraries.middlesbrough.gov.uk/web/arena/",
       "IgnoreSSL": true,
       "Advanced": "extended-search",
@@ -975,12 +980,13 @@
       "Name": "North Ayrshire",
       "Type": "spydus",
       "Url": "https://north-ayrshire.spydus.co.uk/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9781408855713"
     },
     {
       "Name": "North East Lincolnshire",
       "Type": "arena",
       "Id": "252001",
+      "SearchType": "Keyword",
       "Url": "http://www.lincsinspirelibraries.com/web/arena/",
       "Advanced": "advanced-search",
       "OrganisationId": "AUK000252|1",
@@ -1033,6 +1039,7 @@
       "Type": "arena",
       "ArenaName": "AUK000256",
       "Id": "256001",
+      "SearchType": "Keyword",
       "Url": "https://www.librarycatalogue.northamptonshire.gov.uk/web/arena/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000256|1",
@@ -1157,7 +1164,7 @@
       "Type": "horizon",
       "Available": [ "On shelf" ],
       "Url": "http://reading-hip.epixtech.co.uk/",
-      "TestISBN": "9781408855683"
+      "TestISBN": "9780751565355"
     },
     {
       "Name": "Redbridge",
@@ -1307,9 +1314,9 @@
       "Name": "South Gloucestershire",
       "Type": "enterprise",
       "Id": "280001",
-      "Url": "https://www.librarieswest.org.uk/client/en_GB/default/",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+      "Url": "https://www.librarieswest.org.uk/client/en_GB/default/",
       "MultiAuthorityId": 5,
       "TestISBN": "9780747538493"
     },
@@ -1360,6 +1367,7 @@
       "ArenaName": "AUK000250",
       "Id": "250001",
       "ISBNAlias": "number",
+      "SearchType": "Keyword",
       "Url": "https://www.yourlibcat.staffordshire.gov.uk/web/arena/",
       "Advanced": "advanced-search",
       "OrganisationId": "AUK000250|1",
@@ -1425,7 +1433,7 @@
       "ISBNAlias": "number",
       "Url": "https://arena.yourlondonlibrary.net/web/sutton/",
       "Advanced": "extended-search",
-      "OrganisationId": "AUK000226|0",
+      "OrganisationId": "AUK000226|21",
       "TestISBN": "9780747591085"
     },
     {
@@ -1435,6 +1443,8 @@
       "Region": "3",
       "InstitutionId": "74",
       "Profile": "ALLLIBSG",
+      "Available": [ "In stock" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "Url": "https://swan.ent.sirsidynix.net.uk/client/en_GB/default/",
       "TestISBN": "9780747598466"
     },
@@ -1514,6 +1524,7 @@
       "Id": "212001",
       "IgnoreSSL": true,
       "ISBNAlias": "number",
+      "SearchType": "Keyword",
       "Url": "https://libraries.wakefield.gov.uk/web/arena/",
       "Advanced": "advanced-search",
       "OrganisationId": "AUK000212|1",
@@ -1524,6 +1535,7 @@
       "Type": "arena",
       "Id": "140001",
       "ISBNAlias": "number",
+      "SearchType": "Keyword",
       "Url": "https://libcat.walsall.gov.uk/web/arena/",
       "Advanced": "advanced-search",
       "OrganisationId": "AUK000014|0",
@@ -1587,6 +1599,7 @@
       "Type": "arena",
       "Id": "380001",
       "ISBNAlias": "number",
+      "SearchType": "Keyword",
       "Url": "https://arena.westsussex.gov.uk/web/arena/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000038|0",
@@ -1618,6 +1631,7 @@
       "Type": "arena",
       "Id": "400001",
       "ISBNAlias": "number",
+      "SearchType": "Keyword",
       "Url": "https://libraries.wiltshire.gov.uk/web/arena/",
       "Advanced": "advanced-search",
       "OrganisationId": "AUK000040|0",
@@ -1671,6 +1685,8 @@
       "Region": "3",
       "InstitutionId": "174",
       "Profile": "YORKPUB",
+      "Available": [ "Available" ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
       "Url": "https://cyc.sdp.sirsidynix.net.uk/client/en_GB/default/",
       "TestISBN": "9780747591061"
     }
