@@ -67,11 +67,9 @@ exports.searchByISBN = function (isbn, lib, callback) {
     request.get({ url: lib.Url + searchUrl + isbn, timeout: 30000 }, function (error, msg, res) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;
         $ = cheerio.load(res);
+
         // If nothing found return.
-        if ($('.holdings').length == 0) {
-            common.completeCallback(callback, responseHoldings);
-            return;
-        }
+        if ($('.holdings').length == 0) { common.completeCallback(callback, responseHoldings); return; }
 
         // In some cases (multiple records) there is another page request required to get full details (availability).
         if ($('.holdings').text().indexOf('see full display for details') != -1) {

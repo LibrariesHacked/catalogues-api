@@ -261,6 +261,19 @@
       "TestISBN": "9780747538486"
     },
     {
+      "Name": "Central Bedfordshire",
+      "Type": "arena",
+      "OrganisationName": "Central",
+      "ArenaName": "AUK000022",
+      "ISBNAlias": "recordControlNumber",
+      "Id": "220001",
+      "SearchType": "Keyword",
+      "Url": "https://beds-arena.culturalservices.net/web/arena/",
+      "Advanced": "extended-search",
+      "OrganisationId": "AUK000022|1",
+      "TestISBN": "9780747591061"
+    },
+    {
       "Name": "Ceredigion",
       "Type": "vubis",
       "Profile": "Default",
@@ -272,17 +285,17 @@
       "TestISBN": "9780747538492"
     },
     {
-      "Name": "Cheshire West and Chester",
-      "Type": "koha",
-      "Url": "https://cheslive.koha-ptfs.co.uk/",
-      "MultiBranchLimit": "WEST",
-      "TestISBN": "9780747562184"
-    },
-    {
       "Name": "Cheshire East",
       "Type": "koha",
       "Url": "https://cheslive.koha-ptfs.co.uk/",
       "MultiBranchLimit": "EAST",
+      "TestISBN": "9780747562184"
+    },
+    {
+      "Name": "Cheshire West and Chester",
+      "Type": "koha",
+      "Url": "https://cheslive.koha-ptfs.co.uk/",
+      "MultiBranchLimit": "WEST",
       "TestISBN": "9780747562184"
     },
     {
@@ -352,6 +365,7 @@
       "Url": "https://www2.darlington.gov.uk/web/arena/",
       "Libraries": [ "Central Library", "Cockerton Library", "Mobile Library" ],
       "OrganisationId": "AUK000023|0",
+      "OrganisationName": "Darlington",
       "Advanced": "advanced-search",
       "TestISBN": "9781408855652"
     },
@@ -396,6 +410,7 @@
       "Url": "http://library.doncaster.gov.uk/web/arena/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000243|1",
+      "OrganisationName": "Doncaster",
       "TestISBN": "9780747538493"
     },
     {
@@ -476,7 +491,7 @@
       "TestISBN": "9781408855713"
     },
     {
-      "Name": "East Riding",
+      "Name": "East Riding of Yorkshire",
       "Type": "arena",
       "ArenaName": "AUK000205",
       "Id": "205001",
@@ -508,6 +523,7 @@
       "Url": "https://arena.yourlondonlibrary.net/web/enfield/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000226|12",
+      "OrganisationName": "Enfield",
       "TestISBN": "9780747538493"
     },
     {
@@ -558,6 +574,7 @@
       "Url": "http://libcat.csglasgow.org/web/arena/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000048|1",
+      "OrganisationName": "Glasgow",
       "TestISBN": "9780099557739"
     },
     {
@@ -598,6 +615,7 @@
       "Url": "https://arena.yourlondonlibrary.net/web/hackney/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000226|13",
+      "OrganisationName": "Hackney",
       "TestISBN": "9780747538493"
     },
     {
@@ -636,6 +654,7 @@
       "Url": "https://arena.yourlondonlibrary.net/web/harrow/",
       "Advanced": "advanced-search",
       "OrganisationId": "AUK000226|20",
+      "OrganisationName": "Harrow",
       "TestISBN": "9780747591061"
     },
     {
@@ -654,6 +673,7 @@
       "Url": "https://arena.yourlondonlibrary.net/web/havering/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000226|1",
+      "OrganisationName": "Havering",
       "TestISBN": "9781408821572"
     },
     {
@@ -692,7 +712,7 @@
     {
       "Name": "Hounslow",
       "Type": "arena",
-      "ArenaName": "AUK000226",
+      "ArenaName": "AUK000219",
       "Id": "219001",
       "ISBNAlias": "recordControlNumber",
       "SearchType": "Keyword",
@@ -758,7 +778,7 @@
       "TestISBN": "9780747538493"
     },
     {
-      "Name": "Kingston",
+      "Name": "Kingston upon Thames",
       "Type": "arena",
       "ArenaName": "AUK000226",
       "Id": "226016",
@@ -766,6 +786,7 @@
       "Url": "https://arena.yourlondonlibrary.net/web/kingston/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000226|16",
+      "OrganisationName": "Kingston",
       "TestISBN": "9780747538486"
     },
     {
@@ -814,6 +835,7 @@
       "Url": "https://bookfinder.leicester.gov.uk/web/arena/",
       "Advanced": "advanced-search",
       "OrganisationId": "AUK000201|1",
+      "OrganisationName": "Leicester City",
       "TestISBN": "9780747538493"
     },
     {
@@ -833,6 +855,7 @@
       "Url": "https://arena.yourlondonlibrary.net/web/lewisham/",
       "Advanced": "extended-search",
       "OrganisationId": "AUK000226|15",
+      "OrganisationName": "Lewisham",
       "TestISBN": "9780747591061"
     },
     {
@@ -942,7 +965,7 @@
       "TestISBN": "9780747538493"
     },
     {
-      "Name": "Newcastle",
+      "Name": "Newcastle upon Tyne",
       "Type": "arena",
       "ArenaName": "AUK000224",
       "Id": "224001",
@@ -986,6 +1009,7 @@
       "Name": "North East Lincolnshire",
       "Type": "arena",
       "Id": "252001",
+      "ArenaName": "AUK000252",
       "SearchType": "Keyword",
       "Url": "http://www.lincsinspirelibraries.com/web/arena/",
       "Advanced": "advanced-search",
@@ -1178,7 +1202,7 @@
       "TestISBN": "9780747538493"
     },
     {
-      "Name": "Redcar & Cleveland",
+      "Name": "Redcar and Cleveland",
       "Type": "arena",
       "ArenaName": "AUK000215",
       "ISBNAlias": "number",
@@ -1203,7 +1227,7 @@
       "TestISBN": "9780747538493"
     },
     {
-      "Name": "Richmond",
+      "Name": "Richmond upon Thames",
       "Type": "spydus",
       "Url": "https://richmond.spydus.co.uk/",
       "TestISBN": "9780747538493"
@@ -1386,7 +1410,7 @@
       "TestISBN": "9781408855669"
     },
     {
-      "Name": "Stockton",
+      "Name": "Stockton on Tees",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/stockton/",
@@ -1522,6 +1546,7 @@
       "Name": "Wakefield",
       "Type": "arena",
       "Id": "212001",
+      "ArenaName": "AUK000212",
       "IgnoreSSL": true,
       "ISBNAlias": "number",
       "SearchType": "Keyword",
@@ -1534,6 +1559,7 @@
       "Name": "Walsall",
       "Type": "arena",
       "Id": "140001",
+      "ArenaName": "AUK000014",
       "ISBNAlias": "number",
       "SearchType": "Keyword",
       "Url": "https://libcat.walsall.gov.uk/web/arena/",
@@ -1598,6 +1624,7 @@
       "Name": "West Sussex",
       "Type": "arena",
       "Id": "380001",
+      "ArenaName": "AUK000038",
       "ISBNAlias": "number",
       "SearchType": "Keyword",
       "Url": "https://arena.westsussex.gov.uk/web/arena/",
@@ -1630,11 +1657,13 @@
       "Name": "Wiltshire",
       "Type": "arena",
       "Id": "400001",
+      "ArenaName": "AUK000040",
       "ISBNAlias": "number",
       "SearchType": "Keyword",
       "Url": "https://libraries.wiltshire.gov.uk/web/arena/",
       "Advanced": "advanced-search",
       "OrganisationId": "AUK000040|0",
+      "OrganisationName": "Wiltshire Libraries",
       "TestISBN": "9781408810545"
     },
     {

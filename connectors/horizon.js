@@ -55,11 +55,10 @@ exports.searchByISBN = function (isbn, lib, callback) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;
         var libs = {};
         $ = cheerio.load(response);
-        $('table.bibItems tr.bibItemsEntry').each(function (index, elem) {
+        $('form[name="details"] table table table tr').slice(1).each(function (index, elem) {
             var name = $(this).find('td').eq(0).text().trim();
-            var status = $(this).find('td').eq(2).text().trim();
             if (!libs[name]) libs[name] = { available: 0, unavailable: 0 };
-            lib.Available.indexOf(status) != -1 ? libs[name].available++ : libs[name].unavailable++;
+            lib.Available.indexOf($(this).find('td').eq(2).text().trim()) != -1 ? libs[name].available++ : libs[name].unavailable++;
         });
         for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
         common.completeCallback(callback, responseHoldings);

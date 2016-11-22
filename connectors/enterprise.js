@@ -50,54 +50,60 @@ exports.getLibraries = function (service, callback) {
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
     var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
-    // Function to get availability - called either immediately (if redirected onto the main item page)
-    // Or after a second request to go to the item page.
-    var getItemAvailability = function (ils, itemPage) {
+    var ils = '';
+    var itemPage = '';
+
+    var deepLinkResponse = function (error, msg, res) {
+        if (common.handleErrors(callback, responseHoldings, error, msg)) return;
+        ils = msg.request.uri.path.substring(msg.request.uri.path.lastIndexOf("ent:") + 4, msg.request.uri.path.lastIndexOf("/one")) || '';
+        if (ils == '') { common.completeCallback(callback, responseHoldings); return; }
+        itemPage = res;
+        if (ils == '/cl') {
+            // In this situation we're probably still on the search page (there may be duplicate results).
+            $ = cheerio.load(itemPage);
+            if ($('#da0').attr('value')) ils = $('#da0').attr('value').substring($('#da0').attr('value').lastIndexOf("ent:") + 4) || '';
+            if (ils == '') { common.completeCallback(callback, responseHoldings); return; }
+            var url = lib.Url + itemUrl.replace('[ILS]', ils.split('/').join('$002f'));
+            request.get({ url: url, timeout: 30000 }, itemPageResponse);
+        } else {
+            getItemAvailability(ils);
+        }
+    };
+
+    var itemPageResponse = function (error, message, response) {
+        if (common.handleErrors(callback, responseHoldings, error, message)) return;
+        getItemAvailability(ils, response);
+    };
+
+    // Function: getItemAvailability
+    // Called either immediately (if redirected onto the main item page) or after a second request to go to the item page.
+    var getItemAvailability = function (ils) {
         if (ils.indexOf('SD_ILS') == -1) return common.completeCallback(callback, responseHoldings);
         var url = lib.Url + lib.AvailabilityUrl + ils.split('/').join('$002f') + '/';
         // Request 2/3: A post request returns the data used to show the availability information
-        request.post({ url: url, headers: headerPost, timeout: 30000 }, function (error, msg, res) {
-            if (common.handleErrors(callback, responseHoldings, error, msg)) return;
-            if (!common.isJsonString(res)) { common.completeCallback(callback, responseHoldings); return }
-            var avail = JSON.parse(res);
-            $ = cheerio.load(itemPage);
-            var libs = {};
-            $('.detailItemsTableRow').each(function (index, elem) {
-                var name = $(this).find('td').eq(0).text().trim();
-                var bc = $(this).find('td div').attr('id').replace('availabilityDiv', '');
-                // The status search can go down while item details are still returned.  In this case just have to bail out.
-                if (bc && avail.ids && avail.ids.length > 0 && avail.strings && avail.ids.indexOf(bc) != -1) {
-                    var status = avail.strings[avail.ids.indexOf(bc)].trim();
-                    if (!libs[name]) libs[name] = { available: 0, unavailable: 0 };
-                    lib.Available.indexOf(status) > 0 ? libs[name].available++ : libs[name].unavailable++;
-                }
-            });
-            for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
-            common.completeCallback(callback, responseHoldings);
+        request.post({ url: url, headers: headerPost, timeout: 30000 }, getFinalAvailabilityJson);
+    };
+
+    var getFinalAvailabilityJson = function (error, msg, res) {
+        if (common.handleErrors(callback, responseHoldings, error, msg)) return;
+        if (!common.isJsonString(res)) { common.completeCallback(callback, responseHoldings); return }
+        var avail = JSON.parse(res);
+        $ = cheerio.load(itemPage);
+        var libs = {};
+        $('.detailItemsTableRow').each(function (index, elem) {
+            var name = $(this).find('td').eq(0).text().trim();
+            var bc = $(this).find('td div').attr('id').replace('availabilityDiv', '');
+            // The status search can go down while item details are still returned.  In this case just have to bail out.
+            if (bc && avail.ids && avail.ids.length > 0 && avail.strings && avail.ids.indexOf(bc) != -1) {
+                var status = avail.strings[avail.ids.indexOf(bc)].trim();
+                if (!libs[name]) libs[name] = { available: 0, unavailable: 0 };
+                lib.Available.indexOf(status) > 0 ? libs[name].available++ : libs[name].unavailable++;
+            }
         });
+        for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
+        common.completeCallback(callback, responseHoldings);
     };
 
     // Request 1: Call the deep link to the item by ISBN
-    request.get({ url: lib.Url + searchUrl + isbn, headers: header1, timeout: 30000 }, function (error, msg, resp1) {
-        if (common.handleErrors(callback, responseHoldings, error, msg)) return;
-        var uri = msg.request.uri.path;
-        var ils = uri.substring(uri.lastIndexOf("ent:") + 4, uri.lastIndexOf("/one"));
-        // Bail out here if we don't get back an ID.
-        if (!ils) { common.completeCallback(callback, responseHoldings); return; }
-        if (ils == '/cl') {
-            // In this situation we're probably still on the search page (there may be duplicate results).
-            ils = null;
-            $ = cheerio.load(resp1);
-            if ($('#da0').attr('value')) ils = $('#da0').attr('value').substring($('#da0').attr('value').lastIndexOf("ent:") + 4);
-            if (ils == null) return common.completeCallback(callback, responseHoldings);
-            var url = lib.Url + itemUrl.replace('[ILS]', ils.split('/').join('$002f'));
-            // Request 2: Call the item URL with the item ID.
-            request.get({ url: url, timeout: 30000 }, function (error, message, response) {
-                if (common.handleErrors(callback, responseHoldings, error, message)) return;
-                getItemAvailability(ils, response);
-            });
-        } else {
-            getItemAvailability(ils, resp1);
-        }
-    });
+    request.get({ url: lib.Url + searchUrl + isbn, headers: header1, timeout: 30000 }, deepLinkResponse);
 };

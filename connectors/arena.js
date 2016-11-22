@@ -100,7 +100,6 @@ exports.searchByISBN = function (isbn, lib, callback) {
         if (response.lastIndexOf('search_item_id=') === -1) { common.completeCallback(callback, responseHoldings); return; }
         var itemId = response.substring(response.lastIndexOf("search_item_id=") + 15);
         var url = lib.Url + itemUrl.replace('[ARENANAME]', lib.ArenaName).replace('[ITEMID]', itemId.substring(0, itemId.indexOf('&')));
-        
         request.get({ agent: agent, rejectUnauthorized: !lib.IgnoreSSL, url: url, timeout: 20000, headers: { 'Connection': 'keep-alive' }, jar: true }, handleItemPage);
     };
 
@@ -143,10 +142,10 @@ exports.searchByISBN = function (isbn, lib, callback) {
         if (!res['ajax-response'].component) { common.completeCallback(callback, responseHoldings); return; }
         $ = cheerio.load(res['ajax-response'].component[0]._);
         // Sometimes at this point this is enough to get the availability
-        if ($('.arena-holding-nof-total').length > 0) {
+        if ($('.arena-holding-nof-total, .arena-holding-nof-checked-out, .arena-holding-nof-available-for-loan').length > 0) {
             $('.arena-holding-child-container').each(function (idx) {
                 var libName = $(this).find('span.arena-holding-link').text();
-                var totalAvailable = $(this).find('td.arena-holding-nof-total span.arena-value').text();
+                var totalAvailable = $(this).find('td.arena-holding-nof-total span.arena-value').text() || (parseInt($(this).find('td.arena-holding-nof-available-for-loan span.arena-value').text() || 0) + parseInt($(this).find('td.arena-holding-nof-checked-out span.arena-value').text() || 0));
                 var checkedOut = $(this).find('td.arena-holding-nof-checked-out span.arena-value').text();
                 if (libName) responseHoldings.availability.push({ library: libName, available: (parseInt(totalAvailable) - (checkedOut ? parseInt(checkedOut) : 0)), unavailable: (checkedOut != "" ? parseInt(checkedOut) : 0) });
             });
@@ -163,7 +162,6 @@ exports.searchByISBN = function (isbn, lib, callback) {
 
     ///////////////////////////////////////////////
     // getHoldings
-    // Step 5 (Looped): 
     ///////////////////////////////////////////////
     var getHoldings = function (error, message, response) {
         if (common.handleErrors(callback, responseHoldings, error, message)) return;
