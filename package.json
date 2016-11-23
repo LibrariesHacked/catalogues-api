@@ -1,8 +1,8 @@
 {
-  "name": "NodeCatalogueWS",
+  "name": "catalogue-nodews",
   "version": "1.0.0",
   "description": "A web service for searching library catalogues",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
