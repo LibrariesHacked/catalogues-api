@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/LibrariesHacked/Catalogue-WS.git"
+    "url": "https://github.com/LibrariesHacked/catalogue-nodews.git"
   },
   "keywords": [
     "libraries",
@@ -17,9 +17,9 @@
   "author": "Libraries Hacked",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/LibrariesHacked/Catalogue-WS/issues"
+    "url": "https://github.com/LibrariesHacked/catalogue-nodews/issues"
   },
-  "homepage": "https://github.com/LibrariesHacked/Catalogue-WS",
+  "homepage": "https://github.com/LibrariesHacked/catalogue-nodews",
   "dependencies": {
     "async": "^1.4.0",
     "bootstrap": "^3.3.7",
