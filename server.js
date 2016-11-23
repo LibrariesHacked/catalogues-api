@@ -54,4 +54,7 @@ app.get('/testAvailabilityByISBN', libraries.testIsbnSearch);
 // Starts up the web service on port 3000
 ///////////////////////////////////////////
 app.listen(3000);
-console.log('Listening on port 3000...');
+var port = process.env.PORT || config.server.port || 1337;
+var server = app.listen(port, function() {
+    console.log("Express server listening on port %d in %s mode", server.address().port, app.settings.env);
+});
