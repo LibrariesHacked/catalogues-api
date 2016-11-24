@@ -1,6 +1,15 @@
 ﻿$(function () {
+
+    $.sum = function (arr) {
+        var r = 0;
+        $.each(arr, function (i, v) { r += v; });
+        return r;
+    }
+
     var libraryServices = [];
     var isbn = '';
+    var isbn13s = [];
+    var isbn10s = [];
 
     $.get('/services', function (data) { libraryServices = data; });
 
@@ -13,7 +22,16 @@
                 return process($.map(data.items, function (item, x) {
                     if (item.volumeInfo.industryIdentifiers) {
                         var isbn = '';
-                        $.each(item.volumeInfo.industryIdentifiers, function (y, is) { if (is.type == 'ISBN_13') isbn = is.identifier });
+                        var isbns = [];
+                        $.each(item.volumeInfo.industryIdentifiers, function (y, is) {
+                            if (is.type == 'ISBN_10') {
+                                isbn10s.push = is.identifier;
+                            }
+                            if (is.type == 'ISBN_13') {
+                                isbn = is.identifier;
+                                isbn13s.push = is.identifier;
+                            }
+                        });
                         return { id: isbn, name: item.volumeInfo.title + ', ' + item.volumeInfo.authors[0] }
                     };
                 }));
@@ -28,6 +46,8 @@
     $('#txtKeywords').change(function () {
         var current = $('#txtKeywords').typeahead("getActive");
         if (current) { $('#btnSearch').removeClass('disabled'); isbn = current.id; }
+        // let's now trigger the lookup for additional isbns
+
     });
 
     $('#btnSearch').on('click', function () {
@@ -43,10 +63,12 @@
                     countReturns++;
                     $('.progress-bar').css('width', ((countReturns / libraryServices.length) * 100) + '%');
                     if (data && data[0] && data[0].availability) {
-                        $('#found').text(parseInt($('#found').text()) + data[0].availability.length);
-                        $('#available').text(parseInt($('#available').text()) + data[0].availability.length);
-                        $('#unavailable').text(parseInt($('#found').text()) + data[0].availability.length);
-                    } 
+                        var available = $.sum($.map(data[0].availability, function (av, i) { return parseInt(av.available) }));
+                        var unavailable = $.sum($.map(data[0].availability, function (av, i) { return parseInt(av.unavailable) }));
+                        $('#found').text(parseInt($('#found').text()) + available + unavailable);
+                        $('#available').text(parseInt($('#available').text()) + available);
+                        $('#unavailable').text(parseInt($('#unavailable').text()) + unavailable);
+                    }
                 });
             });
         }

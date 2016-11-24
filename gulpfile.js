@@ -8,6 +8,6 @@ gulp.task('default', function () {
     ]).pipe(gulp.dest('public/libs/js'));
     gulp.src([
         'node_modules/bootstrap/dist/js/bootstrap.min.js',
-        'node_modules/bootswatch/sandstone/bootstrap.min.css'
+        'node_modules/bootswatch/paper/bootstrap.min.css'
     ]).pipe(gulp.dest('public/libs/css'));
 });
