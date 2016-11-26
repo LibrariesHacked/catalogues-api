@@ -39,16 +39,16 @@
         var current = $('#txtKeywords').typeahead("getActive");
         if (current) { $('#btnSearch').removeClass('disabled'); isbns = current.id; }
         // let's now trigger the lookup for additional isbns ready for when the search is run
-        $.ajax({ type: 'GET',
-        		url: URL,
-        		dataType: 'xml',
-        		contentType: 'application/xml; charset=utf-8',
-        		success: function (data) {
-        			$.each($(data).find('isbn'), function(data) {
-        				// 
-        			};
-        		}
-        	});
+        //$.ajax({ type: 'GET',
+        	//	url: URL,
+        //		dataType: 'xml',
+        	//	contentType: 'application/xml; charset=utf-8',
+        //		success: function (data) {
+        //			$.each($(data).find('isbn'), function(data) {
+        //				// 
+        //			};
+        	//	}
+        	//});
     });
 
     $('#btnSearch').on('click', function () {
