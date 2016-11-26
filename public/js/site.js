@@ -7,9 +7,7 @@
     }
 
     var libraryServices = [];
-    var isbn = '';
-    var isbn13s = [];
-    var isbn10s = [];
+    var isbns = { 10:[], 13: [] };
 
     $.get('/services', function (data) { libraryServices = data; });
 
@@ -21,18 +19,12 @@
             return $.get('https://www.googleapis.com/books/v1/volumes?q=' + query + '&key=' + config.booksKey, function (data) {
                 return process($.map(data.items, function (item, x) {
                     if (item.volumeInfo.industryIdentifiers) {
-                        var isbn = '';
-                        var isbns = [];
+                        var tempisbns = { 10:[], 13: [] };
                         $.each(item.volumeInfo.industryIdentifiers, function (y, is) {
-                            if (is.type == 'ISBN_10') {
-                                isbn10s.push = is.identifier;
-                            }
-                            if (is.type == 'ISBN_13') {
-                                isbn = is.identifier;
-                                isbn13s.push = is.identifier;
-                            }
+                            if (is.type == 'ISBN_10') tempisbns.10.push = is.identifier;
+                            if (is.type == 'ISBN_13') tempisbns.13.push = is.identifier;
                         });
-                        return { id: isbn, name: item.volumeInfo.title + ', ' + item.volumeInfo.authors[0] }
+                        return { id: tempisbns, name: item.volumeInfo.title + ', ' + item.volumeInfo.authors[0] };
                     };
                 }));
             });
@@ -45,9 +37,18 @@
     ////////////////////////////////////////////////
     $('#txtKeywords').change(function () {
         var current = $('#txtKeywords').typeahead("getActive");
-        if (current) { $('#btnSearch').removeClass('disabled'); isbn = current.id; }
-        // let's now trigger the lookup for additional isbns
-
+        if (current) { $('#btnSearch').removeClass('disabled'); isbns = current.id; }
+        // let's now trigger the lookup for additional isbns ready for when the search is run
+        $.ajax({ type: 'GET',
+        		url: URL,
+        		dataType: 'xml',
+        		contentType: 'application/xml; charset=utf-8',
+        		success: function (data) {
+        			$.each($(data).find('isbn'), function(data) {
+        				// 
+        			};
+        		}
+        	});
     });
 
     $('#btnSearch').on('click', function () {
@@ -56,12 +57,21 @@
         $('#available').text(0);
         $('#unavailable').text(0);
         $('.progress-bar').css('width', '0%');
+        
+        
+        // from the total set of isbns and services, work out the number of calls to make
+        
+        var requests =  [];
+        $.each(libraryServices, function (x, service) {
+        		$.each(isbns.13, function (y, isbn) { requests.push('/availabilityByISBN/' + isbn + '?service=' + service.Name); });		 
+        });
+
         var countReturns = 0;
         if (libraryServices.length > 0 && isbn != '') {
-            $.each(libraryServices, function (x, service) {
-                $.get('/availabilityByISBN/' + isbn + '?service=' + service.Name, function (data) {
+            $.each(requests, function (x, url) {
+                $.get(url, function (data) {
                     countReturns++;
-                    $('.progress-bar').css('width', ((countReturns / libraryServices.length) * 100) + '%');
+                    $('.progress-bar').css('width', ((countReturns / requests.length) * 100) + '%');
                     if (data && data[0] && data[0].availability) {
                         var available = $.sum($.map(data[0].availability, function (av, i) { return parseInt(av.available) }));
                         var unavailable = $.sum($.map(data[0].availability, function (av, i) { return parseInt(av.unavailable) }));
