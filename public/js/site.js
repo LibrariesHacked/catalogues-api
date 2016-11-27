@@ -7,7 +7,7 @@
     }
 
     var libraryServices = [];
-    var isbns = { 10:[], 13: [] };
+    var isbns = { 10s:[], 13s: [] };
 
     $.get('/services', function (data) { libraryServices = data; });
 
@@ -19,10 +19,10 @@
             return $.get('https://www.googleapis.com/books/v1/volumes?q=' + query + '&key=' + config.booksKey, function (data) {
                 return process($.map(data.items, function (item, x) {
                     if (item.volumeInfo.industryIdentifiers) {
-                        var tempisbns = { 10:[], 13: [] };
+                        var tempisbns = { 10s:[], 13s: [] };
                         $.each(item.volumeInfo.industryIdentifiers, function (y, is) {
-                            if (is.type == 'ISBN_10') tempisbns.10.push = is.identifier;
-                            if (is.type == 'ISBN_13') tempisbns.13.push = is.identifier;
+                            if (is.type == 'ISBN_10') tempisbns.10s.push(is.identifier);
+                            if (is.type == 'ISBN_13') tempisbns.13s.push(is.identifier);
                         });
                         return { id: tempisbns, name: item.volumeInfo.title + ', ' + item.volumeInfo.authors[0] };
                     };
@@ -60,10 +60,9 @@
         
         
         // from the total set of isbns and services, work out the number of calls to make
-        
         var requests =  [];
         $.each(libraryServices, function (x, service) {
-        		$.each(isbns.13, function (y, isbn) { requests.push('/availabilityByISBN/' + isbn + '?service=' + service.Name); });		 
+        		$.each(isbns.13s, function (y, isbn) { requests.push('/availabilityByISBN/' + isbn + '?service=' + service.Name); });		 
         });
 
         var countReturns = 0;

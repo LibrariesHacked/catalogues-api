@@ -24,7 +24,7 @@ exports.getServices = function (req, res) {
     var services = data.LibraryServices
         // Could put a filter here e.g. if filter by area (North East) or even spatial. 
         .filter(function (service) {
-            return (service.Type != '' && (!req.query.service || service.Name.indexOf(req.query.service) > -1));
+            return (service.Type != '' && (!req.query.service || service.Name == req.query.service));
         })
         .map(function (service) {
             return function (callback) {
@@ -49,7 +49,7 @@ exports.getLibraries = function (req, res) {
     // Create a list of the searches to perform.
     var searches = data.LibraryServices
         .filter(function (service) {
-            return (service.Type != '' && (!req.query.service || service.Name.indexOf(req.query.service) > -1));
+            return (service.Type != '' && (!req.query.service || service.Name == req.query.service));
         })
         .map(function (service) {
             return function (callback) {
@@ -118,7 +118,6 @@ exports.testIsbnSearch = function (req, res) {
                 });
             }
         });
-
-    // As it's for testing, run in serial to be able to keep track. 
+    // Run in serial to be able to keep track. 
     async.series(searches, function (err, response) {});
 };
