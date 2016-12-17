@@ -50,9 +50,9 @@ exports.getLibraries = function (service, callback) {
 // Function: searchByISBN
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
+    var responseHoldings = { service: lib.Name, availability: [], start: new Date(), url: lib.Url + catUrl + isbn };
     // Request 1: The ISBN search
-    request.get({ url: lib.Url + catUrl + isbn, timeout: 30000 }, function (error, msg, res) {
+    request.get({ url: requestHoldings.url, timeout: 30000 }, function (error, msg, res) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;
         $ = cheerio.load(res, { normalizeWhitespace: true, xmlMode: true });
         var bibLink = $('guid').text();

@@ -80,8 +80,8 @@ exports.getLibraries = function (service, callback) {
 // Function: searchByISBN
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
-    var options = { url: lib.Url + searchUrl + isbn, timeout: 60000 };
+    var responseHoldings = { service: lib.Name, availability: [], start: new Date(), url: lib.Url + searchUrl + isbn };
+    var options = { url: responseHoldings.url, timeout: 60000 };
     if (lib.IgnoreSSL) options.rejectUnauthorized = false;
     // Request 1: Deep link to the item by ISBN
     request.get(options, function (error, msg, res) {

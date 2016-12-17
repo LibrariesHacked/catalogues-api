@@ -49,7 +49,7 @@ exports.getLibraries = function (service, callback) {
 // Function: searchByISBN
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
+    var responseHoldings = { service: lib.Name, availability: [], start: new Date(), url: lib.Url + searchUrl + isbn };
 
     var getAvailability = function ($) {
         var libs = {};
@@ -64,7 +64,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     };
 
     // Request 1: Deep link to item page by ISBN.
-    request.get({ url: lib.Url + searchUrl + isbn, timeout: 30000 }, function (error, msg, res) {
+    request.get({ url: responseHoldings.url, timeout: 30000 }, function (error, msg, res) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;
         $ = cheerio.load(res);
 

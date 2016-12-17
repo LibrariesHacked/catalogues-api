@@ -84,8 +84,7 @@ exports.getWebsite = function (service, callback) {
 // Probably can do all this from a single call - will investigate
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
-    if (lib.ISBN10) isbn = isbn.substring(3);
+    var responseHoldings = { service: lib.Name, availability: [], start: new Date(), url: lib.Url + 'Vubis.csp' };
 
     var sessionResponseFrameset = function (error, message, response) {
         if (common.handleErrors(callback, responseHoldings, error, message)) return;

@@ -62,7 +62,7 @@ exports.getLibraries = function (service, callback) {
 // for the ID, then to get availability.
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, service, callback) {
-    var responseHoldings = { service: service.Name, availability: [], start: new Date() };
+    var responseHoldings = { service: service.Name, availability: [], start: new Date(), url: service.Url + searchUrl + isbn };
  
     var handleSearchResponse = function (error, msg, response) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;
@@ -97,5 +97,5 @@ exports.searchByISBN = function (isbn, service, callback) {
     };
     
     // Request 1: call the search control for the ISBN
-    request.get({ url: service.Url + searchUrl + isbn, timeout: 30000 }, handleSearchResponse);
+    request.get({ url: responseHoldings.url, timeout: 30000 }, handleSearchResponse);
 };

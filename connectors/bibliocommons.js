@@ -32,7 +32,7 @@ exports.getService = function (svc, callback) {
 // Maybe one day...
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
+    var responseHoldings = { service: lib.Name, availability: [], start: new Date(), url: lib.Url + searchUrl + isbn };
 
     var handleSearchRequest = function (error, msg, response) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;
@@ -64,5 +64,5 @@ exports.searchByISBN = function (isbn, lib, callback) {
     };
 
     // Request 1: web service to search for item
-    request.get({ url: lib.Url + searchUrl + isbn, headers: reqHeader, timeout: 30000 }, handleSearchRequest);
+    request.get({ url: responseHoldings.url, headers: reqHeader, timeout: 30000 }, handleSearchRequest);
 };

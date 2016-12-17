@@ -55,7 +55,7 @@ exports.getLibraries = function (service, callback) {
 // Function: searchByISBN
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
+    var responseHoldings = { service: lib.Name, availability: [], start: new Date(), url: lib.Url };
     var resultLocation = '';
     var headers = {
         'Accept-Encoding': 'gzip, deflate',

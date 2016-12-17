@@ -22,7 +22,7 @@ data.LibraryServices.forEach(function (service) {
 /////////////////////////////////////////////////////////////////
 exports.getServices = function (req, res) {
     var services = data.LibraryServices
-        // Could put a filter here e.g. if filter by area (North East) or even spatial. 
+        // Could put a filter here e.g. if filter by region (North East) or even spatial. 
         .filter(function (service) {
             return (service.Type != '' && (!req.query.service || service.Name == req.query.service));
         })
@@ -45,7 +45,6 @@ exports.getServices = function (req, res) {
 // Test: http://localhost:3000/libraries?service=Wiltshire
 /////////////////////////////////////////////////////////////////
 exports.getLibraries = function (req, res) {
-
     // Create a list of the searches to perform.
     var searches = data.LibraryServices
         .filter(function (service) {
@@ -58,7 +57,6 @@ exports.getLibraries = function (req, res) {
                 });
             }
         });
-
     // The searches object will be a list of searches to run against the various library systems.  
     async.parallel(searches, function (err, response) {
         res.send(response);
@@ -72,11 +70,10 @@ exports.getLibraries = function (req, res) {
 // (Harry Potter and the Philosopher's Stone).
 /////////////////////////////////////////////////////////////////
 exports.isbnSearch = function (req, res) {
-
     // Create a list of the searches to perform.
     var searches = data.LibraryServices
         .filter(function (service) {
-            return (service.Type != "" && (!req.query.service || service.Name.indexOf(req.query.service) > -1));
+            return (service.Type != '' && (!req.query.service || service.Name == req.query.service));
         })
         .map(function (service) {
             return function (callback) {
@@ -85,7 +82,6 @@ exports.isbnSearch = function (req, res) {
                 });
             }
         });
-
     // The searches object will be a list of searches to run against the various library systems.  
     async.parallel(searches, function (err, response) {
         res.send(response);
@@ -100,14 +96,12 @@ exports.isbnSearch = function (req, res) {
 // Does some logging to the console.
 /////////////////////////////////////////////////////////////////
 exports.testIsbnSearch = function (req, res) {
-
     // For the browser just send a standard response but then run the tests.
     res.send('Tests starting, check console window.')
-
     // Create a list of the searches to perform.
     var searches = data.LibraryServices
         .filter(function (service) {
-            return (service.Type != "" && (!req.query.service || service.Name.indexOf(req.query.service) > -1));
+            return (service.Type != '' && (!req.query.service || service.Name == req.query.service));
         })
         .map(function (service) {
             return function (callback) {

@@ -50,10 +50,10 @@ exports.getLibraries = function (service, callback) {
 // Function: searchByISBN
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
+    var responseHoldings = { service: lib.Name, availability: [], start: new Date(), url: lib.Url + searchUrl + isbn };
 
     // Request 1: Perform the search.
-    request.get({ url: lib.Url + searchUrl + isbn, timeout: 30000 }, function (error, message, response) {
+    request.get({ url: responseHoldings.url, timeout: 30000 }, function (error, message, response) {
         if (common.handleErrors(callback, responseHoldings, error, message)) return;
         $ = cheerio.load(response);
         // Get the more details link - ah some more horrific code :-)

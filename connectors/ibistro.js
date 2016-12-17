@@ -46,7 +46,7 @@ exports.getLibraries = function (service, callback) {
 // Function: searchByISBN
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
+    var responseHoldings = { service: lib.Name, availability: [], start: new Date(), url: lib.Url + lib.Search + isbn };
 
     // Declare this for use later on depending on search results.
     var getAvailability = function (itemPage) {
@@ -72,7 +72,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     };
 
     // Request 1: 
-    request.get({ url: lib.Url + lib.Search + isbn, timeout: 30000 }, function (error, msg, response) {
+    request.get({ url: responseHoldings.url, timeout: 30000 }, function (error, msg, response) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;
         $ = cheerio.load(response);
         // Could be multiple copies held - check for a hitlist form

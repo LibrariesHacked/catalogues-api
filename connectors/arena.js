@@ -212,9 +212,9 @@ exports.searchByISBN = function (isbn, lib, callback) {
         if (currentBranch == numLibs) { common.completeCallback(callback, responseHoldings); return; }
     };
 
-    if (lib.ISBN == 10) isbn = isbn.substring(3);
     var bookQuery = (lib.SearchType != 'Keyword' ? lib.ISBNAlias + '_index:' + isbn : isbn);
     if (lib.OrganisationId) bookQuery = 'organisationId_index:' + lib.OrganisationId + '+AND+' + bookQuery;
+    responseHoldings.url = lib.Url + searchUrl.replace('[BOOKQUERY]', bookQuery);
     // Request 1: Perform the search
-    request.get({ url: lib.Url + searchUrl.replace('[BOOKQUERY]', bookQuery), timeout: 20000, jar: true, agent: agent, rejectUnauthorized: !lib.IgnoreSSL }, handleSearchRequest);
+    request.get({ url: responseHoldings.url, timeout: 20000, jar: true, agent: agent, rejectUnauthorized: !lib.IgnoreSSL }, handleSearchRequest);
 };

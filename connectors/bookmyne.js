@@ -51,7 +51,7 @@ exports.getLibraries = function (service, callback) {
 // Function: searchByISBN
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
+    var responseHoldings = { service: lib.Name, availability: [], start: new Date(), url: lib.Url + searchUrl.replace('[ISBN]', isbn).replace('[PROFILE]', lib.Profile).replace('[LIBID]', lib.Id) };
     var headers = { "Accept": "application/json", "Accept-Language": "en-gb", "Host": host, "Referer": "https://" + host + "/bookmyne/app.html#extendedDetail" };
     headers["ILS-Profile"] = lib.Profile;
     headers["SD-Institution"] = lib.InstitutionId;
@@ -79,5 +79,5 @@ exports.searchByISBN = function (isbn, lib, callback) {
     };
 
     // Request 1: Call web service to get the item ID
-    request.get({ url: lib.Url + searchUrl.replace('[ISBN]', isbn).replace('[PROFILE]', lib.Profile).replace('[LIBID]', lib.Id), headers: headers, timeout: 30000 }, handleSearchRequest);
+    request.get({ url: responseHoldings.url, headers: headers, timeout: 30000 }, handleSearchRequest);
 };

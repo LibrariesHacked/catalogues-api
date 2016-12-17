@@ -49,7 +49,7 @@ exports.getLibraries = function (service, callback) {
 // Function: searchByISBN
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
+    var responseHoldings = { service: lib.Name, availability: [], start: new Date(), url: lib.Url + searchUrl + isbn };
     var ils = '';
     var itemPage = '';
 
@@ -105,5 +105,5 @@ exports.searchByISBN = function (isbn, lib, callback) {
     };
 
     // Request 1: Call the deep link to the item by ISBN
-    request.get({ url: lib.Url + searchUrl + isbn, headers: header1, timeout: 30000 }, deepLinkResponse);
+    request.get({ url: responseHoldings.url, headers: header1, timeout: 30000 }, deepLinkResponse);
 };

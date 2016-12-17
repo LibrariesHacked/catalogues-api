@@ -49,10 +49,10 @@ exports.getLibraries = function (service, callback) {
 // Function: searchByISBN
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
+    var responseHoldings = { service: lib.Name, availability: [], start: new Date(), url: lib.Url + searchUrl + isbn };
 
     // Request 1: Search for item
-    request.get({ url: lib.Url + searchUrl + isbn, timeout: 30000 }, function (error, message, response) {
+    request.get({ url: responseHoldings.url, timeout: 30000 }, function (error, message, response) {
         if (common.handleErrors(callback, responseHoldings, error, message)) return;
         xml2js.parseString(response, function (err, res) {
             if (common.handleErrors(callback, responseHoldings, err)) return;
