@@ -205,10 +205,12 @@ exports.searchByISBN = function (isbn, lib, callback) {
     var parseLibraryAvailability = function (err, res) {
         currentBranch = currentBranch + 1;
         if (common.handleErrors(callback, responseHoldings, err)) return;
-        $ = cheerio.load(res['ajax-response'].component[0]._);
-        var totalAvailable = $('td.arena-holding-nof-total span.arena-value').text();
-        var checkedOut = $('td.arena-holding-nof-checked-out span.arena-value').text();
-        responseHoldings.availability.push({ library: currentLibName, available: (parseInt(totalAvailable) - parseInt(checkedOut)), unavailable: parseInt(checkedOut) });
+        if (res && res['ajax-response']) {
+            $ = cheerio.load(res['ajax-response'].component[0]._);
+            var totalAvailable = $('td.arena-holding-nof-total span.arena-value').text();
+            var checkedOut = $('td.arena-holding-nof-checked-out span.arena-value').text();
+            responseHoldings.availability.push({ library: currentLibName, available: (parseInt(totalAvailable) - parseInt(checkedOut)), unavailable: parseInt(checkedOut) });
+        }
         if (currentBranch == numLibs) { common.completeCallback(callback, responseHoldings); return; }
     };
 

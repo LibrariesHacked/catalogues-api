@@ -5,6 +5,7 @@
 ///////////////////////////////////////////
 var async = require('async');
 var data = require('./data/data');
+var libThing = require('./connectors/librarything');
 
 // On first run this sets up all the library service connectors
 // that are currently referred to in the data.json file.
@@ -66,7 +67,7 @@ exports.getLibraries = function (req, res) {
 /////////////////////////////////////////////////////////////////
 // Function: isbnSearch
 // Route: /availabilityByISBN/:isbn
-// Test: http://localhost:3000/availabilityByISBN/9780747532699?service=Wiltshire
+// Test: http://localhost:3000/thingISBN/9780747532699
 // (Harry Potter and the Philosopher's Stone).
 /////////////////////////////////////////////////////////////////
 exports.isbnSearch = function (req, res) {
@@ -85,6 +86,19 @@ exports.isbnSearch = function (req, res) {
     // The searches object will be a list of searches to run against the various library systems.  
     async.parallel(searches, function (err, response) {
         res.send(response);
+    });
+};
+
+/////////////////////////////////////////////////////////////////
+// Function: thingISBN
+// Route: /thingISBN
+// Proxies the thingISBN service from Library Thing
+// to retrieve a list of other editions from a work.
+// Test: http://localhost:3000/thingISBN/9780747532699
+/////////////////////////////////////////////////////////////////
+exports.thingISBN = function (req, res) {
+    libThing.thingISBN(req.params.isbn, function (data) {
+        res.send(data.isbns);
     });
 };
 

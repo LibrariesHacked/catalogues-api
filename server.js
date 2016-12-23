@@ -34,6 +34,7 @@ app.get('/', function (req, res) {
 app.get('/services', libraries.getServices);
 app.get('/libraries', libraries.getLibraries);
 app.get('/availabilityByISBN/:isbn', libraries.isbnSearch);
+app.get('/thingISBN/:isbn', libraries.thingISBN);
 
 ///////////////////////////////////////////
 // Routes - Maintenance

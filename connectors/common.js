@@ -1,4 +1,4 @@
-﻿.......///////////////////////////////////////////
+﻿///////////////////////////////////////////
 // COMMON FUNCTIONS
 // Provides some common functionality into 
 // a single file for the connectors to use
