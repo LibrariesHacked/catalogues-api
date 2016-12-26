@@ -2,18 +2,21 @@
   "LibraryServices": [
     {
       "Name": "Aberdeen City",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://aberdeencity.spydus.co.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Aberdeenshire",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://aberdeenshire.spydus.co.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Anglesey",
+      "Code": "",
       "Type": "enterprise",
       "Available": [ "Available" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
@@ -22,18 +25,21 @@
     },
     {
       "Name": "Angus",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://angus.spydus.co.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Argyll and Bute",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://argyll-bute.spydus.co.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Barking and Dagenham",
+      "Code": "",
       "Type": "arena",
       "ISBNAlias": "number",
       "OrganisationId": "AUK000226|6",
@@ -48,6 +54,7 @@
     },
     {
       "Name": "Barnet",
+      "Code": "",
       "Type": "vubis",
       "Index": "Isbn",
       "Id": "|library/vubissmart-marc|220344",
@@ -58,6 +65,7 @@
     },
     {
       "Name": "Barnsley",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/barnsleymbc/",
@@ -75,6 +83,7 @@
     },
     {
       "Name": "Bedford",
+      "Code": "",
       "Type": "arena",
       "OrganisationName": "Bedford",
       "ArenaName": "AUK000022",
@@ -88,6 +97,7 @@
     },
     {
       "Name": "Bexley",
+      "Code": "",
       "Type": "arena",
       "OrganisationId": "AUK000226|18",
       "OrganisationName": "Bexley",
@@ -100,18 +110,21 @@
     },
     {
       "Name": "Birmingham",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://library-opac.birmingham.gov.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Blackburn with Darwen",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://bwdlibraries.spydus.co.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Blackpool",
+      "Code": "",
       "Type": "enterprise",
       "Available": [ "Standard shelving location" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
@@ -120,6 +133,7 @@
     },
     {
       "Name": "Blaenau Gwent",
+      "Code": "",
       "Type": "ibistro",
       "Available": [ "On Shelf" ],
       "Url": "http://librarycatalogue.aneurinleisure.org.uk/",
@@ -129,12 +143,14 @@
     },
     {
       "Name": "Bolton",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://bolton.spydus.co.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Bournemouth",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/bournemouth/",
@@ -142,6 +158,7 @@
     },
     {
       "Name": "Bracknell Forest",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/bracknellforest/",
@@ -149,6 +166,7 @@
     },
     {
       "Name": "Bradford",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/bradford/",
@@ -156,6 +174,7 @@
     },
     {
       "Name": "Brent",
+      "Code": "",
       "Type": "arena",
       "OrganisationId": "AUK000226|11",
       "OrganisationName": "Brent",
@@ -168,6 +187,7 @@
     },
     {
       "Name": "Bridgend",
+      "Code": "",
       "Type": "vubis",
       "Index": "Isbn",
       "Url": "https://opac.awen-wales.com/bvs-app/",
@@ -175,12 +195,14 @@
     },
     {
       "Name": "Brighton and Hove",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://brighton-hove.spydus.co.uk/",
       "TestISBN": "9780747562184"
     },
     {
       "Name": "Bristol City",
+      "Code": "",
       "Type": "enterprise",
       "Id": "280001",
       "Url": "https://www.librarieswest.org.uk/client/en_GB/default/",
@@ -191,6 +213,7 @@
     },
     {
       "Name": "Bromley",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000226",
       "OrganisationId": "AUK000226|19",
@@ -203,18 +226,21 @@
     },
     {
       "Name": "Buckinghamshire",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://buckinghamshire.spydus.co.uk/",
       "TestISBN": "9780747591061"
     },
     {
       "Name": "Bury",
+      "Code": "",
       "Type": "webpac",
       "Url": "https://library.bury.gov.uk/",
       "TestISBN": "9780747538486"
     },
     {
       "Name": "Caerphilly",
+      "Code": "",
       "Type": "iguana",
       "Database": "1_LIBS",
       "Faceted": false,
@@ -223,24 +249,28 @@
     },
     {
       "Name": "Calderdale",
+      "Code": "",
       "Type": "spydus",
       "Url": "http://online.calderdale.gov.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Cambridgeshire",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://cambridgeshire.spydus.co.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Camden",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://camden.spydus.co.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Cardiff",
+      "Code": "",
       "Type": "ibistro",
       "Available": [ "Item on shelves" ],
       "Id": "446",
@@ -254,6 +284,7 @@
     },
     {
       "Name": "Carmarthenshire",
+      "Code": "",
       "Type": "vubis",
       "Index": "Isbn",
       "Url": "http://212.219.142.126/carvs/",
@@ -262,6 +293,7 @@
     },
     {
       "Name": "Central Bedfordshire",
+      "Code": "",
       "Type": "arena",
       "OrganisationName": "Central",
       "ArenaName": "AUK000022",
@@ -275,6 +307,7 @@
     },
     {
       "Name": "Ceredigion",
+      "Code": "",
       "Type": "vubis",
       "Profile": "Default",
       "Index": "Keywords",
@@ -285,6 +318,7 @@
     },
     {
       "Name": "Cheshire East",
+      "Code": "",
       "Type": "koha",
       "Url": "https://cheslive.koha-ptfs.co.uk/",
       "MultiBranchLimit": "EAST",
@@ -292,6 +326,7 @@
     },
     {
       "Name": "Cheshire West and Chester",
+      "Code": "",
       "Type": "koha",
       "Url": "https://cheslive.koha-ptfs.co.uk/",
       "MultiBranchLimit": "WEST",
@@ -299,6 +334,7 @@
     },
     {
       "Name": "City of London",
+      "Code": "",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
@@ -307,12 +343,14 @@
     },
     {
       "Name": "Clackmannanshire",
+      "Code": "",
       "Type": "vufind",
       "Url": "https://vufind-cl.sedar.org.uk/vufind/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Conwy",
+      "Code": "",
       "Type": "enterprise",
       "Available": [ "Available" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
@@ -321,6 +359,7 @@
     },
     {
       "Name": "Cornwall",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/cornwall/",
@@ -328,6 +367,7 @@
     },
     {
       "Name": "Coventry",
+      "Code": "",
       "Type": "iguana",
       "Database": "1",
       "Faceted": false,
@@ -336,6 +376,7 @@
     },
     {
       "Name": "Croydon",
+      "Code": "",
       "Type": "vubis",
       "Index": "Isbn",
       "Url": "http://catalogue.croydonlibraries.com/vs/",
@@ -343,6 +384,7 @@
     },
     {
       "Name": "Cumbria",
+      "Code": "",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
@@ -355,6 +397,7 @@
     },
     {
       "Name": "Darlington",
+      "Code": "",
       "Type": "arena",
       "ISBNAlias": "number",
       "Id": "230001",
@@ -370,6 +413,7 @@
     },
     {
       "Name": "Denbighshire",
+      "Code": "",
       "Type": "enterprise",
       "Available": [ "Available" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
@@ -378,6 +422,7 @@
     },
     {
       "Name": "Derby City",
+      "Code": "",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
@@ -386,6 +431,7 @@
     },
     {
       "Name": "Derbyshire",
+      "Code": "",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
@@ -394,6 +440,7 @@
     },
     {
       "Name": "Devon",
+      "Code": "",
       "Type": "viewpoint2",
       "Available": "Check Shelves",
       "Url": "http://www.devon.gov.uk/library/catalogue/cgi-bin/vps2.5_viewpoint.sh",
@@ -402,6 +449,7 @@
     },
     {
       "Name": "Doncaster",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000243",
       "Id": "243001",
@@ -414,6 +462,7 @@
     },
     {
       "Name": "Dorset",
+      "Code": "",
       "Type": "enterprise",
       "Url": "https://www.librarieswest.org.uk/client/en_GB/default/",
       "Available": [ "In stock" ],
@@ -422,12 +471,14 @@
     },
     {
       "Name": "Dudley",
+      "Code": "",
       "Type": "viewpoint3",
       "Url": "https://libcat.dudley.gov.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Dumfries and Galloway",
+      "Code": "",
       "Type": "iguana",
       "Database": "1",
       "Faceted": true,
@@ -437,12 +488,14 @@
     },
     {
       "Name": "Dundee City",
+      "Code": "",
       "Type": "spydus",
       "Url": "http://opac.dundeecity.gov.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Durham",
+      "Code": "",
       "Type": "durham",
       "Url": "https://libraryonline.durham.gov.uk/",
       "Libraries": "pgLib.aspx",
@@ -450,6 +503,7 @@
     },
     {
       "Name": "Ealing",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000226",
       "Id": "226014",
@@ -462,6 +516,7 @@
     },
     {
       "Name": "East Ayrshire",
+      "Code": "",
       "Type": "ibistro",
       "Available": [ "SHELVES", "RESERVES" ],
       "Url": "https://ealt.sirsidynix.net.uk/",
@@ -471,12 +526,14 @@
     },
     {
       "Name": "East Dunbartonshire",
+      "Code": "",
       "Type": "vufind",
       "Url": "https://vufind-ed.sedar.org.uk/",
       "TestISBN": "9781408810576"
     },
     {
       "Name": "East Lothian",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/eastlothian/",
@@ -484,6 +541,7 @@
     },
     {
       "Name": "East Renfrewshire",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/eastrenfrewshire/",
@@ -491,6 +549,7 @@
     },
     {
       "Name": "East Riding of Yorkshire",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000205",
       "Id": "205001",
@@ -502,12 +561,14 @@
     },
     {
       "Name": "East Sussex",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://e-library.eastsussex.gov.uk/",
       "TestISBN": "9780747538486"
     },
     {
       "Name": "Edinburgh",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/edinburgh/",
@@ -515,6 +576,7 @@
     },
     {
       "Name": "Enfield",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000226",
       "Id": "226012",
@@ -527,6 +589,7 @@
     },
     {
       "Name": "Essex",
+      "Code": "",
       "Type": "iguana",
       "Database": "1",
       "Faceted": true,
@@ -536,6 +599,7 @@
     },
     {
       "Name": "Falkirk",
+      "Code": "",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
@@ -544,6 +608,7 @@
     },
     {
       "Name": "Fife",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/fife/",
@@ -551,6 +616,7 @@
     },
     {
       "Name": "Flintshire",
+      "Code": "",
       "Type": "enterprise",
       "Available": [ "Available" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
@@ -559,6 +625,7 @@
     },
     {
       "Name": "Gateshead",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/gateshead/",
@@ -566,6 +633,7 @@
     },
     {
       "Name": "Glasgow",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000048",
       "Id": "480001",
@@ -578,6 +646,7 @@
     },
     {
       "Name": "Gloucestershire",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/gloslibraries/",
@@ -585,6 +654,7 @@
     },
     {
       "Name": "Greenwich",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/royalgreenwich/",
@@ -592,6 +662,7 @@
     },
     {
       "Name": "Guernsey",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/guernsey/",
@@ -599,6 +670,7 @@
     },
     {
       "Name": "Gwynedd",
+      "Code": "",
       "Type": "enterprise",
       "Available": [ "Available" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
@@ -607,6 +679,7 @@
     },
     {
       "Name": "Hackney",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000226",
       "Id": "226013",
@@ -619,12 +692,14 @@
     },
     {
       "Name": "Halton",
+      "Code": "",
       "Type": "koha",
       "Url": "https://hpl.koha-ptfs.eu/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Hammersmith and Fulham",
+      "Code": "",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
@@ -633,12 +708,14 @@
     },
     {
       "Name": "Hampshire",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://librarycat.hants.gov.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Haringey",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/haringey/",
@@ -646,6 +723,7 @@
     },
     {
       "Name": "Harrow",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000226",
       "Id": "226020",
@@ -658,6 +736,7 @@
     },
     {
       "Name": "Hartlepool",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/hartlepool/",
@@ -665,6 +744,7 @@
     },
     {
       "Name": "Havering",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000226",
       "Id": "226001",
@@ -677,6 +757,7 @@
     },
     {
       "Name": "Herefordshire",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/herefordshire/",
@@ -684,12 +765,14 @@
     },
     {
       "Name": "Hertfordshire",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://herts.spydus.co.uk/",
       "TestISBN": "9781408834985"
     },
     {
       "Name": "Highland",
+      "Code": "",
       "Type": "spydus",
       "Available": [ "Available" ],
       "Url": "https://hlh.spydus.co.uk/",
@@ -697,6 +780,7 @@
     },
     {
       "Name": "Hillingdon",
+      "Code": "",
       "Type": "enterprise",
       "Id": "622",
       "Region": "3",
@@ -710,6 +794,7 @@
     },
     {
       "Name": "Hounslow",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000219",
       "Id": "219001",
@@ -722,6 +807,7 @@
     },
     {
       "Name": "Hull",
+      "Code": "",
       "Type": "ibistro",
       "Available": [ "Item on shelves" ],
       "Url": "http://prismcollect.hullcc.gov.uk/",
@@ -731,18 +817,21 @@
     },
     {
       "Name": "Inverclyde",
+      "Code": "",
       "Type": "spydus",
       "Url": "http://ipac.inverclyde-libraries.org/",
       "TestISBN": "9781408834978"
     },
     {
       "Name": "Isle of Wight",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://iow.spydus.co.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Isle of Man",
+      "Code": "",
       "Type": "heritage",
       "Url": "http://www.douglas.gov.im/HeritageScripts/Hapi.dll/",
       "TestISBN": "9781408855898",
@@ -750,6 +839,7 @@
     },
     {
       "Name": "Islington",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/islington/",
@@ -757,6 +847,7 @@
     },
     {
       "Name": "Jersey",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/jersey/",
@@ -764,6 +855,7 @@
     },
     {
       "Name": "Kensington and Chelsea",
+      "Code": "",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
@@ -772,12 +864,14 @@
     },
     {
       "Name": "Kent",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://kent.spydus.co.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Kingston upon Thames",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000226",
       "Id": "226016",
@@ -790,6 +884,7 @@
     },
     {
       "Name": "Kirklees",
+      "Code": "",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
@@ -798,6 +893,7 @@
     },
     {
       "Name": "Knowsley",
+      "Code": "",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent",
@@ -806,6 +902,7 @@
     },
     {
       "Name": "Lambeth",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/lambeth/",
@@ -813,6 +910,7 @@
     },
     {
       "Name": "Lancashire",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/lancashire/",
@@ -820,6 +918,7 @@
     },
     {
       "Name": "Leeds",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/leeds/",
@@ -827,6 +926,7 @@
     },
     {
       "Name": "Leicester City",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000201",
       "Id": "201001",
@@ -839,6 +939,7 @@
     },
     {
       "Name": "Leicestershire",
+      "Code": "",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
@@ -847,6 +948,7 @@
     },
     {
       "Name": "Lewisham",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000226",
       "Id": "226015",
@@ -859,12 +961,14 @@
     },
     {
       "Name": "Lincolnshire",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://lincolnshire.spydus.co.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Liverpool",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/liverpool/",
@@ -872,6 +976,7 @@
     },
     {
       "Name": "Luton",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000226",
       "Id": "220002",
@@ -883,18 +988,21 @@
     },
     {
       "Name": "Manchester",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://manchester.spydus.co.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Medway",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://medway.spydus.co.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Merthyr Tydfil",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/merthyr/",
@@ -902,6 +1010,7 @@
     },
     {
       "Name": "Merton",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000226",
       "Id": "226017",
@@ -913,6 +1022,7 @@
     },
     {
       "Name": "Middlesbrough",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000054",
       "ISBNAlias": "number",
@@ -925,6 +1035,7 @@
     },
     {
       "Name": "Midlothian",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000075",
       "Id": "750001",
@@ -936,12 +1047,14 @@
     },
     {
       "Name": "Milton Keynes",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://miltonkeynes.spydus.co.uk/",
       "TestISBN": "9780747538484"
     },
     {
       "Name": "Monmouthshire",
+      "Code": "",
       "Type": "ibistro",
       "Available": [ "SHELVES", "RESERVES" ],
       "Url": "http://catalogue.monmouthshire.gov.uk/",
@@ -951,6 +1064,7 @@
     },
     {
       "Name": "Moray",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/moray/",
@@ -958,6 +1072,7 @@
     },
     {
       "Name": "Neath Port Talbot",
+      "Code": "",
       "Type": "vubis",
       "Index": "Isbn",
       "Url": "http://212.219.142.126/nptvs/",
@@ -965,6 +1080,7 @@
     },
     {
       "Name": "Newcastle upon Tyne",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000224",
       "Id": "224001",
@@ -976,6 +1092,7 @@
     },
     {
       "Name": "Newham",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000226",
       "Id": "226008",
@@ -987,6 +1104,7 @@
     },
     {
       "Name": "Newport",
+      "Code": "",
       "Type": "iguana",
       "Database": "1",
       "Url": "https://opac.newport.gov.uk/iguana/",
@@ -994,18 +1112,21 @@
     },
     {
       "Name": "Norfolk",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://norfolk.spydus.co.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "North Ayrshire",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://north-ayrshire.spydus.co.uk/",
       "TestISBN": "9781408855713"
     },
     {
       "Name": "North East Lincolnshire",
+      "Code": "",
       "Type": "arena",
       "Id": "252001",
       "ArenaName": "AUK000252",
@@ -1017,6 +1138,7 @@
     },
     {
       "Name": "North Lanarkshire",
+      "Code": "",
       "Type": "vubis",
       "Index": "Isbn",
       "Url": "https://librariesnl.northlan.gov.uk/vs/",
@@ -1024,6 +1146,7 @@
     },
     {
       "Name": "North Lincolnshire",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000221",
       "ISBNAlias": "number",
@@ -1035,6 +1158,7 @@
     },
     {
       "Name": "North Somerset",
+      "Code": "",
       "Type": "enterprise",
       "Id": "280001",
       "Url": "https://www.librarieswest.org.uk/client/en_GB/default/",
@@ -1045,6 +1169,7 @@
     },
     {
       "Name": "North Tyneside",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/northtyneside/",
@@ -1052,6 +1177,7 @@
     },
     {
       "Name": "North Yorkshire",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/northyorkshire/",
@@ -1059,6 +1185,7 @@
     },
     {
       "Name": "Northamptonshire",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000256",
       "Id": "256001",
@@ -1072,6 +1199,7 @@
     },
     {
       "Name": "Northumberland",
+      "Code": "",
       "Type": "ibistro",
       "Available": [ "SHELVES", "RESERVES" ],
       "Url": "http://library.northumberland.gov.uk/",
@@ -1081,6 +1209,7 @@
     },
     {
       "Name": "Nottingham City",
+      "Code": "",
       "Type": "enterprise",
       "Id": "575",
       "Region": "3",
@@ -1093,6 +1222,7 @@
     },
     {
       "Name": "Nottinghamshire",
+      "Code": "",
       "Type": "enterprise",
       "Id": "580",
       "Region": "3",
@@ -1105,6 +1235,7 @@
     },
     {
       "Name": "Northern Ireland",
+      "Code": "",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
@@ -1113,12 +1244,14 @@
     },
     {
       "Name": "Oldham",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://oldham.spydus.co.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Orkney",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/orkney/",
@@ -1126,6 +1259,7 @@
     },
     {
       "Name": "Oxfordshire",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000217",
       "ISBNAlias": "number",
@@ -1136,6 +1270,7 @@
     },
     {
       "Name": "Pembrokeshire",
+      "Code": "",
       "Type": "vubis",
       "Index": "Isbn",
       "Url": "http://212.219.142.126/pemvs/",
@@ -1143,24 +1278,28 @@
     },
     {
       "Name": "Perth and Kinross",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://pkc.spydus.co.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Peterborough",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://peterborough.spydus.co.uk/",
       "TestISBN": "9780747573760"
     },
     {
       "Name": "Plymouth",
+      "Code": "",
       "Type": "viewpoint3",
       "Url": "https://www.webopac.plymouth.gov.uk/",
       "TestISBN": "9780747562184"
     },
     {
       "Name": "Poole",
+      "Code": "",
       "Type": "enterprise",
       "Url": "https://www.librarieswest.org.uk/client/en_GB/default/",
       "Available": [ "In stock" ],
@@ -1169,12 +1308,14 @@
     },
     {
       "Name": "Portsmouth",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://librarycat.portsmouth.gov.uk/",
       "TestISBN": "9781408810576"
     },
     {
       "Name": "Powys",
+      "Code": "",
       "Type": "ibistro",
       "Available": [ "Adult Fiction" ],
       "Url": "http://powys.sirsidynix.net.uk/",
@@ -1184,6 +1325,7 @@
     },
     {
       "Name": "Reading",
+      "Code": "",
       "Type": "horizon",
       "Available": [ "On shelf" ],
       "Url": "http://reading-hip.epixtech.co.uk/",
@@ -1191,6 +1333,7 @@
     },
     {
       "Name": "Redbridge",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000226",
       "Id": "226002",
@@ -1202,6 +1345,7 @@
     },
     {
       "Name": "Redcar and Cleveland",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000215",
       "ISBNAlias": "number",
@@ -1212,6 +1356,7 @@
     },
     {
       "Name": "Renfrewshire",
+      "Code": "",
       "Type": "iguana",
       "Database": "1",
       "Faceted": false,
@@ -1220,6 +1365,7 @@
     },
     {
       "Name": "Rhondda Cynon Taf",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/rhondda/",
@@ -1227,18 +1373,21 @@
     },
     {
       "Name": "Richmond upon Thames",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://richmond.spydus.co.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Rochdale",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://rochdale.spydus.co.uk/",
       "TestISBN": "9781408855676"
     },
     {
       "Name": "Rotherham",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/rotherham/",
@@ -1246,6 +1395,7 @@
     },
     {
       "Name": "Rutland",
+      "Code": "",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
@@ -1254,18 +1404,21 @@
     },
     {
       "Name": "Salford",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://salfordlibraries.spydus.co.uk/",
       "TestISBN": "9781408855706"
     },
     {
       "Name": "Sandwell",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://opac-lib.smbc.sandwell.gov.uk/",
       "TestISBN": "9781408855706"
     },
     {
       "Name": "Scottish Borders",
+      "Code": "",
       "Type": "vubis",
       "Index": "Isbn",
       "Url": "https://librarysearch.scotborders.gov.uk/vs/",
@@ -1273,6 +1426,7 @@
     },
     {
       "Name": "Sefton",
+      "Code": "",
       "Type": "koha",
       "IgnoreSSL": true,
       "Url": "https://catalogue2.sefton.gov.uk/",
@@ -1280,6 +1434,7 @@
     },
     {
       "Name": "Sheffield",
+      "Code": "",
       "Type": "ibistro",
       "Available": [ "SHELVES", "RESERVES" ],
       "Url": "http://library.sheffield.gov.uk/",
@@ -1289,6 +1444,7 @@
     },
     {
       "Name": "Shetland",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/shetland/",
@@ -1296,6 +1452,7 @@
     },
     {
       "Name": "Shropshire",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000034",
       "ISBNAlias": "number",
@@ -1306,12 +1463,14 @@
     },
     {
       "Name": "Slough",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://slough.spydus.co.uk/",
       "TestISBN": "9781408855669"
     },
     {
       "Name": "Solihull",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/solihull/",
@@ -1319,6 +1478,7 @@
     },
     {
       "Name": "Somerset",
+      "Code": "",
       "Type": "enterprise",
       "Id": "280001",
       "Url": "https://www.librarieswest.org.uk/client/en_GB/default/",
@@ -1329,12 +1489,14 @@
     },
     {
       "Name": "South Ayrshire",
+      "Code": "",
       "Type": "webpac",
       "Url": "https://library.south-ayrshire.gov.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "South Gloucestershire",
+      "Code": "",
       "Type": "enterprise",
       "Id": "280001",
       "Available": [ "In stock" ],
@@ -1345,12 +1507,14 @@
     },
     {
       "Name": "South Lanarkshire",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://www.sllclibrary.co.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "South Tyneside",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/southtyneside/",
@@ -1358,12 +1522,14 @@
     },
     {
       "Name": "Southampton",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://southampton.spydus.co.uk/",
       "TestISBN": "9781408855676"
     },
     {
       "Name": "Southend on Sea",
+      "Code": "",
       "Type": "iguana",
       "Database": "1",
       "Faceted": true,
@@ -1373,6 +1539,7 @@
     },
     {
       "Name": "Southwark",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/southwark/",
@@ -1380,12 +1547,14 @@
     },
     {
       "Name": "St Helens",
+      "Code": "",
       "Type": "koha",
       "Url": "https://sthlibraries.koha-ptfs.co.uk/",
       "TestISBN": "9781408855706"
     },
     {
       "Name": "Staffordshire",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000250",
       "Id": "250001",
@@ -1398,18 +1567,21 @@
     },
     {
       "Name": "Stirling",
+      "Code": "",
       "Type": "vufind",
       "Url": "https://vufind-st.sedar.org.uk/",
       "TestISBN": "9780751565355"
     },
     {
       "Name": "Stockport",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://stockport.spydus.co.uk/",
       "TestISBN": "9781408855669"
     },
     {
       "Name": "Stockton on Tees",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/stockton/",
@@ -1417,6 +1589,7 @@
     },
     {
       "Name": "Stoke on Trent",
+      "Code": "",
       "Type": "iguana",
       "Database": "1",
       "Url": "https://librariesonline.stoke.gov.uk/iguana/",
@@ -1424,12 +1597,14 @@
     },
     {
       "Name": "Suffolk",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://suffolk.spydus.co.uk/",
       "TestISBN": "9780751565355"
     },
     {
       "Name": "Sunderland",
+      "Code": "",
       "Type": "ibistro",
       "Available": [ "Item is on the shelf" ],
       "Url": "https://www.sunderland.gov.uk/",
@@ -1439,6 +1614,7 @@
     },
     {
       "Name": "Surrey",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000021",
       "Id": "210002",
@@ -1450,6 +1626,7 @@
     },
     {
       "Name": "Sutton",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000226",
       "Id": "210002",
@@ -1461,6 +1638,7 @@
     },
     {
       "Name": "Swansea",
+      "Code": "",
       "Type": "enterprise",
       "Id": "406",
       "Region": "3",
@@ -1473,6 +1651,7 @@
     },
     {
       "Name": "Swindon",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/swindon/",
@@ -1480,12 +1659,14 @@
     },
     {
       "Name": "Tameside",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://tameside.spydus.co.uk/",
       "TestISBN": "9780751565355"
     },
     {
       "Name": "Telford and Wrekin",
+      "Code": "",
       "Type": "arena",
       "ArenaName": "AUK000032",
       "Id": "320001",
@@ -1497,6 +1678,7 @@
     },
     {
       "Name": "Thurrock",
+      "Code": "",
       "Type": "iguana",
       "Database": "1",
       "Faceted": true,
@@ -1506,12 +1688,14 @@
     },
     {
       "Name": "Torbay",
+      "Code": "",
       "Type": "viewpoint3",
       "Url": "https://libraries.torbay.gov.uk/",
       "TestISBN": "9780751565355"
     },
     {
       "Name": "Torfaen",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/torfaen/",
@@ -1519,6 +1703,7 @@
     },
     {
       "Name": "Tower Hamlets",
+      "Code": "",
       "Type": "arena",
       "Id": "226010",
       "ISBNAlias": "number",
@@ -1529,12 +1714,14 @@
     },
     {
       "Name": "Trafford",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://trafford.spydus.co.uk/",
       "TestISBN": "9780747538493"
     },
     {
       "Name": "Vale of Glamorgan",
+      "Code": "",
       "Type": "vubis",
       "Index": "Isbn",
       "Url": "http://libhip.valeofglamorgan.gov.uk/vs/",
@@ -1543,6 +1730,7 @@
     },
     {
       "Name": "Wakefield",
+      "Code": "",
       "Type": "arena",
       "Id": "212001",
       "ArenaName": "AUK000212",
@@ -1556,6 +1744,7 @@
     },
     {
       "Name": "Walsall",
+      "Code": "",
       "Type": "arena",
       "Id": "140001",
       "ArenaName": "AUK000014",
@@ -1568,6 +1757,7 @@
     },
     {
       "Name": "Waltham Forest",
+      "Code": "",
       "Type": "arena",
       "Id": "226004",
       "ISBNAlias": "number",
@@ -1578,6 +1768,7 @@
     },
     {
       "Name": "Wandsworth",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/wandsworth/",
@@ -1585,12 +1776,14 @@
     },
     {
       "Name": "Warrington",
+      "Code": "",
       "Type": "koha",
       "Url": "https://libonline.livewirewarrington.co.uk/",
       "TestISBN": "9781408810606"
     },
     {
       "Name": "Warwickshire",
+      "Code": "",
       "Type": "iguana",
       "Database": "1",
       "Faceted": true,
@@ -1600,12 +1793,14 @@
     },
     {
       "Name": "West Berkshire",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://westberks.spydus.co.uk/",
       "TestISBN": "9781408810552"
     },
     {
       "Name": "West Dunbartonshire",
+      "Code": "",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
@@ -1614,6 +1809,7 @@
     },
     {
       "Name": "West Lothian",
+      "Code": "",
       "Type": "horizon",
       "Available": [ "AVAILABLE" ],
       "Url": "http://webpac.westlothian.gov.uk/",
@@ -1621,6 +1817,7 @@
     },
     {
       "Name": "West Sussex",
+      "Code": "",
       "Type": "arena",
       "Id": "380001",
       "ArenaName": "AUK000038",
@@ -1633,12 +1830,14 @@
     },
     {
       "Name": "Western Isles",
+      "Code": "",
       "Type": "vufind",
       "Url": "https://vufind-wi.sedar.org.uk/",
       "TestISBN": "9780751565355"
     },
     {
       "Name": "Westminster",
+      "Code": "",
       "Type": "enterprise",
       "Available": [ "In stock" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
@@ -1647,6 +1846,7 @@
     },
     {
       "Name": "Wigan",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/wigan/",
@@ -1654,6 +1854,7 @@
     },
     {
       "Name": "Wiltshire",
+      "Code": "",
       "Type": "arena",
       "Id": "400001",
       "ArenaName": "AUK000040",
@@ -1667,12 +1868,14 @@
     },
     {
       "Name": "Windsor & Maidenhead",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://rbwm.spydus.co.uk/",
       "TestISBN": "9781510051317"
     },
     {
       "Name": "Wirral",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/wirral/",
@@ -1680,6 +1883,7 @@
     },
     {
       "Name": "Wokingham",
+      "Code": "",
       "Type": "spydus",
       "Url": "https://wokingham.spydus.co.uk/",
       "TestISBN": "9780747538493"
@@ -1693,6 +1897,7 @@
     },
     {
       "Name": "Worcestershire",
+      "Code": "",
       "Type": "prism3",
       "Available": [ "Available" ],
       "Url": "https://capitadiscovery.co.uk/worcs/",
@@ -1700,6 +1905,7 @@
     },
     {
       "Name": "Wrexham",
+      "Code": "",
       "Type": "enterprise",
       "Available": [ "Available" ],
       "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
@@ -1708,6 +1914,7 @@
     },
     {
       "Name": "York City",
+      "Code": "",
       "Type": "enterprise",
       "Id": "474",
       "Region": "3",
