@@ -4,7 +4,7 @@ A web service project for searching multiple UK public library catalogues.
 
 ## What is it?
 
-In the UK there are around 200 public library authorities, (generally) each one with their own Library Management System (LMS) and associated Online Public Access Catalogue (OPAC).
+In the UK there are around 200 public library authorities, (generally) each one with their own Library Management System and associated Online Public Access Catalogue.
 
 Despite being so many authorities, there are relatively few types of library systems, and fewer suppliers.  This project aims to define the interactions with each **type** of web catalogue in order to automate these into a single web service for all UK library services.
 
@@ -17,30 +17,31 @@ The following key plugins/technologies are used - more specific details in third
 | Name | Description |
 | ---- | ----------- |
 | Node JS | Server side JavaScript technology for creating web applications |
+| Web | There is a webn front end to this project in order to display a basic search screen. |
 
 ## Authority Data
 
-A list of UK public library authorities is included in the data.json file.  This has the library authority name and the **type** of library service, along with specific data required to search that service e.g. the web URL. 
+A list of UK public library authorities is included in the **data.json** file.  This has the library authority name and the **type** of library service, along with specific data required to search that service e.g. the web URL. 
 
-It includes the ONS authority code for each authority.  This allows it to be combined with other datasets about that authority, ir particularly about that library service published elsewhere.
+It includes the ONS authority code for each authority.  This allows it to be combined with other datasets about that authority published elsewhere.
 
 For example:
 
-| Name | Type | URL | TestISBN |
-| ---- | ---- | --- | -------- |
-| Aberdeen City | spydus | https://aberdeencity.spydus.co.uk/ | 9780747538493 |
+| Name | Code | Type | URL | TestISBN |
+| ---- | ---- | ---- | --- | -------- |
+| Aberdeen City | S12000033 | spydus | https://aberdeencity.spydus.co.uk/ | 9780747538493 |
 
 ## Build
 
-The project uses Node Package Manager (NPM) for package management.  On downloading a copy of the project the required dependencies should be installed.  Assuming [Node](https://nodejs.org/en/) is already installed.
+The project uses Node Package Manager (NPM) for package management.  On downloading a copy of the project the required dependencies should be installed.  Assuming [Node](https://nodejs.org/en/) is already installed, to build:
 
 ```
-npm install packages
+npm install
 ```
 
 ## Run and deployment
 
-The solution can be run on a local system with [Node JS]() installed.  The solution will be available under localhost at http://localhost:3000/.
+The solution can be run on a local system with [Node JS](https://nodejs.org/) installed.  The solution will be available under localhost at **http://localhost:3000/**.
 
 ```
 node server.js
@@ -64,21 +65,21 @@ Returns selected contents of the data.json file for each service.  This can be u
 
 | URL Route | Description | Example |
 | ----- | ----------- | ------- |
-| */libraries* | Returns a list of library authorities | http://localhost:3000/services |
+| */libraries* | Returns a list of library authorities | *http://localhost:3000/services* |
 
 ### Libraries
 
 | URL Route | Description | Example |
 | ----- | ----------- | ------- |
-| */libraries* | Returns a list of libraries for each service. | http://localhost:3000/libraries |
-| */libraries?service=:service* | Filters the results to a particular library service. | http://localhost:3000/libraries?service=Wiltshire | 
+| */libraries* | Returns a list of libraries for each service. | *http://localhost:3000/libraries* |
+| */libraries?service=:service* | Filters the results to a particular library service. | *http://localhost:3000/libraries?service=Wiltshire* | 
 
 ### Availability
 
 | Route | Description | Example |
 | ----- | ----------- | ------- |
-| */availabilityByISBN/:isbn* | Retrieves availability of a particular book by passing in ISBN.  | http://localhost:3000/availabilityByISBN/9780747538493 |
-| */availabilityByISBN/:isbn?service=:service* | Filters the results to a particular library service. | http://localhost:3000/availabilityByISBN/9780747538493?service=Gloucestershire | 
+| */availabilityByISBN/:isbn* | Retrieves availability of a particular book by passing in ISBN.  | *http://localhost:3000/availabilityByISBN/9780747538493* |
+| */availabilityByISBN/:isbn?service=:service* | Filters the results to a particular library service. | *http://localhost:3000/availabilityByISBN/9780747538493?service=Gloucestershire* |
 
 Returns data showing the number of available/unavailable copies of the relevant book in each branch, for each library service.
 

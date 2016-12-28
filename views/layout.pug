@@ -5,20 +5,27 @@ html
 		title books | { libraries: hacked }
 		meta(name='viewport', content='width=device-width, initial-scale=1.0')
 		link(rel='stylesheet', href="/libs/css/bootstrap.min.css")
+		link(rel='stylesheet', href="/libs/css/tether.min.css")
+		link(rel='stylesheet', href="/libs/css/font-awesome.min.css")
 		link(rel='stylesheet', href="/css/site.css")
-	body
-		.container
-			.header.clearfix
-				nav
-					div(class="navbar-header")
-						a(class="navbar-brand", href='/') { libraries: books }
-		.container
+	body(class="grey")
+		.header.clearfix
+			nav(class="navbar navbar-light bg-faded")
+				div(class="container")
+					button(class="navbar-toggler hidden-lg-up", type="button", data-toggle="collapse", data-target="#navbarResponsive", aria-controls="navbarResponsive", aria-expanded="false", aria-label="Toggle navigation")
+					div(class="collapse navbar-toggleable-md", id="navbarResponsive")
+						a(class="navbar-brand", href="/")
+							span(class="fa fa-cube strong") &nbsp;
+							span(class="text-danger strong") books
+							span .librarydata
+		.container(class="main")
 			block content
 		footer
 			.container
 				hr
-				p an open-source #[a(href='https://www.librarieshacked.org') { libraries: hacked }] project, available on #[a( href='https://www.github.com/librarieshacked/catalogue-nodews' ) GitHub].
+				p an open source #[a(href='https://www.librarieshacked.org') { libraries: hacked }] project, available on #[a(href='https://www.github.com/librarieshacked/catalogues-librarydata') GitHub].
 		script(src="/libs/js/jquery.min.js")
+		script(src="/libs/js/tether.min.js")
 		script(src="/libs/js/bootstrap.min.js")
 		script(src="/libs/js/bootstrap3-typeahead.min.js")
 		script(src="/js/config.js")

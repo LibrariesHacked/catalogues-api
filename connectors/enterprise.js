@@ -53,6 +53,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     var ils = '';
     var itemPage = '';
 
+    // Function: deepLinkResponse
     var deepLinkResponse = function (error, msg, res) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;
         ils = msg.request.uri.path.substring(msg.request.uri.path.lastIndexOf("ent:") + 4, msg.request.uri.path.lastIndexOf("/one")) || '';
@@ -66,13 +67,21 @@ exports.searchByISBN = function (isbn, lib, callback) {
             var url = lib.Url + itemUrl.replace('[ILS]', ils.split('/').join('$002f'));
             request.get({ url: url, timeout: 30000 }, itemPageResponse);
         } else {
-            getItemAvailability(ils);
+            // Availability information may already be part of the page.
+            var matches = /parseDetailAvailabilityJSON\(([\s\S]*?)\)/.exec(itemPage);
+            if (matches && matches[1]) {
+                matchAvailabilityToLibraries(JSON.parse(matches[1]));
+            } else {
+                getItemAvailability(ils);
+            }
         }
     };
 
+    // Function: itemPageResponse
     var itemPageResponse = function (error, message, response) {
         if (common.handleErrors(callback, responseHoldings, error, message)) return;
-        getItemAvailability(ils, response);
+        itemPage = response;
+        getItemAvailability(ils);
     };
 
     // Function: getItemAvailability
@@ -84,16 +93,20 @@ exports.searchByISBN = function (isbn, lib, callback) {
         request.post({ url: url, headers: headerPost, timeout: 30000 }, getFinalAvailabilityJson);
     };
 
+    // Function: getFinalAvailabilityJson
     var getFinalAvailabilityJson = function (error, msg, res) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;
         if (!common.isJsonString(res)) { common.completeCallback(callback, responseHoldings); return }
-        var avail = JSON.parse(res);
+        matchAvailabilityToLibraries(JSON.parse(res))
+    };
+
+    // Function: matchAvailabilityToLibraries
+    var matchAvailabilityToLibraries = function (avail) {
         $ = cheerio.load(itemPage);
         var libs = {};
         $('.detailItemsTableRow').each(function (index, elem) {
             var name = $(this).find('td').eq(0).text().trim();
             var bc = $(this).find('td div').attr('id').replace('availabilityDiv', '');
-            // The status search can go down while item details are still returned.  In this case just have to bail out.
             if (bc && avail.ids && avail.ids.length > 0 && avail.strings && avail.ids.indexOf(bc) != -1) {
                 var status = avail.strings[avail.ids.indexOf(bc)].trim();
                 if (!libs[name]) libs[name] = { available: 0, unavailable: 0 };

@@ -80,7 +80,7 @@ exports.getWebsite = function (service, callback) {
 ///////////////////////////////////////////
 // Function: searchByISBN
 // This is a horrible chain of requests.  Particularly as the data returned is always within 
-// framesets (in 2016!) - so you need to get the URL for the relevant frame.
+// framesets (in 2017!) - so you need to get the URL for the relevant frame.
 // Probably can do all this from a single call - will investigate
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
@@ -95,7 +95,8 @@ exports.searchByISBN = function (isbn, lib, callback) {
     var sessionResponseBody = function (error, message, response) {
         if (common.handleErrors(callback, responseHoldings, error, message)) return;
         $ = cheerio.load(response);
-        request.get({ url: lib.Url + searchUrl.replace('[DATABASE]', (lib.Database || 1)).replace('[ISBN]', isbn).replace('[ISBN]', isbn).replace('[INDEX]', lib.Index) + '&EncodedRequest=' + $('input[name=EncodedRequest]').attr('value'), timeout: 20000 }, searchResponseFrameset);
+        var url = searchUrl.replace('[DATABASE]', (lib.Database || 1)).replace('[ISBN]', isbn).replace('[ISBN]', isbn).replace('[INDEX]', lib.Index) + '&EncodedRequest=' + $('input[name=EncodedRequest]').attr('value');
+        request.get({ url: lib.Url + url, timeout: 20000 }, searchResponseFrameset);
     };
 
     var searchResponseFrameset = function (error, message, response) {
@@ -132,17 +133,27 @@ exports.searchByISBN = function (isbn, lib, callback) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;
         var libs = {};
         $ = cheerio.load(response);
-        var availIndex = $('table[summary="FullBB.HoldingDetails"] tr').eq(1).find(':contains(Availability)').index();
-        var shelfMarkIndex = $('table[summary="FullBB.HoldingDetails"] tr').eq(1).find(':contains(Shelfmark)').index();
-        $('table[summary="FullBB.HoldingDetails"] tr').slice(2).each(function () {
-            var status = $(this).find('td').eq(availIndex).text().trim();
-            var name = $(this).find('td').eq(shelfMarkIndex).text().split(':')[0].split('/')[0].trim();
-            if (!libs[name]) libs[name] = { available: 0, unavailable: 0 };
-            status == 'Available' ? libs[name].available++ : libs[name].unavailable++;
-        });
+        if ($('table[summary="FullBB.HoldingDetails"] tr').length > 0){
+            var availIndex = $('table[summary="FullBB.HoldingDetails"] tr').eq(1).find(':contains(Availability)').index();
+            var shelfMarkIndex = $('table[summary="FullBB.HoldingDetails"] tr').eq(1).find(':contains(Shelfmark)').index();
+            $('table[summary="FullBB.HoldingDetails"] tr').slice(2).each(function () {
+                var status = $(this).find('td').eq(availIndex).text().trim();
+                var name = $(this).find('td').eq(shelfMarkIndex).text().split(':')[0].split('/')[0].trim();
+                if (!libs[name]) libs[name] = { available: 0, unavailable: 0 };
+                status == 'Available' ? libs[name].available++ : libs[name].unavailable++;
+            });
+        } else if ($('table[summary="FullBB.Description"] tr').length > 0) {
+            var availIndex = $('table[summary="FullBB.Description"] tr').eq(1).find(':contains(Availability)').index();
+            var shelfMarkIndex = $('table[summary="FullBB.Description"] tr').eq(1).find(':contains(Shelfmark)').index();
+            $('table[summary="FullBB.Description"] tr').slice(2).each(function () {
+                var status = $(this).find('td').eq(availIndex).text().trim();
+                var name = $(this).find('td').eq(shelfMarkIndex).text().split(':')[0].split('/')[0].trim();
+                if (!libs[name]) libs[name] = { available: 0, unavailable: 0 };
+                status == 'Available' ? libs[name].available++ : libs[name].unavailable++;
+            });
+        }
         for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
         common.completeCallback(callback, responseHoldings);
     };
-
     request.get({ url: lib.Url + 'Vubis.csp', timeout: 20000 }, sessionResponseFrameset);
 };

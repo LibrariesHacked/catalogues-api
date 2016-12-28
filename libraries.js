@@ -49,7 +49,7 @@ exports.getLibraries = function (req, res) {
     // Create a list of the searches to perform.
     var searches = data.LibraryServices
         .filter(function (service) {
-            return (service.Type != '' && (!req.query.service || service.Name == req.query.service));
+            return (service.Type != '' && (!req.query.service || service.Name == req.query.service || service.Code == req.query.service));
         })
         .map(function (service) {
             return function (callback) {
@@ -74,7 +74,7 @@ exports.isbnSearch = function (req, res) {
     // Create a list of the searches to perform.
     var searches = data.LibraryServices
         .filter(function (service) {
-            return (service.Type != '' && (!req.query.service || service.Name == req.query.service));
+            return (service.Type != '' && (!req.query.service || service.Name == req.query.service || service.Code == req.query.service));
         })
         .map(function (service) {
             return function (callback) {
@@ -115,7 +115,7 @@ exports.testIsbnSearch = function (req, res) {
     // Create a list of the searches to perform.
     var searches = data.LibraryServices
         .filter(function (service) {
-            return (service.Type != '' && (!req.query.service || service.Name == req.query.service));
+            return (service.Type != '' && (!req.query.service || service.Name == req.query.service || service.Code == req.query.service));
         })
         .map(function (service) {
             return function (callback) {
