@@ -106,7 +106,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
             if (recordData && recordData[0] && recordData[0].BibDocument && recordData[0].BibDocument[0] && recordData[0].BibDocument[0].HoldingsSummary && recordData[0].BibDocument[0].HoldingsSummary[0]) {
                 recordData[0].BibDocument[0].HoldingsSummary[0].ShelfmarkData.forEach(function (item) {
                     var lib = item.Shelfmark[0].split(' : ')[0];
-                    responseHoldings.availability.push({ library: lib, available: item.Available[0], unavailable: item.Available == "0" ? 1 : 0 });
+                    responseHoldings.availability.push({ library: lib, available: item.Available ? item.Available[0] : 0, unavailable: item.Available == "0" ? 1 : 0 });
                 });
             }
             common.completeCallback(callback, responseHoldings);

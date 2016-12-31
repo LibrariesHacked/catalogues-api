@@ -89,7 +89,6 @@ exports.searchByISBN = function (isbn, lib, callback) {
     var numLibs = 0;
     var currentOrg = null;
     var currentBranch = 0;
-    var currentLibName = '';
 
     ///////////////////////////////////////////////
     // handleSearchRequest
@@ -115,7 +114,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
                 var libName = $(this).find('.arena-branch-name span').text();
                 var totalAvailable = $(this).find('.arena-availability-info span').eq(0).text().replace('Total ', '');
                 var checkedOut = $(this).find('.arena-availability-info span').eq(1).text().replace('On loan ', '');
-                if (libName) responseHoldings.availability.push({ library: libName, available: (parseInt(totalAvailable) - (checkedOut ? parseInt(checkedOut) : 0)), unavailable: (checkedOut != "" ? parseInt(checkedOut) : 0) });
+                if (libName) responseHoldings.availability.push({ library: libName, available: ((totalAvaialable ? parseInt(totalAvailable) : 0) - (checkedOut ? parseInt(checkedOut) : 0)), unavailable: (checkedOut != "" ? parseInt(checkedOut) : 0) });
             });
             common.completeCallback(callback, responseHoldings); return;
         }
@@ -180,7 +179,6 @@ exports.searchByISBN = function (isbn, lib, callback) {
         if (!numLibs || numLibs == 0) { common.completeCallback(callback, responseHoldings); return; }
         currentBranch = 0;
         libsData.each(function (i) {
-            currentLibName = $(this).find('span.arena-holding-link').text();
             resourceId = '/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel:content:holdingsView:' + (currentOrg + 1) + ':childContainer:childView:' + i + ':holdingPanel:holdingContainer:togglableLink::IBehaviorListener:0:';
             url = lib.Url + 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + resourceId + '&p_p_cacheability=';
             // Request 5: (Looped) Get the libraries availability
@@ -209,7 +207,8 @@ exports.searchByISBN = function (isbn, lib, callback) {
             $ = cheerio.load(res['ajax-response'].component[0]._);
             var totalAvailable = $('td.arena-holding-nof-total span.arena-value').text();
             var checkedOut = $('td.arena-holding-nof-checked-out span.arena-value').text();
-            responseHoldings.availability.push({ library: currentLibName, available: (parseInt(totalAvailable) - parseInt(checkedOut)), unavailable: parseInt(checkedOut) });
+            $ = cheerio.load(res['ajax-response'].component[2]._);
+            responseHoldings.availability.push({ library: $('span.arena-holding-link').text(), available: ((totalAvailable ? parseInt(totalAvailable) : 0) - (checkedOut ? parseInt(checkedOut) : 0)), unavailable: (checkedOut ? parseInt(checkedOut) : 0) });
         }
         if (currentBranch == numLibs) { common.completeCallback(callback, responseHoldings); return; }
     };

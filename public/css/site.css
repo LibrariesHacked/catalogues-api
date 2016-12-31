@@ -1,5 +1,5 @@
 ﻿.main {
-    padding-top: 70px;
+    padding-top: 30px;
 }
 
 nav {
@@ -12,4 +12,12 @@ nav {
 
 .strong {
     font-weight: 700;
+}
+
+.card-title {
+    font-weight: 700;
+}
+
+#map { 
+    height: 300px; 
 }

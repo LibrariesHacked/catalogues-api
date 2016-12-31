@@ -2,11 +2,12 @@ doctype html
 html
 	head
 		meta(charset='utf-8')
-		title books | { libraries: hacked }
+		title library books | librarydata
 		meta(name='viewport', content='width=device-width, initial-scale=1.0')
 		link(rel='stylesheet', href="/libs/css/bootstrap.min.css")
 		link(rel='stylesheet', href="/libs/css/tether.min.css")
 		link(rel='stylesheet', href="/libs/css/font-awesome.min.css")
+		link(rel='stylesheet', href="/libs/css/leaflet.css")
 		link(rel='stylesheet', href="/css/site.css")
 	body(class="grey")
 		.header.clearfix
@@ -15,9 +16,7 @@ html
 					button(class="navbar-toggler hidden-lg-up", type="button", data-toggle="collapse", data-target="#navbarResponsive", aria-controls="navbarResponsive", aria-expanded="false", aria-label="Toggle navigation")
 					div(class="collapse navbar-toggleable-md", id="navbarResponsive")
 						a(class="navbar-brand", href="/")
-							span(class="fa fa-cube strong") &nbsp;
-							span(class="text-danger strong") books
-							span .librarydata
+							span(class="text-danger strong") library books
 		.container(class="main")
 			block content
 		footer
@@ -28,6 +27,7 @@ html
 		script(src="/libs/js/tether.min.js")
 		script(src="/libs/js/bootstrap.min.js")
 		script(src="/libs/js/bootstrap3-typeahead.min.js")
+		script(src="/libs/js/leaflet.js")
 		script(src="/js/config.js")
 		script(src="/js/site.js")
 		block scripts

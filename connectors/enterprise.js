@@ -69,7 +69,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
         } else {
             // Availability information may already be part of the page.
             var matches = /parseDetailAvailabilityJSON\(([\s\S]*?)\)/.exec(itemPage);
-            if (matches && matches[1]) {
+            if (matches && matches[1] && common.isJsonString(matches[1])) {
                 matchAvailabilityToLibraries(JSON.parse(matches[1]));
             } else {
                 getItemAvailability(ils);
