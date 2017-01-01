@@ -9,7 +9,7 @@
     var libraryServices = [];
     var isbns = { tens: [], thirteens: [] };
     var updateResults;
-    var map = L.map('map').setView([51.505, -0.09], 13);
+    var map = L.map('map', { zoomControl: false }).setView([52.6, -2.5], 7);
     L.tileLayer(config.mapTilesLight + config.mapBoxToken, { attribution: config.mapAttribution}).addTo(map);
 
     $.get('/services', function (data) { libraryServices = data; });
