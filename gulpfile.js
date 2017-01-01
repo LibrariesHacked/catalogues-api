@@ -3,7 +3,7 @@
 gulp.task('default', function () {
     gulp.src([
         'node_modules/bootstrap/dist/js/bootstrap.min.js',
-        'node_modules/bootstrap/node_modules/tether/dist/js/tether.min.js',
+        'node_modules/tether/dist/js/tether.min.js',
         'node_modules/bootstrap-3-typeahead/bootstrap3-typeahead.min.js',
         'node_modules/jquery/dist/jquery.min.js',
         'node_modules/leaflet/dist/leaflet.js'
@@ -11,7 +11,7 @@ gulp.task('default', function () {
     gulp.src([
         'node_modules/bootstrap/dist/css/bootstrap.min.css',
         'node_modules/bootstrap/dist/css/bootstrap.min.css.map',
-        'node_modules/bootstrap/node_modules/tether/dist/css/tether.min.css',
+        'node_modules/tether/dist/css/tether.min.css',
         'node_modules/font-awesome/css/font-awesome.min.css',
         'node_modules/leaflet/dist/leaflet.css'
     ]).pipe(gulp.dest('public/libs/css'));

@@ -24,7 +24,6 @@
     "async": "^1.4.0",
     "bootstrap": "^4.0.0-alpha.5",
     "bootstrap-3-typeahead": "^4.0.2",
-    "bootstrap-multiselect": "^0.9.13",
     "cheerio": "^0.19.0",
     "express": "^4.13.2",
     "font-awesome": "^4.7.0",
@@ -34,6 +33,7 @@
     "leaflet": "^1.0.2",
     "pug": "^2.0.0-beta4",
     "request": "^2.79.0",
+    "tether": "^1.4.0",
     "xml2js": "^0.4.9"
   }
 }
