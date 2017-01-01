@@ -12,6 +12,9 @@
     var map = L.map('map', { zoomControl: false }).setView([52.6, -2.5], 7);
     L.tileLayer(config.mapTilesLight + config.mapBoxToken, { attribution: config.mapAttribution}).addTo(map);
 
+    var tblResults = $('#tblResults').DataTable();
+    
+
     $.get('/services', function (data) { libraryServices = data; });
 
     ////////////////////////////////////////////
@@ -52,7 +55,7 @@
                     if (isbn.length == 10) isbns.tens.push(isbn);
                     if (isbn.length == 13) isbns.thirteens.push(isbn);
                 });
-                 $('#btnSearch').removeClass('disabled'); 
+                $('#btnSearch').removeClass('disabled'); 
             }
         });
     });
@@ -63,7 +66,7 @@
         $('#found').text(0);
         $('#available').text(0);
         $('#unavailable').text(0);
-        $('.progress-bar').val(0);
+        $('.progress').val(0);
         $('#btnSearch').addClass('disabled'); 
 
         // from the total set of isbns and services, work out the number of calls to make
@@ -75,15 +78,19 @@
         var countReturns = 0;
         var available = 0;
         var unavailable = 0;
+        var responses = {};
         if (libraryServices.length > 0) {
-            // Firstly we want to update the UI with progress but not TOO often - set a timeout to do it every second and a half.
+            // Firstly we want to update the UI with progress but not TOO often - set a timeout to do it every half second.
             updateResults = setInterval(function () {
-                $('.progress-bar').val((countReturns / requests.length) * 100);
+                $('.progress').val((countReturns / requests.length) * 100);
                 $('#found').text(unavailable + available);
                 $('#available').text(available);
                 $('#unavailable').text(unavailable);
+                $.each(Object.keys(responses), function(x, s) {
+                    tblResults.row.add(x,0,1).draw(false);
+                });
                 if (countReturns == request.length) clearInterval(updateResults);
-            }, 1500);
+            }, 500);
 
             for (var i = 0; i < requests.length; i++) {
                 (function (ind) {
@@ -91,11 +98,18 @@
                         $.get(requests[ind], function (data) {
                             countReturns++;
                             if (data && data[0] && data[0].availability) {
+                                if (!responses[data[0].service]) responses[data[0].service] = { libraries: {} };
+                                $.each(data[0].availability, function(i, a) {
+                                    if (!responses[data[0].service].libraries[a.library]) responses[data[0].service].libraries[a.library] = { available: 0, unavailable: 0 };
+                                    responses[data[0].service].libraries[a.library].available = responses[data[0].service].libraries[a.library].available + a.available;
+                                    responses[data[0].service].libraries[a.library].unavailable = responses[data[0].service].libraries[a.library].unavailable + a.unavailable;
+                                    
+                                });
                                 available = available + $.sum($.map(data[0].availability, function (av, i) { return parseInt(av.available) }));
                                 unavailable = unavailable + $.sum($.map(data[0].availability, function (av, i) { return parseInt(av.unavailable) }));
                             }
                         });
-                    }, 5);
+                    }, 1);
                 })(i);
             }
         }
