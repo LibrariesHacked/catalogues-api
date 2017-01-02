@@ -6,7 +6,8 @@ gulp.task('default', function () {
         'node_modules/tether/dist/js/tether.min.js',
         'node_modules/bootstrap-3-typeahead/bootstrap3-typeahead.min.js',
         'node_modules/jquery/dist/jquery.min.js',
-        'node_modules/leaflet/dist/leaflet.js'
+        'node_modules/leaflet/dist/leaflet.js',
+        'node_modules/datatables.net/js/jquery.dataTables.js'
     ]).pipe(gulp.dest('public/libs/js'));
     gulp.src([
         'node_modules/bootstrap/dist/css/bootstrap.min.css',

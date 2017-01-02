@@ -134,6 +134,11 @@
         }
       }
     },
+    "datatables.net": {
+      "version": "1.10.13",
+      "from": "datatables.net@>=1.10.13 <2.0.0",
+      "resolved": "https://registry.npmjs.org/datatables.net/-/datatables.net-1.10.13.tgz"
+    },
     "express": {
       "version": "4.14.0",
       "from": "express@>=4.13.2 <5.0.0",
@@ -146,7 +151,7 @@
           "dependencies": {
             "mime-types": {
               "version": "2.1.13",
-              "from": "mime-types@>=2.1.11 <2.2.0",
+              "from": "mime-types@>=2.1.13 <2.2.0",
               "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.13.tgz",
               "dependencies": {
                 "mime-db": {
@@ -362,7 +367,7 @@
             },
             "mime-types": {
               "version": "2.1.13",
-              "from": "mime-types@>=2.1.11 <2.2.0",
+              "from": "mime-types@>=2.1.13 <2.2.0",
               "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.13.tgz",
               "dependencies": {
                 "mime-db": {
@@ -723,7 +728,7 @@
               "dependencies": {
                 "clone": {
                   "version": "1.0.2",
-                  "from": "clone@>=1.0.0 <2.0.0",
+                  "from": "clone@>=1.0.2 <2.0.0",
                   "resolved": "https://registry.npmjs.org/clone/-/clone-1.0.2.tgz"
                 },
                 "clone-stats": {
@@ -1379,9 +1384,9 @@
                           }
                         },
                         "minimatch": {
-                          "version": "3.0.2", 
-						  "from": "minimatch@>=2.0.1 <3.0.0",
-						  "resolved": "https://registry.npmjs.org/minimatch/-/minimatch-2.0.10.tgz", 
+                          "version": "3.0.2",
+                          "from": "minimatch@>=0.2.11 <0.3.0",
+                          "resolved": "https://registry.npmjs.org/minimatch/-/minimatch-0.2.14.tgz",
                           "dependencies": {
                             "lru-cache": {
                               "version": "2.7.3",

@@ -12,8 +12,7 @@
     var map = L.map('map', { zoomControl: false }).setView([52.6, -2.5], 7);
     L.tileLayer(config.mapTilesLight + config.mapBoxToken, { attribution: config.mapAttribution}).addTo(map);
 
-    var tblResults = $('#tblResults').DataTable();
-    
+    var tblResults = $('#tblResults').DataTable({ searching: false, info: false, lengthChange: false, responsive: true, columns: [{ data: 'service' },{ data: 'available' },{ data: 'unavailable' }]});
 
     $.get('/services', function (data) { libraryServices = data; });
 
@@ -87,9 +86,10 @@
                 $('#available').text(available);
                 $('#unavailable').text(unavailable);
                 $.each(Object.keys(responses), function(x, s) {
-                    tblResults.row.add(x,0,1).draw(false);
+                    if (tblResults.row('#' + s).length == 0) tblResults.row.add({ "DT_RowId": s, "service": s, "available": responses[s].available, "unavailable": responses[s].unavailable }).draw(true);
+                    if (tblResults.row('#' + s).length > 0) tblResults.row('#' + s).data({ "service": s, "available": responses[s].available, "unavailable": responses[s].unavailable }).draw(true);
                 });
-                if (countReturns == request.length) clearInterval(updateResults);
+                if (countReturns == requests.length) clearInterval(updateResults);
             }, 500);
 
             for (var i = 0; i < requests.length; i++) {
@@ -98,12 +98,13 @@
                         $.get(requests[ind], function (data) {
                             countReturns++;
                             if (data && data[0] && data[0].availability) {
-                                if (!responses[data[0].service]) responses[data[0].service] = { libraries: {} };
                                 $.each(data[0].availability, function(i, a) {
+                                    if (!responses[data[0].service]) responses[data[0].service] = { libraries: {}, available: 0, unavailable: 0 };
                                     if (!responses[data[0].service].libraries[a.library]) responses[data[0].service].libraries[a.library] = { available: 0, unavailable: 0 };
+                                    responses[data[0].service].available = responses[data[0].service].available + a.available;
                                     responses[data[0].service].libraries[a.library].available = responses[data[0].service].libraries[a.library].available + a.available;
+                                    responses[data[0].service].unavailable = responses[data[0].service].unavailable + a.unavailable;
                                     responses[data[0].service].libraries[a.library].unavailable = responses[data[0].service].libraries[a.library].unavailable + a.unavailable;
-                                    
                                 });
                                 available = available + $.sum($.map(data[0].availability, function (av, i) { return parseInt(av.available) }));
                                 unavailable = unavailable + $.sum($.map(data[0].availability, function (av, i) { return parseInt(av.unavailable) }));

@@ -12,7 +12,7 @@ block content
 							div(class="form-group")
 								label(for="txtKeywords") keywords
 								input(type="text", class="form-control", id="txtKeywords", aria-describedby="keywordsHelp", placeholder="enter keywords", autocomplete="off")
-								small(id="keywordsHelp", class="form-text text-muted strong") as you type books should appear to select - enter more keywords to refine the search
+								small(id="keywordsHelp", class="form-text text-muted strong") as you type books should appear for you to select
 							button(class='btn btn-success disabled', type='button', id='btnSearch') search
 			div(class="col-sm-4")
 				div(class="card")
@@ -35,12 +35,13 @@ block content
 					div(class="card-block")
 						h4(class="card-title text-warning") full results
 					div(class="card-block")
-						table(id="tblResults", class="table table-sm")
-							thead
-								tr
-									th service
-									th available
-									th unavailable
+						div
+							table(id="tblResults", class="table table-sm")
+								thead
+									tr
+										th service
+										th available
+										th unavailable
 			div(class="col-sm-4")
 				div(class="card")
 					div(class="card-block")
