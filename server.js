@@ -32,6 +32,7 @@ app.get('/', function (req, res) {
 // The web service routes
 ///////////////////////////////////////////
 app.get('/services', libraries.getServices);
+app.get('/servicegeo', libraries.getServiceGeo);
 app.get('/libraries', libraries.getLibraries);
 app.get('/availabilityByISBN/:isbn', libraries.isbnSearch);
 app.get('/thingISBN/:isbn', libraries.thingISBN);

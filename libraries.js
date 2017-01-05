@@ -41,6 +41,20 @@ exports.getServices = function (req, res) {
 };
 
 /////////////////////////////////////////////////////////////////
+// Function: getServiceGeo
+// Route: /servicegeo
+// Returns the geographical boundary of a service
+// Test: http://localhost:3000/servicegeo?service=Wiltshire
+/////////////////////////////////////////////////////////////////
+exports.getServiceGeo = function (req, res) {
+    var servicegeo = null;
+    data.LibraryServices.some(function (s, i) {
+        if (req.query.service == s.Code || req.query.service == s.Name) { servicegeo = require('./data/geography/Simplified_' + s.Code); return true; }
+    });
+    res.send(servicegeo);
+};
+
+/////////////////////////////////////////////////////////////////
 // Function: getLibraries
 // Route: /libraries
 // Test: http://localhost:3000/libraries?service=Wiltshire
