@@ -37,7 +37,7 @@ exports.getService = function (svc, callback) {
 // Hmmmmm, do a very general search and get the facets.
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
-    var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
+    var responseLibraries = { service: service.Name, code: service.Code, libraries: [], start: new Date() };
 
     var getFacets = function (resultId) {
         // Request 2:
@@ -93,14 +93,14 @@ exports.getLibraries = function (service, callback) {
 // Function: searchByISBN
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
+    var responseHoldings = { service: lib.Name, code: lib.Code, availability: [], start: new Date() };
 
     // Request 1: Post to the search web service
     request.post({ url: lib.Url + 'Proxy.SearchRequest.cls', body: itemSearch.replace('[ISBN]', isbn).replace('[DB]', lib.Database).replace('[TID]', 'Iguana_Brief'), headers: reqHeader, timeout: 60000 }, function (error, msg, response) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;
         xml2js.parseString(response, function (err, res) {
             if (common.handleErrors(callback, responseHoldings, error)) return;
-            var record = res['zs:searchRetrieveResponse']['zs:records'][0]['zs:record'];
+            if (res && res['zs:searchRetrieveResponse']) var record = res['zs:searchRetrieveResponse']['zs:records'][0]['zs:record'];
             if (record) var recordData = record[0]['zs:recordData'];
             // Loop through all the holdings records.
             if (recordData && recordData[0] && recordData[0].BibDocument && recordData[0].BibDocument[0] && recordData[0].BibDocument[0].HoldingsSummary && recordData[0].BibDocument[0].HoldingsSummary[0]) {

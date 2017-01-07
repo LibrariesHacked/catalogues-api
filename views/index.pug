@@ -1,58 +1,58 @@
 extends layout.pug
 block content
-	div(class='container')
-		div(class="row")
-			div(class="col-sm-4")
-				div(class="alert alert-danger alert-dismissible fade in", role="alert")
-					button(type="button", class="close", data-dismiss="alert", aria-label="Close")
-						span(aria-hidden="true") &times;
-					strong in development. 
-					span work in progress
-				div(class="card")
-					div(class="card-block")
-						h4(class="card-title text-primary") search for books
-						h6(class="card-subtitle text-muted") books in libraries across the UK
-					div(class="card-block")
-						form
-							div(class="form-group")
-								label(for="txtKeywords") keywords
-								input(type="text", class="form-control", id="txtKeywords", aria-describedby="keywordsHelp", placeholder="enter keywords", autocomplete="off")
-								small(id="keywordsHelp", class="form-text text-muted strong") as you type books should appear for you to select
-							button(class='btn btn-success disabled', type='button', id='btnSearch') search
-							span &nbsp;
-							button(class='btn btn-danger disabled', type='button', id='btnClear') clear
-			div(class="col-sm-4")
-				div(class="card")
-					div(class="card-block")
-						h4(class="card-title text-success") summary
-						h6(class="card-subtitle text-muted") how many copies are there?
-					div(class="card-block")
-						div(class="progress progress-bar-info")
-							progress(class="progress progress-success" value="0" max="100")
-						div(class='row')
-							div(class='col col-xs-4')
-								p(class='small text-muted strong') found
-								p(class='lead text-primary strong', id='found') 0
-							div(class='col col-xs-4')
-								p(class='small text-muted strong') available
-								p(class='lead text-success strong', id='available') 0
-							div(class='col col-xs-4')
-								p(class='small text-muted strong') unavailable
-								p(class='lead text-danger strong', id='unavailable') 0
-				div(class="card")
-					div(class="card-block")
-						h4(class="card-title text-warning") full results
-						h6(class="card-subtitle text-muted") see which library services have the book
-					div(class="card-block")
-						table(id="tblResults", class="table table-sm")
-							thead(class="thead-default")
-								tr
-									th service
-									th available
-									th unavailable
-			div(class="col-sm-4")
-				div(class="card")
-					div(class="card-block")
-						h4(class="card-title text-info") map
-						h6(class="card-subtitle text-muted") a map of results
-					div(id="map", class="card-block")
+	div(class="row")
+		div(class="col-sm-4")
+			div(class="alert alert-danger alert-dismissible fade in", role="alert")
+				button(type="button", class="close", data-dismiss="alert", aria-label="Close")
+					span(aria-hidden="true") &times;
+				strong in development. 
+				span work in progress
+			div(class="card")
+				div(class="card-block")
+					h4(class="card-title text-primary") search for books
+					h6(class="card-subtitle text-muted") books in libraries across the UK
+				div(class="card-block")
+					form
+						div(class="form-group")
+							label(for="txtKeywords") keywords
+							input(type="text", class="form-control", id="txtKeywords", aria-describedby="keywordsHelp", placeholder="enter keywords", autocomplete="off")
+							small(id="keywordsHelp", class="form-text text-muted strong") as you type, books should appear to select.
+						button(class='btn btn-outline-success btn-sm disabled', type='button', id='btnSearch') search
+						span &nbsp;
+						button(class='btn btn-outline-danger btn-sm disabled', type='button', id='btnClear') clear
+		div(class="col-sm-4")
+			div(class="card")
+				div(class="card-block")
+					h4(class="card-title text-success") summary
+					h6(class="card-subtitle text-muted") how many copies?
+				div(class="card-block")
+					small(id="progressPercentage", class="form-text text-muted strong") 0%
+					div(class="progress progress-bar-info")
+						progress(class="progress progress-success" value="0" max="100")
+					div(class='row')
+						div(class='col col-xs-4')
+							p(class='small text-muted strong') found
+							p(class='lead text-primary strong', id='found') 0
+						div(class='col col-xs-4')
+							p(class='small text-muted strong') available
+							p(class='lead text-success strong', id='available') 0
+						div(class='col col-xs-4')
+							p(class='small text-muted strong') unavailable
+							p(class='lead text-danger strong', id='unavailable') 0
+			div(class="card")
+				div(class="card-block")
+					h4(class="card-title text-warning") full results
+					h6(class="card-subtitle text-muted") see which library services have the book
+				div(class="card-block")
+					table(id="tblResults", class="table table-sm")
+						thead(class="thead-default")
+							tr
+								th service
+								th available
+								th unavailable
+		div(class="col-sm-4")
+			div(class="card")
+				div(class="card-block")
+					h4(class="card-title text-info") map
+					h6(class="card-subtitle text-muted") a map of results
+				div(id="map", class="card-block")

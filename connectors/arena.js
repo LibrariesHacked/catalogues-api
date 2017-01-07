@@ -34,7 +34,7 @@ exports.getService = function (svc, callback) {
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
     var agent = forever.ForeverAgent;
-    var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
+    var responseLibraries = { service: service.Name, code: service.Code, libraries: [], start: new Date() };
     // Hardcoded returns.  A few instances don't seem to give an option of filtering by library.
     if (service.Libraries) {
         for (lib in service.Libraries) responseLibraries.libraries.push(lib);
@@ -84,7 +84,7 @@ exports.getLibraries = function (service, callback) {
 // Function: searchByISBN
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
+    var responseHoldings = { service: lib.Name, code: lib.Code, availability: [], start: new Date() };
     var agent = forever.ForeverAgent;
     var numLibs = 0;
     var currentOrg = null;

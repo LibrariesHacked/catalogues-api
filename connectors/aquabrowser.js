@@ -34,7 +34,7 @@ exports.getService = function (svc, callback) {
 // and then parse back the library select
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
-    var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
+    var responseLibraries = { service: service.Name, code: service.Code, libraries: [], start: new Date() };
 
     var handleSearchResponse = function (error, msg, response) {
         if (common.handleErrors(callback, responseLibraries, error, msg)) return;
@@ -62,7 +62,7 @@ exports.getLibraries = function (service, callback) {
 // for the ID, then to get availability.
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, service, callback) {
-    var responseHoldings = { service: service.Name, availability: [], start: new Date(), url: service.Url + searchUrl + isbn };
+    var responseHoldings = { service: service.Name, code: service.Code, availability: [], start: new Date(), url: service.Url + searchUrl + isbn };
  
     var handleSearchResponse = function (error, msg, response) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;

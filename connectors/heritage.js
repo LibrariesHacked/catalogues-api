@@ -32,14 +32,14 @@ exports.getService = function (svc, callback) {
 // Placeholder
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
-    callback({ service: service.Name, libs: service.Libraries, start: new Date(), end: new Date() });
+    callback({ service: service.Name, code: service.Code, libs: service.Libraries, start: new Date(), end: new Date() });
 };
 
 ///////////////////////////////////////////
 // Function: searchByISBN
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = { service: lib.Name, availability: [], start: new Date(), url: lib.Url + searchUrl + isbn };
+    var responseHoldings = { service: lib.Name, code: lib.Code, availability: [], start: new Date(), url: lib.Url + searchUrl + isbn };
 
     // Request 1: Get the deep link URL
     request.get({ url: responseHoldings.url, jar: true, timeout: 60000 }, function (error, message, response) {

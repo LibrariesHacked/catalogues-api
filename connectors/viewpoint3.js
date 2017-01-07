@@ -30,7 +30,7 @@ exports.getService = function (svc, callback) {
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
-    var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
+    var responseLibraries = { service: service.Name, code: service.Code, libraries: [], start: new Date() };
     var options = { url: service.Url + advSearch, timeout: 30000, jar: true };
     if (service.IgnoreSSL) options.rejectUnauthorized = false;
     // Request 1: Get advanced search page
@@ -80,7 +80,7 @@ exports.getLibraries = function (service, callback) {
 // Function: searchByISBN
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = { service: lib.Name, availability: [], start: new Date(), url: lib.Url + searchUrl + isbn };
+    var responseHoldings = { service: lib.Name, code: lib.Code, availability: [], start: new Date(), url: lib.Url + searchUrl + isbn };
     var options = { url: responseHoldings.url, timeout: 60000 };
     if (lib.IgnoreSSL) options.rejectUnauthorized = false;
     // Request 1: Deep link to the item by ISBN

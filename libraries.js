@@ -49,7 +49,7 @@ exports.getServices = function (req, res) {
 exports.getServiceGeo = function (req, res) {
     var servicegeo = null;
     data.LibraryServices.some(function (s, i) {
-        if (req.query.service == s.Code || req.query.service == s.Name) { servicegeo = require('./data/geography/Simplified_' + s.Code); return true; }
+        if (req.query.service == s.Code || req.query.service == s.Name) { servicegeo = require('./data/geography/' + s.Code); return true; }
     });
     res.send(servicegeo);
 };

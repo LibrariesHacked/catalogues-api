@@ -28,7 +28,7 @@ exports.getService = function (svc, callback) {
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
-    var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
+    var responseLibraries = { service: service.Name, code: service.Code, libraries: [], start: new Date() };
 
     var handleSessionRequest = function (error, message, response) {
         if (common.handleErrors(callback, responseLibraries, error, message)) return;
@@ -55,7 +55,7 @@ exports.getLibraries = function (service, callback) {
 // Function: searchByISBN
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = { service: lib.Name, availability: [], start: new Date(), url: lib.Url };
+    var responseHoldings = { service: lib.Name, code: lib.Code, availability: [], start: new Date(), url: lib.Url };
     var resultLocation = '';
     var headers = {
         'Accept-Encoding': 'gzip, deflate',

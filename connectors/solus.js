@@ -31,7 +31,7 @@ exports.getService = function (svc, callback) {
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
-    var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
+    var responseLibraries = { service: service.Name, code: service.Code, libraries: [], start: new Date() };
 
     // Request 1: Get advanced search page
     request.get({ url: service.Url + 'advanced-search', timeout: 60000 }, function (error, message, response) {
@@ -47,7 +47,7 @@ exports.getLibraries = function (service, callback) {
 // chances are this wouldn't work either!
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, libraryService, callback) {
-    var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
+    var responseHoldings = { service: lib.Name, code: lib.Code, availability: [], start: new Date() };
 
     var soapXML = isbnRequest.replace('[ISBN]', isbn).replace('[APPID]', libraryService.Id);
     // Request 1: Search for the item by ISBN

@@ -31,7 +31,7 @@ exports.getService = function (svc, callback) {
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
-    var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
+    var responseLibraries = { service: service.Name, code: service.Code, libraries: [], start: new Date() };
     // Request 1: Call search page with option set to expand branches.
     request.get({ url: service.Url + (service.MultiBranchLimit ? libsUrl.replace('[MULTIBRANCH]', 'multibranchlimit=' + service.MultiBranchLimit + '&') : libsUrl.replace('[MULTIBRANCH]', '')), timeout: 60000 }, function (error, message, response) {
         if (common.handleErrors(callback, responseLibraries, error, message)) return;
@@ -50,7 +50,7 @@ exports.getLibraries = function (service, callback) {
 // Function: searchByISBN
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = { service: lib.Name, availability: [], start: new Date(), url: lib.Url + catUrl + isbn };
+    var responseHoldings = { service: lib.Name, code: lib.Code, availability: [], start: new Date(), url: lib.Url + catUrl + isbn };
     // Request 1: The ISBN search
     request.get({ url: responseHoldings.url, timeout: 30000 }, function (error, msg, res) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;

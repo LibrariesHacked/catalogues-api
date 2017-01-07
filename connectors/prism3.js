@@ -30,7 +30,7 @@ exports.getService = function (svc, callback) {
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
-    var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
+    var responseLibraries = { service: service.Name, code: service.Code, libraries: [], start: new Date() };
 
     // Request 1: Get advanced search page
     request.get({ url: service.Url + 'advancedsearch?target=catalogue', timeout: 60000 }, function (error, message, response) {
@@ -47,7 +47,7 @@ exports.getLibraries = function (service, callback) {
 // Function: searchByISBN
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = { service: lib.Name, availability: [], start: new Date() };
+    var responseHoldings = { service: lib.Name, code: lib.Code, availability: [], start: new Date() };
     // Request 1: 
     request.get({ url: lib.Url + "items.json?query=" + isbn, headers: reqHeader, timeout: 30000 }, function (error, msg, response) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;

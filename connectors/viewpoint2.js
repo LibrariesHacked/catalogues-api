@@ -29,7 +29,7 @@ exports.getService = function (svc, callback) {
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
-    var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
+    var responseLibraries = { service: service.Name, code: service.Code, libraries: [], start: new Date() };
 
     // Request 1: There's no obvious listing of libraries or search filter.  Just get a record where we know it has lots of copies
     request.get({ url: service.Url + '?enqtype=SECOND&enqpara1=RESULT&rcn=' + service.TestRCN, timeout: 30000 }, function (error, message, response) {
@@ -50,7 +50,7 @@ exports.getLibraries = function (service, callback) {
 // Function: searchByISBN
 //////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = { service: lib.Name, availability: [], start: new Date(), url: lib.Url + searchUrl + isbn };
+    var responseHoldings = { service: lib.Name, code: lib.Code, availability: [], start: new Date(), url: lib.Url + searchUrl + isbn };
 
     // Request 1: Perform the search.
     request.get({ url: responseHoldings.url, timeout: 30000 }, function (error, message, response) {

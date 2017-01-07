@@ -32,7 +32,7 @@ exports.getService = function (svc, callback) {
 // Function: getLibraries
 ///////////////////////////////////////////
 exports.getLibraries = function (service, callback) {
-    var responseLibraries = { service: service.Name, libraries: [], start: new Date() };
+    var responseLibraries = { service: service.Name, code: service.Code, libraries: [], start: new Date() };
     var url = service.Url + 'Vubis.csp?Profile=' + service.Profile + '&SearchMethod=Find_2';
     // Request 1. This gets the frameset
     request.get({ url: url, timeout: 30000 }, function (error, message, response) {
@@ -84,7 +84,7 @@ exports.getWebsite = function (service, callback) {
 // Probably can do all this from a single call - will investigate
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = { service: lib.Name, availability: [], start: new Date(), url: lib.Url + 'Vubis.csp' };
+    var responseHoldings = { service: lib.Name, code: lib.Code, availability: [], start: new Date(), url: lib.Url + 'Vubis.csp' };
 
     var sessionResponseFrameset = function (error, message, response) {
         if (common.handleErrors(callback, responseHoldings, error, message)) return;

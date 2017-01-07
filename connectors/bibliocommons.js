@@ -32,7 +32,7 @@ exports.getService = function (svc, callback) {
 // Maybe one day...
 ///////////////////////////////////////////
 exports.searchByISBN = function (isbn, lib, callback) {
-    var responseHoldings = { service: lib.Name, availability: [], start: new Date(), url: lib.Url + searchUrl + isbn };
+    var responseHoldings = { service: lib.Name, code: lib.Code, availability: [], start: new Date(), url: lib.Url + searchUrl + isbn };
 
     var handleSearchRequest = function (error, msg, response) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;
