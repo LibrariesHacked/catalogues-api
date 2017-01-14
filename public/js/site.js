@@ -8,15 +8,15 @@
 
     var libraryServices = [];
     var isbns = { tens: [], thirteens: [] };
-    var getData, updateResults;
-    var map = L.map('map', { zoomControl: false, minZoom: 4 })
-        .setView([52.6, -2.5], 7)
-        .addLayer(L.tileLayer(config.mapTilesLight + config.mapBoxToken, { attribution: config.mapAttribution }));
+    var getData, updateResults, mapUpdate;
+    var map = L.map('map', { zoomControl: false, minZoom: 6 }).setView([52.6, -2.5], 7).addLayer(L.tileLayer(config.mapTilesLight + config.mapBoxToken, { attribution: config.mapAttribution }));
     var layers = L.featureGroup([]).addTo(map);
     var authGeo = [];
 
-    var tblResults = $('#tblResults').DataTable({ searching: false, info: false, lengthChange: false, pagingType: 'numbers', pageLength: 4, responsive: true, columns: [{ data: 'service' }, { data: 'available' }, { data: 'unavailable' }] });
+    var tblResults = $('#tblResults').DataTable({ searching: false, info: false, lengthChange: false, pagingType: 'numbers', pageLength: 4, responsive: true, columns: [{ data: 'library' }, { data: 'available' }, { data: 'unavailable' }] });
 
+
+    // Load the services.
     $.get('/services', function (data) { libraryServices = data; });
 
     ////////////////////////////////////////////
@@ -26,13 +26,13 @@
         source: function (query, process) {
             return $.get('https://www.googleapis.com/books/v1/volumes?q=' + query + '&key=' + config.booksKey, function (data) {
                 return process($.map(data.items, function (item, x) {
-                    if (!item.saleInfo.isEbook && item.volumeInfo.industryIdentifiers) {
+                    if (item.volumeInfo.industryIdentifiers) {
                         var tempisbns = { tens: [], thirteens: [] };
                         $.each(item.volumeInfo.industryIdentifiers, function (y, is) {
                             if (is.type == 'ISBN_10') tempisbns.tens.push(is.identifier);
                             if (is.type == 'ISBN_13') tempisbns.thirteens.push(is.identifier);
                         });
-                        return { id: tempisbns, name: item.volumeInfo.title + (item.volumeInfo.authors ? ', ' + item.volumeInfo.authors[0] : '') };
+                        if (tempisbns.thirteens.length > 0) return { id: tempisbns, name: item.volumeInfo.title + (item.volumeInfo.authors ? ', ' + item.volumeInfo.authors[0] : '') };
                     };
                 }));
             });
@@ -65,7 +65,6 @@
 
     var clearResults = function () {
         $('.progress').val(0);
-        $('#txtKeywords').text('');
         $('#found, #available, #unavailable').text(0);
         $('#btnSearch').addClass('disabled');
         tblResults.clear().draw();
@@ -88,14 +87,11 @@
         if (libraryServices.length > 0) {
 
             var reqInd = 0, geoAdded = 0;
-
             ///////////////////////////////////
             // Interval: getData
             // 
             ///////////////////////////////////
             getData = setInterval(function () {
-
-                // 
                 if (requests[reqInd]) {
                     $.get(requests[reqInd], function (data) {
                         countReturns++;
@@ -112,30 +108,53 @@
                             available = available + $.sum($.map(data[0].availability, function (av, i) { return parseInt(av.available) }));
                             unavailable = unavailable + $.sum($.map(data[0].availability, function (av, i) { return parseInt(av.unavailable) }));
                         }
+                    }).fail(function () {
+                        countReturns++;
                     });
                 }
                 reqInd++;
 
-                // Trigger a map layer call.
-                Object.keys(authGeo).some(function (s, i) {
+                // Trigger the map layer calls
+                Object.keys(authGeo).forEach(function (s, i) {
                     if (!authGeo[s].requested && responses[s]) {
                         authGeo[s].requested = true;
-                        geoAdded++;
                         $.get('/geography/Simplified_' + responses[s].code + '.json', function (data) {
                             authGeo[s].layer = L.geoJSON(data, {
                                 style: function (feature) {
-                                    return { weight: 1, color: '#CCC', fillColor: '#5CB85C' };
+                                    return { weight: 0, color: '#CCC', fillColor: '#5CB85C' };
                                 }
                             });
                             authGeo[s].downloaded = true;
+                        }).fail(function () {
+                            geoAdded++;
                         });
-                        return true;
                     }
                 });
 
                 // End the interval.
                 if (countReturns >= requests.length && geoAdded >= Object.keys(responses).length) clearInterval(getData);
-            }, 10);
+            }, 100);
+
+            ///////////////////////////////////
+            // Interval: mapUpdate
+            // 
+            ///////////////////////////////////
+            mapUpdate = setInterval(function () {
+                var updateMapView = false;
+                // Add a map layer if available.
+                Object.keys(authGeo).forEach(function (l, i) {
+                    if (authGeo[l].downloaded && !authGeo[l].displayed) {
+                        layers.addLayer(authGeo[l].layer);
+                        authGeo[l].displayed = true;
+                        delete authGeo[l];
+                        geoAdded++;
+                        updateMapView = true;
+                    }
+                });
+                if (updateMapView) map.fitBounds(layers.getBounds());
+                // End the interval.
+                if (countReturns >= requests.length && geoAdded >= Object.keys(responses).length) clearInterval(mapUpdate);
+            }, 500)
 
             ///////////////////////////////////
             // Interval: updateResults
@@ -149,27 +168,25 @@
                 $('#available').text(available);
                 $('#unavailable').text(unavailable);
 
-                // Add a map layer if available.
-                Object.keys(authGeo).some(function (l, i) {
-                    if (authGeo[l].downloaded && !authGeo[l].displayed) {
-                        layers.addLayer(authGeo[l].layer);
-                        authGeo[l].displayed = true;
-                        map.fitBounds(layers.getBounds());
-                        return true;
-                    }
-                });
-
                 // Update the table.
+                var updateTableView = false;
                 $.each(Object.keys(responses), function (x, s) {
                     if (!responses[s].displayed) {
-                        if (tblResults.row('#' + s).length == 0) tblResults.row.add({ "DT_RowId": s, "service": s, "available": responses[s].available, "unavailable": responses[s].unavailable }).draw();
-                        if (tblResults.row('#' + s).length > 0) tblResults.row('#' + s).data({ "service": s, "available": responses[s].available, "unavailable": responses[s].unavailable }).draw();
+                        $.each(Object.keys(responses[s].libraries), function (y, l) {
+                            var id = s.replace(/\W/g, '') + l.replace(/\W/g, '');
+                            var lib = responses[s].libraries[l];
+                            if (tblResults.row('#' + id).length == 0) tblResults.row.add({ "DT_RowId": id, "library": s + ': ' + l, "available": lib.available, "unavailable": lib.unavailable });
+                            if (tblResults.row('#' + id).length > 0) tblResults.row('#' + id).data({ "library": s + ': ' + l, "available": lib.available, "unavailable": lib.unavailable });
+                        });
+                        responses[s].displayed = true;
+                        updateTableView = true;
                     }
                 });
+                if (updateTableView) tblResults.draw();
 
                 // End the interval.
                 if (countReturns >= requests.length && geoAdded >= Object.keys(responses).length) clearInterval(updateResults);
-            }, 4000);
+            }, 500);
         }
     });
 });

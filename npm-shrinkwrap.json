@@ -139,6 +139,23 @@
       "from": "datatables.net@>=1.10.13 <2.0.0",
       "resolved": "https://registry.npmjs.org/datatables.net/-/datatables.net-1.10.13.tgz"
     },
+    "datatables.net-responsive": {
+      "version": "2.1.1",
+      "from": "datatables.net-responsive@latest",
+      "resolved": "https://registry.npmjs.org/datatables.net-responsive/-/datatables.net-responsive-2.1.1.tgz"
+    },
+    "datatables.net-responsive-bs": {
+      "version": "2.1.1",
+      "from": "datatables.net-responsive-bs@latest",
+      "resolved": "https://registry.npmjs.org/datatables.net-responsive-bs/-/datatables.net-responsive-bs-2.1.1.tgz",
+      "dependencies": {
+        "datatables.net-bs": {
+          "version": "1.10.13",
+          "from": "datatables.net-bs@>=1.10.9",
+          "resolved": "https://registry.npmjs.org/datatables.net-bs/-/datatables.net-bs-1.10.13.tgz"
+        }
+      }
+    },
     "express": {
       "version": "4.14.0",
       "from": "express@>=4.13.2 <5.0.0",
@@ -1516,6 +1533,42 @@
       "version": "1.0.2",
       "from": "leaflet@>=1.0.2 <2.0.0",
       "resolved": "https://registry.npmjs.org/leaflet/-/leaflet-1.0.2.tgz"
+    },
+    "proj4": {
+      "version": "2.3.15",
+      "from": "proj4@latest",
+      "resolved": "https://registry.npmjs.org/proj4/-/proj4-2.3.15.tgz",
+      "dependencies": {
+        "mgrs": {
+          "version": "0.0.3",
+          "from": "mgrs@>=0.0.2 <0.1.0",
+          "resolved": "https://registry.npmjs.org/mgrs/-/mgrs-0.0.3.tgz"
+        }
+      }
+    },
+    "proj4leaflet": {
+      "version": "0.7.2",
+      "from": "proj4leaflet@latest",
+      "resolved": "https://registry.npmjs.org/proj4leaflet/-/proj4leaflet-0.7.2.tgz",
+      "dependencies": {
+        "leaflet": {
+          "version": "0.7.7",
+          "from": "leaflet@>=0.7.0 <0.8.0",
+          "resolved": "https://registry.npmjs.org/leaflet/-/leaflet-0.7.7.tgz"
+        },
+        "proj4": {
+          "version": "2.0.3",
+          "from": "proj4@>=2.0.0 <2.1.0",
+          "resolved": "https://registry.npmjs.org/proj4/-/proj4-2.0.3.tgz",
+          "dependencies": {
+            "mgrs": {
+              "version": "0.0.0",
+              "from": "mgrs@0.0.0",
+              "resolved": "https://registry.npmjs.org/mgrs/-/mgrs-0.0.0.tgz"
+            }
+          }
+        }
+      }
     },
     "pug": {
       "version": "2.0.0-beta6",
