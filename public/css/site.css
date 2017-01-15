@@ -21,3 +21,7 @@ nav {
 #map { 
     height: 300px; 
 }
+
+#tblResults_filter input{
+    width: 100% !important;
+}

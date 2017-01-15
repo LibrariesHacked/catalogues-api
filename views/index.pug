@@ -6,7 +6,7 @@ block content
 				button(type="button", class="close", data-dismiss="alert", aria-label="Close")
 					span(aria-hidden="true") &times;
 				strong in development. 
-				span work in progress
+				span a work in progress
 			div(class="card")
 				div(class="card-block")
 					h4(class="card-title text-primary") search for books
@@ -44,12 +44,14 @@ block content
 					h4(class="card-title text-warning") full results
 					h6(class="card-subtitle text-muted") see which libraries have the book
 				div(class="card-block")
-					table(id="tblResults", class="table table-sm")
-						thead(class="thead-default")
+					table(id="tblResults", class="table table-bordered")
+						thead(class="")
 							tr
 								th library
+								th service
 								th available
 								th unavailable
+								th link
 		div(class="col-sm-4")
 			div(class="card")
 				div(class="card-block")
