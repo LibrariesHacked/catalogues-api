@@ -36,6 +36,7 @@ app.get('/servicegeo', libraries.getServiceGeo);
 app.get('/libraries', libraries.getLibraries);
 app.get('/availabilityByISBN/:isbn', libraries.isbnSearch);
 app.get('/thingISBN/:isbn', libraries.thingISBN);
+app.get('/openLibrarySearch', libraries.openLibrarySearch);
 
 ///////////////////////////////////////////
 // Routes - Maintenance

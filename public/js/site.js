@@ -13,8 +13,8 @@
     var layers = L.featureGroup([]).addTo(map);
     var authGeo = [];
 
-    var tblResults = $('#tblResults').DataTable({ searching: true, info: false, lengthChange: false, pagingType: 'numbers', pageLength: 4, responsive: true, columns: [{ data: 'library' }, { data: 'service' }, { data: 'available' }, { data: 'unavailable' }, { data: 'url' }], bAutoWidth: false });
-
+    // Initialise the results table.
+    var tblResults = $('#tblResults').DataTable({ searching: true, info: false, lengthChange: false, pagingType: 'numbers', pageLength: 4, responsive: true, columns: [{ data: 'library' }, { data: 'service' }, { data: 'available' }, { data: 'unavailable' }, { data: 'url', render: function (data, type, row) { return '<a href="' + data + '" target="_blank" class="btn btn-outline-success btn-sm">' + data.replace('http://','').replace('https://','').split(/[/?#]/)[0] + '</a>'; } }], bAutoWidth: false });
 
     // Load the services.
     $.get('/services', function (data) { libraryServices = data; });
@@ -24,20 +24,20 @@
     ////////////////////////////////////////////
     $('#txtKeywords').typeahead({
         source: function (query, process) {
-            return $.get('https://www.googleapis.com/books/v1/volumes?q=' + query + '&printType=books&maxResults=40&key=' + config.booksKey, function (data) {
-                return process($.map(data.items, function (item, x) {
-                    if (!item.saleInfo.isEbook && item.volumeInfo.industryIdentifiers) {
-                        var tempisbns = { tens: [], thirteens: [] };
-                        $.each(item.volumeInfo.industryIdentifiers, function (y, is) {
-                            if (is.type == 'ISBN_10') tempisbns.tens.push(is.identifier);
-                            if (is.type == 'ISBN_13') tempisbns.thirteens.push(is.identifier);
-                        });
-                        if (tempisbns.tens.length > 0 || tempisbns.thirteens.length > 0) return { id: tempisbns, name: item.volumeInfo.title + (item.volumeInfo.authors ? ', ' + item.volumeInfo.authors[0] : '') };
-                    };
+            return $.get('/openLibrarySearch?q=' + query, function (data) {
+                return process($.map(data.books, function (item, x) {
+                    var tempisbns = { tens: [], thirteens: [] };
+                    $.each(item.isbn, function (y, isbn) {
+                        if (isbn.length == 10) tempisbns.tens.push(isbn);
+                        if (isbn.length == 13) tempisbns.thirteens.push(isbn);
+                    });
+                    if (tempisbns.thirteens.length > 0) return { id: tempisbns, name: item.title };
                 }));
             });
         },
-        autoSelect: true
+        autoSelect: true,
+        minLength: 5,
+        delay: 1,
     });
 
     ////////////////////////////////////////////////
@@ -46,21 +46,22 @@
     $('#txtKeywords').change(function () {
         var current = $('#txtKeywords').typeahead("getActive");
         isbns = { tens: [], thirteens: [] };
-        if (current) isbns = current.id;
-        // Let's now trigger the lookup for additional isbns ready for when the search is run
-        // This uses library things thingISBN service to have a look.
-        $.ajax({
-            type: 'GET',
-            url: '/thingISBN/' + (isbns.thirteens[0] ? isbns.thirteens[0] : isbns.tens[0]),
-            dataType: 'json',
-            success: function (data) {
-                $.each(data, function (i, isbn) {
-                    if (isbn.length == 10) isbns.tens.push(isbn);
-                    if (isbn.length == 13) isbns.thirteens.push(isbn);
-                });
-                $('#btnSearch').removeClass('disabled');
-            }
-        });
+        if (current) {
+            isbns = current.id;
+            $('#btnSearch').removeClass('disabled');
+        }
+        //$.ajax({
+        //    type: 'GET',
+        //    url: '/thingISBN/' + (isbns.thirteens[0] ? isbns.thirteens[0] : isbns.tens[0]),
+        //    dataType: 'json',
+        //    success: function (data) {
+        //        $.each(data, function (i, isbn) {
+        //            if (isbn.length == 10) isbns.tens.push(isbn);
+        //            if (isbn.length == 13) isbns.thirteens.push(isbn);
+        //        });
+        //        $('#btnSearch').removeClass('disabled');
+        //    }
+        //});
     });
 
     var clearResults = function () {
@@ -84,7 +85,7 @@
         });
 
         var countReturns = 0, available = 0, unavailable = 0, responses = {};
-        if (libraryServices.length > 0) {
+        if (requests.length > 0) {
 
             var reqInd = 0, geoAdded = 0;
             ///////////////////////////////////

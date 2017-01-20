@@ -6,6 +6,7 @@
 var async = require('async');
 var data = require('./data/data');
 var libThing = require('./connectors/librarything');
+var openLibrary = require('./connectors/openlibrary');
 
 // On first run this sets up all the library service connectors
 // that are currently referred to in the data.json file.
@@ -113,6 +114,19 @@ exports.isbnSearch = function (req, res) {
 exports.thingISBN = function (req, res) {
     libThing.thingISBN(req.params.isbn, function (data) {
         res.send(data.isbns);
+    });
+};
+
+/////////////////////////////////////////////////////////////////
+// Function: openLibrarySearch
+// Route: /openLibrarySearch
+// Proxies the thingISBN service from Library Thing
+// to retrieve a list of other editions from a work.
+// Test: http://localhost:3000/openLibrarySearch?q=Harry Potter
+/////////////////////////////////////////////////////////////////
+exports.openLibrarySearch = function (req, res) {
+    openLibrary.search(req.query.q, function (data) {
+        res.send(data);
     });
 };
 
