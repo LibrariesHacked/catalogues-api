@@ -2,14 +2,14 @@ extends layout.pug
 block content
 	div(class="row")
 		div(class="col-sm-4")
-			div(class="alert alert-danger alert-dismissible fade in", role="alert")
+			div(class="alert alert-warning alert-dismissible fade in", role="alert")
 				button(type="button", class="close", data-dismiss="alert", aria-label="Close")
 					span(aria-hidden="true") &times;
 				strong in development. 
 				span a work in progress
 			div(class="card")
 				div(class="card-block")
-					h4(class="card-title text-primary") search for books
+					h4(class="card-title text-muted") search for books
 					h6(class="card-subtitle text-muted") books in libraries across the UK
 				div(class="card-block")
 					form
@@ -23,10 +23,11 @@ block content
 		div(class="col-sm-4")
 			div(class="card")
 				div(class="card-block")
-					h4(class="card-title text-success") summary
+					h4(class="card-title text-muted") summary
 					h6(class="card-subtitle text-muted") how many copies?
 				div(class="card-block")
-					small(id="progressPercentage", class="form-text text-muted strong") 0%
+					small(id="progressPercentage", class="form-text text-muted strong") 0% 
+						span(id="spSpinner", class="fa fa-spinner fa-spin")
 					div(class="progress progress-bar-info")
 						progress(class="progress progress-success" value="0" max="100")
 					div(class='row')
@@ -41,7 +42,7 @@ block content
 							p(class='lead text-danger strong', id='unavailable') 0
 			div(class="card")
 				div(class="card-block")
-					h4(class="card-title text-warning") full results
+					h4(class="card-title text-muted") full results
 					h6(class="card-subtitle text-muted") see which libraries have the book
 				div(class="card-block")
 					table(id="tblResults", class="table table-bordered")
@@ -55,6 +56,6 @@ block content
 		div(class="col-sm-4")
 			div(class="card")
 				div(class="card-block")
-					h4(class="card-title text-info") map
+					h4(class="card-title text-muted") map
 					h6(class="card-subtitle text-muted") a map of results
 				div(id="map", class="card-block")

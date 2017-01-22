@@ -22,7 +22,7 @@ exports.search = function (query, callback) {
     var responseData = { books: [] };
     var handleSearchResponse = function (err, msg, res) {
         if (common.handleErrors(callback, responseData, err, msg)) return;
-        JSON.parse(res).docs.forEach(function (b, a) { responseData.books.push({ title: b.title_suggest, isbn: b.isbn }); });
+        JSON.parse(res).docs.forEach(function (b, a) { responseData.books.push({ title: b.title, author: b.author_name, isbn: b.isbn }); });
         callback(responseData);
     };
     // Request 1: Call to OpenLibrary search which returns JSON

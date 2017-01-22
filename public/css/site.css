@@ -18,10 +18,14 @@ nav {
     font-weight: 700;
 }
 
-#map { 
-    height: 300px; 
+#map {
+    height: 300px;
 }
 
-#tblResults_filter input{
+#spSpinner {
+    display: none;
+}
+
+#tblResults_filter input {
     width: 100% !important;
 }

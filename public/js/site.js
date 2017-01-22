@@ -14,7 +14,7 @@
     var authGeo = [];
 
     // Initialise the results table.
-    var tblResults = $('#tblResults').DataTable({ searching: true, info: false, lengthChange: false, pagingType: 'numbers', pageLength: 4, responsive: true, columns: [{ data: 'library' }, { data: 'service' }, { data: 'available' }, { data: 'unavailable' }, { data: 'url', render: function (data, type, row) { return '<a href="' + data + '" target="_blank" class="btn btn-outline-success btn-sm">' + data.replace('http://','').replace('https://','').split(/[/?#]/)[0] + '</a>'; } }], bAutoWidth: false });
+    var tblResults = $('#tblResults').DataTable({ searching: true, info: false, lengthChange: false, pagingType: 'numbers', pageLength: 4, responsive: true, columns: [{ data: 'library' }, { data: 'service' }, { data: 'available' }, { data: 'unavailable' }, { data: 'url', render: function (data, type, row) { return (data ? '<a href="' + data + '" target="_blank" class="btn btn-outline-success btn-sm">' + data.replace('http://','').replace('https://','').split(/[/?#]/)[0] + '</a>' : ''); } }], bAutoWidth: false });
 
     // Load the services.
     $.get('/services', function (data) { libraryServices = data; });
@@ -31,13 +31,13 @@
                         if (isbn.length == 10) tempisbns.tens.push(isbn);
                         if (isbn.length == 13) tempisbns.thirteens.push(isbn);
                     });
-                    if (tempisbns.thirteens.length > 0) return { id: tempisbns, name: item.title };
+                    if (tempisbns.thirteens.length > 0) return { id: tempisbns, name: item.title + (item.author ? ', ' + item.author : '') };
                 }));
             });
         },
         autoSelect: true,
         minLength: 5,
-        delay: 1,
+        delay: 1000,
     });
 
     ////////////////////////////////////////////////
@@ -50,18 +50,6 @@
             isbns = current.id;
             $('#btnSearch').removeClass('disabled');
         }
-        //$.ajax({
-        //    type: 'GET',
-        //    url: '/thingISBN/' + (isbns.thirteens[0] ? isbns.thirteens[0] : isbns.tens[0]),
-        //    dataType: 'json',
-        //    success: function (data) {
-        //        $.each(data, function (i, isbn) {
-        //            if (isbn.length == 10) isbns.tens.push(isbn);
-        //            if (isbn.length == 13) isbns.thirteens.push(isbn);
-        //        });
-        //        $('#btnSearch').removeClass('disabled');
-        //    }
-        //});
     });
 
     var clearResults = function () {
