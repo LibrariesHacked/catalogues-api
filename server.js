@@ -39,14 +39,6 @@ app.get('/thingISBN/:isbn', libraries.thingISBN);
 app.get('/openLibrarySearch', libraries.openLibrarySearch);
 
 ///////////////////////////////////////////
-// Routes - Maintenance
-// Routes for maintaining the data
-///////////////////////////////////////////
-// app.get('/refreshbranches', libraries.refreshBranches)
-// app.get('/refreshservicetwitters', libraries.refreshServiceTwitters);
-// app.get('/refreshbranchtwitters', libraries.refreshBranchTwitters);
-
-///////////////////////////////////////////
 // Routes - Testing
 // Tests
 ///////////////////////////////////////////
@@ -57,6 +49,6 @@ app.get('/testAvailabilityByISBN', libraries.testIsbnSearch);
 // Starts up the web service on port 3000
 ///////////////////////////////////////////
 var port = process.env.PORT || 3000;
-var server = app.listen(port, function() {
+var server = app.listen(port, function () {
     console.log("Express server listening on port %d in %s mode", server.address().port, app.settings.env);
 });

@@ -155,5 +155,5 @@ exports.testIsbnSearch = function (req, res) {
             }
         });
     // Run in serial to be able to keep track. 
-    async.series(searches, function (err, response) {});
+    async.series(searches, function (err, response) { });
 };
