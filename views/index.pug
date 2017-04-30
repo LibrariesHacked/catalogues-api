@@ -1,7 +1,7 @@
 extends layout.pug
 block content
 	div(class="row")
-		div(class="col-sm-4")
+		div(class="col-4")
 			div(class="alert alert-warning alert-dismissible fade in", role="alert")
 				button(type="button", class="close", data-dismiss="alert", aria-label="Close")
 					span(aria-hidden="true") &times;
@@ -20,7 +20,7 @@ block content
 						button(class='btn btn-outline-success disabled', type='button', id='btnSearch') search
 						span &nbsp;
 						button(class='btn btn-outline-danger disabled', type='button', id='btnClear') clear
-		div(class="col-sm-4")
+		div(class="col-4")
 			div(class="card")
 				div(class="card-block")
 					h4(class="card-title text-muted") summary
@@ -53,7 +53,7 @@ block content
 								th available
 								th unavailable
 								th link
-		div(class="col-sm-4")
+		div(class="col-4")
 			div(class="card")
 				div(class="card-block")
 					h4(class="card-title text-muted") map

@@ -1,0 +1,17 @@
+{
+    "adult fiction":[
+        {
+            "title": "The Abortion: An Historical Romance 1966",
+            "isbns": [ "9780671208721" ],
+            "description": "Jules:  The Abortion is a genre novel parody concerning the librarian of a very unusual California library which accepts books in any form and from anyone who wishes to drop one off at the library—children submit tales told in crayon about their toys; teenagers tell tales of angst and old people drop by with their memoirs—described as “the unwanted, the lyrical and haunted volumes of American writing” in the novel. Summoned by a silver bell at all hours, submissions are catalogued at the librarian’s discretion; not by the Dewey Decimal system, but by placement on whichever magically dust-free shelf would, in the author’s judgment, serve best as the book’s home"
+        },
+        {
+            "title": "Among others",
+            "isbns": [ "9781472100436" ],
+            "description": "Jo Walton:  "
+        } 
+    ],
+    "adult non fiction":[],
+    "poems":[],
+    "childrens books":[]
+}
