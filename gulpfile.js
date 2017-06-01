@@ -15,13 +15,12 @@ gulp.task('default', function () {
         'node_modules/datatables.net-responsive-bs4/js/responsive.bootstrap.js'
     ]).pipe(gulp.dest('public/libs/js'));
     gulp.src([
-        'node_modules/bootstrap/dist/css/bootstrap.min.css',
-        'node_modules/bootstrap/dist/css/bootstrap.min.css.map',
+        'node_modules/bootswatch/materia/bootstrap.min.css',
         'node_modules/tether/dist/css/tether.min.css',
         'node_modules/font-awesome/css/font-awesome.min.css',
         'node_modules/leaflet/dist/leaflet.css',
         'node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css',
-        'node_modules/datatables.net-responsive-bs4/css/responsive.bootstrap.css'
+        'node_modules/datatables.net-responsive-bs4/css/responsive.bootstrap4.css'
     ]).pipe(gulp.dest('public/libs/css'));
     gulp.src([
         'node_modules/font-awesome/fonts/FontAwesome.otf',

@@ -7,7 +7,7 @@ block content
 					span(aria-hidden="true") &times;
 				strong in development. 
 				span a work in progress
-			div(class="card")
+			div(class="card mb-3")
 				div(class="card-block")
 					h4(class="card-title text-muted") search for books
 					h6(class="card-subtitle text-muted") books in libraries across the UK
@@ -17,19 +17,19 @@ block content
 							label(for="txtKeywords") title keywords
 							input(type="text", class="form-control", id="txtKeywords", aria-describedby="keywordsHelp", placeholder="enter keywords", autocomplete="off")
 							small(id="keywordsHelp", class="form-text text-muted strong") as you type, books should appear to select.
-						button(class='btn btn-outline-success disabled', type='button', id='btnSearch') search
+						button(class='btn btn-link disabled', type='button', id='btnSearch') search
 						span &nbsp;
-						button(class='btn btn-outline-danger disabled', type='button', id='btnClear') clear
+						button(class='btn btn-link disabled', type='button', id='btnClear') clear
 		div(class="col-4")
-			div(class="card")
+			div(class="card mb-3")
 				div(class="card-block")
 					h4(class="card-title text-muted") summary
 					h6(class="card-subtitle text-muted") how many copies?
 				div(class="card-block")
 					small(id="progressPercentage", class="form-text text-muted strong") 0% 
 						span(id="spSpinner", class="fa fa-spinner fa-spin")
-					div(class="progress progress-bar-info")
-						progress(class="progress progress-success" value="0" max="100")
+					div(class="progress")
+						div(class="progress-bar progress-bar-striped progress-bar-animated", role="progressbar", aria-valuenow="75", aria-valuemin="0", aria-valuemax="100")
 					div(class='row')
 						div(class='col col-xs-4')
 							span(class='small text-muted strong') found
@@ -40,13 +40,13 @@ block content
 						div(class='col col-xs-4')
 							span(class='small text-muted strong') unavailable
 							p(class='lead text-danger strong', id='unavailable') 0
-			div(class="card")
+			div(class="card mb-3")
 				div(class="card-block")
 					h4(class="card-title text-muted") full results
 					h6(class="card-subtitle text-muted") see which libraries have the book
 				div(class="card-block")
-					table(id="tblResults", class="table table-bordered")
-						thead(class="")
+					table(id="tblResults", class="table")
+						thead
 							tr
 								th library
 								th service
@@ -54,7 +54,7 @@ block content
 								th unavailable
 								th link
 		div(class="col-4")
-			div(class="card")
+			div(class="card mb-3")
 				div(class="card-block")
 					h4(class="card-title text-muted") map
 					h6(class="card-subtitle text-muted") a map of results
