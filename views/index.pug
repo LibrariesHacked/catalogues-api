@@ -2,9 +2,8 @@ extends layout.pug
 block content
 	div(class="row")
 		div(class="col-4")
-			div(class="alert alert-warning alert-dismissible fade in", role="alert")
-				button(type="button", class="close", data-dismiss="alert", aria-label="Close")
-					span(aria-hidden="true") &times;
+			div(class="alert alert-dismissible alert-danger", role="alert")
+				button(type="button", class="close", data-dismiss="alert", aria-label="Close") &times;
 				strong in development. 
 				span a work in progress
 			div(class="card mb-3")
@@ -16,7 +15,7 @@ block content
 						div(class="form-group")
 							label(for="txtKeywords") title keywords
 							input(type="text", class="form-control", id="txtKeywords", aria-describedby="keywordsHelp", placeholder="enter keywords", autocomplete="off")
-							small(id="keywordsHelp", class="form-text text-muted strong") as you type, books should appear to select.
+							small(id="keywordsHelp", class="form-text text-muted") as you type, book options should appear
 						button(class='btn btn-link disabled', type='button', id='btnSearch') search
 						span &nbsp;
 						button(class='btn btn-link disabled', type='button', id='btnClear') clear

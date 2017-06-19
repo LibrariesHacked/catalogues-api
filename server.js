@@ -31,10 +31,16 @@ app.get('/', function (req, res) {
 // Routes - Web service
 // The web service routes
 ///////////////////////////////////////////
+
+// library services
 app.get('/services', libraries.getServices);
 app.get('/servicegeo', libraries.getServiceGeo);
 app.get('/libraries', libraries.getLibraries);
+
+// catalogue services
 app.get('/availabilityByISBN/:isbn', libraries.isbnSearch);
+
+// biblio services
 app.get('/thingISBN/:isbn', libraries.thingISBN);
 app.get('/openLibrarySearch', libraries.openLibrarySearch);
 

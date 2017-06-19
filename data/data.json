@@ -5,7 +5,7 @@
       "Code": "S12000033",
       "Type": "spydus",
       "Url": "https://aberdeencity.spydus.co.uk/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780751565355"
     },
     {
       "Name": "Aberdeenshire",
@@ -19,9 +19,10 @@
       "Code": "W06000001",
       "Type": "enterprise",
       "Available": [ "Available" ],
-      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookupavailability/detailItemsDiv0/ent:[ITEMID]/ILS/0/false",
+      "TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
       "Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/ynysmon_en/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9781408855959"
     },
     {
       "Name": "Angus",
@@ -107,7 +108,7 @@
       "Id": "226018",
       "Url": "https://arena.yourlondonlibrary.net/web/bexley/",
       "Advanced": "extended-search",
-      "TestISBN": "9780747591085"
+      "TestISBN": "9780747550990"
     },
     {
       "Name": "Birmingham",
@@ -252,7 +253,7 @@
       "Name": "Calderdale",
       "Code": "E08000033",
       "Type": "spydus",
-      "Url": "http://online.calderdale.gov.uk/",
+      "Url": "https://online.calderdale.gov.uk/",
       "TestISBN": "9780747538493"
     },
     {
@@ -459,7 +460,7 @@
       "Advanced": "extended-search",
       "OrganisationId": "AUK000243|1",
       "OrganisationName": "Doncaster",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747546344"
     },
     {
       "Name": "Dorset",
@@ -570,9 +571,13 @@
     {
       "Name": "Edinburgh",
       "Code": "S12000036",
-      "Type": "prism3",
-      "Available": [ "Available" ],
-      "Url": "https://capitadiscovery.co.uk/edinburgh/",
+      "Type": "arena",
+      "ArenaName": "AUK269000",
+      "Id": "269001",
+      "ISBNAlias": "number",
+      "Url": "https://yourlibrary.edinburgh.gov.uk/web/arena/",
+      "Advanced": "advanced-search",
+      "OrganisationId": "AUK269000|1",
       "TestISBN": "9780747538493"
     },
     {
@@ -712,7 +717,7 @@
       "Code": "E10000014",
       "Type": "spydus",
       "Url": "https://librarycat.hants.gov.uk/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747546245"
     },
     {
       "Name": "Haringey",
@@ -802,7 +807,7 @@
       "Id": "219001",
       "ISBNAlias": "recordControlNumber",
       "SearchType": "Keyword",
-      "Url": "http://www.hounslowlibraries.org/web/arena/",
+      "Url": "https://www.hounslowlibraries.org/web/arena/",
       "Advanced": "advanced-search",
       "OrganisationId": "AUK000219|0",
       "TestISBN": "9780747591054"
@@ -1143,10 +1148,11 @@
     {
       "Name": "North Lanarkshire",
       "Code": "S12000044",
-      "Type": "vubis",
-      "Index": "Isbn",
-      "Url": "https://librariesnl.northlan.gov.uk/vs/",
-      "TestISBN": "9780747538493"
+      "Type": "iguana",
+      "Database": "1",
+      "Faceted": false,
+      "Url": "https://libraries.culturenl.co.uk/iguana/",
+      "TestISBN": "9780747574477"
     },
     {
       "Name": "North Lincolnshire",
@@ -1277,7 +1283,7 @@
       "Code": "W06000009",
       "Type": "vubis",
       "Index": "Isbn",
-      "Url": "http://212.219.142.126/pemvs/",
+      "Url": "http://libraryonline.pembrokeshire.gov.uk/pemvs/",
       "TestISBN": "9780747538493"
     },
     {
@@ -1314,7 +1320,7 @@
       "Name": "Portsmouth",
       "Code": "E06000044",
       "Type": "spydus",
-      "Url": "https://librarycat.portsmouth.gov.uk/",
+      "Url": "https://portsmouth.spydus.co.uk/",
       "TestISBN": "9781408810576"
     },
     {
@@ -1330,9 +1336,8 @@
     {
       "Name": "Reading",
       "Code": "E06000038",
-      "Type": "horizon",
-      "Available": [ "On shelf" ],
-      "Url": "http://reading-hip.epixtech.co.uk/",
+      "Type": "spydus",
+      "Url": "https://library.reading.gov.uk",
       "TestISBN": "9780751565355"
     },
     {
@@ -1380,7 +1385,7 @@
       "Code": "E09000027",
       "Type": "spydus",
       "Url": "https://richmond.spydus.co.uk/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780747558194"
     },
     {
       "Name": "Rochdale",
@@ -1434,7 +1439,7 @@
       "Type": "koha",
       "IgnoreSSL": true,
       "Url": "https://catalogue2.sefton.gov.uk/",
-      "TestISBN": "9780747574484"
+      "TestISBN": "9781408810569"
     },
     {
       "Name": "Sheffield",
@@ -1721,7 +1726,7 @@
       "Code": "E08000009",
       "Type": "spydus",
       "Url": "https://trafford.spydus.co.uk/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9780751565355"
     },
     {
       "Name": "Bro Morgannwg - the Vale of Glamorgan",
@@ -1815,9 +1820,10 @@
     {
       "Name": "West Lothian",
       "Code": "S12000040",
-      "Type": "horizon",
+      "Type": "enterprise",
       "Available": [ "AVAILABLE" ],
-      "Url": "http://webpac.westlothian.gov.uk/",
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+      "Url": "https://wlcls.ent.sirsidynix.net.uk/client/en_GB/default/",
       "TestISBN": "9780751565355"
     },
     {

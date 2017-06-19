@@ -88,7 +88,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     // Called either immediately (if redirected onto the main item page) or after a second request to go to the item page.
     var getItemAvailability = function (ils) {
         if (ils.indexOf('SD_ILS') == -1) return common.completeCallback(callback, responseHoldings);
-        var url = lib.Url + lib.AvailabilityUrl + ils.split('/').join('$002f') + '/';
+        var url = lib.Url + lib.AvailabilityUrl.replace('[ITEMID]', ils.split('/').join('$002f'));
         // Request 2/3: A post request returns the data used to show the availability information
         request.post({ url: url, headers: headerPost, timeout: 30000 }, getFinalAvailabilityJson);
     };
@@ -97,7 +97,14 @@ exports.searchByISBN = function (isbn, lib, callback) {
     var getFinalAvailabilityJson = function (error, msg, res) {
         if (common.handleErrors(callback, responseHoldings, error, msg)) return;
         if (!common.isJsonString(res)) { common.completeCallback(callback, responseHoldings); return }
-        matchAvailabilityToLibraries(JSON.parse(res))
+        var avail = JSON.parse(res);
+        if (!avail.ids) {
+            var titles = lib.Url + lib.TitleDetailUrl.replace('[ITEMID]', ils.split('/').join('$002f'));
+            console.log(titles);
+            request.post({ url: titles, headers: headerPost, timeout: 30000 }, getTitleDetailJson);
+        } else {
+            matchAvailabilityToLibraries(avail);
+        }
     };
 
     // Function: matchAvailabilityToLibraries
@@ -117,6 +124,27 @@ exports.searchByISBN = function (isbn, lib, callback) {
         common.completeCallback(callback, responseHoldings);
     };
 
+    // Function: getTitleDetailJson  Enterprise 4.5.1
+    var getTitleDetailJson = function (error, msg, res) {
+        if (common.handleErrors(callback, responseHoldings, error, msg)) return;
+        if (!common.isJsonString(res)) { common.completeCallback(callback, responseHoldings); return }
+        processTitleDetail(JSON.parse(res));
+    };
+
+    // Function: processTitleDetail.
+    var processTitleDetail = function (titles) {
+        var libs = {};
+        $(titles.childRecords).each(function (i, c) {
+            var name = c['LIBRARY'];
+            var status = c['SD_ITEM_STATUS'];
+            if (!libs[name]) libs[name] = { available: 0, unavailable: 0 };
+            lib.Available.indexOf(status) > 0 ? libs[name].available++ : libs[name].unavailable++;
+        });
+        for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable });
+        common.completeCallback(callback, responseHoldings);
+    };
+
     // Request 1: Call the deep link to the item by ISBN
+    // We could also use RSS https://wales.ent.sirsidynix.net.uk/client/rss/hitlist/ynysmon_en/qu=9780747538493
     request.get({ url: responseHoldings.url, headers: header1, timeout: 30000 }, deepLinkResponse);
 };

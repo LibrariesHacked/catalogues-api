@@ -2,17 +2,23 @@ doctype html
 html
 	head
 		meta(charset='utf-8')
-		title library books | librarydata
+		title library books
 		meta(name='viewport', content='width=device-width, initial-scale=1.0')
 		link(rel='stylesheet', href="/libs/css/bootstrap.min.css")
 		link(rel='stylesheet', href="/libs/css/tether.min.css")
 		link(rel='stylesheet', href="/libs/css/font-awesome.min.css")
 		link(rel='stylesheet', href="/libs/css/leaflet.css")
 		link(rel='stylesheet', href="/libs/css/dataTables.bootstrap4.css")
-		link(rel='stylesheet', href="/libs/css/responsive.bootstrap.css")
+		link(rel='stylesheet', href="/libs/css/responsive.bootstrap4.css")
 		link(rel='stylesheet', href="/css/site.css")
 	body(class="grey")
 		.container(class="main")
+			ul(class="nav nav-pills")
+				li(class="nav-item") 
+					a(class="nav-link active", href="/") books
+				li(class="nav-item") 
+					a(class="nav-link", href="/bop") on prescription
+			hr
 			block content
 		footer
 			.container
