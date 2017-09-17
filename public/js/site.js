@@ -31,13 +31,13 @@
                         if (isbn.length == 10) tempisbns.tens.push(isbn);
                         if (isbn.length == 13) tempisbns.thirteens.push(isbn);
                     });
-                    if (tempisbns.thirteens.length > 0) return { id: tempisbns, name: item.title + (item.author ? ', ' + item.author : '') };
+                    if (tempisbns.thirteens.length > 0) return { id: tempisbns, name: item.title + (item.author && item.author.length > 0 ? ', ' + item.author[0] : '') };
                 }));
             });
         },
         autoSelect: true,
         minLength: 5,
-        delay: 1000,
+        delay: 300,
     });
 
     ////////////////////////////////////////////////

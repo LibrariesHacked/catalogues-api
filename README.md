@@ -81,7 +81,7 @@ Returns a list of the library service points for each library service.  This may
 | URL Route | Description | Example |
 | ----- | ----------- | ------- |
 | */libraries* | Returns a list of libraries for each service. | *http://localhost:3000/libraries* |
-| */libraries?service=:service* | Filters the results to a particular library service. | *http://localhost:3000/libraries?service=Wiltshire* | 
+| */libraries?service=:service* | Filters the results to a particular library service. | *http://localhost:3000/libraries?service=Wiltshire* |
 
 ### Availability
 
