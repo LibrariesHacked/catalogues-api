@@ -1,11 +1,7 @@
 extends layout.pug
 block content
 	div(class="row")
-		div(class="col-4")
-			div(class="alert alert-dismissible alert-danger", role="alert")
-				button(type="button", class="close", data-dismiss="alert", aria-label="Close") &times;
-				strong in development. 
-				span a work in progress
+		div(class="col-6")
 			div(class="card mb-3")
 				div(class="card-block")
 					h4(class="card-title text-muted") search for books
@@ -19,12 +15,15 @@ block content
 						button(class='btn btn-link disabled', type='button', id='btnSearch') search
 						span &nbsp;
 						button(class='btn btn-link disabled', type='button', id='btnClear') clear
-		div(class="col-4")
+		div(class="col-6")
 			div(class="card mb-3")
+				div(id="map", class="card-block")
+	div(class="row")
+		div(class="col-12")
+			div(class="card")
 				div(class="card-block")
-					h4(class="card-title text-muted") summary
-					h6(class="card-subtitle text-muted") how many copies?
-				div(class="card-block")
+					h4(class="card-title text-muted") full results
+					h6(class="card-subtitle text-muted") see which libraries have the book
 					small(id="progressPercentage", class="form-text text-muted strong") 0% 
 						span(id="spSpinner", class="fa fa-spinner fa-spin")
 					div(class="progress")
@@ -39,10 +38,6 @@ block content
 						div(class='col col-xs-4')
 							span(class='small text-muted strong') unavailable
 							p(class='lead text-danger strong', id='unavailable') 0
-			div(class="card mb-3")
-				div(class="card-block")
-					h4(class="card-title text-muted") full results
-					h6(class="card-subtitle text-muted") see which libraries have the book
 				div(class="card-block")
 					table(id="tblResults", class="table")
 						thead
@@ -52,9 +47,3 @@ block content
 								th available
 								th unavailable
 								th link
-		div(class="col-4")
-			div(class="card mb-3")
-				div(class="card-block")
-					h4(class="card-title text-muted") map
-					h6(class="card-subtitle text-muted") a map of results
-				div(id="map", class="card-block")

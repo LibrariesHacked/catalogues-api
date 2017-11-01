@@ -1,13 +1,14 @@
 ///////////////////////////////////////////
 // REQUIRES
-// Load async so that requests to libraries 
-// can be done in parallel, and the data file.
 ///////////////////////////////////////////
+// So requests can happen in parallel
 var async = require('async');
+// Our library data file
 var data = require('./data/data');
+// Library Thing functions
 var libThing = require('./connectors/librarything');
+// Open Library 
 var openLibrary = require('./connectors/openlibrary');
-
 // On first run this sets up all the library service connectors
 // that are currently referred to in the data.json file.
 var serviceFunctions = {};
@@ -24,7 +25,7 @@ data.LibraryServices.forEach(function (service) {
 /////////////////////////////////////////////////////////////////
 exports.getServices = function (req, res) {
     var services = data.LibraryServices
-        // Could put a filter here e.g. if filter by region (North East) or even spatial. 
+        // Could put more custom filters here e.g. if filter by region (North East), or even spatial?
         .filter(function (service) {
             return (service.Type != '' && (!req.query.service || service.Name == req.query.service));
         })
@@ -35,7 +36,6 @@ exports.getServices = function (req, res) {
                 });
             }
         });
-    // The searches object will be a list of searches to run against the various library systems.  
     async.parallel(services, function (err, response) {
         res.send(response);
     });
@@ -73,7 +73,7 @@ exports.getLibraries = function (req, res) {
                 });
             }
         });
-    // The searches object will be a list of searches to run against the various library systems.  
+    // The services array will be a list of searches to run against the various library systems.  
     async.parallel(searches, function (err, response) {
         res.send(response);
     });
