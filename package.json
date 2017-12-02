@@ -22,9 +22,9 @@
   "homepage": "https://github.com/LibrariesHacked/catalogues-librarydata",
   "dependencies": {
     "async": "^1.5.2",
-    "bootstrap": "^4.0.0-beta",
+    "bootstrap": "^4.0.0-beta.2",
     "bootstrap-3-typeahead": "^4.0.2",
-    "bootswatch": "^4.0.0-alpha.6",
+    "bootswatch": "^4.0.0-beta.2",
     "cheerio": "^0.19.0",
     "datatables.net": "https://registry.npmjs.org/datatables.net/-/datatables.net-1.10.13.tgz",
     "datatables.net-bs4": "^1.10.16",
@@ -36,12 +36,12 @@
     "gulp": "^3.9.1",
     "jquery": "^3.2.1",
     "leaflet": "^1.2.0",
-    "popper.js": "^1.12.5",
+    "popper.js": "^1.13.0",
     "proj4": "^2.4.4",
     "proj4leaflet": "^0.7.2",
     "pug": "^2.0.0-rc.4",
     "request": "^2.83.0",
-    "tether": "^1.4.0",
+    "tether": "^1.4.3",
     "xml2js": "^0.4.19"
   }
 }

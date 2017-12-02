@@ -3,10 +3,8 @@ block content
 	div(class="row")
 		div(class="col-6")
 			div(class="card mb-3")
-				div(class="card-block")
-					h4(class="card-title text-muted") search for books
-					h6(class="card-subtitle text-muted") books in libraries across the UK
-				div(class="card-block")
+				h4(class="card-header") search
+				div(class="card-body")
 					form
 						div(class="form-group")
 							label(for="txtKeywords") title keywords
@@ -17,13 +15,12 @@ block content
 						button(class='btn btn-link disabled', type='button', id='btnClear') clear
 		div(class="col-6")
 			div(class="card mb-3")
-				div(id="map", class="card-block")
+				div(id="map", class="card")
 	div(class="row")
 		div(class="col-12")
 			div(class="card")
-				div(class="card-block")
-					h4(class="card-title text-muted") full results
-					h6(class="card-subtitle text-muted") see which libraries have the book
+				h3(class="card-header text-muted") results
+				div(class="card-body")
 					small(id="progressPercentage", class="form-text text-muted strong") 0% 
 						span(id="spSpinner", class="fa fa-spinner fa-spin")
 					div(class="progress")
@@ -38,7 +35,7 @@ block content
 						div(class='col col-xs-4')
 							span(class='small text-muted strong') unavailable
 							p(class='lead text-danger strong', id='unavailable') 0
-				div(class="card-block")
+				div(class="card-body")
 					table(id="tblResults", class="table")
 						thead
 							tr

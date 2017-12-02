@@ -2,19 +2,7 @@
     padding-top: 30px;
 }
 
-nav {
-    border-bottom: 1px solid rgba(0, 0, 0, .125);
-}
-
-.grey {
-    background-color: #F2F4F8 !important;
-}
-
 .strong {
-    font-weight: 700;
-}
-
-.card-title {
     font-weight: 700;
 }
 
@@ -24,8 +12,4 @@ nav {
 
 #spSpinner {
     display: none;
-}
-
-#tblResults_filter input {
-    width: 100% !important;
 }
