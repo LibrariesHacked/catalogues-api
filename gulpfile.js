@@ -15,7 +15,7 @@ gulp.task('default', function () {
 		'node_modules/datatables.net-responsive-bs4/js/responsive.bootstrap4.js'
 	]).pipe(gulp.dest('public/libs/js'));
 	gulp.src([
-		'node_modules/bootswatch/dist/sketchy/bootstrap.min.css',
+		'node_modules/bootswatch/dist/sandstone/bootstrap.min.css',
 		'node_modules/tether/dist/css/tether.min.css',
 		'node_modules/font-awesome/css/font-awesome.min.css',
 		'node_modules/leaflet/dist/leaflet.css',

@@ -152,7 +152,8 @@
             updateResults = setInterval(function () {
                 // Update the current display of counts.
                 $('#progressPercentage').text(((countReturns / requests.length) * 100).toFixed(2) + '%');
-                $('.progress').val((countReturns / requests.length) * 100);
+				$('.progress-bar').attr('aria-valuenow', (countReturns / requests.length) * 100);
+				$('.progress-bar').css('width', ((countReturns / requests.length) * 100) + '%');
                 $('#found').text(unavailable + available);
                 $('#available').text(available);
                 $('#unavailable').text(unavailable);
