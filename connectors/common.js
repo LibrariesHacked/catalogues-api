@@ -27,7 +27,7 @@ exports.getService = function (service) {
 exports.handleErrors = function (callback, callbackObj, error, httpMessage) {
 	if (httpMessage && (httpMessage.statusCode != 200 && httpMessage.statusCode != 302)) error = 'Web request error.  Status code was ' + httpMessage.statusCode;
 	if (error) {
-		callbackObj.error = error;
+		callbackObj.error = "Web request error";
 		callbackObj.end = new Date();
 		callback(callbackObj);
 		return true;

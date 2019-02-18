@@ -24,7 +24,7 @@ app.set('view engine', 'pug');
 // Routes to deliver pages.
 ///////////////////////////////////////////
 app.get('/', function (req, res) {
-    res.render('index', { title: 'Hey', message: 'Hello there!' });
+	res.render('index', { title: 'Hey', message: 'Hello there!' });
 });
 
 ///////////////////////////////////////////
@@ -56,5 +56,5 @@ app.get('/testAvailabilityByISBN', libraries.testIsbnSearch);
 ///////////////////////////////////////////
 var port = process.env.PORT || 3000;
 var server = app.listen(port, function () {
-    console.log("Express server listening on port %d in %s mode", server.address().port, app.settings.env);
+	console.log("Express server listening on port %d in %s mode", server.address().port, app.settings.env);
 });
