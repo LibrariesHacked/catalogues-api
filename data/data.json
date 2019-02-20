@@ -213,7 +213,7 @@
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookupavailability/detailItemsDiv0/ent:[ITEMID]/ILS/0/false",
 			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/awen_en/",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9781408855713"
 		},
 		{
 			"Name": "Brighton and Hove",
@@ -238,14 +238,11 @@
 		{
 			"Name": "Bromley",
 			"Code": "E09000006",
-			"Type": "arena",
-			"ArenaName": "AUK000226",
-			"OrganisationId": "AUK000226|19",
-			"OrganisationName": "Bromley",
-			"ISBNAlias": "number",
-			"Id": "226019",
-			"Url": "https://arena.yourlondonlibrary.net/web/bromley/",
-			"Advanced": "advanced-search",
+			"Type": "prism3",
+			"Available": [
+				"Available"
+			],
+			"Url": "https://capitadiscovery.co.uk/bromley/",
 			"TestISBN": "9780747532743"
 		},
 		{
@@ -253,14 +250,18 @@
 			"Code": "E10000002",
 			"Type": "spydus",
 			"Url": "https://buckinghamshire.spydus.co.uk/",
-			"TestISBN": "9780747591061"
+			"TestISBN": "9781408855713"
 		},
 		{
 			"Name": "Bury",
 			"Code": "E08000002",
-			"Type": "webpac",
-			"Url": "https://library.bury.gov.uk/",
-			"TestISBN": "9780747538486"
+			"Type": "enterprise",
+			"Available": [
+				"In stock"
+			],
+			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"Url": "https://bury.ent.sirsidynix.net.uk/client/en_GB/default/",
+			"TestISBN": "9780747591054"
 		},
 		{
 			"Name": "Caerphilly",
@@ -275,7 +276,7 @@
 			"Name": "Calderdale",
 			"Code": "E08000033",
 			"Type": "spydus",
-			"Url": "https://online.calderdale.gov.uk/",
+			"Url": "https://calderdale.spydus.co.uk/",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -297,16 +298,13 @@
 			"Code": "W06000015",
 			"Type": "ibistro",
 			"Available": [
-				"Item on shelves"
+				"SHELVES",
+				"RESERVES"
 			],
-			"Id": "446",
-			"Region": "3",
-			"InstitutionId": "163",
-			"Profile": "ALL_LIBS",
-			"Url": "http://ibistro.cardiff.gov.uk/",
-			"Home": "uhtbin/cgisirsi/x/x/0/49/",
+			"Url": "https://card.sirsidynix.net.uk/",
+			"Home": "uhtbin/webcat",
 			"Search": "uhtbin/cgisirsi/x/0/0/5?searchdata1=",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9781408855713"
 		},
 		{
 			"Name": "Sir Gaerfyrddin - Carmarthenshire",
@@ -329,18 +327,16 @@
 			"Url": "https://beds-arena.culturalservices.net/web/arena/",
 			"Advanced": "extended-search",
 			"OrganisationId": "AUK000022|1",
-			"TestISBN": "9780747591061"
+			"TestISBN": "9781408810293"
 		},
 		{
 			"Name": "Sir Ceredigion - Ceredigion",
 			"Code": "W06000008",
-			"Type": "vubis",
-			"Profile": "Default",
-			"Index": "Keywords",
+			"Type": "iguana",
 			"Database": "6",
-			"Url": "https://libraries.ceredigion.gov.uk/vs/",
-			"SubDir": "/vs/",
-			"TestISBN": "0747551006"
+			"Faceted": false,
+			"Url": "http://libraries.ceredigion.gov.uk/iguana/",
+			"TestISBN": "9781408855683"
 		},
 		{
 			"Name": "Cheshire East",
@@ -367,13 +363,13 @@
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
 			"Url": "https://col.ent.sirsidynix.net.uk/client/en_GB/default/",
-			"TestISBN": "9781408810569"
+			"TestISBN": "9781408855669"
 		},
 		{
 			"Name": "Clackmannanshire",
 			"Code": "S12000005",
-			"Type": "vufind",
-			"Url": "https://vufind-cl.sedar.org.uk/vufind/",
+			"Type": "koha",
+			"Url": "https://clacks.koha-ptfs.co.uk/",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -385,7 +381,7 @@
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
 			"Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/conwy_en/",
-			"TestISBN": "9781408855713"
+			"TestISBN": "9780747591061"
 		},
 		{
 			"Name": "Cornwall",
@@ -395,7 +391,7 @@
 				"Available"
 			],
 			"Url": "https://capitadiscovery.co.uk/cornwall/",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9781408855713"
 		},
 		{
 			"Name": "Coventry",
@@ -404,14 +400,15 @@
 			"Database": "1",
 			"Faceted": false,
 			"Url": "https://librarycatalogue.coventry.gov.uk/iguana/",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9781408855669"
 		},
 		{
 			"Name": "Croydon",
 			"Code": "E09000008",
-			"Type": "vubis",
-			"Index": "Isbn",
-			"Url": "http://catalogue.croydonlibraries.com/vs/",
+			"Type": "iguana",
+			"Database": "1",
+			"Faceted": false,
+			"Url": "http://catalogue.croydonlibraries.com/iguana/",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -427,7 +424,7 @@
 			"InstitutionId": "768",
 			"Profile": "ALL_LIBS",
 			"Url": "https://cmbr.ent.sirsidynix.net.uk/client/en_GB/default/",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9781408855713"
 		},
 		{
 			"Name": "Darlington",
@@ -1881,7 +1878,7 @@
 			"Url": "https://arena.yourlondonlibrary.net/web/tower-hamlets/",
 			"Advanced": "extended-search",
 			"OrganisationId": "AUK000226|10",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9780747581086"
 		},
 		{
 			"Name": "Trafford",
@@ -1893,10 +1890,12 @@
 		{
 			"Name": "Bro Morgannwg - the Vale of Glamorgan",
 			"Code": "W06000014",
-			"Type": "vubis",
-			"Index": "Isbn",
-			"Url": "http://libhip.valeofglamorgan.gov.uk/vs/",
-			"Profile": "Default",
+			"Type": "enterprise",
+			"Available": [
+				"Available"
+			],
+			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/vog_en/",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -1946,7 +1945,7 @@
 				"Available"
 			],
 			"Url": "https://capitadiscovery.co.uk/wandsworth/",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9781408834985"
 		},
 		{
 			"Name": "Warrington",
@@ -2009,9 +2008,9 @@
 		},
 		{
 			"Name": "Western Isles",
-			"Code": "",
-			"Type": "vufind",
-			"Url": "https://vufind-wi.sedar.org.uk/",
+			"Code": "S12000013",
+			"Type": "koha",
+			"Url": "https://wi.koha-ptfs.co.uk/",
 			"TestISBN": "9780751565355"
 		},
 		{
@@ -2023,7 +2022,7 @@
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
 			"Url": "https://elibrary.westminster.gov.uk/client/en_GB/wcc/",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9781408855713"
 		},
 		{
 			"Name": "Wigan",
@@ -2064,7 +2063,7 @@
 				"Available"
 			],
 			"Url": "https://capitadiscovery.co.uk/wirral/",
-			"TestISBN": "9780747560777"
+			"TestISBN": "9781408855713"
 		},
 		{
 			"Name": "Wokingham",
@@ -2101,8 +2100,8 @@
 				"Available"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-			"Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/ynysmon_en/",
-			"TestISBN": "9780747538493"
+			"Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/wrexham_en/",
+			"TestISBN": "9780747591054"
 		},
 		{
 			"Name": "York City",

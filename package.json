@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "A web service for searching library catalogues",
   "main": "server.js",
-  "scripts": {
-    "postinstall": "gulp default"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/LibrariesHacked/catalogues-librarydata.git"
