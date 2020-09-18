@@ -1,60 +1,28 @@
-///////////////////////////////////////////
-// Requires
-// Use express and custom libraries.js
-///////////////////////////////////////////
-var express = require('express');
-var libraries = require('./libraries');
 
-var app = express();
-///////////////////////////////////////////
-// Static files
-// Setup for serving static content
-///////////////////////////////////////////
-app.use(express.static('public'));
+const express = require('express')
+const libraries = require('./libraries')
 
-///////////////////////////////////////////
-// Template engine
-// Using pug as a basic templating engine
-///////////////////////////////////////////
-app.set('views', './views');
-app.set('view engine', 'pug');
+const app = express()
 
-///////////////////////////////////////////
-// Routes - Pages
-// Routes to deliver pages.
-///////////////////////////////////////////
+app.use(express.static('public'))
+
+app.set('views', './views')
+app.set('view engine', 'pug')
+
 app.get('/', function (req, res) {
-	res.render('index', { title: 'Hey', message: 'Hello there!' });
-});
+  res.render('index')
+})
 
-///////////////////////////////////////////
-// Routes - Web service
-// The web service routes
-///////////////////////////////////////////
+app.get('/services', libraries.getServices)
+app.get('/servicegeo', libraries.getServiceGeo)
+app.get('/libraries', libraries.getLibraries)
 
-// library services
-app.get('/services', libraries.getServices);
-app.get('/servicegeo', libraries.getServiceGeo);
-app.get('/libraries', libraries.getLibraries);
+app.get('/availabilityByISBN/:isbn', libraries.isbnSearch)
 
-// catalogue services
-app.get('/availabilityByISBN/:isbn', libraries.isbnSearch);
+app.get('/thingISBN/:isbn', libraries.thingISBN)
+app.get('/openLibrarySearch', libraries.openLibrarySearch)
 
-// biblio services
-app.get('/thingISBN/:isbn', libraries.thingISBN);
-app.get('/openLibrarySearch', libraries.openLibrarySearch);
+app.get('/testAvailabilityByISBN', libraries.testIsbnSearch)
 
-///////////////////////////////////////////
-// Routes - Testing
-// Tests
-///////////////////////////////////////////
-app.get('/testAvailabilityByISBN', libraries.testIsbnSearch);
-
-///////////////////////////////////////////
-// Startup
-// Starts up the web service on port 3000
-///////////////////////////////////////////
-var port = process.env.PORT || 3000;
-var server = app.listen(port, function () {
-	console.log("Express server listening on port %d in %s mode", server.address().port, app.settings.env);
-});
+const port = process.env.PORT || 3000
+app.listen(port)
