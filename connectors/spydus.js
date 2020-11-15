@@ -23,8 +23,8 @@ var libsUrl = 'cgi-bin/spydus.exe/MSGTRN/OPAC/COMB?HOMEPRMS=COMBPARAMS'
 // Function: getService
 /// ////////////////////////////////////////
 exports.getService = function (svc) {
-  var service = common.getService(svc);
-  return service;
+  var service = common.getService(svc)
+  return service
 }
 
 /// ////////////////////////////////////////
@@ -41,7 +41,7 @@ exports.getLibraries = function (service, callback) {
     $('select#LOC option').each(function () {
       if ($(this).text() != 'All Locations') responseLibraries.libraries.push($(this).text())
     })
-    common.completeCallback(callback, responseLibraries)
+    return responseLibraries
   })
 }
 
@@ -60,7 +60,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
       status == 'Available' ? libs[name].available++ : libs[name].unavailable++
     })
     for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable })
-    common.completeCallback(callback, responseHoldings)
+    return responseHoldings
   }
 
   // Request 1: Deep link to item page by ISBN.
@@ -69,7 +69,7 @@ exports.searchByISBN = function (isbn, lib, callback) {
     $ = cheerio.load(res)
 
     // If nothing found return.
-    if ($('.holdings').length == 0) { common.completeCallback(callback, responseHoldings); return }
+    if ($('.holdings').length == 0) return responseHoldings
 
     // In some cases (multiple records) there is another page request required to get full details (availability).
     if ($('.holdings').text().indexOf('see full display for details') != -1) {

@@ -1,3 +1,15 @@
+/// ////////////////////////////////////////
+// COMMON FUNCTIONS
+// Provides some common functionality into
+// a single file for the connectors to use
+// such as error handling.
+/// ///////////////////////////////////////////////
+
+/// ////////////////////////////////////
+// getService
+// The majority of the get service call is just returning information that's in the service
+// object from data.json.  Maintain a list here of what to return.
+/// ////////////////////////////////////
 exports.getService = function (service) {
   return {
     name: service.Name,
@@ -7,6 +19,25 @@ exports.getService = function (service) {
   }
 }
 
+/// /////////////////////////////////////
+// handleErrors
+// Used for error handling and checking HTTP status
+// messages.
+/// /////////////////////////////////////
+exports.handleErrors = function (callback, callbackObj, error, httpMessage) {
+  if (httpMessage && (httpMessage.statusCode != 200 && httpMessage.statusCode != 302)) error = 'Web request error.  Status code was ' + httpMessage.statusCode
+  if (error) {
+    callbackObj.error = 'Web request error'
+    callbackObj.end = new Date()
+    callback(callbackObj)
+    return true
+  }
+  return false
+}
+
+/// /////////////////////////////////////
+// isJsonString
+/// /////////////////////////////////////
 exports.isJsonString = function (str) {
   try {
     JSON.parse(str)
@@ -14,4 +45,13 @@ exports.isJsonString = function (str) {
     return false
   }
   return true
+}
+
+/// //////////////////////////////////////
+// completeCallback
+// Just adds the current timestamp to a callback
+/// //////////////////////////////////////
+exports.completeCallback = function (callback, callbackObj) {
+  callbackObj.end = new Date()
+  return callbackObj
 }
