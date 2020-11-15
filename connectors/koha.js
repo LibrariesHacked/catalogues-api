@@ -22,9 +22,10 @@ var libsUrl = 'cgi-bin/koha/opac-search.pl?[MULTIBRANCH]do=Search&expand=holding
 /// ////////////////////////////////////////
 // Function: getService
 /// ////////////////////////////////////////
-exports.getService = function (svc, callback) {
-  var service = common.getService(svc)
-  callback(service)
+exports.getService = function (svc) {
+  var service = common.getService(svc);
+  return service;
+
 }
 
 /// ////////////////////////////////////////

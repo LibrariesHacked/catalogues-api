@@ -19,9 +19,9 @@ var common = require('../connectors/common')
 /// ////////////////////////////////////////
 // Function: getService
 /// ////////////////////////////////////////
-exports.getService = function (svc, callback) {
-  var service = common.getService(svc)
-  callback(service)
+exports.getService = function (svc) {
+  var service = common.getService(svc);
+  return service;
 }
 
 /// ////////////////////////////////////////

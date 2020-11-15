@@ -8,19 +8,19 @@ data.LibraryServices.forEach(function (service) {
   if (!serviceFunctions[service.Type]) serviceFunctions[service.Type] = require('./connectors/' + service.Type)
 })
 
-exports.getServices = function (req, res) {
+exports.getServices = async function (req, res) {
   var services = data.LibraryServices
     .filter(function (service) {
       return (service.Type !== '' && (!req.query.service || service.Name === req.query.service))
-    })
-    .map(function (service) {
-      return function () {
-        var response = serviceFunctions[service.Type].getService(service)
-        return response
-      }
-    })
-  var responses = async.parallel(services)
-  res.send(responses)
+    }).map(function (service) {
+        return function(callback) {
+          callback( null, serviceFunctions[service.Type].getService(service) );
+        }
+    });
+
+  var services = await async.parallel(services);
+
+  res.send( services );
 }
 
 exports.getServiceGeo = function (req, res) {

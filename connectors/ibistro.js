@@ -20,10 +20,10 @@ var common = require('../connectors/common')
 /// ////////////////////////////////////////
 // Function: getService
 /// ////////////////////////////////////////
-exports.getService = function (svc, callback) {
+exports.getService = function (svc) {
   var service = common.getService(svc)
   service.CatalogueUrl = svc.Url + svc.Home
-  callback(service)
+  return service;
 }
 
 /// ////////////////////////////////////////

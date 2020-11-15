@@ -22,10 +22,11 @@ var home = 'vubis.csp'
 /// ////////////////////////////////////////
 // Function: getService
 /// ////////////////////////////////////////
-exports.getService = function (svc, callback) {
-  var service = common.getService(svc)
-  service.CatalogueUrl = svc.Url + home
-  callback(service)
+exports.getService = function (svc) {
+  var service = common.getService(svc);
+  service.CatalogueUrl = svc.Url + home;
+  
+  return service;
 }
 
 /// ////////////////////////////////////////

@@ -24,10 +24,10 @@ var home = 'www.main.cls'
 /// ////////////////////////////////////////
 // Function: getService
 /// ////////////////////////////////////////
-exports.getService = function (svc, callback) {
+exports.getService = function (svc) {
   var service = common.getService(svc)
   service.CatalogueUrl = svc.Url + home
-  callback(service)
+  return service;
 }
 
 /// ////////////////////////////////////////
