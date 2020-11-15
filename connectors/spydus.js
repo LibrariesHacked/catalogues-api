@@ -22,9 +22,9 @@ var libsUrl = 'cgi-bin/spydus.exe/MSGTRN/OPAC/COMB?HOMEPRMS=COMBPARAMS'
 /// ////////////////////////////////////////
 // Function: getService
 /// ////////////////////////////////////////
-exports.getService = function (svc, callback) {
-  var service = common.getService(svc)
-  callback(service)
+exports.getService = function (svc) {
+  var service = common.getService(svc);
+  return service;
 }
 
 /// ////////////////////////////////////////

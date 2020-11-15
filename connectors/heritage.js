@@ -21,10 +21,10 @@ var searchUrl = 'search2?searchTerm0='
 /// ////////////////////////////////////////
 // Function: getService
 /// ////////////////////////////////////////
-exports.getService = function (svc, callback) {
+exports.getService = function (svc) {
   var service = common.getService(svc)
-  service.CatalogueUrl = svc.Url + 'search1'
-  callback(service)
+  service.CatalogueUrl = svc.Url + 'search1';
+  return service;
 }
 
 /// ////////////////////////////////////////

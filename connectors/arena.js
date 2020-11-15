@@ -11,8 +11,8 @@ const SEARCH_URL = 'search?p_auth=NJXnzkEv&p_p_id=searchResult_WAR_arenaportlets
 const AVAILABILITY_CONTAINER = '/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel::IBehaviorListener:0:'
 
 exports.getService = function (svc) {
-  var service = common.getService(svc)
-  return service
+  var service = common.getService(svc);
+  return service;
 }
 
 exports.getLibraries = async function (service) {

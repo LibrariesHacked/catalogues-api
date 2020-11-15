@@ -480,15 +480,6 @@
 			"TestISBN": "9780747538493"
 		},
 		{
-			"Name": "Devon",
-			"Code": "E10000008",
-			"Type": "viewpoint2",
-			"Available": "Check Shelves",
-			"Url": "http://www.devon.gov.uk/library/catalogue/cgi-bin/vps2.5_viewpoint.sh",
-			"TestISBN": "9780747538493",
-			"TestRCN": "1780892896"
-		},
-		{
 			"Name": "Doncaster",
 			"Code": "E08000017",
 			"Type": "arena",

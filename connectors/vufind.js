@@ -23,9 +23,9 @@ var searchUrl = 'Search/Results?view=rss&type=ISN&lookfor='
 /// ////////////////////////////////////////
 // Function: getService
 /// ////////////////////////////////////////
-exports.getService = function (svc, callback) {
-  var service = common.getService(svc)
-  callback(service)
+exports.getService = function (svc) {
+  var service = common.getService(svc);
+  return service;
 }
 
 /// ////////////////////////////////////////
