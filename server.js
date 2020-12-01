@@ -1,4 +1,3 @@
-
 const express = require('express')
 const libraries = require('./libraries')
 
@@ -9,9 +8,7 @@ app.use(express.static('public'))
 app.set('views', './views')
 app.set('view engine', 'pug')
 
-app.get('/', function (req, res) {
-  res.render('index')
-})
+app.get('/', function (req, res) { res.render('index') })
 
 app.get('/services', libraries.getServices)
 app.get('/servicegeo', libraries.getServiceGeo)

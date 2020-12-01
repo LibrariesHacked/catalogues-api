@@ -1,12 +1,11 @@
-Library Catalogues.  LibraryData
-================================
+## Library Catalogues API
 
-This is a web service project, with basic front-end, for searching multiple public library catalogues. It is part of the LibraryData UK project.
+This is a web service project, with basic front-end, for searching multiple public library catalogues.
 
 What it is
 ----------
 
-In the UK there are around 200 public library authorities, each one with their own Library Management System and associated Online Public Access Catalogue (aside from a few shared systems).
+In the UK there are around 200 public library authorities, each one with their own Library Management System and associated Online Public Access Catalogue (aside from some shared systems).
 
 Despite being so many authorities, there are relatively few types of library systems, and fewer suppliers. This project aims to define the interactions with each type of web catalogue, in order to a single set of web services for all UK libraries.
 
