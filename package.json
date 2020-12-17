@@ -21,7 +21,7 @@
     "async": "^3.2.0",
     "bootstrap": "^5.0.0-alpha1",
     "cheerio": "^1.0.0-rc.3",
-    "datatables.net": "^1.10.21",
+    "datatables.net": "^1.10.22",
     "datatables.net-bs4": "^1.10.21",
     "datatables.net-responsive": "^2.2.5",
     "datatables.net-responsive-bs4": "^2.2.5",
