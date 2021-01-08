@@ -22,8 +22,8 @@ var container = '#ctl00_ContentPlaceCenterContent_copyAvailabilityContainer'
 // Function: getService
 /// ////////////////////////////////////////
 exports.getService = function (svc) {
-  var service = common.getService(svc);
-  return service;
+  var service = common.getService(svc)
+  return service
 }
 
 /// ////////////////////////////////////////

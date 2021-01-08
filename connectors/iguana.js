@@ -27,7 +27,7 @@ var home = 'www.main.cls'
 exports.getService = function (svc) {
   var service = common.getService(svc)
   service.CatalogueUrl = svc.Url + home
-  return service;
+  return service
 }
 
 /// ////////////////////////////////////////

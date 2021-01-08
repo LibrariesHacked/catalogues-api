@@ -43,27 +43,23 @@
 		{
 			"Name": "Barking and Dagenham",
 			"Code": "E09000002",
-			"Type": "arena",
-			"ISBNAlias": "number",
-			"OrganisationId": "AUK000226|6",
-			"OrganisationName": "Barking & Dagenham",
-			"ArenaName": "AUK000226",
-			"ArenaMemberId": "",
-			"Id": "226006",
-			"SearchType": "ISBN",
-			"Url": "https://arena.yourlondonlibrary.net/web/barking-and-dagenham/",
-			"Advanced": "advanced-search",
+			"Type": "enterprise",
+			"Available": [
+				"Available"
+			],
+			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookupavailability/detailItemsDiv0/ent:[ITEMID]/ILS/0/false",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
+			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/barking-and-dagenham/",
 			"TestISBN": "9780747538486"
 		},
 		{
 			"Name": "Barnet",
 			"Code": "E09000003",
-			"Type": "vubis",
-			"Index": "Isbn",
-			"Id": "|library/vubissmart-marc|220344",
-			"Url": "http://www.libraries.barnet.gov.uk/vs/",
-			"SubDir": "/vs/",
-			"Profile": "Default",
+			"Type": "prism3",
+			"Available": [
+				"Available"
+			],
+			"Url": "https://capitadiscovery.co.uk/barnet/",
 			"TestISBN": "9780747538486"
 		},
 		{
@@ -93,27 +89,34 @@
 			"Name": "Bedford",
 			"Code": "E06000055",
 			"Type": "arena",
-			"OrganisationName": "Bedford",
-			"ArenaName": "AUK000022",
-			"ISBNAlias": "recordControlNumber",
 			"Id": "220001",
+			"OrganisationName": "Bedford",
+			"OrganisationId": "AUK000022|3",
+			"ArenaName": "AUK000022",
 			"SearchType": "Keyword",
 			"Url": "https://beds-arena.culturalservices.net/web/arena/",
-			"Advanced": "extended-search",
-			"OrganisationId": "AUK000022|3",
-			"TestISBN": "9781408810293"
+			"AdvancedUrl": "extended-search",
+			"LibrariesUrl": "extended-search?p_p_id=extendedSearch_WAR_arenaportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=/extendedSearch/?wicket:interface=:0:extendedSearchPanel:extendedSearchForm:organisationHierarchyPanel:organisationContainer:organisationChoice::IBehaviorListener:0:&p_p_cacheability=cacheLevelPage&random=0.08709241788681465",
+			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_search_item_id=[ITEMID]&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_agency_name=[ARENANAME]&p_r_p_arena_urn:arena_search_item_no=0&p_r_p_arena_urn:arena_search_type=solr",
+			"HoldingsUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel::IBehaviorListener:0:&p_p_cacheability=cacheLevelPage&p_p_col_id=column-2&p_p_col_pos=1&p_p_col_count=3",
+			"TestISBN": "9781526606198"
 		},
 		{
 			"Name": "Bexley",
 			"Code": "E09000004",
 			"Type": "arena",
+			"Id": "226018",
 			"OrganisationId": "AUK000226|18",
 			"OrganisationName": "Bexley",
 			"ArenaName": "AUK000226",
-			"ISBNAlias": "number",
-			"Id": "226018",
+			"SearchType": "Keyword",
 			"Url": "https://arena.yourlondonlibrary.net/web/bexley/",
-			"Advanced": "extended-search",
+			"AdvancedUrl": "extended-search",
+			"LibrariesUrl": "extended-search?p_p_id=extendedSearch_WAR_arenaportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=/extendedSearch/?wicket:interface=:0:extendedSearchPanel:extendedSearchForm:organisationHierarchyPanel:organisationContainer:organisationChoice::IBehaviorListener:0:&p_p_cacheability=cacheLevelPage&random=0.08709241788681465",
+			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_search_item_id=[ITEMID]&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_agency_name=[ARENANAME]&p_r_p_arena_urn:arena_search_item_no=0&p_r_p_arena_urn:arena_search_type=solr",
+			"HoldingsUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel::IBehaviorListener:0:&p_p_cacheability=cacheLevelPage&p_p_col_id=column-2&p_p_col_pos=1&p_p_col_count=3",
 			"TestISBN": "9780747550990"
 		},
 		{
@@ -296,23 +299,20 @@
 		{
 			"Name": "Caerdydd - Cardiff",
 			"Code": "W06000015",
-			"Type": "ibistro",
+			"Type": "enterprise",
 			"Available": [
 				"SHELVES",
 				"RESERVES"
 			],
-			"Url": "https://card.sirsidynix.net.uk/",
-			"Home": "uhtbin/webcat",
-			"Search": "uhtbin/cgisirsi/x/0/0/5?searchdata1=",
+			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/card_en/",
 			"TestISBN": "9781408855713"
 		},
 		{
 			"Name": "Sir Gaerfyrddin - Carmarthenshire",
 			"Code": "W06000010",
-			"Type": "vubis",
-			"Index": "Isbn",
-			"Url": "http://212.219.142.126/carvs/",
-			"SubDir": "/carvs/",
+			"Type": "enterprise",
+			"Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/carm_en",
 			"TestISBN": "9780747538486"
 		},
 		{
@@ -321,7 +321,6 @@
 			"Type": "arena",
 			"OrganisationName": "Central",
 			"ArenaName": "AUK000022",
-			"ISBNAlias": "recordControlNumber",
 			"Id": "220001",
 			"SearchType": "Keyword",
 			"Url": "https://beds-arena.culturalservices.net/web/arena/",
@@ -430,7 +429,6 @@
 			"Name": "Darlington",
 			"Code": "E06000005",
 			"Type": "arena",
-			"ISBNAlias": "number",
 			"Id": "230001",
 			"ArenaName": "AUK000023",
 			"SearchType": "Keyword",
@@ -564,8 +562,8 @@
 		{
 			"Name": "East Dunbartonshire",
 			"Code": "S12000045",
-			"Type": "vufind",
-			"Url": "https://vufind-ed.sedar.org.uk/",
+			"Type": "koha",
+			"Url": "https://edlc.koha-ptfs.co.uk/",
 			"TestISBN": "9781408810576"
 		},
 		{
@@ -873,7 +871,6 @@
 			"ArenaName": "AUK000219",
 			"Id": "219001",
 			"ISBNAlias": "recordControlNumber",
-			"SearchType": "Keyword",
 			"Url": "https://www.hounslowlibraries.org/web/arena/",
 			"Advanced": "advanced-search",
 			"OrganisationId": "AUK000219|0",
@@ -886,7 +883,7 @@
 			"Available": [
 				"Item on shelves"
 			],
-			"Url": "http://prismcollect.hullcc.gov.uk/",
+			"Url": "https://hull.sirsidynix.net.uk/",
 			"Home": "uhtbin/cgisirsi.exe/x/0/0/57/49?user_id=HULLWEB&password=",
 			"Search": "uhtbin/cgisirsi.exe/x/0/0/5?searchdata1=",
 			"TestISBN": "9780747538493"
@@ -904,16 +901,6 @@
 			"Type": "spydus",
 			"Url": "https://iow.spydus.co.uk/",
 			"TestISBN": "9780747538493"
-		},
-		{
-			"Name": "Isle of Man",
-			"Code": "",
-			"Type": "heritage",
-			"Url": "http://www.douglas.gov.im/HeritageScripts/Hapi.dll/",
-			"TestISBN": "9781408855898",
-			"Libraries": [
-				"Isle of Man"
-			]
 		},
 		{
 			"Name": "Islington",
@@ -1127,7 +1114,6 @@
 			"Type": "arena",
 			"ArenaName": "AUK000054",
 			"ISBNAlias": "number",
-			"SearchType": "Keyword",
 			"Url": "https://libraries.middlesbrough.gov.uk/web/arena/",
 			"IgnoreSSL": true,
 			"Advanced": "extended-search",
@@ -1179,9 +1165,8 @@
 		{
 			"Name": "Castell-nedd Port Talbot - Neath Port Talbot",
 			"Code": "W06000012",
-			"Type": "vubis",
-			"Index": "Isbn",
-			"Url": "http://212.219.142.126/nptvs/",
+			"Type": "enterprise",
+			"Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/npt_en/",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -1396,9 +1381,10 @@
 		{
 			"Name": "Sir Benfro - Pembrokeshire",
 			"Code": "W06000009",
-			"Type": "vubis",
-			"Index": "Isbn",
-			"Url": "http://libraryonline.pembrokeshire.gov.uk/pemvs/",
+			"Type": "iguana",
+			"Database": "1_LIBS",
+			"Faceted": false,
+			"Url": "https://libraries.pembrokeshire.gov.uk/iguana/",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -1553,9 +1539,11 @@
 		{
 			"Name": "Scottish Borders",
 			"Code": "S12000026",
-			"Type": "vubis",
-			"Index": "Isbn",
-			"Url": "https://librarysearch.scotborders.gov.uk/vs/",
+			"Type": "iguana",
+			"Database": "1",
+			"Faceted": true,
+			"LibraryFacet": "Items held at",
+			"Url": "https://liveborders.inforlib.uk/iguana/",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -1717,8 +1705,8 @@
 		{
 			"Name": "Stirling",
 			"Code": "S12000030",
-			"Type": "vufind",
-			"Url": "https://vufind-st.sedar.org.uk/",
+			"Type": "enterprise",
+			"Url": "https://scl.ent.sirsidynix.net.uk/client/en_GB/default/",
 			"TestISBN": "9780751565355"
 		},
 		{
@@ -1897,7 +1885,6 @@
 			"ArenaName": "AUK000212",
 			"IgnoreSSL": true,
 			"ISBNAlias": "number",
-			"SearchType": "Keyword",
 			"Url": "https://libraries.wakefield.gov.uk/web/arena/",
 			"Advanced": "advanced-search",
 			"OrganisationId": "AUK000212|1",
@@ -1910,7 +1897,6 @@
 			"Id": "140001",
 			"ArenaName": "AUK000014",
 			"ISBNAlias": "number",
-			"SearchType": "Keyword",
 			"Url": "https://libcat.walsall.gov.uk/web/arena/",
 			"Advanced": "advanced-search",
 			"OrganisationId": "AUK000014|0",
@@ -1991,7 +1977,6 @@
 			"Id": "380001",
 			"ArenaName": "AUK000038",
 			"ISBNAlias": "number",
-			"SearchType": "Keyword",
 			"Url": "https://arena.westsussex.gov.uk/web/arena/",
 			"Advanced": "extended-search",
 			"OrganisationId": "AUK000038|0",
@@ -2031,12 +2016,14 @@
 			"Type": "arena",
 			"Id": "400001",
 			"ArenaName": "AUK000040",
-			"ISBNAlias": "number",
-			"SearchType": "Keyword",
-			"Url": "https://libraries.wiltshire.gov.uk/web/arena/",
-			"Advanced": "advanced-search",
-			"OrganisationId": "AUK000040|0",
+			"OrganisationId": "AUK000040|1",
 			"OrganisationName": "Wiltshire Libraries",
+			"ISBNAlias": "number",
+			"Url": "https://libraries.wiltshire.gov.uk/web/arena/",
+			"AdvancedUrl": "advanced-search",
+			"LibrariesUrl": "advanced-search?p_p_id=extendedSearch_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=/extendedSearch/?wicket:interface=:0:extendedSearchPanel:extendedSearchForm:organisationHierarchyPanel:organisationContainer:organisationChoice::IBehaviorListener:0:&p_p_cacheability=cacheLevelPage&random=0.08709241788681465",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_pos=2&p_p_col_count=4&p_r_p_687834046_facet_queries=&p_r_p_687834046_search_item_no=0&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_item_id=[ITEMID]&p_r_p_687834046_agency_name=[ARENANAME]",
+			"SearchUrl": "search?p_auth=NJXnzkEv&p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=[BOOKQUERY]",
 			"TestISBN": "9781408810545"
 		},
 		{

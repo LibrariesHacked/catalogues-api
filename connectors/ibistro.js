@@ -23,7 +23,7 @@ var common = require('../connectors/common')
 exports.getService = function (svc) {
   var service = common.getService(svc)
   service.CatalogueUrl = svc.Url + svc.Home
-  return service;
+  return service
 }
 
 /// ////////////////////////////////////////

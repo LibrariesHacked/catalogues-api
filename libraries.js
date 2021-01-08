@@ -62,7 +62,7 @@ exports.isbnSearch = async function (req, res) {
     })
 
   var responses = await async.parallel(searches)
-  return responses
+  res.send(responses)
 }
 
 exports.thingISBN = async function (req, res) {

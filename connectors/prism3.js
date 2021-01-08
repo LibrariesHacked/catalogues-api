@@ -22,8 +22,8 @@ var reqHeader = { 'Content-Type': 'text/xml; charset=utf-8' }
 // Function: getService
 /// ////////////////////////////////////////
 exports.getService = function (svc) {
-  var service = common.getService(svc);
-  return service;
+  var service = common.getService(svc)
+  return service
 }
 
 /// ////////////////////////////////////////

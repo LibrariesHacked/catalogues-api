@@ -14,84 +14,98 @@ axios.defaults.withCredentials = true
 
 const common = require('../connectors/common')
 
-const ITEM_URL = 'results?p_auth=cnJs8BK0&p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_pos=2&p_p_col_count=4&p_r_p_687834046_facet_queries=&p_r_p_687834046_search_item_no=0&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_item_id=[ITEMID]&p_r_p_687834046_agency_name=[ARENANAME]'
-const SEARCH_URL = 'search?p_auth=NJXnzkEv&p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=[BOOKQUERY]'
-const AVAILABILITY_CONTAINER = '/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel::IBehaviorListener:0:'
+/**
+ * Gets the object representing the service
+ * @param {object} service
+ */
+exports.getService = (service) => { return common.getService(service) }
 
-exports.getService = (svc) => { return common.getService(svc) }
-
+/**
+ * Gets the libraries in the service based upon possible search and filters within the library catalogue
+ * @param {object} service
+ */
 exports.getLibraries = async function (service) {
-  var responseLibraries = { service: service.Name, code: service.Code, libraries: [], start: new Date() }
+  const responseLibraries = common.initialiseGetLibrariesResponse(service)
 
+  // Sometimes we use libraries that are hardcoded into the config
   if (service.Libraries) {
-    for (var lib in service.Libraries) responseLibraries.libraries.push(lib)
-    responseLibraries.end = new Date()
-    return responseLibraries
+    for (const lib in service.Libraries) responseLibraries.libraries.push(lib)
+    return common.endResponse(responseLibraries)
   }
 
-  var advancedSearchResponse = await axios.get(service.Url + service.Advanced)
+  // Get the advanced search page
+  let advancedSearchResponse = null
+  try {
+    advancedSearchResponse = await axios.get(service.Url + service.AdvancedUrl)
+  } catch (e) { common.endResponse(responseLibraries) }
 
-  var $ = cheerio.load(advancedSearchResponse.data)
-
+  // The advanced search page may have libraries listed on it
+  let $ = cheerio.load(advancedSearchResponse.data)
   if ($('.arena-extended-search-branch-choice option').length > 1) {
     $('.arena-extended-search-branch-choice option').each(function () {
-      if ($(this).text() !== 'Select library') responseLibraries.libraries.push($(this).text())
+      if (common.isLibrary($(this).text())) responseLibraries.libraries.push($(this).text())
     })
-    return responseLibraries
+    return common.endResponse(responseLibraries)
   }
 
-  var headers = { Accept: 'text/xml', 'Wicket-Ajax': true, 'Wicket-FocusedElementId': 'id__extendedSearch__WAR__arenaportlet____e', 'Content-Type': 'application/x-www-form-urlencoded' }
-  var url = service.Url + service.Advanced + '?p_p_id=extendedSearch_WAR_arenaportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=/extendedSearch/?wicket:interface=:0:extendedSearchPanel:extendedSearchForm:organisationHierarchyPanel:organisationContainer:organisationChoice::IBehaviorListener:0:&p_p_cacheability=cacheLevelPage&random=0.08709241788681465'
+  // If not we'll need to call a portlet to get the data
+  const headers = { Accept: 'text/xml', 'Wicket-Ajax': true, 'Wicket-FocusedElementId': 'id__extendedSearch__WAR__arenaportlet____e', 'Content-Type': 'application/x-www-form-urlencoded' }
+  const url = service.Url + service.LibrariesUrl
+  let responseHeaderRequest = null
+  try {
+    responseHeaderRequest = await axios.post(url, querystring.stringify({ 'organisationHierarchyPanel:organisationContainer:organisationChoice': service.OrganisationId }), { headers: headers })
+  } catch (e) { common.endResponse(responseLibraries) }
 
-  var responseHeaderRequest = await axios.post(url, querystring.stringify({ 'organisationHierarchyPanel:organisationContainer:organisationChoice': service.OrganisationId }), { headers: headers })
-
-  var js = await xml2js.parseStringPromise(responseHeaderRequest.data)
-
-  if (js && js['ajax-response'] && js['ajax-response'].component) {
+  // Parse the results of the request
+  const js = await xml2js.parseStringPromise(responseHeaderRequest.data)
+  if (js && js !== 'Undeployed' && js['ajax-response'] && js['ajax-response'].component) {
     $ = cheerio.load(js['ajax-response'].component[0]._)
     $('option').each(function () {
-      if ($(this).text() !== 'Select library') responseLibraries.libraries.push($(this).text())
+      if (common.isLibrary($(this).text())) responseLibraries.libraries.push($(this).text())
     })
   }
-  return responseLibraries
+  return common.endResponse(responseLibraries)
 }
 
-exports.searchByISBN = async function (isbn, lib) {
-  var responseHoldings = { service: lib.Name, code: lib.Code, availability: [], start: new Date() }
-  var numLibs = 0
-  var currentOrg = null
+/**
+ * Retrieves the availability summary of an ISBN by library
+ * @param {string} isbn
+ * @param {object} service
+ */
+exports.searchByISBN = async function (isbn, service) {
+  const responseHoldings = common.initialiseSearchByISBNResponse(service)
 
-  var bookQuery = (lib.SearchType !== 'Keyword' ? lib.ISBNAlias + '_index:' + isbn : isbn)
-  if (lib.OrganisationId) bookQuery = 'organisationId_index:' + lib.OrganisationId + '+AND+' + bookQuery
-  responseHoldings.url = lib.Url + SEARCH_URL.replace('[BOOKQUERY]', bookQuery)
+  let bookQuery = (service.SearchType !== 'Keyword' ? service.ISBNAlias + '_index:' + isbn : isbn)
+  if (service.OrganisationId) bookQuery = 'organisationId_index:' + service.OrganisationId + '+AND+' + bookQuery
+  responseHoldings.url = service.Url + service.SearchUrl.replace('[BOOKQUERY]', bookQuery)
 
-  var searchResponse = await axios.get({ url: responseHoldings.url, timeout: 20000, jar: true, agent: agent, rejectUnauthorized: !lib.IgnoreSSL })
+  const searchResponse = await axios.get(responseHoldings.url, { timeout: 20000, jar: false, rejectUnauthorized: true })
 
-  if (searchResponse.lastIndexOf('search_item_id=') === -1) return responseHoldings
-  var itemId = searchResponse.substring(searchResponse.lastIndexOf('search_item_id=') + 15)
-  var url = lib.Url + ITEM_URL.replace('[ARENANAME]', lib.ArenaName).replace('[ITEMID]', itemId.substring(0, itemId.indexOf('&')))
+  // No item found
+  if (!searchResponse.data || (searchResponse.data && searchResponse.data.lastIndexOf('search_item_id') === -1)) return common.endResponse(responseHoldings)
 
-  var itemPageResponse = await axios.get({ agent: agent, rejectUnauthorized: !lib.IgnoreSSL, url: url, timeout: 20000, headers: { Connection: 'keep-alive' }, jar: true })
-
-  var $ = cheerio.load(itemPageResponse)
-  if ($('.arena-availability-viewbranch').length > 0) {
+  // Call to the item page
+  const pageText = searchResponse.data.replace(/\\x3d/g, '=').replace(/\\x26/g, '&')
+  const itemId = pageText.substring(pageText.lastIndexOf('search_item_id=') + 15)
+  const itemUrl = service.Url + service.ItemUrl.replace('[ARENANAME]', service.ArenaName).replace('[ITEMID]', itemId.substring(0, itemId.indexOf('&')))
+  const itemPageResponse = await axios.get(itemUrl, { rejectUnauthorized: true, timeout: 20000, headers: { Connection: 'keep-alive' }, jar: true })
+  var $ = cheerio.load(itemPageResponse.data)
+  if ($('.arena-availability-viewbranch').length > 0) { // If the item holdings are available immediately on the page
     $('.arena-availability-viewbranch').each(function () {
       var libName = $(this).find('.arena-branch-name span').text()
       var totalAvailable = $(this).find('.arena-availability-info span').eq(0).text().replace('Total ', '')
       var checkedOut = $(this).find('.arena-availability-info span').eq(1).text().replace('On loan ', '')
       if (libName) responseHoldings.availability.push({ library: libName, available: ((totalAvailable ? parseInt(totalAvailable) : 0) - (checkedOut ? parseInt(checkedOut) : 0)), unavailable: (checkedOut !== '' ? parseInt(checkedOut) : 0) })
     })
-    return responseHoldings
+    return common.endResponse(responseHoldings)
   }
 
-  var headers = { Accept: 'text/xml', 'Wicket-Ajax': true }
-  var containerUrl = lib.Url + 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + AVAILABILITY_CONTAINER + '&p_p_cacheability=cacheLevelPage&p_p_col_id=column-2&p_p_col_pos=1&p_p_col_count=3'
-
-  var containerResponse = await axios.get({ agent: agent, rejectUnauthorized: !lib.IgnoreSSL, url: containerUrl, headers: headers, timeout: 20000, jar: true })
-
-  var js = await xml2js.parseStringPromise(containerResponse)
-
-  if (!js['ajax-response'].component) return responseHoldings
+  // Get the item holdings widget
+  const itemPortletHeader = { Accept: 'text/xml', 'Wicket-Ajax': true }
+  const itemPortletUrl = service.Url + service.HoldingsUrl
+  var itemPortletResponse = await axios.get(itemPortletUrl, { rejectUnauthorized: true, headers: itemPortletHeader, timeout: 20000, jar: true })
+  var js = await xml2js.parseStringPromise(itemPortletResponse.data)
+  if (!js['ajax-response'] || !js['ajax-response'].component) return common.endResponse(responseHoldings)
   $ = cheerio.load(js['ajax-response'].component[0]._)
 
   if ($('.arena-holding-nof-total, .arena-holding-nof-checked-out, .arena-holding-nof-available-for-loan').length > 0) {
@@ -101,32 +115,32 @@ exports.searchByISBN = async function (isbn, lib) {
       var checkedOut = $(this).find('td.arena-holding-nof-checked-out span.arena-value').text()
       if (libName) responseHoldings.availability.push({ library: libName, available: (parseInt(totalAvailable) - (checkedOut ? parseInt(checkedOut) : 0)), unavailable: (checkedOut !== '' ? parseInt(checkedOut) : 0) })
     })
-    return responseHoldings
+    return common.endResponse(responseHoldings)
   }
 
-  $('.arena-holding-hyper-container .arena-holding-container a span').each(function (i) { if ($(this).text().trim() === (lib.OrganisationName || lib.Name)) currentOrg = i })
-
+  let currentOrg = null
+  $('.arena-holding-hyper-container .arena-holding-container a span').each(function (i) { if ($(this).text().trim() === (service.OrganisationName || service.Name)) currentOrg = i })
   if (currentOrg == null) return responseHoldings
 
   var holdingsHeaders = { Accept: 'text/xml', 'Wicket-Ajax': true }
   holdingsHeaders['Wicket-FocusedElementId'] = 'id__crDetailWicket__WAR__arenaportlets____2a'
   var resourceId = '/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel:content:holdingsView:' + (currentOrg + 1) + ':holdingContainer:togglableLink::IBehaviorListener:0:'
-  var holdingsUrl = lib.Url + 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + resourceId + '&p_p_cacheability='
-  var holdingsResponse = await axios.get({ agent: agent, rejectUnauthorized: !lib.IgnoreSSL, headers: headers, url: holdingsUrl, timeout: 20000, jar: true })
+  var holdingsUrl = service.Url + 'results?p_p_id=' + service.ItemPortlet + '&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + resourceId + '&p_p_cacheability='
+  var holdingsResponse = await axios.get(holdingsUrl, { rejectUnauthorized: true, headers: holdingsHeaders, timeout: 20000, jar: true })
 
   var holdingsJs = await xml2js.parseStringPromise(holdingsResponse)
 
   $ = cheerio.load(holdingsJs['ajax-response'].component[0]._)
   var libsData = $('.arena-holding-container')
-  numLibs = libsData.length
+  const numLibs = libsData.length
   if (!numLibs || numLibs === 0) return responseHoldings
 
   libsData.each(async function (i) {
     resourceId = '/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel:content:holdingsView:' + (currentOrg + 1) + ':childContainer:childView:' + i + ':holdingPanel:holdingContainer:togglableLink::IBehaviorListener:0:'
-    url = lib.Url + 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + resourceId + '&p_p_cacheability='
+    const liburl = service.Url + 'results?p_p_id=' + service.ItemPortlet + '&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + resourceId + '&p_p_cacheability='
 
     var headers = { Accept: 'text/xml', 'Wicket-Ajax': true }
-    var libraryAvailabilityResponse = await axios.get({ agent: agent, rejectUnauthorized: !lib.IgnoreSSL, headers: headers, url: url, timeout: 20000, jar: true })
+    var libraryAvailabilityResponse = await axios.get(liburl, { rejectUnauthorized: true, headers: headers, timeout: 20000, jar: true })
     var availabilityJs = await xml2js.parseStringPromise(libraryAvailabilityResponse)
     if (availabilityJs && availabilityJs['ajax-response']) {
       $ = cheerio.load(availabilityJs['ajax-response'].component[0]._)
@@ -136,5 +150,5 @@ exports.searchByISBN = async function (isbn, lib) {
       responseHoldings.availability.push({ library: $('span.arena-holding-link').text(), available: ((totalAvailable ? parseInt(totalAvailable) : 0) - (checkedOut ? parseInt(checkedOut) : 0)), unavailable: (checkedOut ? parseInt(checkedOut) : 0) })
     }
   })
-  return responseHoldings
+  return common.endResponse(responseHoldings)
 }

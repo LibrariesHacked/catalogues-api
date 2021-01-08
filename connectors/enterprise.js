@@ -25,8 +25,8 @@ var headerPost = { 'X-Requested-With': 'XMLHttpRequest' }
 // Function: getService
 /// ////////////////////////////////////////
 exports.getService = function (svc) {
-  var service = common.getService(svc);
-  return service;
+  var service = common.getService(svc)
+  return service
 }
 
 /// ////////////////////////////////////////
