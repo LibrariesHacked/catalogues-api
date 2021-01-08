@@ -79,7 +79,7 @@ exports.searchByISBN = async function (isbn, service) {
   if (service.OrganisationId) bookQuery = 'organisationId_index:' + service.OrganisationId + '+AND+' + bookQuery
   responseHoldings.url = service.Url + service.SearchUrl.replace('[BOOKQUERY]', bookQuery)
 
-  const searchResponse = await axios.get(responseHoldings.url, { timeout: 20000, jar: false, rejectUnauthorized: true })
+  const searchResponse = await axios.get(responseHoldings.url, { timeout: 20000, jar: true, rejectUnauthorized: true })
 
   // No item found
   if (!searchResponse.data || (searchResponse.data && searchResponse.data.lastIndexOf('search_item_id') === -1)) return common.endResponse(responseHoldings)
@@ -102,7 +102,7 @@ exports.searchByISBN = async function (isbn, service) {
 
   // Get the item holdings widget
   const itemPortletHeader = { Accept: 'text/xml', 'Wicket-Ajax': true }
-  const itemPortletUrl = service.Url + service.HoldingsUrl
+  const itemPortletUrl = service.Url + service.HoldingsPanelUrl
   var itemPortletResponse = await axios.get(itemPortletUrl, { rejectUnauthorized: true, headers: itemPortletHeader, timeout: 20000, jar: true })
   var js = await xml2js.parseStringPromise(itemPortletResponse.data)
   if (!js['ajax-response'] || !js['ajax-response'].component) return common.endResponse(responseHoldings)
@@ -125,23 +125,22 @@ exports.searchByISBN = async function (isbn, service) {
   var holdingsHeaders = { Accept: 'text/xml', 'Wicket-Ajax': true }
   holdingsHeaders['Wicket-FocusedElementId'] = 'id__crDetailWicket__WAR__arenaportlets____2a'
   var resourceId = '/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel:content:holdingsView:' + (currentOrg + 1) + ':holdingContainer:togglableLink::IBehaviorListener:0:'
-  var holdingsUrl = service.Url + 'results?p_p_id=' + service.ItemPortlet + '&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + resourceId + '&p_p_cacheability='
+  var holdingsUrl = service.Url + service.HoldingsDetailUrl.replace('[RESOURCEID]', resourceId)
   var holdingsResponse = await axios.get(holdingsUrl, { rejectUnauthorized: true, headers: holdingsHeaders, timeout: 20000, jar: true })
 
-  var holdingsJs = await xml2js.parseStringPromise(holdingsResponse)
+  var holdingsJs = await xml2js.parseStringPromise(holdingsResponse.data)
 
   $ = cheerio.load(holdingsJs['ajax-response'].component[0]._)
   var libsData = $('.arena-holding-container')
   const numLibs = libsData.length
-  if (!numLibs || numLibs === 0) return responseHoldings
+  if (!numLibs || numLibs === 0) return common.endResponse(responseHoldings)
 
   libsData.each(async function (i) {
     resourceId = '/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel:content:holdingsView:' + (currentOrg + 1) + ':childContainer:childView:' + i + ':holdingPanel:holdingContainer:togglableLink::IBehaviorListener:0:'
-    const liburl = service.Url + 'results?p_p_id=' + service.ItemPortlet + '&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=' + resourceId + '&p_p_cacheability='
-
+    const liburl = service.Url + service.HoldingsLibraryUrl.replace('[RESOURCEID]', resourceId)
     var headers = { Accept: 'text/xml', 'Wicket-Ajax': true }
     var libraryAvailabilityResponse = await axios.get(liburl, { rejectUnauthorized: true, headers: headers, timeout: 20000, jar: true })
-    var availabilityJs = await xml2js.parseStringPromise(libraryAvailabilityResponse)
+    var availabilityJs = await xml2js.parseStringPromise(libraryAvailabilityResponse.data)
     if (availabilityJs && availabilityJs['ajax-response']) {
       $ = cheerio.load(availabilityJs['ajax-response'].component[0]._)
       var totalAvailable = $('td.arena-holding-nof-total span.arena-value').text()
