@@ -886,8 +886,8 @@
 				"Item on shelves"
 			],
 			"Url": "https://hull.sirsidynix.net.uk/",
-			"Home": "uhtbin/cgisirsi.exe/x/0/0/57/49?user_id=HULLWEB&password=",
-			"Search": "uhtbin/cgisirsi.exe/x/0/0/5?searchdata1=",
+			"Home": "uhtbin/cgisirsi/x/0/0/57/49?user_id=HULLWEB&amp;password=",
+			"Search": "uhtbin/cgisirsi/x/0/0/5?searchdata1=",
 			"TestISBN": "9780747538493"
 		},
 		{
