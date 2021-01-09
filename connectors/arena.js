@@ -135,12 +135,18 @@ exports.searchByISBN = async function (isbn, service) {
   const numLibs = libsData.length
   if (!numLibs || numLibs === 0) return common.endResponse(responseHoldings)
 
-  libsData.each(async function (i) {
+  const availabilityRequests = []
+  libsData.each(function (i) {
     resourceId = '/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel:content:holdingsView:' + (currentOrg + 1) + ':childContainer:childView:' + i + ':holdingPanel:holdingContainer:togglableLink::IBehaviorListener:0:'
     const liburl = service.Url + service.HoldingsLibraryUrl.replace('[RESOURCEID]', resourceId)
     var headers = { Accept: 'text/xml', 'Wicket-Ajax': true }
-    var libraryAvailabilityResponse = await axios.get(liburl, { rejectUnauthorized: true, headers: headers, timeout: 20000, jar: true })
-    var availabilityJs = await xml2js.parseStringPromise(libraryAvailabilityResponse.data)
+    availabilityRequests.push(axios.get(liburl, { rejectUnauthorized: true, headers: headers, timeout: 20000, jar: true }))
+  })
+
+  const responses = await axios.all(availabilityRequests)
+
+  responses.forEach(async (response) => {
+    var availabilityJs = await xml2js.parseStringPromise(response.data)
     if (availabilityJs && availabilityJs['ajax-response']) {
       $ = cheerio.load(availabilityJs['ajax-response'].component[0]._)
       var totalAvailable = $('td.arena-holding-nof-total span.arena-value').text()
@@ -149,5 +155,6 @@ exports.searchByISBN = async function (isbn, service) {
       responseHoldings.availability.push({ library: $('span.arena-holding-link').text(), available: ((totalAvailable ? parseInt(totalAvailable) : 0) - (checkedOut ? parseInt(checkedOut) : 0)), unavailable: (checkedOut ? parseInt(checkedOut) : 0) })
     }
   })
+
   return common.endResponse(responseHoldings)
 }
