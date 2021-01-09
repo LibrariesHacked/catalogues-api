@@ -47,9 +47,9 @@
 			"Available": [
 				"Available"
 			],
-			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookupavailability/detailItemsDiv0/ent:[ITEMID]/ILS/0/false",
-			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
 			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/barking-and-dagenham/",
+			"LibraryNameFilter": "Barking and Dagenham",
 			"TestISBN": "9780747538486"
 		},
 		{

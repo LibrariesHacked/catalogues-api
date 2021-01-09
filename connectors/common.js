@@ -39,7 +39,10 @@ exports.isJsonString = function (str) {
  * @param {string} str
  */
 exports.isLibrary = function (str) {
-  return (str.indexOf('Select library') === -1 && str.indexOf('Invalid key') === -1)
+  const nonLibraries = ['Select library', 'Invalid key', 'Any Library']
+  let library = true
+  nonLibraries.forEach(nl => { if (str.indexOf(nl) !== -1) library = false })
+  return library
 }
 
 /**
