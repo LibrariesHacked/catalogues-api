@@ -1,18 +1,19 @@
 
 const xml2js = require('xml2js')
 const cheerio = require('cheerio')
+const querystring = require('querystring')
+
 const axios = require('axios').default
 const axiosCookieJarSupport = require('axios-cookiejar-support').default
 const tough = require('tough-cookie')
-var querystring = require('querystring')
-
 axiosCookieJarSupport(axios)
-
 const cookieJar = new tough.CookieJar()
 axios.defaults.jar = cookieJar
 axios.defaults.withCredentials = true
 
 const common = require('../connectors/common')
+
+console.log('arena connector loading...')
 
 /**
  * Gets the object representing the service

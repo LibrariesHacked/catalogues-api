@@ -2,7 +2,7 @@
 /**
  * The majority of the get service call is just returning information that's in the service
  * object from data.json.  Maintain a list here of what to return.
- * @param {*} service
+ * @param {object} service
  */
 exports.getService = function (service) {
   return {
@@ -25,7 +25,7 @@ exports.handleErrors = function (error, httpMessage) {
 
 /**
  * Test if a string is json
- * @param {*} str
+ * @param {string} str
  */
 exports.isJsonString = function (str) {
   try {
@@ -36,7 +36,7 @@ exports.isJsonString = function (str) {
 
 /**
  * Test if a string is a library
- * @param {*} str
+ * @param {string} str
  */
 exports.isLibrary = function (str) {
   return (str.indexOf('Select library') === -1 && str.indexOf('Invalid key') === -1)
@@ -44,7 +44,7 @@ exports.isLibrary = function (str) {
 
 /**
  * Creates a new object to store results for the get libraries request
- * @param {*} service
+ * @param {object} service
  */
 exports.initialiseGetLibrariesResponse = function (service) {
   return { service: service.Name, code: service.Code, libraries: [], start: new Date(), end: null }
@@ -52,7 +52,7 @@ exports.initialiseGetLibrariesResponse = function (service) {
 
 /**
  * Creates a new object to store search results for the ISBN search
- * @param {*} service
+ * @param {object} service
  */
 exports.initialiseSearchByISBNResponse = function (service) {
   return { service: service.Name, code: service.Code, availability: [], start: new Date(), end: null }
