@@ -271,10 +271,13 @@
 		{
 			"Name": "Caerphilly",
 			"Code": "W06000018",
-			"Type": "iguana",
-			"Database": "1_LIBS",
-			"Faceted": false,
-			"Url": "http://libraries.caerphilly.gov.uk/iguana/",
+			"Type": "enterprise",
+			"Available": [
+				"SHELVES",
+				"RESERVES"
+			],
+			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/caer_en/",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -333,10 +336,13 @@
 		{
 			"Name": "Sir Ceredigion - Ceredigion",
 			"Code": "W06000008",
-			"Type": "iguana",
-			"Database": "6",
-			"Faceted": false,
-			"Url": "http://libraries.ceredigion.gov.uk/iguana/",
+			"Type": "enterprise",
+			"Available": [
+				"SHELVES",
+				"RESERVES"
+			],
+			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"Url": "https://libraries.ceredigion.gov.uk/client/en_GB/cer_en/",
 			"TestISBN": "9781408855683"
 		},
 		{
@@ -401,7 +407,7 @@
 			"Database": "1",
 			"Faceted": false,
 			"Url": "https://librarycatalogue.coventry.gov.uk/iguana/",
-			"TestISBN": "9781408855669"
+			"TestISBN": "Coventry"
 		},
 		{
 			"Name": "Croydon",
@@ -514,10 +520,10 @@
 			"Name": "Dumfries and Galloway",
 			"Code": "S12000006",
 			"Type": "iguana",
-			"Database": "1",
+			"Database": "1_STOCK",
 			"Faceted": true,
 			"LibraryFacet": "Location (restriction)",
-			"Url": "http://library.dumgal.gov.uk/iguana/",
+			"Url": "https://dumgal.inforlib.uk/iguana/",
 			"TestISBN": "9780747538493"
 		},
 		{
