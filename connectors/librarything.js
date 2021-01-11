@@ -1,37 +1,22 @@
-/// ////////////////////////////////////////
-// LIBRARYTHING
-/// ////////////////////////////////////////
+const xml2js = require('xml2js')
+const axios = require('axios')
+
 console.log('library thing connector loading...')
 
-/// ////////////////////////////////////////
-// REQUIRES
-// Request (for HTTP calls) and xml2js for
-// converting xml response to JSON
-/// ////////////////////////////////////////
-var xml2js = require('xml2js')
-var request = require('request')
-var common = require('../connectors/common')
+const URL = 'http://www.librarything.com/api/thingISBN/'
 
-/// ////////////////////////////////////////
-// LIBRARYTHING VARIABLES
-/// ////////////////////////////////////////
-var url = 'http://www.librarything.com/api/thingISBN/'
+/**
+ * Gets a set of ISBNs relating to a single ISBN from the library thing thingISBN service
+ * @param {string} isbn
+ */
+exports.thingISBN = async (isbn) => {
+  const responseISBNs = { isbns: [] }
 
-/// ////////////////////////////////////////
-// Function: thingISBN
-/// ////////////////////////////////////////
-exports.thingISBN = function (isbn, callback) {
-  var responseISBNs = { isbns: [] }
-  var handleThingISBN = function (err, msg, res) {
-    if (common.handleErrors(callback, responseISBNs, err, msg)) return
-    xml2js.parseString(res, parseISBNResponse)
-  }
-  var parseISBNResponse = function (err, res) {
-    if (common.handleErrors(callback, responseISBNs, err)) return
-    var isbns = res.idlist.isbn
-    if (isbns) isbns.forEach(function (item) { responseISBNs.isbns.push(item) })
-    common.completeCallback(callback, responseISBNs)
-  }
-  // Request 1: Call to LibraryThing which returns XML of ISBNs
-  request.get({ url: url + isbn, timeout: 1000 }, handleThingISBN)
+  const isbnRequest = await axios.get(URL + isbn, { timeout: 1000 })
+
+  const isbnJs = await xml2js.parseStringPromise(isbnRequest.data)
+  const isbns = isbnJs.idlist.isbn
+  if (isbns) isbns.forEach((item) => responseISBNs.isbns.push(item))
+
+  return responseISBNs
 }
