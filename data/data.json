@@ -133,7 +133,7 @@
 			"Code": "E06000008",
 			"Type": "spydus",
 			"Url": "https://bwdlibraries.spydus.co.uk/",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9781408835012"
 		},
 		{
 			"Name": "Blackpool",
@@ -285,7 +285,7 @@
 			"Code": "E08000033",
 			"Type": "spydus",
 			"Url": "https://calderdale.spydus.co.uk/",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9780751565362"
 		},
 		{
 			"Name": "Cambridgeshire",
@@ -359,7 +359,7 @@
 			"Type": "koha",
 			"Url": "https://cheslive.koha-ptfs.co.uk/",
 			"MultiBranchLimit": "WEST",
-			"TestISBN": "9780747562184"
+			"TestISBN": "9781408845660"
 		},
 		{
 			"Name": "City of London",
@@ -557,14 +557,13 @@
 		{
 			"Name": "East Ayrshire",
 			"Code": "S12000008",
-			"Type": "ibistro",
+			"Type": "enterprise",
 			"Available": [
 				"SHELVES",
 				"RESERVES"
 			],
-			"Url": "https://ealt.sirsidynix.net.uk/",
-			"Home": "uhtbin/webcat",
-			"Search": "uhtbin/cgisirsi/x/0/0/5?searchdata1=",
+			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"Url": "https://ealt.ent.sirsidynix.net.uk/client/en_GB/default",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -688,7 +687,7 @@
 				"Available"
 			],
 			"Url": "https://capitadiscovery.co.uk/gateshead/",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9781408855713"
 		},
 		{
 			"Name": "Glasgow",
@@ -762,7 +761,7 @@
 			"Code": "E06000006",
 			"Type": "koha",
 			"Url": "https://hpl.koha-ptfs.eu/",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9780751565355"
 		},
 		{
 			"Name": "Hammersmith and Fulham",
@@ -854,7 +853,7 @@
 				"Available"
 			],
 			"Url": "https://hlh.spydus.co.uk/",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9780751565355"
 		},
 		{
 			"Name": "Hillingdon",
@@ -1054,8 +1053,11 @@
 		{
 			"Name": "Lincolnshire",
 			"Code": "E10000019",
-			"Type": "spydus",
-			"Url": "https://lincolnshire.spydus.co.uk/",
+			"Type": "prism3",
+			"Available": [
+				"Available"
+			],
+			"Url": "https://capitadiscovery.co.uk/lincolnshire/",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -1611,7 +1613,7 @@
 				"Available"
 			],
 			"Url": "https://capitadiscovery.co.uk/solihull/",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9780751565355"
 		},
 		{
 			"Name": "Somerset",
@@ -2072,10 +2074,11 @@
 		{
 			"Name": "Worcestershire",
 			"Code": "E10000034",
-			"Type": "prism3",
+			"Type": "enterprise",
 			"Available": [
 				"Available"
 			],
+			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
 			"Url": "https://capitadiscovery.co.uk/worcs/",
 			"TestISBN": "9780747538493"
 		},
@@ -2087,7 +2090,7 @@
 				"Available"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-			"Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/wrexham_en/",
+			"Url": "https://wcc.ent.sirsidynix.net.uk/client/en_GB/wcc/",
 			"TestISBN": "9780747591054"
 		},
 		{

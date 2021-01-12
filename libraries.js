@@ -75,7 +75,7 @@ exports.openLibrarySearch = async (req, res) => {
   res.send(openLibData)
 }
 
-exports.testIsbnSearch = (req, res) => {
+exports.testIsbnSearch = async (req, res) => {
   var searches = data.LibraryServices
     .filter((service) => {
       return (service.Type !== '' && (!req.query.service || service.Name === req.query.service || service.Code === req.query.service))
@@ -83,9 +83,10 @@ exports.testIsbnSearch = (req, res) => {
     .map((service) => {
       return async () => {
         var response = await serviceFunctions[service.Type].searchByISBN(service.TestISBN, service)
-        if (response.availability.length === 0) console.log('None found: ' + JSON.stringify(response))
+        if (response.availability.length === 0) console.log('None found. ' + JSON.stringify(response))
         return response
       }
     })
-  async.series(searches)
+  await async.parallel(searches)
+  res.send({})
 }

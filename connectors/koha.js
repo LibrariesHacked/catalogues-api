@@ -53,8 +53,8 @@ exports.searchByISBN = async function (isbn, service) {
   const itemPageRequest = await axios.get(bibLink + '&viewallitems=1', { timeout: 30000 })
   $ = cheerio.load(itemPageRequest.data)
   const libs = {}
-  $('.holdingst tbody').find('tr').each((idx, table) => {
-    var lib = $(table).find('td.location span span').eq(1).text().trim()
+  $('#holdingst tbody').find('tr').each((idx, table) => {
+    var lib = $(table).find('td.location span span').text().trim()
     if (!libs[lib]) libs[lib] = { available: 0, unavailable: 0 }
     $(table).find('td.status span').text().trim() === 'Available' ? libs[lib].available++ : libs[lib].unavailable++
   })
