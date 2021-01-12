@@ -512,8 +512,8 @@
 		{
 			"Name": "Dudley",
 			"Code": "E08000027",
-			"Type": "viewpoint3",
-			"Url": "https://libcat.dudley.gov.uk/",
+			"Type": "prism3",
+			"Url": "https://capitadiscovery.co.uk/dudley/",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -1412,8 +1412,8 @@
 		{
 			"Name": "Plymouth",
 			"Code": "E06000026",
-			"Type": "viewpoint3",
-			"Url": "https://www.webopac.plymouth.gov.uk/",
+			"Type": "arena",
+			"Url": "https://library.plymouth.gov.uk/web/arena",
 			"TestISBN": "9780747562184"
 		},
 		{
@@ -1842,8 +1842,8 @@
 		{
 			"Name": "Torbay",
 			"Code": "E06000027",
-			"Type": "viewpoint3",
-			"Url": "https://libraries.torbay.gov.uk/",
+			"Type": "arena",
+			"Url": "https://www.torbaylibraries.org.uk/web/arena/catalogue",
 			"TestISBN": "9780751565355"
 		},
 		{
