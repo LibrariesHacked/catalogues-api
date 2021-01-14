@@ -524,7 +524,7 @@
 			"Faceted": true,
 			"LibraryFacet": "Location (restriction)",
 			"Url": "https://dumgal.inforlib.uk/iguana/",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9780751565355"
 		},
 		{
 			"Name": "Dundee City",
@@ -1367,7 +1367,7 @@
 			"Code": "E08000004",
 			"Type": "spydus",
 			"Url": "https://oldham.spydus.co.uk/",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9781510051317"
 		},
 		{
 			"Name": "Orkney Islands",
@@ -1404,7 +1404,7 @@
 			"Code": "S12000024",
 			"Type": "spydus",
 			"Url": "https://pkc.spydus.co.uk/",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9781785301544"
 		},
 		{
 			"Name": "Peterborough",
@@ -1504,7 +1504,7 @@
 			"Code": "E09000027",
 			"Type": "spydus",
 			"Url": "https://richmond.spydus.co.uk/",
-			"TestISBN": "9780747558194"
+			"TestISBN": "9781510051317"
 		},
 		{
 			"Name": "Rochdale",
@@ -1744,7 +1744,7 @@
 			"Code": "E10000029",
 			"Type": "spydus",
 			"Url": "https://suffolk.spydus.co.uk/",
-			"TestISBN": "9780751565355"
+			"TestISBN": "9781526622808"
 		},
 		{
 			"Name": "Sunderland",
