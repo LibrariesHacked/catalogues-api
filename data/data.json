@@ -986,11 +986,13 @@
 		{
 			"Name": "Lambeth",
 			"Code": "E09000022",
-			"Type": "prism3",
-			"Available": [
-				"Available"
-			],
-			"Url": "https://capitadiscovery.co.uk/lambeth/",
+			"Type": "arena",
+			"ArenaName": "AUK000271",
+			"Id": "271001",
+			"ISBNAlias": "number",
+			"Url": "https://arena.yourlondonlibrary.net/web/merton/",
+			"Advanced": "extended-search",
+			"OrganisationId": "AUK000271|1",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -1001,16 +1003,16 @@
 				"Available"
 			],
 			"Url": "https://capitadiscovery.co.uk/lancashire/",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9781408855706"
 		},
 		{
 			"Name": "Leeds",
 			"Code": "E08000035",
-			"Type": "prism3",
+			"Type": "enterprise",
 			"Available": [
 				"Available"
 			],
-			"Url": "https://capitadiscovery.co.uk/leeds/",
+			"Url": "https://leeds.ent.sirsidynix.net.uk/client/en_GB/default/",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -1087,7 +1089,7 @@
 			"Code": "E08000003",
 			"Type": "spydus",
 			"Url": "https://manchester.spydus.co.uk/",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9780751565362"
 		},
 		{
 			"Name": "Medway",
@@ -1104,7 +1106,7 @@
 				"Available"
 			],
 			"Url": "https://capitadiscovery.co.uk/merthyr/",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9781408855713"
 		},
 		{
 			"Name": "Merton",
@@ -1147,7 +1149,7 @@
 			"Code": "E06000042",
 			"Type": "spydus",
 			"Url": "https://miltonkeynes.spydus.co.uk/",
-			"TestISBN": "9780747538484"
+			"TestISBN": "9781510051317"
 		},
 		{
 			"Name": "Sir Fynwy - Monmouthshire",
@@ -1280,7 +1282,7 @@
 				"Available"
 			],
 			"Url": "https://capitadiscovery.co.uk/northtyneside/",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9780747583899"
 		},
 		{
 			"Name": "North Yorkshire",
@@ -1290,7 +1292,7 @@
 				"Available"
 			],
 			"Url": "https://capitadiscovery.co.uk/northyorkshire/",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9781408855713"
 		},
 		{
 			"Name": "Northamptonshire",
@@ -1375,7 +1377,7 @@
 				"Available"
 			],
 			"Url": "https://capitadiscovery.co.uk/orkney/",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9780747546245"
 		},
 		{
 			"Name": "Oxfordshire",
@@ -1560,9 +1562,8 @@
 			"Name": "Sefton",
 			"Code": "E08000014",
 			"Type": "koha",
-			"IgnoreSSL": true,
 			"Url": "https://catalogue2.sefton.gov.uk/",
-			"TestISBN": "9781408810569"
+			"TestISBN": "9780751565355"
 		},
 		{
 			"Name": "Sheffield",
@@ -1608,12 +1609,9 @@
 		{
 			"Name": "Solihull",
 			"Code": "E08000029",
-			"Type": "prism3",
-			"Available": [
-				"Available"
-			],
-			"Url": "https://capitadiscovery.co.uk/solihull/",
-			"TestISBN": "9780751565355"
+			"Type": "spydus",
+			"Url": "https://solihull.spydus.co.uk/",
+			"TestISBN": "9780751565362"
 		},
 		{
 			"Name": "Somerset",
@@ -1685,11 +1683,8 @@
 		{
 			"Name": "Southwark",
 			"Code": "E09000028",
-			"Type": "prism3",
-			"Available": [
-				"Available"
-			],
-			"Url": "https://capitadiscovery.co.uk/southwark/",
+			"Type": "spydus",
+			"Url": "https://southwark.spydus.co.uk/",
 			"TestISBN": "9781408834985"
 		},
 		{
@@ -1805,12 +1800,9 @@
 		{
 			"Name": "Swindon",
 			"Code": "E06000030",
-			"Type": "prism3",
-			"Available": [
-				"Available"
-			],
-			"Url": "https://capitadiscovery.co.uk/swindon/",
-			"TestISBN": "9781781100264"
+			"Type": "spydus",
+			"Url": "https://swindon.spydus.co.uk/",
+			"TestISBN": "9781510051317"
 		},
 		{
 			"Name": "Tameside",
@@ -1939,7 +1931,7 @@
 			"Code": "E06000007",
 			"Type": "koha",
 			"Url": "https://libonline.livewirewarrington.co.uk/",
-			"TestISBN": "9781408810606"
+			"TestISBN": "9780747591269"
 		},
 		{
 			"Name": "Warwickshire",
