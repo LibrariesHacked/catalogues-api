@@ -24,10 +24,17 @@ exports.getService = (service) => { return common.getService(service) }
  */
 exports.getLibraries = async function (service) {
   const responseLibraries = common.initialiseGetLibrariesResponse(service)
-  await axios.get(service.Url, { timeout: 20000, jar: true })
-  await axios.post(service.Url + 'pgLogin.aspx?CheckJavascript=1', {}, { jar: true, timeout: 20000 })
-  const libraries = await axios.get(service.Url + service.Libraries, { timeout: 20000, jar: true })
-  const $ = cheerio.load(libraries.data)
+
+  let $ = null
+  try {
+    await axios.get(service.Url, { timeout: 20000, jar: true })
+    await axios.post(service.Url + 'pgLogin.aspx?CheckJavascript=1', {}, { jar: true, timeout: 20000 })
+    const libraries = await axios.get(service.Url + service.Libraries, { timeout: 20000, jar: true })
+    $ = cheerio.load(libraries.data)
+  } catch (e) {
+    return common.endResponse(responseLibraries)
+  }
+
   $('ol.list-unstyled li a').each((idx, tag) => responseLibraries.libraries.push($(tag).text()))
   return common.endResponse(responseLibraries)
 }
@@ -44,11 +51,16 @@ exports.searchByISBN = async function (isbn, service) {
     'Content-Type': 'application/x-www-form-urlencoded'
   }
 
-  await axios.get(service.Url, { timeout: 20000, jar: true })
-  await axios.post(service.Url + 'pgLogin.aspx?CheckJavascript=1', {}, { jar: true, timeout: 20000 })
+  let $ = null
+  try {
+    await axios.get(service.Url, { timeout: 20000, jar: true })
+    await axios.post(service.Url + 'pgLogin.aspx?CheckJavascript=1', {}, { jar: true, timeout: 20000 })
+    const cataloguePage = await axios.post(service.Url + 'pgCatKeywordSearch.aspx', {}, { jar: true, timeout: 20000 })
+    $ = cheerio.load(cataloguePage.data)
+  } catch (e) {
+    return common.endResponse(responseHoldings)
+  }
 
-  const cataloguePage = await axios.post(service.Url + 'pgCatKeywordSearch.aspx', {}, { jar: true, timeout: 20000 })
-  let $ = cheerio.load(cataloguePage.data)
   let aspNetForm = {
     __VIEWSTATE: $('input[name=__VIEWSTATE]').val(),
     __VIEWSTATEGENERATOR: $('input[name=__VIEWSTATEGENERATOR]').val(),
@@ -58,8 +70,15 @@ exports.searchByISBN = async function (isbn, service) {
     ctl00$ctl00$cph1$cph2$btSearch: 'Search'
   }
 
-  const resultPage = await axios.post(service.Url + 'pgCatKeywordSearch.aspx', querystring.stringify(aspNetForm), { gzip: true, jar: true, headers: headers, timeout: 20000 })
-  $ = cheerio.load(resultPage.data)
+  let resultPageUrl = null
+  try {
+    const resultPage = await axios.post(service.Url + 'pgCatKeywordSearch.aspx', querystring.stringify(aspNetForm), { gzip: true, jar: true, headers: headers, timeout: 20000 })
+    $ = cheerio.load(resultPage.data)
+    resultPageUrl = resultPage.config.url
+  } catch (e) {
+    return common.endResponse(responseHoldings)
+  }
+
   if ($('#cph1_cph2_lvResults_lnkbtnTitle_0').length === 0) return common.endResponse(responseHoldings)
   aspNetForm = {
     __EVENTARGUMENT: '',
@@ -71,8 +90,15 @@ exports.searchByISBN = async function (isbn, service) {
     ctl00$ctl00$cph1$cph2$lvResults$DataPagerEx2$ctl00$ctl00: 10
   }
 
-  const itemPage = await axios.post(resultPage.config.url, querystring.stringify(aspNetForm), { gzip: true, jar: true, headers: headers, timeout: 20000 })
-  $ = cheerio.load(itemPage.data)
+  let itemPageUrl = null
+  try {
+    const itemPage = await axios.post(resultPageUrl, querystring.stringify(aspNetForm), { gzip: true, jar: true, headers: headers, timeout: 20000 })
+    $ = cheerio.load(itemPage.data)
+    itemPageUrl = itemPage.config.url
+  } catch (e) {
+    return common.endResponse(responseHoldings)
+  }
+
   aspNetForm = {
     __EVENTARGUMENT: '',
     __EVENTTARGET: '',
@@ -85,8 +111,13 @@ exports.searchByISBN = async function (isbn, service) {
     ctl00$ctl00$cph1$ucItem$lvTitle$ctrl0$btLibraryList: 'Libraries'
   }
 
-  const availabilityPage = await axios.post(itemPage.config.url, querystring.stringify(aspNetForm), { gzip: true, jar: true, headers: headers, timeout: 20000 })
-  $ = cheerio.load(availabilityPage.data)
+  try {
+    const availabilityPage = await axios.post(itemPageUrl, querystring.stringify(aspNetForm), { gzip: true, jar: true, headers: headers, timeout: 20000 })
+    $ = cheerio.load(availabilityPage.data)
+  } catch (e) {
+    return common.endResponse(responseHoldings)
+  }
+
   const libs = {}
   $('#cph1_ucItem_lvTitle2_lvLocation_0_itemPlaceholderContainer_0 table tr').slice(1).each(function () {
     const name = $(this).find('td').eq(0).text().trim()

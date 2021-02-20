@@ -20,9 +20,14 @@ exports.getService = (service) => { return common.getService(service) }
 exports.getLibraries = async function (service) {
   const responseLibraries = common.initialiseGetLibrariesResponse(service)
 
-  const advancedSearchPageRequest = await axios.get(service.Url + 'advancedsearch?target=catalogue', { timeout: 60000 })
+  let $ = null
+  try {
+    const advancedSearchPageRequest = await axios.get(service.Url + 'advancedsearch?target=catalogue', { timeout: 60000 })
+    $ = cheerio.load(advancedSearchPageRequest.data)
+  } catch (e) {
+    return common.endResponse(responseLibraries)
+  }
 
-  const $ = cheerio.load(advancedSearchPageRequest.data)
   $('#locdd option').each((idx, option) => {
     if ($(option).text() !== '') responseLibraries.libraries.push($(option).text())
   })
@@ -38,13 +43,17 @@ exports.getLibraries = async function (service) {
 exports.searchByISBN = async function (isbn, service) {
   const responseHoldings = common.initialiseSearchByISBNResponse(service)
 
-  const searchRequest = await axios.get(service.Url + 'items.json?query=' + isbn, { headers: HEADER, timeout: 30000 })
+  let $ = null
+  try {
+    const searchRequest = await axios.get(service.Url + 'items.json?query=' + isbn, { headers: HEADER, timeout: 30000 })
+    if (searchRequest.data.length === 0) return common.endResponse(responseHoldings)
+    const itemUrl = Object.keys(searchRequest.data)[2]
+    const itemRequest = await axios.get(itemUrl, { headers: HEADER, timeout: 30000 })
+    $ = cheerio.load(itemRequest.data)
+  } catch (e) {
+    return common.endResponse(responseHoldings)
+  }
 
-  if (searchRequest.data.length === 0) return common.endResponse(responseHoldings)
-  var itemUrl = Object.keys(searchRequest.data)[2]
-
-  const itemRequest = await axios.get(itemUrl, { headers: HEADER, timeout: 30000 })
-  const $ = cheerio.load(itemRequest.data)
   $('#availability').find('ul.options li').each((idx, li) => {
     var libr = { library: $(li).find('h3 span span').text().trim(), available: 0, unavailable: 0 }
     $(li).find('div.jsHidden table tbody tr').each((i, tr) => {

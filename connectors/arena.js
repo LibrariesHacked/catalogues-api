@@ -38,7 +38,9 @@ exports.getLibraries = async function (service) {
   let advancedSearchResponse = null
   try {
     advancedSearchResponse = await axios.get(service.Url + service.AdvancedUrl)
-  } catch (e) { common.endResponse(responseLibraries) }
+  } catch (e) {
+    common.endResponse(responseLibraries)
+  }
 
   // The advanced search page may have libraries listed on it
   let $ = cheerio.load(advancedSearchResponse.data)
@@ -52,13 +54,15 @@ exports.getLibraries = async function (service) {
   // If not we'll need to call a portlet to get the data
   const headers = { Accept: 'text/xml', 'Wicket-Ajax': true, 'Wicket-FocusedElementId': 'id__extendedSearch__WAR__arenaportlet____e', 'Content-Type': 'application/x-www-form-urlencoded' }
   const url = service.Url + service.LibrariesUrl
-  let responseHeaderRequest = null
+  let js = null
   try {
-    responseHeaderRequest = await axios.post(url, querystring.stringify({ 'organisationHierarchyPanel:organisationContainer:organisationChoice': service.OrganisationId }), { headers: headers })
-  } catch (e) { common.endResponse(responseLibraries) }
+    const responseHeaderRequest = await axios.post(url, querystring.stringify({ 'organisationHierarchyPanel:organisationContainer:organisationChoice': service.OrganisationId }), { headers: headers })
+    js = await xml2js.parseStringPromise(responseHeaderRequest.data)
+  } catch (e) {
+    common.endResponse(responseLibraries)
+  }
 
   // Parse the results of the request
-  const js = await xml2js.parseStringPromise(responseHeaderRequest.data)
   if (js && js !== 'Undeployed' && js['ajax-response'] && js['ajax-response'].component) {
     $ = cheerio.load(js['ajax-response'].component[0]._)
     $('option').each(function () {
@@ -80,17 +84,29 @@ exports.searchByISBN = async function (isbn, service) {
   if (service.OrganisationId) bookQuery = 'organisationId_index:' + service.OrganisationId + '+AND+' + bookQuery
   responseHoldings.url = service.Url + service.SearchUrl.replace('[BOOKQUERY]', bookQuery)
 
-  const searchResponse = await axios.get(responseHoldings.url, { timeout: 20000, jar: true, rejectUnauthorized: true })
+  let searchResponse = null
+  try {
+    searchResponse = await axios.get(responseHoldings.url, { timeout: 20000, jar: true, rejectUnauthorized: true })
+  } catch (e) {
+    return common.endResponse(responseHoldings)
+  }
 
   // No item found
-  if (!searchResponse.data || (searchResponse.data && searchResponse.data.lastIndexOf('search_item_id') === -1)) return common.endResponse(responseHoldings)
+  if (!searchResponse || !searchResponse.data || (searchResponse.data && searchResponse.data.lastIndexOf('search_item_id') === -1)) return common.endResponse(responseHoldings)
 
   // Call to the item page
   const pageText = searchResponse.data.replace(/\\x3d/g, '=').replace(/\\x26/g, '&')
   const itemId = pageText.substring(pageText.lastIndexOf('search_item_id=') + 15)
   const itemUrl = service.Url + service.ItemUrl.replace('[ARENANAME]', service.ArenaName).replace('[ITEMID]', itemId.substring(0, itemId.indexOf('&')))
-  const itemPageResponse = await axios.get(itemUrl, { rejectUnauthorized: true, timeout: 20000, headers: { Connection: 'keep-alive' }, jar: true })
-  var $ = cheerio.load(itemPageResponse.data)
+
+  let $ = null
+  try {
+    const itemPageResponse = await axios.get(itemUrl, { rejectUnauthorized: true, timeout: 20000, headers: { Connection: 'keep-alive' }, jar: true })
+    $ = cheerio.load(itemPageResponse.data)
+  } catch (e) {
+    return common.endResponse(responseHoldings)
+  }
+
   if ($('.arena-availability-viewbranch').length > 0) { // If the item holdings are available immediately on the page
     $('.arena-availability-viewbranch').each(function () {
       var libName = $(this).find('.arena-branch-name span').text()
@@ -105,9 +121,14 @@ exports.searchByISBN = async function (isbn, service) {
   const itemPortletHeader = { Accept: 'text/xml', 'Wicket-Ajax': true }
   const itemPortletUrl = service.Url + service.HoldingsPanelUrl
   var itemPortletResponse = await axios.get(itemPortletUrl, { rejectUnauthorized: true, headers: itemPortletHeader, timeout: 20000, jar: true })
-  var js = await xml2js.parseStringPromise(itemPortletResponse.data)
-  if (!js['ajax-response'] || !js['ajax-response'].component) return common.endResponse(responseHoldings)
-  $ = cheerio.load(js['ajax-response'].component[0]._)
+
+  try {
+    var js = await xml2js.parseStringPromise(itemPortletResponse.data)
+    if (!js['ajax-response'] || !js['ajax-response'].component) return common.endResponse(responseHoldings)
+    $ = cheerio.load(js['ajax-response'].component[0]._)
+  } catch (e) {
+    return common.endResponse(responseHoldings)
+  }
 
   if ($('.arena-holding-nof-total, .arena-holding-nof-checked-out, .arena-holding-nof-available-for-loan').length > 0) {
     $('.arena-holding-child-container').each(function () {
@@ -121,17 +142,21 @@ exports.searchByISBN = async function (isbn, service) {
 
   let currentOrg = null
   $('.arena-holding-hyper-container .arena-holding-container a span').each(function (i) { if ($(this).text().trim() === (service.OrganisationName || service.Name)) currentOrg = i })
-  if (currentOrg == null) return responseHoldings
+  if (currentOrg == null) return common.endResponse(responseHoldings)
 
   var holdingsHeaders = { Accept: 'text/xml', 'Wicket-Ajax': true }
   holdingsHeaders['Wicket-FocusedElementId'] = 'id__crDetailWicket__WAR__arenaportlets____2a'
   var resourceId = '/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel:content:holdingsView:' + (currentOrg + 1) + ':holdingContainer:togglableLink::IBehaviorListener:0:'
   var holdingsUrl = service.Url + service.HoldingsDetailUrl.replace('[RESOURCEID]', resourceId)
-  var holdingsResponse = await axios.get(holdingsUrl, { rejectUnauthorized: true, headers: holdingsHeaders, timeout: 20000, jar: true })
 
-  var holdingsJs = await xml2js.parseStringPromise(holdingsResponse.data)
+  try {
+    var holdingsResponse = await axios.get(holdingsUrl, { rejectUnauthorized: true, headers: holdingsHeaders, timeout: 20000, jar: true })
+    var holdingsJs = await xml2js.parseStringPromise(holdingsResponse.data)
+    $ = cheerio.load(holdingsJs['ajax-response'].component[0]._)
+  } catch (e) {
+    return common.endResponse(responseHoldings)
+  }
 
-  $ = cheerio.load(holdingsJs['ajax-response'].component[0]._)
   var libsData = $('.arena-holding-container')
   const numLibs = libsData.length
   if (!numLibs || numLibs === 0) return common.endResponse(responseHoldings)
@@ -144,7 +169,12 @@ exports.searchByISBN = async function (isbn, service) {
     availabilityRequests.push(axios.get(liburl, { rejectUnauthorized: true, headers: headers, timeout: 20000, jar: true }))
   })
 
-  const responses = await axios.all(availabilityRequests)
+  let responses = null
+  try {
+    responses = await axios.all(availabilityRequests)
+  } catch (e) {
+    return common.endResponse(responseHoldings)
+  }
 
   responses.forEach(async (response) => {
     var availabilityJs = await xml2js.parseStringPromise(response.data)

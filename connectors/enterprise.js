@@ -21,8 +21,15 @@ exports.getService = (service) => { return common.getService(service) }
  */
 exports.getLibraries = async function (service) {
   const responseLibraries = common.initialiseGetLibrariesResponse(service)
-  const advancedPage = await axios.get(service.Url + 'search/advanced', { timeout: 30000 })
-  const $ = cheerio.load(advancedPage.data)
+
+  let $ = null
+  try {
+    const advancedPage = await axios.get(service.Url + 'search/advanced', { timeout: 30000 })
+    $ = cheerio.load(advancedPage.data)
+  } catch (e) {
+    return common.endResponse(responseLibraries)
+  }
+
   $('#libraryDropDown option').each((idx, lib) => {
     const name = $(lib).text()
     if (common.isLibrary(name) && name.indexOf(service.LibraryNameFilter) !== -1) responseLibraries.libraries.push(name)
@@ -41,15 +48,22 @@ exports.searchByISBN = async function (isbn, service) {
   let itemPage = ''
   let availabilityJson = null
 
-  // We could also use RSS https://wales.ent.sirsidynix.net.uk/client/rss/hitlist/ynysmon_en/qu=9780747538493
-  const deepLinkPageRequest = await axios.get(responseHoldings.url, { headers: HEADER, timeout: 30000 })
+  let itemId = null
+  let $ = null
+  let deepLinkPageUrl = null
+  try {
+    // We could also use RSS https://wales.ent.sirsidynix.net.uk/client/rss/hitlist/ynysmon_en/qu=9780747538493
+    const deepLinkPageRequest = await axios.get(responseHoldings.url, { headers: HEADER, timeout: 30000 })
+    itemId = deepLinkPageRequest.config.url.substring(deepLinkPageRequest.config.url.lastIndexOf('ent:') + 4, deepLinkPageRequest.config.url.lastIndexOf('/one')) || ''
+    $ = cheerio.load(deepLinkPageRequest.data)
+    deepLinkPageUrl = deepLinkPageRequest.config.url
+    if (itemId === '') return common.endResponse(responseHoldings)
+    itemPage = deepLinkPageRequest.data
+  } catch (e) {
+    return common.endResponse(responseHoldings)
+  }
 
-  let itemId = deepLinkPageRequest.config.url.substring(deepLinkPageRequest.config.url.lastIndexOf('ent:') + 4, deepLinkPageRequest.config.url.lastIndexOf('/one')) || ''
-  let $ = cheerio.load(deepLinkPageRequest.data)
-  if (itemId === '') return common.endResponse(responseHoldings)
-  itemPage = deepLinkPageRequest.data
-
-  if (deepLinkPageRequest.config.url.lastIndexOf('ent:') === -1) {
+  if (deepLinkPageUrl.lastIndexOf('ent:') === -1) {
     // In this situation we're probably still on the search page (there may be duplicate results).
     if ($('#da0').attr('value')) itemId = $('#da0').attr('value').substring($('#da0').attr('value').lastIndexOf('ent:') + 4) || ''
     if (itemId === '') return common.endResponse(responseHoldings)

@@ -65,11 +65,13 @@
 		{
 			"Name": "Barnsley",
 			"Code": "E08000016",
-			"Type": "prism3",
+			"Type": "enterprise",
+			"Id": "280001",
+			"Url": "https://barns.ent.sirsidynix.net.uk/client/en_GB/default",
 			"Available": [
-				"Available"
+				"In stock"
 			],
-			"Url": "https://capitadiscovery.co.uk/barnsleymbc/",
+			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -105,20 +107,13 @@
 		{
 			"Name": "Bexley",
 			"Code": "E09000004",
-			"Type": "arena",
-			"Id": "226018",
-			"OrganisationId": "AUK000226|18",
-			"OrganisationName": "Bexley",
-			"ArenaName": "AUK000226",
-			"SearchType": "Keyword",
-			"Url": "https://arena.yourlondonlibrary.net/web/bexley/",
-			"AdvancedUrl": "extended-search",
-			"LibrariesUrl": "extended-search?p_p_id=extendedSearch_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=/extendedSearch/?wicket:interface=:0:extendedSearchPanel:extendedSearchForm:organisationHierarchyPanel:organisationContainer:organisationChoice::IBehaviorListener:0:&p_p_cacheability=cacheLevelPage&random=0.08709241788681465",
-			"SearchUrl": "search?p_auth=NJXnzkEv&p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=[BOOKQUERY]",
-			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_pos=2&p_p_col_count=4&p_r_p_687834046_facet_queries=&p_r_p_687834046_search_item_no=0&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_item_id=[ITEMID]&p_r_p_687834046_agency_name=[ARENANAME]",
-			"HoldingsPanelUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel::IBehaviorListener:0:&p_p_cacheability=cacheLevelPage&p_p_col_id=column-2&p_p_col_pos=1&p_p_col_count=3",
-			"HoldingsDetailUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=[RESOURCEID]&p_p_cacheability=",
-			"HoldingsLibraryUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=[RESOURCEID]&p_p_cacheability=",
+			"Type": "enterprise",
+			"Available": [
+				"Available"
+			],
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
+			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/bexley/",
+			"LibraryNameFilter": "Bexley",
 			"TestISBN": "9780747550990"
 		},
 		{
@@ -138,12 +133,8 @@
 		{
 			"Name": "Blackpool",
 			"Code": "E06000009",
-			"Type": "enterprise",
-			"Available": [
-				"Standard shelving location"
-			],
-			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-			"Url": "http://libraries.blackpool.gov.uk/client/default/",
+			"Type": "blackpool",
+			"Url": "https://www.blackpool.gov.uk/Residents/Libraries-arts-and-heritage/Libraries/Library-catalogue-search.aspx",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -198,15 +189,13 @@
 		{
 			"Name": "Brent",
 			"Code": "E09000005",
-			"Type": "arena",
-			"OrganisationId": "AUK000226|11",
-			"OrganisationName": "Brent",
-			"ArenaName": "AUK000226",
-			"ISBNAlias": "number",
-			"Id": "226011",
-			"Url": "https://arena.yourlondonlibrary.net/web/brent/",
-			"AdvancedUrl": "extended-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
+			"Type": "enterprise",
+			"Available": [
+				"Available"
+			],
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
+			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/brent/",
+			"LibraryNameFilter": "Brent",
 			"TestISBN": "9781408855652"
 		},
 		{
@@ -423,16 +412,8 @@
 		{
 			"Name": "Cumbria",
 			"Code": "E10000006",
-			"Type": "enterprise",
-			"Available": [
-				"In stock"
-			],
-			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-			"Id": "8348",
-			"Region": "3",
-			"InstitutionId": "768",
-			"Profile": "ALL_LIBS",
-			"Url": "https://cmbr.ent.sirsidynix.net.uk/client/en_GB/default/",
+			"Type": "koha",
+			"Url": "https://cumbria-libraries.org.uk/",
 			"TestISBN": "9781408855713"
 		},
 		{
@@ -548,15 +529,13 @@
 		{
 			"Name": "Ealing",
 			"Code": "E09000009",
-			"Type": "arena",
-			"ArenaName": "AUK000226",
-			"Id": "226014",
-			"OrganisationName": "Ealing",
-			"ISBNAlias": "number",
-			"Url": "https://arena.yourlondonlibrary.net/web/ealing/",
-			"AdvancedUrl": "advanced-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
-			"OrganisationId": "AUK000226|14",
+			"Type": "enterprise",
+			"Available": [
+				"Available"
+			],
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
+			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/ealing/",
+			"LibraryNameFilter": "Ealing",
 			"TestISBN": "9780747591085"
 		},
 		{
@@ -624,25 +603,23 @@
 			"Type": "arena",
 			"ArenaName": "AUK269000",
 			"Id": "269001",
-			"ISBNAlias": "number",
 			"Url": "https://yourlibrary.edinburgh.gov.uk/web/arena/",
 			"AdvancedUrl": "advanced-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
+			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=[BOOKQUERY]",
+			"SearchType": "Keyword",
 			"OrganisationId": "AUK269000|1",
 			"TestISBN": "9780747538493"
 		},
 		{
 			"Name": "Enfield",
 			"Code": "E09000010",
-			"Type": "arena",
-			"ArenaName": "AUK000226",
-			"Id": "226012",
-			"ISBNAlias": "number",
-			"Url": "https://arena.yourlondonlibrary.net/web/enfield/",
-			"AdvancedUrl": "extended-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
-			"OrganisationId": "AUK000226|12",
-			"OrganisationName": "Enfield",
+			"Type": "enterprise",
+			"Available": [
+				"Available"
+			],
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
+			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/enfield/",
+			"LibraryNameFilter": "Enfield",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -714,11 +691,8 @@
 		{
 			"Name": "Gloucestershire",
 			"Code": "E10000013",
-			"Type": "prism3",
-			"Available": [
-				"Available"
-			],
-			"Url": "https://capitadiscovery.co.uk/gloslibraries/",
+			"Type": "spydus",
+			"Url": "https://gloucestershire.spydus.co.uk/",
 			"TestISBN": "9781408855713"
 		},
 		{
@@ -755,15 +729,13 @@
 		{
 			"Name": "Hackney",
 			"Code": "E09000012",
-			"Type": "arena",
-			"ArenaName": "AUK000226",
-			"Id": "226013",
-			"ISBNAlias": "number",
-			"Url": "https://arena.yourlondonlibrary.net/web/hackney/",
-			"AdvancedUrl": "extended-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
-			"OrganisationId": "AUK000226|13",
-			"OrganisationName": "Hackney",
+			"Type": "enterprise",
+			"Available": [
+				"Available"
+			],
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
+			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/hackney/",
+			"LibraryNameFilter": "Hackney",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -788,7 +760,7 @@
 			"Name": "Hampshire",
 			"Code": "E10000014",
 			"Type": "spydus",
-			"Url": "https://librarycat.hants.gov.uk/",
+			"Url": "https://hampshire.spydus.co.uk/",
 			"TestISBN": "9780747546245"
 		},
 		{
@@ -804,15 +776,13 @@
 		{
 			"Name": "Harrow",
 			"Code": "E09000015",
-			"Type": "arena",
-			"ArenaName": "AUK000226",
-			"Id": "226020",
-			"ISBNAlias": "number",
-			"Url": "https://arena.yourlondonlibrary.net/web/harrow/",
-			"AdvancedUrl": "advanced-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
-			"OrganisationId": "AUK000226|20",
-			"OrganisationName": "Harrow",
+			"Type": "enterprise",
+			"Available": [
+				"Available"
+			],
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
+			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/harrow/",
+			"LibraryNameFilter": "Harrow",
 			"TestISBN": "9780747591061"
 		},
 		{
@@ -828,16 +798,13 @@
 		{
 			"Name": "Havering",
 			"Code": "E09000016",
-			"Type": "arena",
-			"ArenaName": "AUK000226",
-			"Id": "226001",
-			"SearchType": "ISBN",
-			"ISBNAlias": "number",
-			"Url": "https://arena.yourlondonlibrary.net/web/lewisham/",
-			"AdvancedUrl": "extended-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
-			"OrganisationId": "AUK000226|1",
-			"OrganisationName": "Havering",
+			"Type": "enterprise",
+			"Available": [
+				"Available"
+			],
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
+			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/havering/",
+			"LibraryNameFilter": "Havering",
 			"TestISBN": "9781408821572"
 		},
 		{
@@ -886,14 +853,13 @@
 		{
 			"Name": "Hounslow",
 			"Code": "E09000018",
-			"Type": "arena",
-			"ArenaName": "AUK000219",
-			"Id": "219001",
-			"ISBNAlias": "recordControlNumber",
-			"Url": "https://www.hounslowlibraries.org/web/arena/",
-			"AdvancedUrl": "advanced-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
-			"OrganisationId": "AUK000219|0",
+			"Type": "enterprise",
+			"Available": [
+				"Available"
+			],
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
+			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/hounslow/",
+			"LibraryNameFilter": "Hounslow",
 			"TestISBN": "9780747591054"
 		},
 		{
@@ -963,16 +929,13 @@
 		{
 			"Name": "Kingston upon Thames",
 			"Code": "E09000021",
-			"Type": "arena",
-			"ArenaName": "AUK000226",
-			"Id": "226016",
-			"ISBNAlias": "number",
-			"SearchType": "ISBN",
-			"Url": "https://arena.yourlondonlibrary.net/web/lewisham/",
-			"AdvancedUrl": "extended-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
-			"OrganisationId": "AUK000226|16",
-			"OrganisationName": "Kingston",
+			"Type": "enterprise",
+			"Available": [
+				"Available"
+			],
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
+			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/kingston",
+			"LibraryNameFilter": "Kingston upon Thames",
 			"TestISBN": "9780747538486"
 		},
 		{
@@ -989,25 +952,20 @@
 		{
 			"Name": "Knowsley",
 			"Code": "E08000011",
-			"Type": "enterprise",
-			"Available": [
-				"In stock"
-			],
-			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent",
-			"Url": "http://kmbc.sdp.sirsidynix.net.uk/client/default/",
+			"Type": "koha",
+			"Url": "https://catalogue.knowsley.gov.uk/",
 			"TestISBN": "9781408855959"
 		},
 		{
 			"Name": "Lambeth",
 			"Code": "E09000022",
-			"Type": "arena",
-			"ArenaName": "AUK000271",
-			"Id": "271001",
-			"ISBNAlias": "number",
-			"Url": "https://arena.yourlondonlibrary.net/web/merton/",
-			"AdvancedUrl": "extended-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
-			"OrganisationId": "AUK000271|1",
+			"Type": "enterprise",
+			"Available": [
+				"Available"
+			],
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
+			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/lambeth",
+			"LibraryNameFilter": "Lambeth",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -1058,15 +1016,13 @@
 		{
 			"Name": "Lewisham",
 			"Code": "E09000023",
-			"Type": "arena",
-			"ArenaName": "AUK000226",
-			"Id": "226015",
-			"ISBNAlias": "number",
-			"Url": "https://arena.yourlondonlibrary.net/web/lewisham/",
-			"AdvancedUrl": "extended-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
-			"OrganisationId": "AUK000226|15",
-			"OrganisationName": "Lewisham",
+			"Type": "enterprise",
+			"Available": [
+				"Available"
+			],
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
+			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/lewisham",
+			"LibraryNameFilter": "Lewisham",
 			"TestISBN": "9780747591061"
 		},
 		{
@@ -1092,14 +1048,13 @@
 		{
 			"Name": "Luton",
 			"Code": "E06000032",
-			"Type": "arena",
-			"ArenaName": "AUK000226",
-			"Id": "220002",
-			"ISBNAlias": "number",
-			"Url": "https://arena.yourlondonlibrary.net/web/luton/",
-			"AdvancedUrl": "extended-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
-			"OrganisationId": "AUK000226|22",
+			"Type": "enterprise",
+			"Available": [
+				"Available"
+			],
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
+			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/luton",
+			"LibraryNameFilter": "Luton",
 			"TestISBN": "9780747546245"
 		},
 		{
@@ -1129,27 +1084,20 @@
 		{
 			"Name": "Merton",
 			"Code": "E09000024",
-			"Type": "arena",
-			"ArenaName": "AUK000226",
-			"Id": "226017",
-			"ISBNAlias": "number",
-			"Url": "https://arena.yourlondonlibrary.net/web/merton/",
-			"AdvancedUrl": "extended-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
-			"OrganisationId": "AUK000226|17",
+			"Type": "enterprise",
+			"Available": [
+				"Available"
+			],
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
+			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/merton",
+			"LibraryNameFilter": "Merton",
 			"TestISBN": "9780747538493"
 		},
 		{
 			"Name": "Middlesbrough",
 			"Code": "E06000002",
-			"Type": "arena",
-			"ArenaName": "AUK000054",
-			"ISBNAlias": "number",
-			"Url": "https://libraries.middlesbrough.gov.uk/web/arena/",
-			"IgnoreSSL": true,
-			"AdvancedUrl": "extended-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
-			"OrganisationId": "AUK000054|0",
+			"Type": "koha",
+			"Url": "https://libraries.middlesbrough.gov.uk/",
 			"TestISBN": "9781408810606"
 		},
 		{
@@ -1212,14 +1160,13 @@
 		{
 			"Name": "Newham",
 			"Code": "E09000025",
-			"Type": "arena",
-			"ArenaName": "AUK000226",
-			"Id": "226008",
-			"ISBNAlias": "number",
-			"Url": "https://arena.yourlondonlibrary.net/web/newham/",
-			"AdvancedUrl": "advanced-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
-			"OrganisationId": "AUK000226|8",
+			"Type": "enterprise",
+			"Available": [
+				"Available"
+			],
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
+			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/newham/",
+			"LibraryNameFilter": "Newham",
 			"TestISBN": "9780747550990"
 		},
 		{
@@ -1486,14 +1433,13 @@
 		{
 			"Name": "Redbridge",
 			"Code": "E09000026",
-			"Type": "arena",
-			"ArenaName": "AUK000226",
-			"Id": "226002",
-			"ISBNAlias": "number",
-			"Url": "https://arena.yourlondonlibrary.net/web/redbridge/",
-			"AdvancedUrl": "advanced-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
-			"OrganisationId": "AUK000226|2",
+			"Type": "enterprise",
+			"Available": [
+				"Available"
+			],
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
+			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/redbridge/",
+			"LibraryNameFilter": "Redbridge",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -1804,14 +1750,13 @@
 		{
 			"Name": "Sutton",
 			"Code": "E09000029",
-			"Type": "arena",
-			"ArenaName": "AUK000226",
-			"Id": "210002",
-			"ISBNAlias": "number",
-			"Url": "https://arena.yourlondonlibrary.net/web/sutton/",
-			"AdvancedUrl": "extended-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
-			"OrganisationId": "AUK000226|21",
+			"Type": "enterprise",
+			"Available": [
+				"Available"
+			],
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
+			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/sutton/",
+			"LibraryNameFilter": "Sutton",
 			"TestISBN": "9780747591085"
 		},
 		{
@@ -1891,13 +1836,13 @@
 		{
 			"Name": "Tower Hamlets",
 			"Code": "E09000030",
-			"Type": "arena",
-			"Id": "226010",
-			"ISBNAlias": "number",
-			"Url": "https://arena.yourlondonlibrary.net/web/tower-hamlets/",
-			"AdvancedUrl": "extended-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
-			"OrganisationId": "AUK000226|10",
+			"Type": "enterprise",
+			"Available": [
+				"Available"
+			],
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
+			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/tower-hamlets/",
+			"LibraryNameFilter": "Tower Hamlets",
 			"TestISBN": "9780747581086"
 		},
 		{
@@ -1949,13 +1894,13 @@
 		{
 			"Name": "Waltham Forest",
 			"Code": "E09000031",
-			"Type": "arena",
-			"Id": "226004",
-			"ISBNAlias": "number",
-			"Url": "https://arena.yourlondonlibrary.net/web/walthamforest/",
-			"AdvancedUrl": "extended-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
-			"OrganisationId": "AUK000226|4",
+			"Type": "enterprise",
+			"Available": [
+				"Available"
+			],
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
+			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/waltham-forest/",
+			"LibraryNameFilter": "Waltham Forest",
 			"TestISBN": "9780747574491"
 		},
 		{
