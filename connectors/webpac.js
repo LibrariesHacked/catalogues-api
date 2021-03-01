@@ -17,12 +17,13 @@ exports.getService = (service) => { return common.getService(service) }
 exports.getLibraries = async function (service) {
   const responseLibraries = common.initialiseGetLibrariesResponse(service)
 
-  const advancedSearchPageRequest = await axios.get(service.Url + 'search/X', { timeout: 60000 })
-
-  const $ = cheerio.load(advancedSearchPageRequest.data)
-  $('select[Name=searchscope] option').each((idx, option) => {
-    if (common.isLibrary($(option).text())) responseLibraries.libraries.push($(option).text().trim())
-  })
+  try {
+    const advancedSearchPageRequest = await axios.get(service.Url + 'search/X', { timeout: 60000 })
+    const $ = cheerio.load(advancedSearchPageRequest.data)
+    $('select[Name=searchscope] option').each((idx, option) => {
+      if (common.isLibrary($(option).text())) responseLibraries.libraries.push($(option).text().trim())
+    })
+  } catch (e) {}
 
   return common.endResponse(responseLibraries)
 }
@@ -35,17 +36,21 @@ exports.getLibraries = async function (service) {
 exports.searchByISBN = async function (isbn, service) {
   const responseHoldings = common.initialiseSearchByISBNResponse(service)
 
+  const libs = {}
   responseHoldings.url = service.Url + 'search~S1?/i' + isbn + '/i' + isbn + '/1,1,1,E/holdings&FF=i' + isbn + '&1,1,'
 
-  const responseHoldingsRequest = await axios.get(responseHoldings.url, { timeout: 60000 })
-  const libs = {}
-  const $ = cheerio.load(responseHoldingsRequest.data)
-  $('table.bibItems tr.bibItemsEntry').each(function (idx, tr) {
-    var name = $(tr).find('td').eq(0).text().trim()
-    var status = $(tr).find('td').eq(2).text().trim()
-    if (!libs[name]) libs[name] = { available: 0, unavailable: 0 }
-    status === 'AVAILABLE' ? libs[name].available++ : libs[name].unavailable++
-  })
+  try {
+    const responseHoldingsRequest = await axios.get(responseHoldings.url, { timeout: 60000 })
+
+    const $ = cheerio.load(responseHoldingsRequest.data)
+    $('table.bibItems tr.bibItemsEntry').each(function (idx, tr) {
+      var name = $(tr).find('td').eq(0).text().trim()
+      var status = $(tr).find('td').eq(2).text().trim()
+      if (!libs[name]) libs[name] = { available: 0, unavailable: 0 }
+      status === 'AVAILABLE' ? libs[name].available++ : libs[name].unavailable++
+    })
+  } catch (e) {}
+
   for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable })
 
   return common.endResponse(responseHoldings)

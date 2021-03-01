@@ -35,15 +35,24 @@ exports.searchByISBN = async function (isbn, service) {
   const responseHoldings = common.initialiseSearchByISBNResponse(service)
   responseHoldings.url = service.Url + service.Search + isbn
 
-  const searchPageRequest = await axios.get(responseHoldings.url, { timeout: 30000 })
-  const itemPage = searchPageRequest.data
+  let itemPage = null
+  try {
+    const searchPageRequest = await axios.get(responseHoldings.url, { timeout: 30000 })
+    itemPage = searchPageRequest.data
+  } catch (e) {
+    return common.endResponse(responseHoldings)
+  }
 
   let $ = cheerio.load(itemPage)
 
   if ($('form[name=hitlist]').length > 0) {
     const itemUrl = service.Url + $('form[name=hitlist]').attr('action')
-    const itemPageRequest = axios.post(itemUrl, 'first_hit=1&form_type=&last_hit=2&VIEW%5E1=Details', { timeout: 30000 })
-    $ = cheerio.load(itemPageRequest.data)
+    try {
+      const itemPageRequest = axios.post(itemUrl, 'first_hit=1&form_type=&last_hit=2&VIEW%5E1=Details', { timeout: 30000 })
+      $ = cheerio.load(itemPageRequest.data)
+    } catch (e) {
+      return common.endResponse(responseHoldings)
+    }
   }
 
   var libs = {}

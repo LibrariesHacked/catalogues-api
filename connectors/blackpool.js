@@ -26,5 +26,7 @@ exports.getLibraries = async function (service) {
 exports.searchByISBN = async function (isbn, service) {
   const responseHoldings = common.initialiseSearchByISBNResponse(service)
 
+  const isbnSearch = 'https://www.blackpool.gov.uk/Client.api/api/library/standard/catalogsearchrest/?Term1=9781448217908&Term2=&SearchType=General&HitsToDisplay=5&LibraryFilter=&LanguageFilter=&ItemTypeFilter=&ExactMatch=false&Token='
+
   return common.endResponse(responseHoldings)
 }

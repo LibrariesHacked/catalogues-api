@@ -33,9 +33,14 @@ exports.getService = (service) => {
 exports.getLibraries = async function (service) {
   const responseLibraries = common.initialiseGetLibrariesResponse(service)
 
-  const homePageRequest = await axios.get(service.Url + HOME)
-  const sessionCookie = homePageRequest.headers['set-cookie'][0]
-  const sid = sessionCookie.substring(43, 53)
+  let sid = null
+  try {
+    const homePageRequest = await axios.get(service.Url + HOME)
+    const sessionCookie = homePageRequest.headers['set-cookie'][0]
+    sid = sessionCookie.substring(43, 53)
+  } catch (e) {
+    return common.endResponse(responseLibraries)
+  }
 
   const body = ITEM_SEARCH.replace('[ISBN]', 'harry').replace('Index=Isbn', 'Index=Keywords').replace('[DB]', service.Database).replace('[TID]', 'Iguana_Brief').replace(/\[SID\]/g, sid)
 
@@ -45,9 +50,16 @@ exports.getLibraries = async function (service) {
 
   if (service.Faceted) {
     const resultId = searchJs.searchRetrieveResponse.resultSetId[0]
-    const facetRequest = await axios.post(service.Url + 'Proxy.SearchRequest.cls', FACET_SEARCH.replace('[RESULTID]', resultId).replace(/\[SID\]/g, sid), { jar: true, headers: { ...HEADER, Referer: service.Url + HOME }, timeout: 30000 })
-    const facetJs = await xml2js.parseStringPromise(facetRequest.data)
-    const facets = facetJs.VubisFacetedSearchResponse.Facets[0].Facet
+
+    let facets = null
+    try {
+      const facetRequest = await axios.post(service.Url + 'Proxy.SearchRequest.cls', FACET_SEARCH.replace('[RESULTID]', resultId).replace(/\[SID\]/g, sid), { jar: true, headers: { ...HEADER, Referer: service.Url + HOME }, timeout: 30000 })
+      const facetJs = await xml2js.parseStringPromise(facetRequest.data)
+      facets = facetJs.VubisFacetedSearchResponse.Facets[0].Facet
+    } catch (e) {
+      return common.endResponse(responseLibraries)
+    }
+
     if (facets) {
       facets.forEach((facet) => {
         if (facet.FacetWording[0] === service.LibraryFacet) {
@@ -79,14 +91,18 @@ exports.getLibraries = async function (service) {
 exports.searchByISBN = async function (isbn, service) {
   const responseHoldings = common.initialiseSearchByISBNResponse(service)
 
-  const homePageRequest = await axios.get(service.Url + HOME)
-  const sessionCookie = homePageRequest.headers['set-cookie'][0]
-  const sid = sessionCookie.substring(43, 53)
+  let searchJs = null
+  try {
+    const homePageRequest = await axios.get(service.Url + HOME)
+    const sessionCookie = homePageRequest.headers['set-cookie'][0]
+    const sid = sessionCookie.substring(43, 53)
+    const searchPageRequest = await axios.post(service.Url + 'Proxy.SearchRequest.cls', ITEM_SEARCH.replace('[ISBN]', isbn).replace('[DB]', service.Database).replace('[TID]', 'Iguana_Brief').replace(/\[SID\]/g, sid), { headers: { ...HEADER, Referer: service.Url + HOME }, timeout: 60000 })
+    searchJs = await xml2js.parseStringPromise(searchPageRequest.data)
+  } catch (e) {
+    return common.endResponse(responseHoldings)
+  }
 
-  const searchPageRequest = await axios.post(service.Url + 'Proxy.SearchRequest.cls', ITEM_SEARCH.replace('[ISBN]', isbn).replace('[DB]', service.Database).replace('[TID]', 'Iguana_Brief').replace(/\[SID\]/g, sid), { headers: { ...HEADER, Referer: service.Url + HOME }, timeout: 60000 })
-  const searchJs = await xml2js.parseStringPromise(searchPageRequest.data)
   let record = null
-
   if (searchJs && searchJs.searchRetrieveResponse) record = searchJs.searchRetrieveResponse.records[0].record
   if (record) var recordData = record[0].recordData
 

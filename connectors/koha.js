@@ -21,8 +21,15 @@ exports.getLibraries = async function (service) {
   const responseLibraries = common.initialiseGetLibrariesResponse(service)
 
   const url = service.Url + (service.MultiBranchLimit ? LIBS_URL.replace('[MULTIBRANCH]', 'multibranchlimit=' + service.MultiBranchLimit + '&') : LIBS_URL.replace('[MULTIBRANCH]', ''))
-  const libraryPageRequest = await axios.get(url, { timeout: 60000 })
-  const $ = cheerio.load(libraryPageRequest.data)
+
+  let $ = null
+  try {
+    const libraryPageRequest = await axios.get(url, { timeout: 60000 })
+    $ = cheerio.load(libraryPageRequest.data)
+  } catch (e) {
+    return common.endResponse(responseLibraries)
+  }
+
   $('div#location select#branchloop option').each((idx, option) => {
     if (common.isLibrary($(option).text())) responseLibraries.libraries.push($(this).text().trim())
   })
@@ -45,13 +52,24 @@ exports.searchByISBN = async function (isbn, service) {
   const responseHoldings = common.initialiseSearchByISBNResponse(service)
   responseHoldings.url = service.Url + CAT_URL + isbn
 
-  const searchPageRequest = await axios.get(responseHoldings.url, { timeout: 30000 })
-  let $ = cheerio.load(searchPageRequest.data, { normalizeWhitespace: true, xmlMode: true })
+  let $ = null
+  try {
+    const searchPageRequest = await axios.get(responseHoldings.url, { timeout: 30000 })
+    $ = cheerio.load(searchPageRequest.data, { normalizeWhitespace: true, xmlMode: true })
+  } catch (e) {
+    return common.endResponse(responseHoldings)
+  }
+
   var bibLink = $('guid').text()
   if (!bibLink) return common.endResponse(responseHoldings)
 
-  const itemPageRequest = await axios.get(bibLink + '&viewallitems=1', { timeout: 30000 })
-  $ = cheerio.load(itemPageRequest.data)
+  try {
+    const itemPageRequest = await axios.get(bibLink + '&viewallitems=1', { timeout: 30000 })
+    $ = cheerio.load(itemPageRequest.data)
+  } catch (e) {
+    return common.endResponse(responseHoldings)
+  }
+
   const libs = {}
   $('#holdingst tbody').find('tr').each((idx, table) => {
     var lib = $(table).find('td.location span span').text().trim()

@@ -20,11 +20,14 @@ exports.getService = (service) => { return common.getService(service) }
 exports.getLibraries = async function (service) {
   const responseLibraries = common.initialiseGetLibrariesResponse(service)
 
-  const libsPageRequest = await axios.get(service.Url + LIBS_URL, { headers: { Cookie: 'ALLOWCOOKIES_443=1' }, timeout: 60000 })
-  const $ = cheerio.load(libsPageRequest.data)
-  $('#LOC option').each(function (idx, option) {
-    if (common.isLibrary($(option).text())) responseLibraries.libraries.push($(option).text())
-  })
+  try {
+    const libsPageRequest = await axios.get(service.Url + LIBS_URL, { headers: { Cookie: 'ALLOWCOOKIES_443=1' }, timeout: 60000 })
+    const $ = cheerio.load(libsPageRequest.data)
+    $('#LOC option').each(function (idx, option) {
+      if (common.isLibrary($(option).text())) responseLibraries.libraries.push($(option).text())
+    })
+  } catch (e) {}
+
   return common.endResponse(responseLibraries)
 }
 
@@ -37,24 +40,25 @@ exports.searchByISBN = async function (isbn, service) {
   const responseHoldings = common.initialiseSearchByISBNResponse(service)
   responseHoldings.url = service.Url + SEARCH_URL + isbn
 
-  const itemPageRequest = await axios.get(responseHoldings.url, { timeout: 30000 })
-  let $ = cheerio.load(itemPageRequest.data)
+  try {
+    const itemPageRequest = await axios.get(responseHoldings.url, { timeout: 30000 })
+    const $ = cheerio.load(itemPageRequest.data)
+    if ($('#result-content-list').length === 0) return common.endResponse(responseHoldings)
 
-  if ($('#result-content-list').length === 0) return common.endResponse(responseHoldings)
+    const availabilityUrl = $('.card-text.availability').first().find('a').attr('href')
+    const availabilityRequest = await axios.get(service.Url + availabilityUrl, { timeout: 30000 })
 
-  const availabilityUrl = $('.card-text.availability').first().find('a').attr('href')
-  const availabilityRequest = await axios.get(service.Url + availabilityUrl, { timeout: 30000 })
+    $ = cheerio.load(availabilityRequest.data)
 
-  $ = cheerio.load(availabilityRequest.data)
-
-  var libs = {}
-  $('table tr').slice(1).each(function (i, tr) {
-    var name = $(tr).find('td').eq(0).text().trim()
-    var status = $(tr).find('td').eq(3).text().trim()
-    if (!libs[name]) libs[name] = { available: 0, unavailable: 0 }
-    status === 'Available' ? libs[name].available++ : libs[name].unavailable++
-  })
-  for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable })
+    var libs = {}
+    $('table tr').slice(1).each(function (i, tr) {
+      var name = $(tr).find('td').eq(0).text().trim()
+      var status = $(tr).find('td').eq(3).text().trim()
+      if (!libs[name]) libs[name] = { available: 0, unavailable: 0 }
+      status === 'Available' ? libs[name].available++ : libs[name].unavailable++
+    })
+    for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable })
+  } catch (e) {}
 
   return common.endResponse(responseHoldings)
 }

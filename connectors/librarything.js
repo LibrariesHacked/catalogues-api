@@ -12,10 +12,13 @@ const URL = 'http://www.librarything.com/api/thingISBN/'
 exports.thingISBN = async (isbn) => {
   const responseISBNs = { isbns: [] }
 
-  const isbnRequest = await axios.get(URL + isbn, { timeout: 1000 })
+  let isbns = null
+  try {
+    const isbnRequest = await axios.get(URL + isbn, { timeout: 1000 })
+    const isbnJs = await xml2js.parseStringPromise(isbnRequest.data)
+    isbns = isbnJs.idlist.isbn
+  } catch (e) {}
 
-  const isbnJs = await xml2js.parseStringPromise(isbnRequest.data)
-  const isbns = isbnJs.idlist.isbn
   if (isbns) isbns.forEach((item) => responseISBNs.isbns.push(item))
 
   return responseISBNs

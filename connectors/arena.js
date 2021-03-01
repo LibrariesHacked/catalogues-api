@@ -28,7 +28,7 @@ exports.getService = (service) => { return common.getService(service) }
 exports.getLibraries = async function (service) {
   const responseLibraries = common.initialiseGetLibrariesResponse(service)
 
-  // Sometimes we use libraries that are hardcoded into the config
+  // Sometimes we have to use libraries that are hardcoded into the config
   if (service.Libraries) {
     for (const lib in service.Libraries) responseLibraries.libraries.push(lib)
     return common.endResponse(responseLibraries)
@@ -179,11 +179,15 @@ exports.searchByISBN = async function (isbn, service) {
   responses.forEach(async (response) => {
     var availabilityJs = await xml2js.parseStringPromise(response.data)
     if (availabilityJs && availabilityJs['ajax-response']) {
-      $ = cheerio.load(availabilityJs['ajax-response'].component[0]._)
-      var totalAvailable = $('td.arena-holding-nof-total span.arena-value').text()
-      var checkedOut = $('td.arena-holding-nof-checked-out span.arena-value').text()
-      $ = cheerio.load(availabilityJs['ajax-response'].component[2]._)
-      responseHoldings.availability.push({ library: $('span.arena-holding-link').text(), available: ((totalAvailable ? parseInt(totalAvailable) : 0) - (checkedOut ? parseInt(checkedOut) : 0)), unavailable: (checkedOut ? parseInt(checkedOut) : 0) })
+      try {
+        $ = cheerio.load(availabilityJs['ajax-response'].component[0]._)
+        var totalAvailable = $('td.arena-holding-nof-total span.arena-value').text()
+        var checkedOut = $('td.arena-holding-nof-checked-out span.arena-value').text()
+        $ = cheerio.load(availabilityJs['ajax-response'].component[2]._)
+        responseHoldings.availability.push({ library: $('span.arena-holding-link').text(), available: ((totalAvailable ? parseInt(totalAvailable) : 0) - (checkedOut ? parseInt(checkedOut) : 0)), unavailable: (checkedOut ? parseInt(checkedOut) : 0) })
+      } catch (e) {
+        return common.endResponse(responseHoldings)
+      }
     }
   })
 

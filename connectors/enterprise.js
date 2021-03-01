@@ -68,8 +68,12 @@ exports.searchByISBN = async function (isbn, service) {
     if ($('#da0').attr('value')) itemId = $('#da0').attr('value').substring($('#da0').attr('value').lastIndexOf('ent:') + 4) || ''
     if (itemId === '') return common.endResponse(responseHoldings)
     const itemPageUrl = service.Url + ITEM_URL.replace('[ILS]', itemId.split('/').join('$002f'))
-    const itemPageRequest = await axios.get(itemPageUrl, { timeout: 30000 })
-    itemPage = itemPageRequest.data
+    try {
+      const itemPageRequest = await axios.get(itemPageUrl, { timeout: 30000 })
+      itemPage = itemPageRequest.data
+    } catch (e) {
+      return common.endResponse(responseHoldings)
+    }
   }
 
   // Availability information may already be part of the page.
@@ -80,9 +84,13 @@ exports.searchByISBN = async function (isbn, service) {
 
   if (availabilityJson === null && service.AvailabilityUrl) {
     const availabilityUrl = service.Url + service.AvailabilityUrl.replace('[ITEMID]', itemId.split('/').join('$002f'))
-    const availabilityPageRequest = await axios.post(availabilityUrl, {}, { headers: HEADER_POST, timeout: 30000 })
-    const availabilityResponse = JSON.parse(availabilityPageRequest.data)
-    if (availabilityResponse.ids) availabilityJson = availabilityResponse
+    try {
+      const availabilityPageRequest = await axios.post(availabilityUrl, {}, { headers: HEADER_POST, timeout: 30000 })
+      const availabilityResponse = JSON.parse(availabilityPageRequest.data)
+      if (availabilityResponse.ids) availabilityJson = availabilityResponse
+    } catch (e) {
+      return common.endResponse(responseHoldings)
+    }
   }
 
   if (availabilityJson !== null) {
@@ -100,16 +108,21 @@ exports.searchByISBN = async function (isbn, service) {
     for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable })
   } else {
     var titleUrl = service.Url + service.TitleDetailUrl.replace('[ITEMID]', itemId.split('/').join('$002f'))
-    const titleDetailRequest = await axios.post(titleUrl, {}, { headers: HEADER_POST, timeout: 30000 })
-    const titles = titleDetailRequest.data
-    const libs = {}
-    $(titles.childRecords).each(function (i, c) {
-      const name = c.LIBRARY
-      const status = c.SD_ITEM_STATUS
-      if (!libs[name]) libs[name] = { available: 0, unavailable: 0 }
-      service.Available.indexOf(status) > 0 ? libs[name].available++ : libs[name].unavailable++
-    })
-    for (var lib in libs) responseHoldings.availability.push({ library: lib, available: libs[lib].available, unavailable: libs[lib].unavailable })
+
+    try {
+      const titleDetailRequest = await axios.post(titleUrl, {}, { headers: HEADER_POST, timeout: 30000 })
+      const titles = titleDetailRequest.data
+      const libs = {}
+      $(titles.childRecords).each(function (i, c) {
+        const name = c.LIBRARY
+        const status = c.SD_ITEM_STATUS
+        if (!libs[name]) libs[name] = { available: 0, unavailable: 0 }
+        service.Available.indexOf(status) > 0 ? libs[name].available++ : libs[name].unavailable++
+      })
+      for (var lib in libs) responseHoldings.availability.push({ library: lib, available: libs[lib].available, unavailable: libs[lib].unavailable })
+    } catch (e) {
+      return common.endResponse(responseHoldings)
+    }
   }
   return common.endResponse(responseHoldings)
 }
