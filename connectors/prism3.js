@@ -6,6 +6,7 @@ const common = require('../connectors/common')
 console.log('prism3 connector loading...')
 
 const HEADER = { 'Content-Type': 'text/xml; charset=utf-8' }
+const DEEP_LINK = 'items?query='
 
 /**
  * Gets the object representing the service
@@ -42,6 +43,7 @@ exports.getLibraries = async function (service) {
  */
 exports.searchByISBN = async function (isbn, service) {
   const responseHoldings = common.initialiseSearchByISBNResponse(service)
+  responseHoldings.url = DEEP_LINK + isbn
 
   let $ = null
   try {

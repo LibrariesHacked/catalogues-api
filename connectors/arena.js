@@ -120,9 +120,9 @@ exports.searchByISBN = async function (isbn, service) {
   // Get the item holdings widget
   const itemPortletHeader = { Accept: 'text/xml', 'Wicket-Ajax': true }
   const itemPortletUrl = service.Url + service.HoldingsPanelUrl
-  var itemPortletResponse = await axios.get(itemPortletUrl, { rejectUnauthorized: true, headers: itemPortletHeader, timeout: 20000, jar: true })
 
   try {
+    var itemPortletResponse = await axios.get(itemPortletUrl, { rejectUnauthorized: true, headers: itemPortletHeader, timeout: 20000, jar: true })
     var js = await xml2js.parseStringPromise(itemPortletResponse.data)
     if (!js['ajax-response'] || !js['ajax-response'].component) return common.endResponse(responseHoldings)
     $ = cheerio.load(js['ajax-response'].component[0]._)

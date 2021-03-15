@@ -72,6 +72,7 @@
 				"In stock"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -84,6 +85,7 @@
 				"In stock"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"MultiAuthorityId": 4,
 			"TestISBN": "9780747538493"
 		},
@@ -107,13 +109,15 @@
 		{
 			"Name": "Bexley",
 			"Code": "E09000004",
-			"Type": "enterprise",
-			"Available": [
-				"Available"
-			],
-			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
-			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/bexley/",
-			"LibraryNameFilter": "Bexley",
+			"Type": "arena",
+			"ArenaName": "AUK000226",
+			"Id": "750001",
+			"ISBNAlias": "number",
+			"Url": "https://arena.yourlondonlibrary.net/web/bexley/",
+			"AdvancedUrl": "extended-search",
+			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_search_item_id=[ITEMID]&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_agency_name=[ARENANAME]&p_r_p_arena_urn:arena_search_item_no=0&p_r_p_arena_urn:arena_search_type=solr",
+			"OrganisationId": "AUK000226|18",
 			"TestISBN": "9780747550990"
 		},
 		{
@@ -227,6 +231,7 @@
 				"In stock"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"MultiAuthorityId": 3,
 			"TestISBN": "9780747538493"
 		},
@@ -255,6 +260,7 @@
 				"In stock"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://bury.ent.sirsidynix.net.uk/client/en_GB/default/",
 			"TestISBN": "9780747591054"
 		},
@@ -267,6 +273,7 @@
 				"RESERVES"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/caer_en/",
 			"TestISBN": "9780747538493"
 		},
@@ -300,6 +307,7 @@
 				"RESERVES"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/card_en/",
 			"TestISBN": "9781408855713"
 		},
@@ -308,6 +316,7 @@
 			"Code": "W06000010",
 			"Type": "enterprise",
 			"Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/carm_en",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"TestISBN": "9780747538486"
 		},
 		{
@@ -321,8 +330,9 @@
 			"Url": "https://beds-arena.culturalservices.net/web/arena/",
 			"AdvancedUrl": "extended-search",
 			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_search_item_id=[ITEMID]&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_agency_name=[ARENANAME]&p_r_p_arena_urn:arena_search_item_no=0&p_r_p_arena_urn:arena_search_type=solr",
 			"OrganisationId": "AUK000022|1",
-			"TestISBN": "9781408810293"
+			"TestISBN": "9780747591054"
 		},
 		{
 			"Name": "Sir Ceredigion - Ceredigion",
@@ -333,6 +343,7 @@
 				"RESERVES"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://libraries.ceredigion.gov.uk/client/en_GB/cer_en/",
 			"TestISBN": "9781408855683"
 		},
@@ -360,6 +371,7 @@
 				"In stock"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://col.ent.sirsidynix.net.uk/client/en_GB/default/",
 			"TestISBN": "9781408855669"
 		},
@@ -368,7 +380,7 @@
 			"Code": "S12000005",
 			"Type": "koha",
 			"Url": "https://clacks.koha-ptfs.co.uk/",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9781907545009"
 		},
 		{
 			"Name": "Conwy",
@@ -378,6 +390,7 @@
 				"Available"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/conwy_en/",
 			"TestISBN": "9780747591061"
 		},
@@ -434,6 +447,7 @@
 			"OrganisationName": "Darlington",
 			"AdvancedUrl": "advanced-search",
 			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_search_item_id=[ITEMID]&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_agency_name=[ARENANAME]&p_r_p_arena_urn:arena_search_item_no=0&p_r_p_arena_urn:arena_search_type=solr",
 			"TestISBN": "9781408855652"
 		},
 		{
@@ -444,6 +458,7 @@
 				"Available"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/denbighshire_en/",
 			"TestISBN": "9781408855713"
 		},
@@ -455,6 +470,7 @@
 				"In stock"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/derby/",
 			"TestISBN": "9780747538493"
 		},
@@ -466,6 +482,7 @@
 				"In stock"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/derbyshire/",
 			"TestISBN": "9780747538493"
 		},
@@ -479,6 +496,7 @@
 			"Url": "http://library.doncaster.gov.uk/web/arena/",
 			"AdvancedUrl": "extended-search",
 			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_search_item_id=[ITEMID]&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_agency_name=[ARENANAME]&p_r_p_arena_urn:arena_search_item_no=0&p_r_p_arena_urn:arena_search_type=solr",
 			"OrganisationId": "AUK000243|1",
 			"OrganisationName": "Doncaster",
 			"TestISBN": "9780747546344"
@@ -492,12 +510,16 @@
 				"In stock"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"TestISBN": "9780747538493"
 		},
 		{
 			"Name": "Dudley",
 			"Code": "E08000027",
 			"Type": "prism3",
+			"Available": [
+				"Available"
+			],
 			"Url": "https://capitadiscovery.co.uk/dudley/",
 			"TestISBN": "9780747538493"
 		},
@@ -515,7 +537,7 @@
 			"Name": "Dundee City",
 			"Code": "S12000042",
 			"Type": "spydus",
-			"Url": "http://opac.dundeecity.gov.uk/",
+			"Url": "https://dundee.spydus.co.uk/",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -547,7 +569,8 @@
 				"RESERVES"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-			"Url": "https://ealt.ent.sirsidynix.net.uk/client/en_GB/default",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
+			"Url": "https://ealt.ent.sirsidynix.net.uk/client/en_GB/default/",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -586,15 +609,16 @@
 			"ISBNAlias": "number",
 			"Url": "https://library.eastriding.gov.uk/web/arena/",
 			"AdvancedUrl": "advanced-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
+			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_search_item_id=[ITEMID]&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_agency_name=[ARENANAME]&p_r_p_arena_urn:arena_search_item_no=0&p_r_p_arena_urn:arena_search_type=solr",
 			"OrganisationId": "AUK000205|1",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9780747538486"
 		},
 		{
 			"Name": "East Sussex",
 			"Code": "E10000011",
 			"Type": "spydus",
-			"Url": "https://e-library.eastsussex.gov.uk/",
+			"Url": "https://eastsussex.spydus.co.uk/",
 			"TestISBN": "9780747538486"
 		},
 		{
@@ -606,6 +630,7 @@
 			"Url": "https://yourlibrary.edinburgh.gov.uk/web/arena/",
 			"AdvancedUrl": "advanced-search",
 			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_search_item_id=[ITEMID]&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_agency_name=[ARENANAME]&p_r_p_arena_urn:arena_search_item_no=0&p_r_p_arena_urn:arena_search_type=solr",
 			"SearchType": "Keyword",
 			"OrganisationId": "AUK269000|1",
 			"TestISBN": "9780747538493"
@@ -640,6 +665,7 @@
 				"In stock"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "http://fct.ent.sirsidynix.net.uk/client/en_GB/libraries/",
 			"TestISBN": "9780747538493"
 		},
@@ -661,6 +687,7 @@
 				"Available"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/flintshire_en/",
 			"TestISBN": "9780747538493"
 		},
@@ -684,6 +711,7 @@
 			"Url": "http://libcat.csglasgow.org/web/arena/",
 			"AdvancedUrl": "extended-search",
 			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_search_item_id=[ITEMID]&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_agency_name=[ARENANAME]&p_r_p_arena_urn:arena_search_item_no=0&p_r_p_arena_urn:arena_search_type=solr",
 			"OrganisationId": "AUK000048|1",
 			"OrganisationName": "Glasgow",
 			"TestISBN": "9780099557739"
@@ -723,6 +751,7 @@
 				"Available"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/gwynedd_en/",
 			"TestISBN": "9780747538493"
 		},
@@ -753,6 +782,7 @@
 				"In stock"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://trib.ent.sirsidynix.net.uk/client/en_GB/lbhf/",
 			"TestISBN": "9780747538493"
 		},
@@ -846,6 +876,7 @@
 				"In stock"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"SearchType": "Keyword",
 			"Url": "http://hldn.ent.sirsidynix.net.uk/client/en_GB/public/",
 			"TestISBN": "9780747595823"
@@ -878,8 +909,8 @@
 			"Name": "Inverclyde",
 			"Code": "S12000018",
 			"Type": "spydus",
-			"Url": "http://ipac.inverclyde-libraries.org/",
-			"TestISBN": "9781408834978"
+			"Url": "https://inverclyde.spydus.co.uk/",
+			"TestISBN": "9781408865408"
 		},
 		{
 			"Name": "Isle of Wight",
@@ -916,6 +947,7 @@
 				"In stock"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://trib.ent.sirsidynix.net.uk/client/en_GB/rbkc/",
 			"TestISBN": "9780747538493"
 		},
@@ -934,7 +966,7 @@
 				"Available"
 			],
 			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
-			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/kingston",
+			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/kingston/",
 			"LibraryNameFilter": "Kingston upon Thames",
 			"TestISBN": "9780747538486"
 		},
@@ -946,6 +978,7 @@
 				"In stock"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "http://kir.ent.sirsidynix.net.uk/client/en_GB/default/",
 			"TestISBN": "9787020034635"
 		},
@@ -959,13 +992,15 @@
 		{
 			"Name": "Lambeth",
 			"Code": "E09000022",
-			"Type": "enterprise",
-			"Available": [
-				"Available"
-			],
-			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
-			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/lambeth",
-			"LibraryNameFilter": "Lambeth",
+			"Type": "arena",
+			"ArenaName": "AUK000271",
+			"Id": "750001",
+			"ISBNAlias": "number",
+			"Url": "https://libraries.lambeth.gov.uk/web/arena/",
+			"AdvancedUrl": "extended-search",
+			"SearchUrl": "search?p_auth=NJXnzkEv&p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_pos=2&p_p_col_count=4&p_r_p_687834046_facet_queries=&p_r_p_687834046_search_item_no=0&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_item_id=[ITEMID]&p_r_p_687834046_agency_name=[ARENANAME]",
+			"OrganisationId": "AUK000271|1",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -985,6 +1020,7 @@
 			"Available": [
 				"Available"
 			],
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://leeds.ent.sirsidynix.net.uk/client/en_GB/default/",
 			"TestISBN": "9780747538493"
 		},
@@ -998,6 +1034,7 @@
 			"Url": "https://bookfinder.leicester.gov.uk/web/arena/",
 			"AdvancedUrl": "advanced-search",
 			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_search_item_id=[ITEMID]&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_agency_name=[ARENANAME]&p_r_p_arena_urn:arena_search_item_no=0&p_r_p_arena_urn:arena_search_type=solr",
 			"OrganisationId": "AUK000201|1",
 			"OrganisationName": "Leicester City",
 			"TestISBN": "9780747538493"
@@ -1010,6 +1047,7 @@
 				"In stock"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/leics/",
 			"TestISBN": "9780099557739"
 		},
@@ -1021,7 +1059,7 @@
 				"Available"
 			],
 			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
-			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/lewisham",
+			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/lewisham/",
 			"LibraryNameFilter": "Lewisham",
 			"TestISBN": "9780747591061"
 		},
@@ -1053,7 +1091,7 @@
 				"Available"
 			],
 			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
-			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/luton",
+			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/luton/",
 			"LibraryNameFilter": "Luton",
 			"TestISBN": "9780747546245"
 		},
@@ -1089,7 +1127,7 @@
 				"Available"
 			],
 			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
-			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/merton",
+			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/merton/",
 			"LibraryNameFilter": "Merton",
 			"TestISBN": "9780747538493"
 		},
@@ -1109,9 +1147,9 @@
 			"ISBNAlias": "number",
 			"Url": "https://libraries.midlothian.gov.uk/web/arena/",
 			"AdvancedUrl": "extended-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
-			"OrganisationId": "AUK000075|0",
-			"TestISBN": "9780747538493"
+			"SearchUrl": "search?p_auth=NJXnzkEv&p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_pos=2&p_p_col_count=4&p_r_p_687834046_facet_queries=&p_r_p_687834046_search_item_no=0&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_item_id=[ITEMID]&p_r_p_687834046_agency_name=[ARENANAME]",			"OrganisationId": "AUK000075|0",
+			"TestISBN": "9780747584667"
 		},
 		{
 			"Name": "Milton Keynes",
@@ -1123,14 +1161,13 @@
 		{
 			"Name": "Sir Fynwy - Monmouthshire",
 			"Code": "W06000021",
-			"Type": "ibistro",
+			"Type": "enterprise",
 			"Available": [
-				"SHELVES",
-				"RESERVES"
+				"Available"
 			],
-			"Url": "http://catalogue.monmouthshire.gov.uk/",
-			"Home": "uhtbin/cgisirsi.exe/x/x/0/49/",
-			"Search": "uhtbin/cgisirsi.exe/x/0/0/5?searchdata1=",
+			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
+			"Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/mmou_en/",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -1147,6 +1184,7 @@
 			"Name": "Castell-nedd Port Talbot - Neath Port Talbot",
 			"Code": "W06000012",
 			"Type": "enterprise",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/npt_en/",
 			"TestISBN": "9780747538493"
 		},
@@ -1200,7 +1238,8 @@
 			"SearchType": "Keyword",
 			"Url": "https://www.lincsinspirelibraries.com/web/arena/",
 			"AdvancedUrl": "advanced-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
+			"SearchUrl": "search?p_auth=NJXnzkEv&p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_pos=2&p_p_col_count=4&p_r_p_687834046_facet_queries=&p_r_p_687834046_search_item_no=0&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_item_id=[ITEMID]&p_r_p_687834046_agency_name=[ARENANAME]",
 			"OrganisationId": "AUK000252|1",
 			"OrganisationName": "NELC Libraries",
 			"TestISBN": "9780747591054"
@@ -1222,10 +1261,10 @@
 			"ISBNAlias": "number",
 			"Url": "https://www.opac.northlincs.gov.uk/web/arena/",
 			"AdvancedUrl": "extended-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
-			"OrganisationId": "AUK000221|0",
+			"SearchUrl": "search?p_auth=NJXnzkEv&p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_pos=2&p_p_col_count=4&p_r_p_687834046_facet_queries=&p_r_p_687834046_search_item_no=0&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_item_id=[ITEMID]&p_r_p_687834046_agency_name=[ARENANAME]",			"OrganisationId": "AUK000221|0",
 			"Id": "221001",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9780747591108"
 		},
 		{
 			"Name": "North Somerset",
@@ -1236,7 +1275,8 @@
 			"Available": [
 				"In stock"
 			],
-			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"AvailabilityUrl": "/search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:[ITEMID]/ILS/0/true/true",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"MultiAuthorityId": 2,
 			"TestISBN": "9780747538493"
 		},
@@ -1269,8 +1309,8 @@
 			"SearchType": "Keyword",
 			"Url": "https://www.librarycatalogue.northamptonshire.gov.uk/web/arena/",
 			"AdvancedUrl": "extended-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
-			"OrganisationId": "AUK000256|1",
+			"SearchUrl": "search?p_auth=NJXnzkEv&p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_pos=2&p_p_col_count=4&p_r_p_687834046_facet_queries=&p_r_p_687834046_search_item_no=0&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_item_id=[ITEMID]&p_r_p_687834046_agency_name=[ARENANAME]",			"OrganisationId": "AUK000256|1",
 			"OrganisationName": "Northamptonshire",
 			"ISBNAlias": "recordControlNumber",
 			"TestISBN": "9781408812525"
@@ -1278,15 +1318,9 @@
 		{
 			"Name": "Northumberland",
 			"Code": "E06000057",
-			"Type": "ibistro",
-			"Available": [
-				"SHELVES",
-				"RESERVES"
-			],
-			"Url": "http://library.northumberland.gov.uk/",
-			"Home": "uhtbin/cgisirsi.exe/x/0/0/49",
-			"Search": "uhtbin/cgisirsi.exe/x/0/0/5?searchdata1=",
-			"TestISBN": "9780747538493"
+			"Type": "spydus",
+			"Url": "https://northumberland.spydus.co.uk/",
+			"TestISBN": "9781408855959"
 		},
 		{
 			"Name": "Nottingham City",
@@ -1300,6 +1334,7 @@
 				""
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/nottcity/",
 			"TestISBN": "9780747538493"
 		},
@@ -1315,6 +1350,7 @@
 				""
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/nelib/",
 			"TestISBN": "9780747538493"
 		},
@@ -1326,6 +1362,7 @@
 				"In stock"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "http://lni.ent.sirsidynix.net.uk/client/en_GB/default/",
 			"TestISBN": "9780747538493"
 		},
@@ -1334,7 +1371,7 @@
 			"Code": "E08000004",
 			"Type": "spydus",
 			"Url": "https://oldham.spydus.co.uk/",
-			"TestISBN": "9781510051317"
+			"TestISBN": "9781408835005"
 		},
 		{
 			"Name": "Orkney Islands",
@@ -1355,8 +1392,9 @@
 			"Url": "https://libcat.oxfordshire.gov.uk/web/arena/",
 			"AdvancedUrl": "extended-search",
 			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_search_item_id=[ITEMID]&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_agency_name=[ARENANAME]&p_r_p_arena_urn:arena_search_item_no=0&p_r_p_arena_urn:arena_search_type=solr",
 			"OrganisationId": "AUK000217|0",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9781408845660"
 		},
 		{
 			"Name": "Sir Benfro - Pembrokeshire",
@@ -1388,7 +1426,8 @@
 			"ArenaName": "AUK770000",
 			"ISBNAlias": "number",
 			"AdvancedUrl": "extended-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
+			"SearchUrl": "search?p_auth=NJXnzkEv&p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_pos=2&p_p_col_count=4&p_r_p_687834046_facet_queries=&p_r_p_687834046_search_item_no=0&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_item_id=[ITEMID]&p_r_p_687834046_agency_name=[ARENANAME]",
 			"OrganisationId": "AUK770000|1",
 			"Url": "https://library.plymouth.gov.uk/web/arena",
 			"TestISBN": "9780747562184"
@@ -1402,6 +1441,7 @@
 				"In stock"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -1414,20 +1454,20 @@
 		{
 			"Name": "Powys",
 			"Code": "W06000023",
-			"Type": "ibistro",
+			"Type": "enterprise",
 			"Available": [
-				"Adult Fiction"
+				"Available"
 			],
-			"Url": "http://powys.sirsidynix.net.uk/",
-			"Home": "uhtbin/cgisirsi/x/x/0/49/",
-			"Search": "uhtbin/cgisirsi/x/0/0/5?searchdata1=",
+			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookupavailability/detailItemsDiv0/ent:[ITEMID]/ILS/0/false",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
+			"Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/powys_en/",
 			"TestISBN": "9780751565355"
 		},
 		{
 			"Name": "Reading",
 			"Code": "E06000038",
 			"Type": "spydus",
-			"Url": "https://library.reading.gov.uk",
+			"Url": "https://library.reading.gov.uk/",
 			"TestISBN": "9780751565355"
 		},
 		{
@@ -1450,7 +1490,8 @@
 			"ISBNAlias": "number",
 			"Url": "https://libraries.redcar-cleveland.gov.uk/web/arena/",
 			"AdvancedUrl": "extended-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
+			"SearchUrl": "search?p_auth=NJXnzkEv&p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_pos=2&p_p_col_count=4&p_r_p_687834046_facet_queries=&p_r_p_687834046_search_item_no=0&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_item_id=[ITEMID]&p_r_p_687834046_agency_name=[ARENANAME]",
 			"OrganisationId": "AUK000215|1",
 			"TestISBN": "9780747538493"
 		},
@@ -1466,11 +1507,13 @@
 		{
 			"Name": "Rhondda Cynon Taf",
 			"Code": "W06000016",
-			"Type": "prism3",
+			"Type": "enterprise",
 			"Available": [
 				"Available"
 			],
-			"Url": "https://capitadiscovery.co.uk/rhondda/",
+			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookupavailability/detailItemsDiv0/ent:[ITEMID]/ILS/0/false",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
+			"Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/rct_en/",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -1490,11 +1533,13 @@
 		{
 			"Name": "Rotherham",
 			"Code": "E08000018",
-			"Type": "prism3",
+			"Type": "enterprise",
 			"Available": [
 				"Available"
 			],
-			"Url": "https://capitadiscovery.co.uk/rotherham/",
+			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookupavailability/detailItemsDiv0/ent:[ITEMID]/ILS/0/false",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
+			"Url": "https://rotherham.ent.sirsidynix.net.uk/client/en_GB/default/",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -1505,6 +1550,7 @@
 				"In stock"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://emlib.ent.sirsidynix.net.uk/client/en_GB/rutland/",
 			"TestISBN": "9781408855706"
 		},
@@ -1518,8 +1564,11 @@
 		{
 			"Name": "Sandwell",
 			"Code": "E08000028",
-			"Type": "spydus",
-			"Url": "https://opac-lib.smbc.sandwell.gov.uk/",
+			"Type": "prism3",
+			"Available": [
+				"Available"
+			],
+			"Url": "https://capitadiscovery.co.uk/sandwell/",
 			"TestISBN": "9781408855706"
 		},
 		{
@@ -1570,7 +1619,8 @@
 			"ISBNAlias": "number",
 			"Url": "https://libraries.shropshire.gov.uk/web/arena/",
 			"AdvancedUrl": "extended-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
+			"SearchUrl": "search?p_auth=NJXnzkEv&p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_pos=2&p_p_col_count=4&p_r_p_687834046_facet_queries=&p_r_p_687834046_search_item_no=0&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_item_id=[ITEMID]&p_r_p_687834046_agency_name=[ARENANAME]",
 			"OrganisationId": "AUK000034|1",
 			"TestISBN": "9780747591054"
 		},
@@ -1598,6 +1648,7 @@
 				"In stock"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"MultiAuthorityId": 1,
 			"TestISBN": "9780747538493"
 		},
@@ -1617,6 +1668,7 @@
 				"In stock"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://www.librarieswest.org.uk/client/en_GB/default/",
 			"MultiAuthorityId": 5,
 			"TestISBN": "9780747538493"
@@ -1679,7 +1731,8 @@
 			"SearchType": "Keyword",
 			"Url": "https://www.yourlibcat.staffordshire.gov.uk/web/arena/",
 			"AdvancedUrl": "advanced-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
+			"SearchUrl": "search?p_auth=NJXnzkEv&p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_pos=2&p_p_col_count=4&p_r_p_687834046_facet_queries=&p_r_p_687834046_search_item_no=0&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_item_id=[ITEMID]&p_r_p_687834046_agency_name=[ARENANAME]",
 			"OrganisationId": "AUK000250|1",
 			"TestISBN": "9781510051317"
 		},
@@ -1688,6 +1741,7 @@
 			"Code": "S12000030",
 			"Type": "enterprise",
 			"Url": "https://scl.ent.sirsidynix.net.uk/client/en_GB/default/",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"TestISBN": "9780751565355"
 		},
 		{
@@ -1725,13 +1779,9 @@
 		{
 			"Name": "Sunderland",
 			"Code": "E08000024",
-			"Type": "ibistro",
-			"Available": [
-				"Item is on the shelf"
-			],
-			"Url": "https://www.sunderland.gov.uk/",
-			"Home": "uhtbin/cgisirsi.exe/x/0/0/49",
-			"Search": "uhtbin/cgisirsi.exe/x/0/0/5?searchdata1=",
+			"Type": "enterprise",
+			"Url": "https://libraries.sunderland.gov.uk/client/en_GB/default/",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -1744,6 +1794,7 @@
 			"Url": "https://arena.surreylibraries.org/web/arena/",
 			"AdvancedUrl": "extended-search",
 			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_search_item_id=[ITEMID]&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_agency_name=[ARENANAME]&p_r_p_arena_urn:arena_search_item_no=0&p_r_p_arena_urn:arena_search_type=solr",
 			"OrganisationId": "AUK000021|0",
 			"TestISBN": "9781408810569"
 		},
@@ -1771,7 +1822,8 @@
 				"In stock"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-			"Url": "https://swan.ent.sirsidynix.net.uk/client/en_GB/default/",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
+			"Url": "https://swan.ent.sirsidynix.net.uk/client/en_GB/swan_en/",
 			"TestISBN": "9780747598466"
 		},
 		{
@@ -1779,7 +1831,7 @@
 			"Code": "E06000030",
 			"Type": "spydus",
 			"Url": "https://swindon.spydus.co.uk/",
-			"TestISBN": "9781510051317"
+			"TestISBN": "9781408845660"
 		},
 		{
 			"Name": "Tameside",
@@ -1798,6 +1850,7 @@
 			"Url": "https://library.telford.gov.uk/web/arena/",
 			"AdvancedUrl": "extended-search",
 			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_search_item_id=[ITEMID]&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_agency_name=[ARENANAME]&p_r_p_arena_urn:arena_search_item_no=0&p_r_p_arena_urn:arena_search_type=solr",
 			"OrganisationId": "AUK000032|0",
 			"TestISBN": "9781408865279"
 		},
@@ -1817,9 +1870,10 @@
 			"Type": "arena",
 			"ArenaName": "AUK267001",
 			"ISBNAlias": "number",
-			"Url": "https://www.torbaylibraries.org.uk/web/arena/catalogue",
+			"Url": "https://www.torbaylibraries.org.uk/web/arena/",
 			"AdvancedUrl": "extended-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
+			"SearchUrl": "search?p_auth=NJXnzkEv&p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_pos=2&p_p_col_count=4&p_r_p_687834046_facet_queries=&p_r_p_687834046_search_item_no=0&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_item_id=[ITEMID]&p_r_p_687834046_agency_name=[ARENANAME]",
 			"OrganisationId": "AUK267001|2",
 			"TestISBN": "9780751565355"
 		},
@@ -1830,7 +1884,7 @@
 			"Available": [
 				"Available"
 			],
-			"Url": "https://capitadiscovery.co.uk/torfaen/",
+			"url": "https://capitadiscovery.co.uk/torfaen/",
 			"TestISBN": "9780751565355"
 		},
 		{
@@ -1860,6 +1914,7 @@
 				"Available"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/vog_en/",
 			"TestISBN": "9780747538493"
 		},
@@ -1874,21 +1929,18 @@
 			"Url": "https://libraries.wakefield.gov.uk/web/arena/",
 			"AdvancedUrl": "advanced-search",
 			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_search_item_id=[ITEMID]&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_agency_name=[ARENANAME]&p_r_p_arena_urn:arena_search_item_no=0&p_r_p_arena_urn:arena_search_type=solr",
 			"OrganisationId": "AUK000212|1",
 			"TestISBN": "9781408855669"
 		},
 		{
 			"Name": "Walsall",
 			"Code": "E08000030",
-			"Type": "arena",
-			"Id": "140001",
-			"ArenaName": "AUK000014",
-			"ISBNAlias": "number",
-			"Url": "https://libcat.walsall.gov.uk/web/arena/",
-			"AdvancedUrl": "advanced-search",
-			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
-			"OrganisationId": "AUK000014|0",
-			"OrganisationName": "Walsall Libraries",
+			"Type": "prism3",
+			"Available": [
+				"Available"
+			],
+			"Url": "https://capitadiscovery.co.uk/walsall/",
 			"TestISBN": "9781408845653"
 		},
 		{
@@ -1899,7 +1951,7 @@
 				"Available"
 			],
 			"TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
-			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/waltham-forest/",
+			"Url": "https://llc.ent.sirsidynix.net.uk/client/en_GB/walthamforest/",
 			"LibraryNameFilter": "Waltham Forest",
 			"TestISBN": "9780747574491"
 		},
@@ -1935,7 +1987,7 @@
 			"Code": "E06000037",
 			"Type": "spydus",
 			"Url": "https://westberks.spydus.co.uk/",
-			"TestISBN": "9781408810552"
+			"TestISBN": "9780747599876"
 		},
 		{
 			"Name": "West Dunbartonshire",
@@ -1945,6 +1997,7 @@
 				"In stock"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "http://wd.ent.sirsidynix.net.uk/client/wd/",
 			"TestISBN": "9781408810606"
 		},
@@ -1956,6 +2009,7 @@
 				"AVAILABLE"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://wlcls.ent.sirsidynix.net.uk/client/en_GB/default/",
 			"TestISBN": "9780751565355"
 		},
@@ -1969,6 +2023,7 @@
 			"Url": "https://arena.westsussex.gov.uk/web/arena/",
 			"AdvancedUrl": "extended-search",
 			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
+			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_search_item_id=[ITEMID]&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_agency_name=[ARENANAME]&p_r_p_arena_urn:arena_search_item_no=0&p_r_p_arena_urn:arena_search_type=solr",
 			"OrganisationId": "AUK000038|0",
 			"TestISBN": "9781408810606"
 		},
@@ -1987,6 +2042,7 @@
 				"In stock"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://elibrary.westminster.gov.uk/client/en_GB/wcc/",
 			"TestISBN": "9781408855713"
 		},
@@ -2039,7 +2095,7 @@
 			"Code": "E06000041",
 			"Type": "spydus",
 			"Url": "https://wokingham.spydus.co.uk/",
-			"TestISBN": "9780747538493"
+			"TestISBN": "9781408845653"
 		},
 		{
 			"Name": "Wolverhampton",
@@ -2059,7 +2115,8 @@
 				"Available"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-			"Url": "https://capitadiscovery.co.uk/worcs/",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
+			"Url": "https://wcc.ent.sirsidynix.net.uk/client/en_GB/wcc/",
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -2070,6 +2127,7 @@
 				"Available"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://wcc.ent.sirsidynix.net.uk/client/en_GB/wcc/",
 			"TestISBN": "9780747591054"
 		},
@@ -2085,6 +2143,7 @@
 				"Available"
 			],
 			"AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
+			"TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
 			"Url": "https://cyc.sdp.sirsidynix.net.uk/client/en_GB/default/",
 			"TestISBN": "9780747591061"
 		}

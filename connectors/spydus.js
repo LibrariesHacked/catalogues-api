@@ -1,11 +1,18 @@
 const axios = require('axios')
 const cheerio = require('cheerio')
 const common = require('../connectors/common')
+const https = require('https')
 
 console.log('spydus connector loading...')
 
 const SEARCH_URL = 'cgi-bin/spydus.exe/ENQ/WPAC/BIBENQ?NRECS=1&ISBN='
 const LIBS_URL = 'cgi-bin/spydus.exe/MSGTRN/WPAC/COMB'
+
+const axe = axios.create({
+  httpsAgent: new https.Agent({
+    rejectUnauthorized: false
+  })
+})
 
 /**
  * Gets the object representing the service
@@ -21,7 +28,10 @@ exports.getLibraries = async function (service) {
   const responseLibraries = common.initialiseGetLibrariesResponse(service)
 
   try {
-    const libsPageRequest = await axios.get(service.Url + LIBS_URL, { headers: { Cookie: 'ALLOWCOOKIES_443=1' }, timeout: 60000 })
+    const libsPageRequest = await axe.get(service.Url + LIBS_URL, {
+      headers: { Cookie: 'ALLOWCOOKIES_443=1' },
+      timeout: 60000
+    })
     const $ = cheerio.load(libsPageRequest.data)
     $('#LOC option').each(function (idx, option) {
       if (common.isLibrary($(option).text())) responseLibraries.libraries.push($(option).text())
@@ -41,12 +51,12 @@ exports.searchByISBN = async function (isbn, service) {
   responseHoldings.url = service.Url + SEARCH_URL + isbn
 
   try {
-    const itemPageRequest = await axios.get(responseHoldings.url, { timeout: 30000 })
-    const $ = cheerio.load(itemPageRequest.data)
+    const itemPageRequest = await axe.get(responseHoldings.url, { timeout: 30000 })
+    let $ = cheerio.load(itemPageRequest.data)
     if ($('#result-content-list').length === 0) return common.endResponse(responseHoldings)
 
     const availabilityUrl = $('.card-text.availability').first().find('a').attr('href')
-    const availabilityRequest = await axios.get(service.Url + availabilityUrl, { timeout: 30000 })
+    const availabilityRequest = await axe.get(service.Url + availabilityUrl, { timeout: 30000 })
 
     $ = cheerio.load(availabilityRequest.data)
 
@@ -58,7 +68,7 @@ exports.searchByISBN = async function (isbn, service) {
       status === 'Available' ? libs[name].available++ : libs[name].unavailable++
     })
     for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable })
-  } catch (e) {}
+  } catch (e) { }
 
   return common.endResponse(responseHoldings)
 }

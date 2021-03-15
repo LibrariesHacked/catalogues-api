@@ -83,10 +83,11 @@ exports.searchByISBN = async function (isbn, service) {
   }
 
   if (availabilityJson === null && service.AvailabilityUrl) {
+    // e.g. /search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:548433/ILS/0/true/true?qu=9780747538493&d=ent%3A%2F%2FSD_ILS%2F0%2FSD_ILS%3A548433%7E%7E0&ps=300
     const availabilityUrl = service.Url + service.AvailabilityUrl.replace('[ITEMID]', itemId.split('/').join('$002f'))
     try {
       const availabilityPageRequest = await axios.post(availabilityUrl, {}, { headers: HEADER_POST, timeout: 30000 })
-      const availabilityResponse = JSON.parse(availabilityPageRequest.data)
+      const availabilityResponse = availabilityPageRequest.data
       if (availabilityResponse.ids) availabilityJson = availabilityResponse
     } catch (e) {
       return common.endResponse(responseHoldings)
@@ -106,23 +107,24 @@ exports.searchByISBN = async function (isbn, service) {
       }
     })
     for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable })
-  } else {
-    var titleUrl = service.Url + service.TitleDetailUrl.replace('[ITEMID]', itemId.split('/').join('$002f'))
-
-    try {
-      const titleDetailRequest = await axios.post(titleUrl, {}, { headers: HEADER_POST, timeout: 30000 })
-      const titles = titleDetailRequest.data
-      const libs = {}
-      $(titles.childRecords).each(function (i, c) {
-        const name = c.LIBRARY
-        const status = c.SD_ITEM_STATUS
-        if (!libs[name]) libs[name] = { available: 0, unavailable: 0 }
-        service.Available.indexOf(status) > 0 ? libs[name].available++ : libs[name].unavailable++
-      })
-      for (var lib in libs) responseHoldings.availability.push({ library: lib, available: libs[lib].available, unavailable: libs[lib].unavailable })
-    } catch (e) {
-      return common.endResponse(responseHoldings)
-    }
+    return common.endResponse(responseHoldings)
   }
+
+  var titleUrl = service.Url + service.TitleDetailUrl.replace('[ITEMID]', itemId.split('/').join('$002f'))
+  try {
+    const titleDetailRequest = await axios.post(titleUrl, {}, { headers: HEADER_POST, timeout: 30000 })
+    const titles = titleDetailRequest.data
+    const libs = {}
+    $(titles.childRecords).each(function (i, c) {
+      const name = c.LIBRARY
+      const status = c.SD_ITEM_STATUS
+      if (!libs[name]) libs[name] = { available: 0, unavailable: 0 }
+      service.Available.indexOf(status) > 0 ? libs[name].available++ : libs[name].unavailable++
+    })
+    for (var lib in libs) responseHoldings.availability.push({ library: lib, available: libs[lib].available, unavailable: libs[lib].unavailable })
+  } catch (e) {
+    return common.endResponse(responseHoldings)
+  }
+
   return common.endResponse(responseHoldings)
 }
