@@ -110,20 +110,22 @@ exports.searchByISBN = async function (isbn, service) {
     return common.endResponse(responseHoldings)
   }
 
-  var titleUrl = service.Url + service.TitleDetailUrl.replace('[ITEMID]', itemId.split('/').join('$002f'))
-  try {
-    const titleDetailRequest = await axios.post(titleUrl, {}, { headers: HEADER_POST, timeout: 30000 })
-    const titles = titleDetailRequest.data
-    const libs = {}
-    $(titles.childRecords).each(function (i, c) {
-      const name = c.LIBRARY
-      const status = c.SD_ITEM_STATUS
-      if (!libs[name]) libs[name] = { available: 0, unavailable: 0 }
-      service.Available.indexOf(status) > 0 ? libs[name].available++ : libs[name].unavailable++
-    })
-    for (var lib in libs) responseHoldings.availability.push({ library: lib, available: libs[lib].available, unavailable: libs[lib].unavailable })
-  } catch (e) {
-    return common.endResponse(responseHoldings)
+  if (service.TitleDetailUrl) {
+    var titleUrl = service.Url + service.TitleDetailUrl.replace('[ITEMID]', itemId.split('/').join('$002f'))
+    try {
+      const titleDetailRequest = await axios.post(titleUrl, {}, { headers: HEADER_POST, timeout: 30000 })
+      const titles = titleDetailRequest.data
+      const libs = {}
+      $(titles.childRecords).each(function (i, c) {
+        const name = c.LIBRARY
+        const status = c.SD_ITEM_STATUS
+        if (!libs[name]) libs[name] = { available: 0, unavailable: 0 }
+        service.Available.indexOf(status) > 0 ? libs[name].available++ : libs[name].unavailable++
+      })
+      for (var lib in libs) responseHoldings.availability.push({ library: lib, available: libs[lib].available, unavailable: libs[lib].unavailable })
+    } catch (e) {
+      return common.endResponse(responseHoldings)
+    }
   }
 
   return common.endResponse(responseHoldings)

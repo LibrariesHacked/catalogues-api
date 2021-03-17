@@ -43,7 +43,7 @@ exports.getLibraries = async function (service) {
  */
 exports.searchByISBN = async function (isbn, service) {
   const responseHoldings = common.initialiseSearchByISBNResponse(service)
-  responseHoldings.url = DEEP_LINK + isbn
+  responseHoldings.url = service.Url + DEEP_LINK + isbn
 
   let $ = null
   try {
