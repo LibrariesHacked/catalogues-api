@@ -96,8 +96,9 @@ exports.searchByISBN = async function (isbn, service) {
 
   // Call to the item page
   const pageText = searchResponse.data.replace(/\\x3d/g, '=').replace(/\\x26/g, '&')
-  const itemId = pageText.substring(pageText.lastIndexOf('search_item_id=') + 15)
-  const itemUrl = service.Url + service.ItemUrl.replace('[ARENANAME]', service.ArenaName).replace('[ITEMID]', itemId.substring(0, itemId.indexOf('&')))
+  let itemId = pageText.substring(pageText.lastIndexOf('search_item_id=') + 15)
+  itemId = itemId.substring(0, itemId.indexOf('&'))
+  const itemUrl = service.Url + service.ItemUrl.replace('[ARENANAME]', service.ArenaName).replace('[ITEMID]', itemId)
 
   let $ = null
   try {

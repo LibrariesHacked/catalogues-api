@@ -138,6 +138,16 @@
 			"Code": "E06000009",
 			"Type": "blackpool",
 			"Url": "https://www.blackpool.gov.uk/Residents/Libraries-arts-and-heritage/Libraries/Library-catalogue-search.aspx",
+			"Libraries": [
+				["ANC","Anchorsholme"],
+				["GRA","Library @thegrange"],
+				["CEN","Central"],
+				["LAY","Layton"],
+				["MER","Mereside"],
+				["MOR","Moor Park"],
+				["PAL","Palatine"],
+				["REV","Revoe"]
+			],
 			"TestISBN": "9780747538493"
 		},
 		{
@@ -624,7 +634,7 @@
 			"SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=[BOOKQUERY]",
 			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_search_item_id=[ITEMID]&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_agency_name=[ARENANAME]&p_r_p_arena_urn:arena_search_item_no=0&p_r_p_arena_urn:arena_search_type=solr",
 			"OrganisationId": "AUK000205|1",
-			"TestISBN": "9780747538486"
+			"TestISBN": "9781408898123"
 		},
 		{
 			"Name": "East Sussex",
@@ -1276,7 +1286,7 @@
 			"SearchUrl": "search?p_auth=NJXnzkEv&p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=[BOOKQUERY]",
 			"ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_pos=2&p_p_col_count=4&p_r_p_687834046_facet_queries=&p_r_p_687834046_search_item_no=0&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_item_id=[ITEMID]&p_r_p_687834046_agency_name=[ARENANAME]",			"OrganisationId": "AUK000221|0",
 			"Id": "221001",
-			"TestISBN": "9780747591108"
+			"TestISBN": "9780747583257"
 		},
 		{
 			"Name": "North Somerset",
@@ -1531,7 +1541,7 @@
 			"Code": "E09000027",
 			"Type": "spydus",
 			"Url": "https://richmond.spydus.co.uk/",
-			"TestISBN": "9781510051317"
+			"TestISBN": "9780751565362"
 		},
 		{
 			"Name": "Rochdale",
@@ -1601,14 +1611,12 @@
 		{
 			"Name": "Sheffield",
 			"Code": "E08000019",
-			"Type": "ibistro",
+			"Type": "enterprise",
+			"Url": "https://library.sheffield.gov.uk/client/en_GB/default/",
 			"Available": [
-				"SHELVES",
-				"RESERVES"
+				"In stock"
 			],
-			"Url": "http://library.sheffield.gov.uk/",
-			"Home": "uhtbin/webcat",
-			"Search": "uhtbin/cgisirsi/X/0/0/49?searchdata1=",
+			"AvailabilityUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:[ITEMID]/ILS/0/true/true",
 			"TestISBN": "9780747538493"
 		},
 		{
