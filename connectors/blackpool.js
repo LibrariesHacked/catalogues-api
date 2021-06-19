@@ -42,17 +42,18 @@ exports.searchByISBN = async function (isbn, service) {
     return common.endResponse(responseHoldings)
   }
 
-  const titleId = item?.titleAvailabilityInfoField?.titleIDField
+  const titleId = item?.titleIDField
 
   if (titleId) {
     try {
       const titleSearch = `https://api.blackpool.gov.uk/live/api/library/standard/lookupTitleInformation/${titleId}`
-      if (titleSearch?.data?.callInfoField) {
-        titleSearch.data.callInfoField.forEach(info => {
-          const lib = service.Libraries.filter(l => l[0] === info.libraryIdField)
-          const copiesAvailable = info.itemInfoField.filter(i => i.homeLocationIdField === i.currentLocationIdField)
-          const copiesUnAvailable = info.itemInfoField.filter(i => i.homeLocationIdField !== i.currentLocationIdField)
-          responseHoldings.availability.push({ library: lib, available: copiesAvailable.length, unavailable: copiesUnAvailable.length })
+      const titleRequest = await axios.get(titleSearch, { timeout: 30000 })
+      if (titleRequest?.data?.callInfoField) {
+        titleRequest.data.callInfoField.forEach(info => {
+          const lib = service.Libraries.find(l => l[0] === info.libraryIDField)
+          const copiesAvailable = info.itemInfoField.filter(i => i.homeLocationIDField === i.currentLocationIDField)
+          const copiesUnAvailable = info.itemInfoField.filter(i => i.homeLocationIDField !== i.currentLocationIDField)
+          responseHoldings.availability.push({ library: lib[1], available: copiesAvailable.length, unavailable: copiesUnAvailable.length })
         });
       } else {
         return common.endResponse(responseHoldings)
