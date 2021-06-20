@@ -526,8 +526,8 @@
       "ArenaName": "AUK267001",
       "ISBNAlias": "number",
       "AdvancedUrl": "advanced-search",
-      "SearchUrl": "search?p_auth=NJXnzkEv&p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=[BOOKQUERY]",
-      "ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_pos=2&p_p_col_count=4&p_r_p_687834046_facet_queries=&p_r_p_687834046_search_item_no=0&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_item_id=[ITEMID]&p_r_p_687834046_agency_name=[ARENANAME]",
+      "SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
+      "ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_search_item_id=[ITEMID]&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_agency_name=[ARENANAME]&p_r_p_arena_urn:arena_search_item_no=0&p_r_p_arena_urn:arena_search_type=solr",
       "OrganisationId": "AUK267001|1",
       "Url": "https://www.devonlibraries.org.uk/web/arena/",
       "TestISBN": "9780747591054"
@@ -675,7 +675,7 @@
       "Id": "269001",
       "Url": "https://yourlibrary.edinburgh.gov.uk/web/arena/",
       "AdvancedUrl": "advanced-search",
-      "SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=[BOOKQUERY]",
+      "SearchUrl": "search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]",
       "ItemUrl": "results?p_p_id=crDetailWicket_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_search_item_id=[ITEMID]&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_agency_name=[ARENANAME]&p_r_p_arena_urn:arena_search_item_no=0&p_r_p_arena_urn:arena_search_type=solr",
       "SearchType": "Keyword",
       "OrganisationId": "AUK269000|1",
@@ -1450,7 +1450,7 @@
       "Name": "Sir Benfro - Pembrokeshire",
       "Code": "W06000009",
       "Type": "iguana",
-      "Database": "1_LIBS",
+      "Database": "1_STOCK",
       "Faceted": false,
       "Url": "https://libraries.pembrokeshire.gov.uk/iguana/",
       "TestISBN": "9780751565355"
