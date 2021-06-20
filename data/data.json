@@ -439,9 +439,8 @@
       "Code": "E08000026",
       "Type": "iguana",
       "Database": "1",
-      "Faceted": false,
       "Url": "https://librarycatalogue.coventry.gov.uk/iguana/",
-      "TestISBN": "Coventry"
+      "TestISBN": "9781408855669"
     },
     {
       "Name": "Croydon",
@@ -574,10 +573,8 @@
       "Code": "S12000006",
       "Type": "iguana",
       "Database": "1_STOCK",
-      "Faceted": true,
-      "LibraryFacet": "Location (restriction)",
       "Url": "https://dumgal.inforlib.uk/iguana/",
-      "TestISBN": "9780751565355"
+      "TestISBN": "9781408855669"
     },
     {
       "Name": "Dundee City",
@@ -1259,9 +1256,13 @@
     {
       "Name": "Casnewydd - Newport",
       "Code": "W06000022",
-      "Type": "iguana",
-      "Database": "1",
-      "Url": "https://opac.newport.gov.uk/iguana/",
+      "Type": "enterprise",
+      "Available": [
+        "Available"
+      ],
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookupavailability/detailItemsDiv0/ent:[ITEMID]/ILS/0/false",
+      "TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
+      "Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/newport_en/",
       "TestISBN": "9780747538493"
     },
     {
@@ -1298,7 +1299,6 @@
       "Code": "S12000044",
       "Type": "iguana",
       "Database": "1",
-      "Faceted": false,
       "Url": "https://libraries.culturenl.co.uk/iguana/",
       "TestISBN": "9780747574477"
     },
@@ -1451,7 +1451,6 @@
       "Code": "W06000009",
       "Type": "iguana",
       "Database": "1_STOCK",
-      "Faceted": false,
       "Url": "https://libraries.pembrokeshire.gov.uk/iguana/",
       "TestISBN": "9780751565355"
     },

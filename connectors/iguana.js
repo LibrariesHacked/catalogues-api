@@ -11,9 +11,9 @@ axios.defaults.withCredentials = true
 
 console.log('iguana connector loading...')
 
-const ITEM_SEARCH = 'fu=BibSearch&RequestType=ResultSet_DisplayList&NumberToRetrieve=10&StartValue=1&SearchTechnique=Find&Language=eng&Profile=Iguana&ExportByTemplate=Brief&TemplateId=Iguana_Brief&FacetedSearch=Yes&MetaBorrower=&Cluster=1&Namespace=0&BestMatch=99&ASRProfile=&Sort=Relevancy&SortDirection=1&WithoutRestrictions=Yes&Associations=Also&Application=Bib&Database=[DB]&Index=Keywords&Request=[ISBN]&SessionCMS=&CspSessionId=[SID]&SearchMode=simple&SIDTKN=[SID]'
+const ITEM_SEARCH = 'fu=BibSearch&RequestType=ResultSet_DisplayList&NumberToRetrieve=10&StartValue=1&SearchTechnique=Find&Language=eng&Profile=Iguana&ExportByTemplate=Brief&TemplateId=Iguana_Brief&FacetedSearch=Yes&MetaBorrower=&Cluster=0&Namespace=0&BestMatch=99&ASRProfile=&Sort=Relevancy&SortDirection=1&WithoutRestrictions=Yes&Associations=Also&Application=Bib&Database=[DB]&Index=Keywords&Request=[ISBN]&SessionCMS=&CspSessionId=[SID]&SearchMode=simple&SIDTKN=[SID]'
 const FACET_SEARCH = 'FacetedSearch=[RESULTID]&FacetsFound=&fu=BibSearch&SIDTKN=[SID]'
-const HEADER = { 'Content-Type': 'application/x-www-form-urlencoded' }
+const HEADER = { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' }
 const HOME = 'www.main.cls'
 
 /**
@@ -103,9 +103,9 @@ exports.searchByISBN = async function (isbn, service) {
   }
 
   let record = null
-  if (searchJs && searchJs.searchRetrieveResponse) record = searchJs?.searchRetrieveResponse?.records[0]?.record
+  if (searchJs?.searchRetrieveResponse) record = searchJs.searchRetrieveResponse.records[0]?.record[0]
 
-  if (record?.recordData[0]?.BibDocument[0]?.HoldingsSummary[0]) {
+  if (record?.recordData && record.recordData[0] && record.recordData[0].BibDocument[0] && record.recordData[0].BibDocument[0].HoldingsSummary[0]) {
     record.recordData[0].BibDocument[0].HoldingsSummary[0].ShelfmarkData.forEach(function (item) {
       var lib = item.Shelfmark[0].split(' : ')[0]
       responseHoldings.availability.push({ library: lib, available: item.Available ? item.Available[0] : 0, unavailable: item.Available === '0' ? 1 : 0 })
