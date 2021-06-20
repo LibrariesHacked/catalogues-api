@@ -1550,7 +1550,7 @@
       "Database": "1",
       "Faceted": false,
       "Url": "https://libcat.renfrewshire.gov.uk/iguana/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9781408855683"
     },
     {
       "Name": "Rhondda Cynon Taf",
@@ -1624,10 +1624,8 @@
       "Code": "S12000026",
       "Type": "iguana",
       "Database": "1",
-      "Faceted": true,
-      "LibraryFacet": "Items held at",
       "Url": "https://liveborders.inforlib.uk/iguana/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9781408855690"
     },
     {
       "Name": "Sefton",
@@ -1808,7 +1806,7 @@
       "Type": "iguana",
       "Database": "1",
       "Url": "https://librariesonline.stoke.gov.uk/iguana/",
-      "TestISBN": "9780747538493"
+      "TestISBN": "9781408855690"
     },
     {
       "Name": "Suffolk",
@@ -2022,8 +2020,6 @@
       "Code": "E10000031",
       "Type": "iguana",
       "Database": "1",
-      "Faceted": true,
-      "LibraryFacet": "Location (restriction)",
       "Url": "https://library.warwickshire.gov.uk/iguana/",
       "TestISBN": "9780747562184"
     },

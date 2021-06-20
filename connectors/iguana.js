@@ -105,10 +105,12 @@ exports.searchByISBN = async function (isbn, service) {
   let record = null
   if (searchJs?.searchRetrieveResponse) record = searchJs.searchRetrieveResponse.records[0]?.record[0]
 
-  if (record?.recordData && record.recordData[0] && record.recordData[0].BibDocument[0] && record.recordData[0].BibDocument[0].HoldingsSummary[0]) {
+  if (record?.recordData && record.recordData[0] && record.recordData[0].BibDocument[0] && record.recordData[0].BibDocument[0].HoldingsSummary) {
     record.recordData[0].BibDocument[0].HoldingsSummary[0].ShelfmarkData.forEach(function (item) {
-      var lib = item.Shelfmark[0].split(' : ')[0]
-      responseHoldings.availability.push({ library: lib, available: item.Available ? item.Available[0] : 0, unavailable: item.Available === '0' ? 1 : 0 })
+      if (item.Shelfmark) {
+        var lib = item.Shelfmark[0].split(' : ')[0]
+        responseHoldings.availability.push({ library: lib, available: item.Available ? item.Available[0] : 0, unavailable: item.Available === '0' ? 1 : 0 })
+      }
     })
   }
 
