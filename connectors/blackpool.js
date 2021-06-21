@@ -15,7 +15,6 @@ exports.getService = (service) => { return common.getService(service) }
  */
 exports.getLibraries = async function (service) {
   const responseLibraries = common.initialiseGetLibrariesResponse(service)
-  for (var lib in service.Libraries) responseLibraries.libraries.push(lib[1])
   return common.endResponse(responseLibraries)
 }
 

@@ -15,6 +15,17 @@ const common = require('../connectors/common')
 
 console.log('arena connector loading...')
 
+const LIBRARIES_URL_PORTLET = '?p_p_id=extendedSearch_WAR_arenaportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=/extendedSearch/?wicket:interface=:0:extendedSearchPanel:extendedSearchForm:organisationHierarchyPanel:organisationContainer:organisationChoice::IBehaviorListener:0:&p_p_cacheability=cacheLevelPage&random=0.08709241788681465extended-search?p_p_id=extendedSearch_WAR_arenaportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=/extendedSearch/?wicket:interface=:0:extendedSearchPanel:extendedSearchForm:organisationHierarchyPanel:organisationContainer:organisationChoice::IBehaviorListener:0:&p_p_cacheability=cacheLevelPage&random=0.08709241788681465'
+const LIBRARIES_URL_PORTLETS = '?p_p_id=extendedSearch_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=/extendedSearch/?wicket:interface=:0:extendedSearchPanel:extendedSearchForm:organisationHierarchyPanel:organisationContainer:organisationChoice::IBehaviorListener:0:&p_p_cacheability=cacheLevelPage&random=0.08709241788681465extended-search?p_p_id=extendedSearch_WAR_arenaportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=/extendedSearch/?wicket:interface=:0:extendedSearchPanel:extendedSearchForm:organisationHierarchyPanel:organisationContainer:organisationChoice::IBehaviorListener:0:&p_p_cacheability=cacheLevelPage&random=0.08709241788681465'
+const SEARCH_URL_PORTLET = 'search?p_p_id=searchResult_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_search_type=solr&p_r_p_arena_urn:arena_search_query=[BOOKQUERY]'
+const SEARCH_URL_PORTLETS = 'search?p_p_id=searchResult_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_r_p_687834046_facet_queries=&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_query=[BOOKQUERY]'
+const ITEM_URL_PORTLET = 'results?p_p_id=crDetailWicket_WAR_arenaportlet&p_p_lifecycle=1&p_p_state=normal&p_r_p_arena_urn:arena_search_item_id=[ITEMID]&p_r_p_arena_urn:arena_facet_queries=&p_r_p_arena_urn:arena_agency_name=[ARENANAME]&p_r_p_arena_urn:arena_search_item_no=0&p_r_p_arena_urn:arena_search_type=solr'
+const ITEM_URL_PORTLETS = 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=1&p_p_state=normal&p_p_mode=view&p_p_col_id=column-2&p_p_col_pos=2&p_p_col_count=4&p_r_p_687834046_facet_queries=&p_r_p_687834046_search_item_no=0&p_r_p_687834046_sort_advice=field%3DRelevance%26direction%3DDescending&p_r_p_687834046_search_type=solr&p_r_p_687834046_search_item_id=[ITEMID]&p_r_p_687834046_agency_name=[ARENANAME]'
+const HOLDINGS_URL_PORTLET = 'results?p_p_id=crDetailWicket_WAR_arenaportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel::IBehaviorListener:0:&p_p_cacheability=cacheLevelPage&p_p_col_id=column-2&p_p_col_pos=1&p_p_col_count=3'
+const HOLDINGS_URL_PORTLETS = 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel::IBehaviorListener:0:&p_p_cacheability=cacheLevelPage&p_p_col_id=column-2&p_p_col_pos=1&p_p_col_count=3'
+const HOLDINGSDETAIL_URL_PORTLET = 'results?p_p_id=crDetailWicket_WAR_arenaportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=[RESOURCEID]&p_p_cacheability='
+const HOLDINGSDETAIL_URL_PORTLETS = 'results?p_p_id=crDetailWicket_WAR_arenaportlets&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_resource_id=[RESOURCEID]&p_p_cacheability='
+
 /**
  * Gets the object representing the service
  * @param {object} service
@@ -27,16 +38,12 @@ exports.getService = (service) => { return common.getService(service) }
  */
 exports.getLibraries = async function (service) {
   const responseLibraries = common.initialiseGetLibrariesResponse(service)
-
-  // Sometimes we have to use libraries that are hardcoded into the config
-  if (service.Libraries) {
-    for (const lib in service.Libraries) responseLibraries.libraries.push(lib)
-    return common.endResponse(responseLibraries)
-  }
+  if (responseLibraries.libraries.length > 0) return common.endResponse(responseLibraries)
 
   // Get the advanced search page
   let advancedSearchResponse = null
   try {
+    // The AdvancedUrl tends to either be advanced-search or extended-search
     advancedSearchResponse = await axios.get(service.Url + service.AdvancedUrl)
   } catch (e) {
     common.endResponse(responseLibraries)
@@ -53,7 +60,7 @@ exports.getLibraries = async function (service) {
 
   // If not we'll need to call a portlet to get the data
   const headers = { Accept: 'text/xml', 'Wicket-Ajax': true, 'Wicket-FocusedElementId': 'id__extendedSearch__WAR__arenaportlet____e', 'Content-Type': 'application/x-www-form-urlencoded' }
-  const url = service.Url + service.LibrariesUrl
+  const url = service.Url + service.AdvancedUrl + (service.portlets ? LIBRARIES_URL_PORTLETS : LIBRARIES_URL_PORTLET)
   let js = null
   try {
     const responseHeaderRequest = await axios.post(url, querystring.stringify({ 'organisationHierarchyPanel:organisationContainer:organisationChoice': service.OrganisationId }), { headers: headers })
@@ -63,7 +70,7 @@ exports.getLibraries = async function (service) {
   }
 
   // Parse the results of the request
-  if (js && js !== 'Undeployed' && js['ajax-response'] && js['ajax-response'].component) {
+  if (js && js !== 'Undeployed' && js['ajax-response']?.component) {
     $ = cheerio.load(js['ajax-response'].component[0]._)
     $('option').each(function () {
       if (common.isLibrary($(this).text())) responseLibraries.libraries.push($(this).text())
@@ -82,7 +89,9 @@ exports.searchByISBN = async function (isbn, service) {
 
   let bookQuery = (service.SearchType !== 'Keyword' ? service.ISBNAlias + '_index:' + isbn : isbn)
   if (service.OrganisationId) bookQuery = 'organisationId_index:' + service.OrganisationId + '+AND+' + bookQuery
-  responseHoldings.url = service.Url + service.SearchUrl.replace('[BOOKQUERY]', bookQuery)
+  
+  const searchUrl = (service.Portlets ? SEARCH_URL_PORTLETS : SEARCH_URL_PORTLET).replace('[BOOKQUERY]', bookQuery)
+  responseHoldings.url = service.Url + searchUrl
 
   let searchResponse = null
   try {
@@ -98,7 +107,9 @@ exports.searchByISBN = async function (isbn, service) {
   const pageText = searchResponse.data.replace(/\\x3d/g, '=').replace(/\\x26/g, '&')
   let itemId = pageText.substring(pageText.lastIndexOf('search_item_id=') + 15)
   itemId = itemId.substring(0, itemId.indexOf('&'))
-  const itemUrl = service.Url + service.ItemUrl.replace('[ARENANAME]', service.ArenaName).replace('[ITEMID]', itemId)
+
+  let itemDetailsUrl = (service.Portlets ? ITEM_URL_PORTLETS : ITEM_URL_PORTLET).replace('[ARENANAME]', service.ArenaName).replace('[ITEMID]', itemId)
+  const itemUrl = service.Url + itemDetailsUrl
 
   let $ = null
   try {
@@ -119,12 +130,12 @@ exports.searchByISBN = async function (isbn, service) {
   }
 
   // Get the item holdings widget
-  const itemPortletHeader = { Accept: 'text/xml', 'Wicket-Ajax': true }
-  const itemPortletUrl = service.Url + service.HoldingsPanelUrl
+  const holdingsPanelHeader = { Accept: 'text/xml', 'Wicket-Ajax': true }
+  const holdingsPanelUrl = service.Url + (service.Portlets ? HOLDINGS_URL_PORTLETS : HOLDINGS_URL_PORTLET) 
 
   try {
-    var itemPortletResponse = await axios.get(itemPortletUrl, { rejectUnauthorized: true, headers: itemPortletHeader, timeout: 20000, jar: true })
-    var js = await xml2js.parseStringPromise(itemPortletResponse.data)
+    var holdingsPanelPortletResponse = await axios.get(holdingsPanelUrl, { rejectUnauthorized: true, headers: holdingsPanelHeader, timeout: 20000, jar: true })
+    var js = await xml2js.parseStringPromise(holdingsPanelPortletResponse.data)
     if (!js['ajax-response'] || !js['ajax-response'].component) return common.endResponse(responseHoldings)
     $ = cheerio.load(js['ajax-response'].component[0]._)
   } catch (e) {
@@ -148,7 +159,7 @@ exports.searchByISBN = async function (isbn, service) {
   var holdingsHeaders = { Accept: 'text/xml', 'Wicket-Ajax': true }
   holdingsHeaders['Wicket-FocusedElementId'] = 'id__crDetailWicket__WAR__arenaportlets____2a'
   var resourceId = '/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel:content:holdingsView:' + (currentOrg + 1) + ':holdingContainer:togglableLink::IBehaviorListener:0:'
-  var holdingsUrl = service.Url + service.HoldingsDetailUrl.replace('[RESOURCEID]', resourceId)
+  var holdingsUrl = service.Url + (service.Portlets ? HOLDINGSDETAIL_URL_PORTLETS : HOLDINGSDETAIL_URL_PORTLET).replace('[RESOURCEID]', resourceId)
 
   try {
     var holdingsResponse = await axios.get(holdingsUrl, { rejectUnauthorized: true, headers: holdingsHeaders, timeout: 20000, jar: true })
@@ -165,9 +176,9 @@ exports.searchByISBN = async function (isbn, service) {
   const availabilityRequests = []
   libsData.each(function (i) {
     resourceId = '/crDetailWicket/?wicket:interface=:0:recordPanel:holdingsPanel:content:holdingsView:' + (currentOrg + 1) + ':childContainer:childView:' + i + ':holdingPanel:holdingContainer:togglableLink::IBehaviorListener:0:'
-    const liburl = service.Url + service.HoldingsLibraryUrl.replace('[RESOURCEID]', resourceId)
+    const libUrl = service.Url + (service.Portlets ? HOLDINGSDETAIL_URL_PORTLETS : HOLDINGSDETAIL_URL_PORTLET).replace('[RESOURCEID]', resourceId)
     var headers = { Accept: 'text/xml', 'Wicket-Ajax': true }
-    availabilityRequests.push(axios.get(liburl, { rejectUnauthorized: true, headers: headers, timeout: 20000, jar: true }))
+    availabilityRequests.push(axios.get(libUrl, { rejectUnauthorized: true, headers: headers, timeout: 20000, jar: true }))
   })
 
   let responses = null

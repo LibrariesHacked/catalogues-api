@@ -50,7 +50,12 @@ exports.isLibrary = function (str) {
  * @param {object} service
  */
 exports.initialiseGetLibrariesResponse = function (service) {
-  return { service: service.Name, code: service.Code, libraries: [], start: new Date(), end: null }
+  let response = { service: service.Name, code: service.Code, libraries: [], start: new Date(), end: null }
+  // Sometimes we have to use libraries that are hardcoded into the config
+  if (service.Libraries) {
+    for (const lib in service.Libraries) responseLibraries.libraries.push(lib)
+  }
+  return response
 }
 
 /**
