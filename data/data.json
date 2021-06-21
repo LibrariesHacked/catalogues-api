@@ -1030,10 +1030,11 @@
       "ArenaName": "AUK000271",
       "Id": "750001",
       "ISBNAlias": "number",
+      "SearchType": "Keyword",
       "Url": "https://libraries.lambeth.gov.uk/web/arena/",
       "AdvancedUrl": "extended-search",
       "OrganisationId": "AUK000271|1",
-      "Portlets": false,
+      "Portlets": true,
       "TestISBN": "9780747538493"
     },
     {

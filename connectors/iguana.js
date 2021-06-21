@@ -95,7 +95,8 @@ exports.searchByISBN = async function (isbn, service) {
   try {
     const homePageRequest = await axios.get(service.Url + HOME)
     const sessionCookie = homePageRequest.headers['set-cookie'][0]
-    const sid = sessionCookie.substring(43, 53)
+    const iguanaCookieIndex = sessionCookie.indexOf('iguana-=')
+    const sid = sessionCookie.substring(iguanaCookieIndex + 20, iguanaCookieIndex + 30)
     const searchPageRequest = await axios.post(service.Url + 'Proxy.SearchRequest.cls', ITEM_SEARCH.replace('[ISBN]', isbn).replace('[DB]', service.Database).replace('[TID]', 'Iguana_Brief').replace(/\[SID\]/g, sid), { headers: { ...HEADER, Referer: service.Url + HOME }, timeout: 60000 })
     searchJs = await xml2js.parseStringPromise(searchPageRequest.data)
   } catch (e) {
