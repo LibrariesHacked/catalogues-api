@@ -356,7 +356,7 @@
       "Url": "https://beds-arena.culturalservices.net/web/arena/",
       "AdvancedUrl": "extended-search",
       "OrganisationId": "AUK000022|1",
-      "Portlets": true,
+      "Portlets": false,
       "TestISBN": "9780747591054"
     },
     {
@@ -531,7 +531,7 @@
       "ArenaName": "AUK000243",
       "Id": "243001",
       "ISBNAlias": "number",
-      "Url": "http://library.doncaster.gov.uk/web/arena/",
+      "Url": "https://library.doncaster.gov.uk/web/arena/",
       "AdvancedUrl": "extended-search",
       "OrganisationId": "AUK000243|1",
       "OrganisationName": "Doncaster",
@@ -743,12 +743,12 @@
       "ArenaName": "AUK000048",
       "Id": "480001",
       "ISBNAlias": "number",
-      "Url": "http://libcat.csglasgow.org/web/arena/",
+      "Url": "https://libcat.csglasgow.org/web/arena/",
       "AdvancedUrl": "extended-search",
       "OrganisationId": "AUK000048|1",
       "OrganisationName": "Glasgow",
       "Portlets": false,
-      "TestISBN": "9780099557739"
+      "TestISBN": "9781408855911"
     },
     {
       "Name": "Gloucestershire",
@@ -2036,9 +2036,10 @@
       "Id": "380001",
       "ArenaName": "AUK000038",
       "ISBNAlias": "number",
+      "SearchType":"Keyword",
       "Url": "https://arena.westsussex.gov.uk/web/arena/",
       "AdvancedUrl": "extended-search",
-      "OrganisationId": "AUK000038|0",
+      "OrganisationId": "AUK000038|1",
       "Portlets": true,
       "TestISBN": "9781408855683"
     },
