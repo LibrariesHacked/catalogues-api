@@ -1,61 +1,57 @@
-/// ////////////////////////////////////////
-// WEBPAC
-//
-/// ////////////////////////////////////////
+const axios = require('axios')
+const cheerio = require('cheerio')
+const common = require('../connectors/common')
+
 console.log('webpac connector loading')
 
-/// ////////////////////////////////////////
-// REQUIRES
-// Request (for HTTP calls) and cheerio for
-// querying HTML returned.
-/// ////////////////////////////////////////
-var request = require('request')
-var cheerio = require('cheerio')
-var common = require('../connectors/common')
+/**
+ * Gets the object representing the service
+ * @param {object} service
+ */
+exports.getService = (service) => { return common.getService(service) }
 
-/// ////////////////////////////////////////
-// Function: getService
-/// ////////////////////////////////////////
-exports.getService = function (svc) {
-  var service = common.getService(svc);
-  return service;
-}
+/**
+ * Gets the libraries in the service based upon possible search and filters within the library catalogue
+ * @param {object} service
+ */
+exports.getLibraries = async function (service) {
+  const responseLibraries = common.initialiseGetLibrariesResponse(service)
 
-/// ////////////////////////////////////////
-// Function: getLibraries
-/// ////////////////////////////////////////
-exports.getLibraries = function (service, callback) {
-  var responseLibraries = { service: service.Name, code: service.Code, libraries: [], start: new Date() }
-
-  // Request 1: Get advanced search page
-  request.get({ url: service.Url + 'search/X', timeout: 60000 }, function (error, message, response) {
-    if (common.handleErrors(callback, responseLibraries, error, message)) return
-    $ = cheerio.load(response)
-    $('select[Name=b] option').each(function () {
-      if ($(this).text() != 'ANY') responseLibraries.libraries.push($(this).text().trim())
+  try {
+    const advancedSearchPageRequest = await axios.get(service.Url + 'search/X', { timeout: 60000 })
+    const $ = cheerio.load(advancedSearchPageRequest.data)
+    $('select[Name=searchscope] option').each((idx, option) => {
+      if (common.isLibrary($(option).text())) responseLibraries.libraries.push($(option).text().trim())
     })
-    common.completeCallback(callback, responseLibraries)
-  })
+  } catch (e) {}
+
+  return common.endResponse(responseLibraries)
 }
 
-/// ////////////////////////////////////////
-// Function: searchByISBN
-/// ////////////////////////////////////////
-exports.searchByISBN = function (isbn, lib, callback) {
-  var responseHoldings = { service: lib.Name, code: lib.Code, availability: [], start: new Date(), url: lib.Url + 'search~S1?/i' + isbn + '/i' + isbn + '/1,1,1,E/holdings&FF=i' + isbn + '&1,1,' }
+/**
+ * Retrieves the availability summary of an ISBN by library
+ * @param {string} isbn
+ * @param {object} service
+ */
+exports.searchByISBN = async function (isbn, service) {
+  const responseHoldings = common.initialiseSearchByISBNResponse(service)
 
-  // Request 1: Use the item deep link URL
-  request.get({ url: responseHoldings.url, timeout: 60000 }, function (error, msg, response) {
-    if (common.handleErrors(callback, responseHoldings, error, msg)) return
-    var libs = {}
-    $ = cheerio.load(response)
-    $('table.bibItems tr.bibItemsEntry').each(function (index, elem) {
-      var name = $(this).find('td').eq(0).text().trim()
-      var status = $(this).find('td').eq(2).text().trim()
+  const libs = {}
+  responseHoldings.url = service.Url + 'search~S1?/i' + isbn + '/i' + isbn + '/1,1,1,E/holdings&FF=i' + isbn + '&1,1,'
+
+  try {
+    const responseHoldingsRequest = await axios.get(responseHoldings.url, { timeout: 60000 })
+
+    const $ = cheerio.load(responseHoldingsRequest.data)
+    $('table.bibItems tr.bibItemsEntry').each(function (idx, tr) {
+      var name = $(tr).find('td').eq(0).text().trim()
+      var status = $(tr).find('td').eq(2).text().trim()
       if (!libs[name]) libs[name] = { available: 0, unavailable: 0 }
-      status == 'AVAILABLE' ? libs[name].available++ : libs[name].unavailable++
+      status === 'AVAILABLE' ? libs[name].available++ : libs[name].unavailable++
     })
-    for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable })
-    common.completeCallback(callback, responseHoldings)
-  })
+  } catch (e) {}
+
+  for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable })
+
+  return common.endResponse(responseHoldings)
 }

@@ -1,149 +1,144 @@
-/// ////////////////////////////////////////
-// ENTERPRISE
-//
-/// ////////////////////////////////////////
+const axios = require('axios').default
+const cheerio = require('cheerio')
+const common = require('../connectors/common')
+
 console.log('enterprise connector loading...')
 
-/// ////////////////////////////////////////
-// REQUIRES
-// Request (for HTTP calls) and cheerio for
-// querying the HTML returned.
-/// ////////////////////////////////////////
-var request = require('request')
-var cheerio = require('cheerio')
-var common = require('../connectors/common')
+const SEARCH_URL = 'search/results?qu='
+const ITEM_URL = 'search/detailnonmodal/ent:[ILS]/one'
+const HEADER = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586' }
+const HEADER_POST = { 'X-Requested-With': 'XMLHttpRequest' }
 
-/// ////////////////////////////////////////
-// VARIABLES
-/// ////////////////////////////////////////
-var searchUrl = 'search/results?qu='
-var itemUrl = 'search/detailnonmodal/ent:[ILS]/one'
-var header1 = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586' }
-var headerPost = { 'X-Requested-With': 'XMLHttpRequest' }
+/**
+ * Gets the object representing the service
+ * @param {object} service
+ */
+exports.getService = (service) => { return common.getService(service) }
 
-/// ////////////////////////////////////////
-// Function: getService
-/// ////////////////////////////////////////
-exports.getService = function (svc) {
-  var service = common.getService(svc);
-  return service;
-}
+/**
+ * Gets the libraries in the service based upon possible search and filters within the library catalogue
+ * @param {object} service
+ */
+exports.getLibraries = async function (service) {
+  const responseLibraries = common.initialiseGetLibrariesResponse(service)
 
-/// ////////////////////////////////////////
-// Function: getLibraries
-/// ////////////////////////////////////////
-exports.getLibraries = function (service, callback) {
-  var responseLibraries = { service: service.Name, code: service.Code, libraries: [], start: new Date() }
-  // Request 1: Get advanced search page
-  request.get({ url: service.Url + 'search/advanced', timeout: 30000 }, function (error, message, response) {
-    if (common.handleErrors(callback, responseLibraries, error, message)) return
-    $ = cheerio.load(response)
-    $('#libraryDropDown option').each(function () {
-      if ($(this).text() != 'Any Library') responseLibraries.libraries.push($(this).text())
-    })
-    common.completeCallback(callback, responseLibraries)
+  let $ = null
+  try {
+    const advancedPage = await axios.get(service.Url + 'search/advanced', { timeout: 30000 })
+    $ = cheerio.load(advancedPage.data)
+  } catch (e) {
+    return common.endResponse(responseLibraries)
+  }
+
+  $('#libraryDropDown option').each((idx, lib) => {
+    const name = $(lib).text()
+    if (common.isLibrary(name) && name.indexOf(service.LibraryNameFilter) !== -1) responseLibraries.libraries.push(name)
   })
+  return common.endResponse(responseLibraries)
 }
 
-/// ///////////////////////
-// Function: searchByISBN
-/// ///////////////////////
-exports.searchByISBN = function (isbn, lib, callback) {
-  var responseHoldings = { service: lib.Name, code: lib.Code, availability: [], start: new Date(), url: lib.Url + searchUrl + isbn }
-  var ils = ''
-  var itemPage = ''
+/**
+ * Retrieves the availability summary of an ISBN by library
+ * @param {string} isbn
+ * @param {object} service
+ */
+exports.searchByISBN = async function (isbn, service) {
+  const responseHoldings = common.initialiseSearchByISBNResponse(service)
+  responseHoldings.url = service.Url + SEARCH_URL + isbn
+  let itemPage = ''
+  let availabilityJson = null
 
-  // Function: deepLinkResponse
-  var deepLinkResponse = function (error, msg, res) {
-    if (common.handleErrors(callback, responseHoldings, error, msg)) return
-    ils = msg.request.uri.path.substring(msg.request.uri.path.lastIndexOf('ent:') + 4, msg.request.uri.path.lastIndexOf('/one')) || ''
-    if (ils == '') { common.completeCallback(callback, responseHoldings); return }
-    itemPage = res
-    if (ils == '/cl') {
-      // In this situation we're probably still on the search page (there may be duplicate results).
-      $ = cheerio.load(itemPage)
-      if ($('#da0').attr('value')) ils = $('#da0').attr('value').substring($('#da0').attr('value').lastIndexOf('ent:') + 4) || ''
-      if (ils == '') { common.completeCallback(callback, responseHoldings); return }
-      var url = lib.Url + itemUrl.replace('[ILS]', ils.split('/').join('$002f'))
-      request.get({ url: url, timeout: 30000 }, itemPageResponse)
-    } else {
-      // Availability information may already be part of the page.
-      var matches = /parseDetailAvailabilityJSON\(([\s\S]*?)\)/.exec(itemPage)
-      if (matches && matches[1] && common.isJsonString(matches[1])) {
-        matchAvailabilityToLibraries(JSON.parse(matches[1]))
-      } else {
-        getItemAvailability(ils)
-      }
+  let itemId = null
+  let $ = null
+  let deepLinkPageUrl = null
+  try {
+    // We could also use RSS https://wales.ent.sirsidynix.net.uk/client/rss/hitlist/ynysmon_en/qu=9780747538493
+    const deepLinkPageRequest = await axios.get(responseHoldings.url, { headers: HEADER, timeout: 30000 })
+    itemId = deepLinkPageRequest.config.url.substring(deepLinkPageRequest.config.url.lastIndexOf('ent:') + 4, deepLinkPageRequest.config.url.lastIndexOf('/one')) || ''
+    $ = cheerio.load(deepLinkPageRequest.data)
+    deepLinkPageUrl = deepLinkPageRequest.config.url
+    if (itemId === '') return common.endResponse(responseHoldings)
+    itemPage = deepLinkPageRequest.data
+  } catch (e) {
+    return common.endResponse(responseHoldings)
+  }
+
+  if (deepLinkPageUrl.lastIndexOf('ent:') === -1) {
+    // In this situation we're probably still on the search page (there may be duplicate results).
+    if ($('#da0').attr('value')) itemId = $('#da0').attr('value').substring($('#da0').attr('value').lastIndexOf('ent:') + 4) || ''
+    if (itemId === '') return common.endResponse(responseHoldings)
+    const itemPageUrl = service.Url + ITEM_URL.replace('[ILS]', itemId.split('/').join('$002f'))
+    try {
+      const itemPageRequest = await axios.get(itemPageUrl, { timeout: 30000 })
+      itemPage = itemPageRequest.data
+    } catch (e) {
+      return common.endResponse(responseHoldings)
     }
   }
 
-  // Function: itemPageResponse
-  var itemPageResponse = function (error, message, response) {
-    if (common.handleErrors(callback, responseHoldings, error, message)) return
-    itemPage = response
-    getItemAvailability(ils)
+  // Availability information may already be part of the page.
+  var matches = /parseDetailAvailabilityJSON\(([\s\S]*?)\)/.exec(itemPage)
+  if (matches && matches[1] && common.isJsonString(matches[1])) {
+    availabilityJson = JSON.parse(matches[1])
   }
 
-  // Function: getItemAvailability
-  // Called either immediately (if redirected onto the main item page) or after a second request to go to the item page.
-  var getItemAvailability = function (ils) {
-    if (ils.indexOf('SD_ILS') == -1) return common.completeCallback(callback, responseHoldings)
-    var url = lib.Url + lib.AvailabilityUrl.replace('[ITEMID]', ils.split('/').join('$002f'))
-    // Request 2/3: A post request returns the data used to show the availability information
-    request.post({ url: url, headers: headerPost, timeout: 30000 }, getFinalAvailabilityJson)
-  }
-
-  // Function: getFinalAvailabilityJson
-  var getFinalAvailabilityJson = function (error, msg, res) {
-    if (common.handleErrors(callback, responseHoldings, error, msg)) return
-    if (!common.isJsonString(res)) { common.completeCallback(callback, responseHoldings); return }
-    var avail = JSON.parse(res)
-    if (!avail.ids) {
-      var titles = lib.Url + lib.TitleDetailUrl.replace('[ITEMID]', ils.split('/').join('$002f'))
-      request.post({ url: titles, headers: headerPost, timeout: 30000 }, getTitleDetailJson)
-    } else {
-      matchAvailabilityToLibraries(avail)
+  if (availabilityJson === null && service.AvailabilityUrl) {
+    // e.g. /search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:548433/ILS/0/true/true?qu=9780747538493&d=ent%3A%2F%2FSD_ILS%2F0%2FSD_ILS%3A548433%7E%7E0&ps=300
+    const availabilityUrl = service.Url + service.AvailabilityUrl.replace('[ITEMID]', itemId.split('/').join('$002f'))
+    try {
+      const availabilityPageRequest = await axios.post(availabilityUrl, {}, { headers: HEADER_POST, timeout: 30000 })
+      const availabilityResponse = availabilityPageRequest.data
+      if (availabilityResponse.ids || availabilityResponse.childRecords) availabilityJson = availabilityResponse
+    } catch (e) {
+      return common.endResponse(responseHoldings)
     }
   }
 
-  // Function: matchAvailabilityToLibraries
-  var matchAvailabilityToLibraries = function (avail) {
+  if (availabilityJson?.childRecords) {
+    const libs = {}
+    $(availabilityJson.childRecords).each(function (i, c) {
+      const name = c.LIBRARY
+      const status = c.SD_ITEM_STATUS
+      if (!libs[name]) libs[name] = { available: 0, unavailable: 0 }
+      service.Available.indexOf(status) > 0 ? libs[name].available++ : libs[name].unavailable++
+    })
+    for (var lib in libs) responseHoldings.availability.push({ library: lib, available: libs[lib].available, unavailable: libs[lib].unavailable })
+    return common.endResponse(responseHoldings)
+  }
+
+  if (availabilityJson?.ids) {
     $ = cheerio.load(itemPage)
     var libs = {}
     $('.detailItemsTableRow').each(function (index, elem) {
       var name = $(this).find('td').eq(0).text().trim()
       var bc = $(this).find('td div').attr('id').replace('availabilityDiv', '')
-      if (bc && avail.ids && avail.ids.length > 0 && avail.strings && avail.ids.indexOf(bc) != -1) {
-        var status = avail.strings[avail.ids.indexOf(bc)].trim()
+      if (bc && availabilityJson.ids && availabilityJson.ids.length > 0 && availabilityJson.strings && availabilityJson.ids.indexOf(bc) !== -1) {
+        var status = availabilityJson.strings[availabilityJson.ids.indexOf(bc)].trim()
         if (!libs[name]) libs[name] = { available: 0, unavailable: 0 }
-        lib.Available.indexOf(status) > 0 ? libs[name].available++ : libs[name].unavailable++
+        service.Available.indexOf(status) > 0 ? libs[name].available++ : libs[name].unavailable++
       }
     })
     for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable })
-    common.completeCallback(callback, responseHoldings)
+    return common.endResponse(responseHoldings)
   }
 
-  // Function: getTitleDetailJson  Enterprise 4.5.1
-  var getTitleDetailJson = function (error, msg, res) {
-    if (common.handleErrors(callback, responseHoldings, error, msg)) return
-    if (!common.isJsonString(res)) { common.completeCallback(callback, responseHoldings); return }
-    processTitleDetail(JSON.parse(res))
+  if (service.TitleDetailUrl) {
+    var titleUrl = service.Url + service.TitleDetailUrl.replace('[ITEMID]', itemId.split('/').join('$002f'))
+    try {
+      const titleDetailRequest = await axios.post(titleUrl, {}, { headers: HEADER_POST, timeout: 30000 })
+      const titles = titleDetailRequest.data
+      const libs = {}
+      $(titles.childRecords).each(function (i, c) {
+        const name = c.LIBRARY
+        const status = c.SD_ITEM_STATUS
+        if (!libs[name]) libs[name] = { available: 0, unavailable: 0 }
+        service.Available.indexOf(status) > 0 ? libs[name].available++ : libs[name].unavailable++
+      })
+      for (var lib in libs) responseHoldings.availability.push({ library: lib, available: libs[lib].available, unavailable: libs[lib].unavailable })
+    } catch (e) {
+      return common.endResponse(responseHoldings)
+    }
   }
 
-  // Function: processTitleDetail.
-  var processTitleDetail = function (titles) {
-    var libs = {}
-    $(titles.childRecords).each(function (i, c) {
-      var name = c.LIBRARY
-      var status = c.SD_ITEM_STATUS
-      if (!libs[name]) libs[name] = { available: 0, unavailable: 0 }
-      lib.Available.indexOf(status) > 0 ? libs[name].available++ : libs[name].unavailable++
-    })
-    for (var l in libs) responseHoldings.availability.push({ library: l, available: libs[l].available, unavailable: libs[l].unavailable })
-    common.completeCallback(callback, responseHoldings)
-  }
-
-  // Request 1: Call the deep link to the item by ISBN
-  // We could also use RSS https://wales.ent.sirsidynix.net.uk/client/rss/hitlist/ynysmon_en/qu=9780747538493
-  request.get({ url: responseHoldings.url, headers: header1, timeout: 30000 }, deepLinkResponse)
+  return common.endResponse(responseHoldings)
 }
