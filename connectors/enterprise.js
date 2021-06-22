@@ -88,13 +88,25 @@ exports.searchByISBN = async function (isbn, service) {
     try {
       const availabilityPageRequest = await axios.post(availabilityUrl, {}, { headers: HEADER_POST, timeout: 30000 })
       const availabilityResponse = availabilityPageRequest.data
-      if (availabilityResponse.ids) availabilityJson = availabilityResponse
+      if (availabilityResponse.ids || availabilityResponse.childRecords) availabilityJson = availabilityResponse
     } catch (e) {
       return common.endResponse(responseHoldings)
     }
   }
 
-  if (availabilityJson !== null) {
+  if (availabilityJson?.childRecords) {
+    const libs = {}
+    $(availabilityJson.childRecords).each(function (i, c) {
+      const name = c.LIBRARY
+      const status = c.SD_ITEM_STATUS
+      if (!libs[name]) libs[name] = { available: 0, unavailable: 0 }
+      service.Available.indexOf(status) > 0 ? libs[name].available++ : libs[name].unavailable++
+    })
+    for (var lib in libs) responseHoldings.availability.push({ library: lib, available: libs[lib].available, unavailable: libs[lib].unavailable })
+    return common.endResponse(responseHoldings)
+  }
+
+  if (availabilityJson?.ids) {
     $ = cheerio.load(itemPage)
     var libs = {}
     $('.detailItemsTableRow').each(function (index, elem) {
