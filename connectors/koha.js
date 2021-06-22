@@ -20,7 +20,7 @@ exports.getService = (service) => { return common.getService(service) }
 exports.getLibraries = async function (service) {
   const responseLibraries = common.initialiseGetLibrariesResponse(service)
 
-  const url = service.Url + (service.MultiBranchLimit ? LIBS_URL.replace('[MULTIBRANCH]', 'multibranchlimit=' + service.MultiBranchLimit + '&') : LIBS_URL.replace('[MULTIBRANCH]', ''))
+  const url = service.Url + (LIBS_URL.replace('[MULTIBRANCH]', service.MultiBranchLimit ? 'multibranchlimit=' + service.MultiBranchLimit + '&' : ''))
 
   let $ = null
   try {
@@ -50,18 +50,21 @@ exports.getLibraries = async function (service) {
  */
 exports.searchByISBN = async function (isbn, service) {
   const responseHoldings = common.initialiseSearchByISBNResponse(service)
-  responseHoldings.url = service.Url + CAT_URL + isbn
+  responseHoldings.url = service.Url
 
   let $ = null
   try {
-    const searchPageRequest = await axios.get(responseHoldings.url, { timeout: 30000 })
+    const searchPageRequest = await axios.get(service.Url + CAT_URL + isbn, { timeout: 30000 })
     $ = cheerio.load(searchPageRequest.data, { normalizeWhitespace: true, xmlMode: true })
+    responseHoldings.url = $('link').first().text()
   } catch (e) {
     return common.endResponse(responseHoldings)
   }
 
   var bibLink = $('guid').text()
   if (!bibLink) return common.endResponse(responseHoldings)
+
+  responseHoldings.url = bibLink
 
   try {
     const itemPageRequest = await axios.get(bibLink + '&viewallitems=1', { timeout: 30000 })
@@ -71,8 +74,8 @@ exports.searchByISBN = async function (isbn, service) {
   }
 
   const libs = {}
-  $('#holdingst tbody').find('tr').each((idx, table) => {
-    var lib = $(table).find('td.location span span').text().trim()
+  $('#holdingst tbody, .holdingst tbody').find('tr').each((idx, table) => {
+    var lib = $(table).find('td.location span span').first().text().trim()
     if (!libs[lib]) libs[lib] = { available: 0, unavailable: 0 }
     $(table).find('td.status span').text().trim() === 'Available' ? libs[lib].available++ : libs[lib].unavailable++
   })
