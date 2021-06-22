@@ -389,8 +389,7 @@
       "Available": [
         "In stock"
       ],
-      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-      "TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
+      "TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:[ITEMID]/ILS/0/true/true",
       "Url": "https://col.ent.sirsidynix.net.uk/client/en_GB/default/",
       "TestISBN": "9781408855669"
     },
@@ -988,8 +987,7 @@
       "Available": [
         "In stock"
       ],
-      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-      "TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
+      "TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:[ITEMID]/ILS/0/true/true",
       "Url": "http://kir.ent.sirsidynix.net.uk/client/en_GB/default/",
       "TestISBN": "9781408855713"
     },
@@ -2016,8 +2014,7 @@
       "Available": [
         "In stock"
       ],
-      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-      "TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
+      "TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:[ITEMID]/ILS/0/true/true",
       "Url": "https://elibrary.westminster.gov.uk/client/en_GB/wcc/",
       "TestISBN": "9781408855713"
     },
@@ -2086,7 +2083,7 @@
       "Available": [
         "Available"
       ],
-      "TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:[ITEMID]/ILS/0/true/true",
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:[ITEMID]/ILS/0/true/true",
       "Url": "https://wcc.ent.sirsidynix.net.uk/client/en_GB/wcc/",
       "TestISBN": "9780747538493"
     },
@@ -2097,19 +2094,14 @@
       "Available": [
         "Available"
       ],
-      "AvailabilityUrl": "search/detailnonmodal.detail.detailitemstable_0:loadavailability/0/ent:",
-      "TitleDetailUrl": "search/detailnonmodal.detail.detailitemstable_0.webservicefieldsajax:lookuptitleinfo/detailItemsDiv0/ent:[ITEMID]/ILS/true/true",
-      "Url": "https://wcc.ent.sirsidynix.net.uk/client/en_GB/wcc/",
+      "AvailabilityUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:[ITEMID]/ILS/0/true/true",
+      "Url": "https://wales.ent.sirsidynix.net.uk/client/en_GB/wrexham_en/",
       "TestISBN": "9780747591054"
     },
     {
       "Name": "York City",
       "Code": "E06000014",
       "Type": "enterprise",
-      "Id": "474",
-      "Region": "3",
-      "InstitutionId": "174",
-      "Profile": "YORKPUB",
       "Available": [
         "Available"
       ],
