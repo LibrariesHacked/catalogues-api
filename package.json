@@ -2,9 +2,9 @@
   "name": "catalogues-librarydata",
   "version": "1.0.0",
   "description": "A web service for searching library catalogues",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
