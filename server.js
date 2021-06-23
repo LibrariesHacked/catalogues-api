@@ -10,16 +10,16 @@ app.set('view engine', 'pug')
 
 app.get('/', (req, res) => res.render('index'))
 
-app.get('/services', libraries.getServices)
-app.get('/servicegeo', libraries.getServiceGeo)
-app.get('/libraries', libraries.getLibraries)
+app.get('/api/services', libraries.getServices)
+app.get('/api/servicegeo', libraries.getServiceGeo)
+app.get('/api/libraries', libraries.getLibraries)
 
-app.get('/availabilityByISBN/:isbn', libraries.isbnSearch)
+app.get('/api/availabilityByISBN/:isbn', libraries.isbnSearch)
 
-app.get('/thingISBN/:isbn', libraries.thingISBN)
-app.get('/openLibrarySearch', libraries.openLibrarySearch)
+app.get('/api/thingISBN/:isbn', libraries.thingISBN)
+app.get('/api/openLibrarySearch', libraries.openLibrarySearch)
 
-app.get('/testAvailabilityByISBN', libraries.testIsbnSearch)
+app.get('/api/testAvailabilityByISBN', libraries.testIsbnSearch)
 
 const port = process.env.PORT || 3000
 app.listen(port)
