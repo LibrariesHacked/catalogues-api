@@ -1,39 +1,43 @@
 extends layout.pug
 block content
-	div(class='hero')
-		form
-			div(class='form-group')
-				label(for='txtKeywords') Title keywords
-				input(type='text', class='form-control', id='txtKeywords', aria-describedby='keywordsHelp', placeholder='Enter keywords', autocomplete='off')
-				small(id='keywordsHelp', class='form-text text-muted') As you type, book options should appear
-			button(class='btn btn-link disabled', type='button', id='btnSearch') Search
-			span &nbsp;
-			button(class='btn btn-link disabled', type='button', id='btnClear') Clear
-	div(class="row")
-		div(class="col-12")
-			div(class="card")
-				h3(class="card-header text-muted") Results
-				div(class="card-body")
-					small(id="progressPercentage", class="form-text text-muted") 0% 
-						span(id="spSpinner", class="fa fa-spinner fa-spin")
-					div(class="progress")
-						div(class="progress-bar bg-success", role="progressbar", aria-valuenow="75", aria-valuemin="0", aria-valuemax="100")
-					div(class='row')
-						div(class='col col-xs-4')
-							span(class='small text-muted') Found
-							p(class='lead text-primary', id='found') 0
-						div(class='col col-xs-4')
-							span(class='small text-muted') Available
-							p(class='lead text-success', id='available') 0
-						div(class='col col-xs-4')
-							span(class='small text-muted') Unavailable
-							p(class='lead text-danger', id='unavailable') 0
-				div(class='card-body')
-					table(id='tblResults', class='table')
-						thead
-							tr
-								th Library
-								th Service
-								th Available
-								th Unavailable
-								th Link
+
+	div(class="p-5 mt-4 bg-light rounded-3")
+		div(class="container-fluid py-5")
+			h1(class="display-5 fw-bold") Library books
+			p(class="fs-4") Search for a book in libraries across the UK
+			form
+				div(class='form-group')
+					label(class="form-label", for='txtIsbn') International Standard Book Number
+					input(type='text', class='form-control form-control-lg', id='txtIsbn', placeholder='Enter ISBN', autocomplete='off')
+
+				div(class="d-grid gap-2 d-md-block")
+					button(class='btn btn-lg btn-primary', type='button', id='btnSearch') Search
+					button(class='btn btn-lg btn-link m-3', type='button', id='btnClear') Clear
+
+	div(class="container-fluid py-5")
+		h2(class="text-muted") Results
+		div(class="container")
+			small(id="progressPercentage", class="form-text text-muted") 0% 
+				span(id="spSpinner", class="fa fa-spinner fa-spin")
+			div(class="progress")
+				div(class="progress-bar bg-success", role="progressbar", aria-valuenow="75", aria-valuemin="0", aria-valuemax="100")
+			div(class='row')
+				div(class='col col-xs-4')
+					span(class='small text-muted') Found
+					p(class='lead text-primary', id='found') 0
+				div(class='col col-xs-4')
+					span(class='small text-muted') Available
+					p(class='lead text-success', id='available') 0
+				div(class='col col-xs-4')
+					span(class='small text-muted') Unavailable
+					p(class='lead text-danger', id='unavailable') 0
+
+		div(class='container')
+			table(id='tblResults', class='table')
+				thead
+					tr
+						th Library
+						th Service
+						th Available
+						th Unavailable
+						th Link
