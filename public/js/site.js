@@ -1,6 +1,21 @@
+var services = []
+
+// First thing we do is fetch a list of services
+fetch(config.services)
+  .then(response => {
+    response.json()
+      .then(serviceResults => {
+        services = serviceResults
+        document.getElementById('btnSearch').removeAttribute('disabled')
+      })
+
+  })
+  .catch((error) => console.log(error))
+
 document.getElementById('btnSearch').addEventListener('click', function () {
+  var isbn = document.getElementById('txtIsbn').value
   clearData()
-  searchByIsbn()
+  searchByIsbn(isbn)
 })
 
 document.getElementById('btnClear').addEventListener('click', function () {
@@ -11,8 +26,27 @@ var clearData = function () {
 
 }
 
-var searchByIsbn = function (isbn) {
+var searchByIsbn = (isbn) => {
   if (!isValidIsbn(isbn)) return null
+
+  var requestUrls = services.map(service => `/api/availabilityByIsbn/${isbn}&service=${service.name}`)
+
+  Promise.all(
+    requestUrls.map(url => {
+      return fetch(url)
+        .then(value => {
+          value.json()
+        })
+    })
+  )
+    .then((value) => {
+      console.log(value)
+      //json response
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
 }
 
 var isValidIsbn = function (textInput) {
@@ -38,7 +72,7 @@ var isValidIsbn = function (textInput) {
       }
     }
     check = (10 - (sum % 10)) % 10
-    return (check === textInput[12])
+    return (check.toString() === textInput[12])
   }
 
   if (textInput.length === 10) {
@@ -53,6 +87,6 @@ var isValidIsbn = function (textInput) {
     if (check === 10) {
       check = 'X'
     }
-    return (check === textInput[9].toUpperCase())
+    return (check.toString() === textInput[9].toUpperCase())
   }
 }

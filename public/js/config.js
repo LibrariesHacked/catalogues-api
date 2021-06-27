@@ -1,3 +1,3 @@
 var config = {
-  booksKey: ''
+  services: '/api/services'
 }
