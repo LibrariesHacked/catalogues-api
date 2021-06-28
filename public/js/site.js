@@ -9,7 +9,10 @@ var unavailable = 0
 
 const libraryTable = new simpleDatatables.DataTable('#tblResults', {
   searchable: false,
-  fixedHeight: true
+  fixedHeight: true,
+  columns: [
+    { select: 4, render: (data, cell, row) => data }
+  ]
 })
 
 window.fetch(config.services)
@@ -72,7 +75,7 @@ var updateSummaryDisplay = () => {
 }
 
 var addToLibraryTable = (service, library, url) => {
-  var row = [library.library, service, library.available, library.unavailable, url]
+  var row = [library.library, service, String(library.available), String(library.unavailable), url]
   libraryTable.rows().add(row)
 }
 
