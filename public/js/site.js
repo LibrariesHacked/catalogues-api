@@ -6,8 +6,13 @@ var services = []
 var found = 0
 var available = 0
 var unavailable = 0
+var libraries = []
 
 const libraryTable = new simpleDatatables.DataTable('#tblResults', {
+  labels: {
+    noRows: 'Libraries will be listed when search is complete'
+  },
+  perPageSelect: false,
   columns: [
     {
       select: 2,
@@ -17,11 +22,15 @@ const libraryTable = new simpleDatatables.DataTable('#tblResults', {
       select: 3,
       hidden: true
     },
-    { 
-      select: 4, 
+    {
+      select: 4,
       render: function (data, cell, row) {
         var total = (parseInt(row.children[2].data) + parseInt(row.children[3].data))
-        return `<i class="fas fa-external-link-square-alt"></i> ${row.children[2].data} of ${total} copies`
+        var copiesAvailable = parseInt(row.children[2].data) > 0
+        var buttonClass = copiesAvailable > 0 ? 'light' : 'warning'
+        var buttonIcon = copiesAvailable ? 'check' : 'times'
+        row.classList.add(copiesAvailable ? 'table-success' : 'table-default')
+        return `<a class="btn btn-lg btn-${buttonClass}" href="${data}" target="_blank"><i class="fas fa-${buttonIcon}"></i> ${row.children[2].data}/${total}</a>`
       }
     }
   ]
@@ -66,7 +75,10 @@ var searchByIsbn = (isbn) => {
             .then(availabilityResults => {
               if (availabilityResults && availabilityResults.length > 0 && availabilityResults[0].availability && availabilityResults[0].availability.length > 0) {
                 availabilityResults[0].availability.forEach(library => {
-                  addToLibraryTable(availabilityResults[0].service, library, availabilityResults[0].url)
+                  found += (library.available + library.unavailable)
+                  available += library.available
+                  unavailable += library.unavailable
+                  libraries.push([availabilityResults[0].service, library.library, String(library.available), String(library.unavailable), availabilityResults[0].url])
                 })
                 updateSummaryDisplay()
               }
@@ -75,7 +87,7 @@ var searchByIsbn = (isbn) => {
     })
   )
     .then((value) => {
-
+      addToLibraryTable()
     })
     .catch((err) => {
       console.log(err)
@@ -83,12 +95,15 @@ var searchByIsbn = (isbn) => {
 }
 
 var updateSummaryDisplay = () => {
-  document.getElementById('pFound').innerText = found
+  document.getElementById('pFound').innerText = `${found} found`
+  document.getElementById('pAvailable').innerText = `${available} available`
+  document.getElementById('pUnavailable').innerText = `${unavailable} unavailable`
 }
 
-var addToLibraryTable = (service, library, url) => {
-  var row = [library.library, service, String(library.available), String(library.unavailable), url]
-  libraryTable.rows().add(row)
+var addToLibraryTable = () => {
+  libraries.forEach(library => {
+    libraryTable.rows().add(library)
+  })
   libraryTable.setColumns()
 }
 
