@@ -27,7 +27,7 @@ const libraryTable = new simpleDatatables.DataTable('#tblResults', {
       render: function (data, cell, row) {
         var total = (parseInt(row.children[2].data) + parseInt(row.children[3].data))
         var copiesAvailable = parseInt(row.children[2].data) > 0
-        var buttonClass = copiesAvailable > 0 ? 'light' : 'warning'
+        var buttonClass = copiesAvailable > 0 ? 'outline-success' : 'link'
         var buttonIcon = copiesAvailable ? 'check' : 'times'
         row.classList.add(copiesAvailable ? 'table-success' : 'table-default')
         return `<a class="btn btn-lg btn-${buttonClass}" href="${data}" target="_blank"><i class="fas fa-${buttonIcon}"></i> ${row.children[2].data}/${total}</a>`
