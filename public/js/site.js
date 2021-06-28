@@ -1,14 +1,24 @@
+var config = {
+  services: '/api/services',
+  availability: '/api/availabilityByISBN'
+}
 var services = []
+var found = 0
+var available = 0
+var unavailable = 0
 
-// First thing we do is fetch a list of services
-fetch(config.services)
+const libraryTable = new simpleDatatables.DataTable('#tblResults', {
+  searchable: false,
+  fixedHeight: true
+})
+
+window.fetch(config.services)
   .then(response => {
     response.json()
       .then(serviceResults => {
         services = serviceResults
         document.getElementById('btnSearch').removeAttribute('disabled')
       })
-
   })
   .catch((error) => console.log(error))
 
@@ -22,34 +32,51 @@ document.getElementById('btnClear').addEventListener('click', function () {
   clearData()
 })
 
-var clearData = function () {
-
+var clearData = () => {
+  document.getElementById('btnSearch').removeAttribute('disabled')
 }
 
 var searchByIsbn = (isbn) => {
   if (!isValidIsbn(isbn)) return null
 
-  var requestUrls = services.map(service => `/api/availabilityByIsbn/${isbn}&service=${service.name}`)
+  document.getElementById('btnSearch').setAttribute('disabled', 'disabled')
+
+  var requestUrls = services.map(service => `${config.availability}/${isbn}?service=${service.name}`)
 
   Promise.all(
     requestUrls.map(url => {
-      return fetch(url)
-        .then(value => {
-          value.json()
+      return window.fetch(url)
+        .then(response => {
+          response.json()
+            .then(availabilityResults => {
+              if (availabilityResults && availabilityResults.length > 0 && availabilityResults[0].availability && availabilityResults[0].availability.length > 0) {
+                availabilityResults[0].availability.forEach(library => {
+                  addToLibraryTable(availabilityResults[0].service, library, availabilityResults[0].url)
+                })
+                updateSummaryDisplay()
+              }
+            })
         })
     })
   )
     .then((value) => {
-      console.log(value)
-      //json response
+
     })
     .catch((err) => {
-      console.log(err);
-    });
-
+      console.log(err)
+    })
 }
 
-var isValidIsbn = function (textInput) {
+var updateSummaryDisplay = () => {
+  document.getElementById('pFound').innerText = found
+}
+
+var addToLibraryTable = (service, library, url) => {
+  var row = [library.library, service, library.available, library.unavailable, url]
+  libraryTable.rows().add(row)
+}
+
+var isValidIsbn = (textInput) => {
   var sum
   var weight
   var digit
