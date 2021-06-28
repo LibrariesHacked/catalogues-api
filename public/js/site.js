@@ -8,10 +8,22 @@ var available = 0
 var unavailable = 0
 
 const libraryTable = new simpleDatatables.DataTable('#tblResults', {
-  searchable: false,
-  fixedHeight: true,
   columns: [
-    { select: 4, render: (data, cell, row) => data }
+    {
+      select: 2,
+      hidden: true
+    },
+    {
+      select: 3,
+      hidden: true
+    },
+    { 
+      select: 4, 
+      render: function (data, cell, row) {
+        var total = (parseInt(row.children[2].data) + parseInt(row.children[3].data))
+        return `<i class="fas fa-external-link-square-alt"></i> ${row.children[2].data} of ${total} copies`
+      }
+    }
   ]
 })
 
@@ -77,6 +89,7 @@ var updateSummaryDisplay = () => {
 var addToLibraryTable = (service, library, url) => {
   var row = [library.library, service, String(library.available), String(library.unavailable), url]
   libraryTable.rows().add(row)
+  libraryTable.setColumns()
 }
 
 var isValidIsbn = (textInput) => {
