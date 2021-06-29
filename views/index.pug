@@ -9,10 +9,16 @@ block content
 				div(class="row")
 					div(class="col")
 						label(class="form-label", for='txtIsbn') International Standard Book Number
-						input(type='text', class='form-control form-control-lg', id='txtIsbn', placeholder='Enter ISBN', autocomplete='off')
+						div(class="input-group mb-3")
+							span(class="input-group-text")
+								i(class="fas fa-book-open fa-2x")
+							input(type='text', class='form-control form-control-lg', id='txtIsbn', placeholder='Enter ISBN', autocomplete='off')
 					div(class="col")
 						label(class="form-label", for='txtPostcode') Postcode
-						input(type='text', class='form-control form-control-lg', id='txtPostcode', placeholder='Enter your postcode', autocomplete='off')
+						div(class="input-group mb-3")
+							span(class="input-group-text")
+								i(class="fas fa-map-marker-alt fa-2x")
+							input(type='text', class='form-control form-control-lg', id='txtPostcode', placeholder='Enter your postcode', autocomplete='off')
 
 				div(class="d-grid gap-2 d-md-block mt-2")
 					button(class='btn btn-lg btn-primary', type='button', id='btnSearch', disabled) Search
