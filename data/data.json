@@ -208,11 +208,12 @@
     {
       "Name": "Bradford",
       "Code": "E08000032",
-      "Type": "prism3",
+      "Type": "enterprise",
       "Available": [
         "Available"
       ],
-      "Url": "https://capitadiscovery.co.uk/bradford/",
+      "TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:[ITEMID]/ILS/0/true/true",
+      "Url": "https://bradford.ent.sirsidynix.net.uk/client/en_GB/default/",
       "TestISBN": "9780747546290"
     },
     {
