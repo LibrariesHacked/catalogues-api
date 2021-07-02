@@ -45,9 +45,9 @@ exports.searchByISBN = async function (isbn, service) {
     const $ = cheerio.load(responseHoldingsRequest.data)
     $('table.bibItems tr.bibItemsEntry').each(function (idx, tr) {
       var name = $(tr).find('td').eq(0).text().trim()
-      var status = $(tr).find('td').eq(2).text().trim()
+      var status = $(tr).find('td').eq(3).text().trim()
       if (!libs[name]) libs[name] = { available: 0, unavailable: 0 }
-      status === 'AVAILABLE' ? libs[name].available++ : libs[name].unavailable++
+      status === 'AVAILABLE' || status === 'FOR LOAN' ? libs[name].available++ : libs[name].unavailable++
     })
   } catch (e) {}
 
