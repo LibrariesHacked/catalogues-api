@@ -22,8 +22,8 @@ const HOME = 'www.main.cls'
  */
 exports.getService = (service) => {
   const serviceData = common.getService(service)
-  serviceData.CatalogueUrl = serviceData.Url + HOME
-  return service
+  serviceData.url = service.Url + HOME
+  return serviceData
 }
 
 /**

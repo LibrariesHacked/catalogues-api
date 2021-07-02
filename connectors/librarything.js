@@ -3,7 +3,7 @@ const axios = require('axios')
 
 console.log('library thing connector loading...')
 
-const URL = 'http://www.librarything.com/api/thingISBN/'
+const URL = 'https://www.librarything.com/api/thingISBN/'
 
 /**
  * Gets a set of ISBNs relating to a single ISBN from the library thing thingISBN service
@@ -17,7 +17,7 @@ exports.thingISBN = async (isbn) => {
     const isbnRequest = await axios.get(URL + isbn, { timeout: 1000 })
     const isbnJs = await xml2js.parseStringPromise(isbnRequest.data)
     isbns = isbnJs.idlist.isbn
-  } catch (e) {}
+  } catch (e) { }
 
   if (isbns) isbns.forEach((item) => responseISBNs.isbns.push(item))
 

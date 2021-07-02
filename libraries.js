@@ -3,14 +3,20 @@ const data = require('./data/data')
 const libThing = require('./connectors/librarything')
 const openLibrary = require('./connectors/openlibrary')
 
+// Loads all the connectors that are currently referenced in data.json
 var serviceFunctions = {}
 data.LibraryServices.forEach((service) => {
   if (!serviceFunctions[service.Type]) serviceFunctions[service.Type] = require('./connectors/' + service.Type)
 })
 
+/**
+ * Gets library service data
+ * @param {Object} req The request
+ * @param {Object} res The response
+ */
 exports.getServices = async (req, res) => {
   var services = data.LibraryServices
-    .filter((service) => (service.Type !== '' && (!req.query.service || service.Name === req.query.service)))
+    .filter((service) => (service.Type !== '' && (!req.query.service || service.Name === req.query.service || service.Code === req.query.service)))
     .map((service) => {
       return async () => {
         return serviceFunctions[service.Type].getService(service)
@@ -22,17 +28,11 @@ exports.getServices = async (req, res) => {
   res.send(services)
 }
 
-exports.getServiceGeo = (req, res) => {
-  var servicegeo = null
-  data.LibraryServices.some((s, i) => {
-    if (req.query.service === s.Code || req.query.service === s.Name) {
-      servicegeo = require('./data/geography/' + s.Code)
-      return true
-    }
-  })
-  res.send(servicegeo)
-}
-
+/**
+ * Gets individual library service point data
+ * @param {Object} req The request
+ * @param {Object} res The response
+ */
 exports.getLibraries = async (req, res) => {
   var searches = data.LibraryServices
     .filter((service) => {
@@ -49,6 +49,11 @@ exports.getLibraries = async (req, res) => {
   res.send(responses)
 }
 
+/**
+ * Gets ISBN availability information for library service points
+ * @param {Object} req The request
+ * @param {Object} res The response
+ */
 exports.isbnSearch = async (req, res) => {
   var searches = data.LibraryServices
     .filter((service) => {
@@ -65,20 +70,35 @@ exports.isbnSearch = async (req, res) => {
   res.send(responses)
 }
 
+/**
+ * Gets results from the library thing thingISBN service
+ * @param {Object} req The request
+ * @param {Object} res The response
+ */
 exports.thingISBN = async (req, res) => {
   var thingData = await libThing.thingISBN(req.params.isbn)
   res.send(thingData.isbns)
 }
 
+/**
+ * Gets results from open libraries free text search
+ * @param {Object} req The request
+ * @param {Object} res The response
+ */
 exports.openLibrarySearch = async (req, res) => {
   var openLibData = await openLibrary.search(req.query.q)
   res.send(openLibData)
 }
 
+/**
+ * Runs through tests for the ISBN search and reports where no copies are found for the test ISBNs
+ * @param {Object} req The request
+ * @param {Object} res The response
+ */
 exports.testIsbnSearch = async (req, res) => {
   var searches = data.LibraryServices
     .filter((service) => {
-      return (service.Type !== '' && (!req.query.service || service.Name === req.query.service || service.Code === req.query.service))
+      return (service.Type !== '' && (!req.query.service || service.Name === req.query.service || service.Code === req.query.code))
     })
     .map((service) => {
       return async () => {

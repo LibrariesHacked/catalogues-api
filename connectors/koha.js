@@ -11,7 +11,7 @@ const LIBS_URL = 'cgi-bin/koha/opac-search.pl?[MULTIBRANCH]do=Search&expand=hold
  * Gets the object representing the service
  * @param {object} service
  */
-exports.getService = (service) => { return common.getService(service) }
+exports.getService = (service) => common.getService(service)
 
 /**
  * Gets the libraries in the service based upon possible search and filters within the library catalogue

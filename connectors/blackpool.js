@@ -7,7 +7,7 @@ console.log('blackpool connector loading...')
  * Gets the object representing the service
  * @param {object} service
  */
-exports.getService = (service) => { return common.getService(service) }
+exports.getService = (service) => common.getService(service)
 
 /**
  * Gets the libraries in the service based upon possible search and filters within the library catalogue
@@ -53,7 +53,7 @@ exports.searchByISBN = async function (isbn, service) {
           const copiesAvailable = info.itemInfoField.filter(i => i.homeLocationIDField === i.currentLocationIDField)
           const copiesUnAvailable = info.itemInfoField.filter(i => i.homeLocationIDField !== i.currentLocationIDField)
           responseHoldings.availability.push({ library: lib[1], available: copiesAvailable.length, unavailable: copiesUnAvailable.length })
-        });
+        })
       } else {
         return common.endResponse(responseHoldings)
       }

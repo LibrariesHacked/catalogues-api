@@ -2,7 +2,7 @@ const axios = require('axios')
 
 console.log('open library connector loading...')
 
-const URL = 'http://openlibrary.org/search.json?q='
+const URL = 'https://openlibrary.org/search.json?q='
 
 exports.search = async (query) => {
   const responseData = { books: [] }

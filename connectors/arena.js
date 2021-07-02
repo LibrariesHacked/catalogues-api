@@ -30,7 +30,7 @@ const HOLDINGSDETAIL_URL_PORTLETS = 'results?p_p_id=crDetailWicket_WAR_arenaport
  * Gets the object representing the service
  * @param {object} service
  */
-exports.getService = (service) => { return common.getService(service) }
+exports.getService = (service) => common.getService(service)
 
 /**
  * Gets the libraries in the service based upon possible search and filters within the library catalogue
@@ -89,7 +89,7 @@ exports.searchByISBN = async function (isbn, service) {
 
   let bookQuery = (service.SearchType !== 'Keyword' ? service.ISBNAlias + '_index:' + isbn : isbn)
   if (service.OrganisationId) bookQuery = 'organisationId_index:' + service.OrganisationId + '+AND+' + bookQuery
-  
+
   const searchUrl = (service.Portlets ? SEARCH_URL_PORTLETS : SEARCH_URL_PORTLET).replace('[BOOKQUERY]', bookQuery)
   responseHoldings.url = service.Url + searchUrl
 
@@ -108,7 +108,7 @@ exports.searchByISBN = async function (isbn, service) {
   let itemId = pageText.substring(pageText.lastIndexOf('search_item_id=') + 15)
   itemId = itemId.substring(0, itemId.indexOf('&'))
 
-  let itemDetailsUrl = (service.Portlets ? ITEM_URL_PORTLETS : ITEM_URL_PORTLET).replace('[ARENANAME]', service.ArenaName).replace('[ITEMID]', itemId)
+  const itemDetailsUrl = (service.Portlets ? ITEM_URL_PORTLETS : ITEM_URL_PORTLET).replace('[ARENANAME]', service.ArenaName).replace('[ITEMID]', itemId)
   const itemUrl = service.Url + itemDetailsUrl
 
   let $ = null
@@ -131,7 +131,7 @@ exports.searchByISBN = async function (isbn, service) {
 
   // Get the item holdings widget
   const holdingsPanelHeader = { Accept: 'text/xml', 'Wicket-Ajax': true }
-  const holdingsPanelUrl = service.Url + (service.Portlets ? HOLDINGS_URL_PORTLETS : HOLDINGS_URL_PORTLET) 
+  const holdingsPanelUrl = service.Url + (service.Portlets ? HOLDINGS_URL_PORTLETS : HOLDINGS_URL_PORTLET)
 
   try {
     var holdingsPanelPortletResponse = await axios.get(holdingsPanelUrl, { rejectUnauthorized: true, headers: holdingsPanelHeader, timeout: 20000, jar: true })

@@ -22,16 +22,13 @@
   },
   "homepage": "https://github.com/LibrariesHacked/catalogues-librarydata",
   "dependencies": {
-    "@types/tough-cookie": "^4.0.0",
     "async": "^3.2.0",
     "axios": "^0.21.1",
     "axios-cookiejar-support": "^1.0.1",
     "cheerio": "^1.0.0-rc.10",
     "express": "^4.17.1",
-    "forever-agent": "^0.6.1",
     "pug": "^3.0.2",
     "request": "^2.88.2",
-    "tether": "^1.4.7",
     "tough-cookie": "^4.0.0",
     "xml2js": "^0.4.23"
   },
