@@ -1,9 +1,11 @@
 const express = require('express')
+const compression = require('compression')
 const libraries = require('./libraries')
 
 const app = express()
 
-app.use(express.static('public'))
+app.use(compression())
+app.use(express.static('public', { maxAge: '1d' }))
 
 app.set('views', './views')
 app.set('view engine', 'pug')
