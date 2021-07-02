@@ -37,7 +37,7 @@ exports.searchByISBN = async function (isbn, service) {
   const responseHoldings = common.initialiseSearchByISBNResponse(service)
 
   const libs = {}
-  responseHoldings.url = service.Url + 'search~S1?/i' + isbn + '/i' + isbn + '/1,1,1,E/holdings&FF=i' + isbn + '&1,1,'
+  responseHoldings.url = service.Url + 'search~S1/?searchtype=i&searcharg=' + isbn
 
   try {
     const responseHoldingsRequest = await axios.get(responseHoldings.url, { timeout: 60000 })

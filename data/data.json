@@ -1134,7 +1134,7 @@
       "Available": [
         "Available"
       ],
-      "TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:$002f$002fSD_ILS$002f0$002fSD_ILS:418188/ILS/0/true/true?d=ent://SD_ILS/0/SD_ILS:418188~~0",
+      "TitleDetailUrl": "search/detailnonmodal.detail.detailavailabilityaccordions:lookuptitleinfo/ent:[ITEMID]/ILS/0/true/true",
       "Url": "https://libraries.merton.gov.uk/client/en_GB/merton/",
       "LibraryNameFilter": "Merton",
       "TestISBN": "9780747538493"
