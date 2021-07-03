@@ -110,7 +110,7 @@ exports.searchByISBN = async function (isbn, service) {
     record.recordData[0].BibDocument[0].HoldingsSummary[0].ShelfmarkData.forEach(function (item) {
       if (item.Shelfmark) {
         var lib = item.Shelfmark[0].split(' : ')[0]
-        responseHoldings.availability.push({ library: lib, available: item.Available ? item.Available[0] : 0, unavailable: item.Available === '0' ? 1 : 0 })
+        responseHoldings.availability.push({ library: lib, available: item.Available ? parseInt(item.Available[0]) : 0, unavailable: item.Available === '0' ? 1 : 0 })
       }
     })
   }
