@@ -1,12 +1,14 @@
-var config = {
+const config = {
   services: '/api/services',
-  availability: '/api/availabilityByISBN'
+  availability: '/api/availabilityByISBN',
+  servicesGeo: 'https://api-geography.librarydata.uk/rest/libraryauthorities',
+  postcodes: 'https://api-geography.librarydata.uk/rest/postcodes'
 }
-var services = []
-var found = 0
-var available = 0
-var unavailable = 0
-var libraries = []
+
+let found = 0
+let available = 0
+let unavailable = 0
+const libraries = []
 
 const libraryTable = new simpleDatatables.DataTable('#tblResults', {
   labels: {
@@ -25,10 +27,10 @@ const libraryTable = new simpleDatatables.DataTable('#tblResults', {
     {
       select: 4,
       render: function (data, cell, row) {
-        var total = (parseInt(row.children[2].data) + parseInt(row.children[3].data))
-        var copiesAvailable = parseInt(row.children[2].data) > 0
-        var buttonClass = copiesAvailable > 0 ? 'link' : 'link'
-        var buttonIcon = copiesAvailable ? 'check' : 'times'
+        const total = (parseInt(row.children[2].data) + parseInt(row.children[3].data))
+        const copiesAvailable = parseInt(row.children[2].data) > 0
+        const buttonClass = copiesAvailable > 0 ? 'link' : 'link'
+        const buttonIcon = copiesAvailable ? 'check' : 'times'
         row.classList.add(copiesAvailable ? 'table-success' : 'table-default')
         return `<a class="btn btn-lg btn-${buttonClass}" href="${data}" target="_blank"><i class="fas fa-${buttonIcon}"></i> ${row.children[2].data}/${total}</a>`
       }
@@ -36,20 +38,11 @@ const libraryTable = new simpleDatatables.DataTable('#tblResults', {
   ]
 })
 
-window.fetch(config.services)
-  .then(response => {
-    response.json()
-      .then(serviceResults => {
-        services = serviceResults
-        document.getElementById('btnSearch').removeAttribute('disabled')
-      })
-  })
-  .catch((error) => console.log(error))
-
-document.getElementById('btnSearch').addEventListener('click', function () {
-  var isbn = document.getElementById('txtIsbn').value
+document.getElementById('btnSearch').addEventListener('click', async function () {
+  const isbn = document.getElementById('txtIsbn').value
+  const postcode = document.getElementById('txtPostcode').value
   clearData()
-  searchByIsbn(isbn)
+  await searchByIsbn(isbn, postcode)
 })
 
 document.getElementById('btnClear').addEventListener('click', function () {
@@ -60,14 +53,47 @@ var clearData = () => {
   document.getElementById('btnSearch').removeAttribute('disabled')
 }
 
-var searchByIsbn = (isbn) => {
+var searchByIsbn = async (isbn, postcode) => {
+  // Check whether it's a valid isbn
   if (!isValidIsbn(isbn)) return null
 
-  document.getElementById('btnSearch').setAttribute('disabled', 'disabled')
+  let localSearch = false
 
-  var requestUrls = services.map(service => `${config.availability}/${isbn}?service=${service.name}`)
+  let servicesUrl = config.services
 
-  Promise.all(
+  // Check whether it's a valid postcode
+  if (postcode && postcode.length > 0) {
+    const postcodeRe = /^([A-Z][A-HJ-Y]?\d[A-Z\d]? ?\d[A-Z]{2}|GIR ?0A{2})$/
+    const postcodeValid = postcodeRe.test(postcode)
+
+    if (postcodeValid) {
+      // Get the postcode
+      const postcodeResult = await window.fetch(`${config.postcodes}/${postcode}`)
+      const postcodeData = await postcodeResult.json()
+      servicesUrl = `${config.servicesGeo}?longitude=${postcodeData.longitude}&latitude=${postcodeData.latitude}`
+      localSearch = true
+    }
+  }
+
+  const servicesResult = await window.fetch(`${servicesUrl}`)
+  const servicesData = await servicesResult.json()
+  var requestUrls = servicesData.map(service => `${config.availability}/${isbn}?service=${service.code || service.utla19cd}`)
+
+  if (localSearch) {
+    // Do the first five
+    await performBatchSearch(requestUrls.splice(0, 5))
+    while (available === 0 && requestUrls.length > 0) {
+      await performBatchSearch(requestUrls.splice(0, 1))
+    }
+    addToLibraryTable()
+  } else {
+    await performBatchSearch(requestUrls)
+    addToLibraryTable()
+  }
+}
+
+var performBatchSearch = async (requestUrls) => {
+  await Promise.all(
     requestUrls.map(url => {
       return window.fetch(url)
         .then(response => {
@@ -86,12 +112,6 @@ var searchByIsbn = (isbn) => {
         })
     })
   )
-    .then((value) => {
-      addToLibraryTable()
-    })
-    .catch((err) => {
-      console.log(err)
-    })
 }
 
 var updateSummaryDisplay = () => {

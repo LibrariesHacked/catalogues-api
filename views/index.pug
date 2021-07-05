@@ -1,46 +1,53 @@
 extends layout.pug
 block content
 
-	div(class="p-5 mt-4 bg-light rounded-3")
-		div(class="container-fluid py-5")
-			h1(class="display-5 fw-bold") Library books
-			p(class="fs-4") Search for a library book
+	div(class="container-fluid py-4")
+		div(class="p-5 mt-2 bg-light rounded-3")
+			h1(class="display-5 fw-bold") Library book search
+			p(class="fs-4") If you provide a postcode you'll see search results tailored to your area
 			form
 				div(class="row")
-					div(class="col")
-						label(class="form-label", for='txtIsbn') International Standard Book Number
+					div(class="col-12 col-md-6")
+						label(class="form-label", for='txtIsbn') International standard book number
 						div(class="input-group mb-3")
 							span(class="input-group-text")
 								i(class="fas fa-book-open fa-2x")
 							input(type='text', class='form-control form-control-lg', id='txtIsbn', placeholder='Enter ISBN', autocomplete='off')
-					div(class="col")
-						label(class="form-label", for='txtPostcode') Postcode
+					div(class="col-12 col-md-6")
+						label(class="form-label", for='txtPostcode') Postcode (optional)
 						div(class="input-group mb-3")
 							span(class="input-group-text")
 								i(class="fas fa-map-marker-alt fa-2x")
 							input(type='text', class='form-control form-control-lg', id='txtPostcode', placeholder='Enter your postcode', autocomplete='off')
 
-				div(class="d-grid gap-2 d-md-block mt-2")
-					button(class='btn btn-lg btn-primary', type='button', id='btnSearch', disabled) Search
-					button(class='btn btn-lg btn-link ml-3', type='button', id='btnClear') Clear
+				div(class="mt-2")
+					button(class='btn btn-lg btn-primary', type='button', id='btnSearch') Search libraries
+					button(class='btn btn-lg btn-link mx-3', type='button', id='btnClear') Clear
 
-	div(class="container-fluid py-5")
-		div(class="container")
-			div(class='row')
-				div(class='col col-xs-4')
-					p(class='lead text-primary', id='pFound')
-				div(class='col col-xs-4')
-					p(class='lead text-success', id='pAvailable')
-				div(class='col col-xs-4')
-					p(class='lead text-danger', id='pUnavailable')
+	div(class="container-fluid py-2")
+		div(class='row')
+			div(class='col-12 col-sm-4')
+				div(class="alert alert-dismissible alert-info")
+					p
+						strong Copies found
+					p(class='lead', id='pFound') 0
+			div(class='col-12 col-sm-4')
+				div(class="alert alert-dismissible alert-success")
+					p
+						strong Copies available
+					p(class='lead', id='pAvailable') 0
+			div(class='col-12 col-sm-4')
+				div(class="alert alert-dismissible alert-warning")
+					p
+						strong Copies unavailable
+					p(class='lead', id='pUnavailable') 0
 
-		div(class='container')
-			div(class="table-responsive")
-				table(id='tblResults', class='table')
-					thead
-						tr
-							th Service
-							th Library
-							th Available
-							th Unavailable
-							th Copies available
+		div(class="table-responsive")
+			table(id='tblResults', class='table')
+				thead
+					tr
+						th Service
+						th Library
+						th Available
+						th Unavailable
+						th Availability
