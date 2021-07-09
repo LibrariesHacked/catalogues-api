@@ -21,25 +21,26 @@ block content
 							input(type='text', class='form-control form-control-lg', id='txtPostcode', placeholder='Enter your postcode', autocomplete='off')
 
 				div(class="mt-2")
-					button(class='btn btn-lg btn-primary', type='button', id='btnSearch') Search libraries
-					button(class='btn btn-lg btn-link mx-3', type='button', id='btnClear') Clear
+					button(class='btn btn-lg btn-link', type='button', id='btnSearch') Run search
+						span(id="spSearchSpinner", class="spinner-grow spinner-grow-sm mx-3", role="status")
+					button(class='btn btn-lg btn-link mx-3', type='button', id='btnClear', disabled='disabled') Reset search
 
 	div(class="container-fluid py-2")
 		div(class='row')
 			div(class='col-12 col-sm-4')
 				div(class="alert alert-dismissible alert-info")
 					p
-						strong Copies found
+						strong Copies
 					p(class='lead', id='pFound') 0
 			div(class='col-12 col-sm-4')
 				div(class="alert alert-dismissible alert-success")
 					p
-						strong Copies available
+						strong Available
 					p(class='lead', id='pAvailable') 0
 			div(class='col-12 col-sm-4')
 				div(class="alert alert-dismissible alert-warning")
 					p
-						strong Copies unavailable
+						strong Unavailable
 					p(class='lead', id='pUnavailable') 0
 
 		div(class="table-responsive")

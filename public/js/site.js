@@ -57,6 +57,9 @@ var searchByIsbn = async (isbn, postcode) => {
   // Check whether it's a valid isbn
   if (!isValidIsbn(isbn)) return null
 
+  document.getElementById('btnSearch').setAttribute('disabled', 'disabled')
+  document.getElementById('spSearchSpinner').style.visibility = 'visible'
+
   let localSearch = false
 
   let servicesUrl = config.services
@@ -68,14 +71,14 @@ var searchByIsbn = async (isbn, postcode) => {
 
     if (postcodeValid) {
       // Get the postcode
-      const postcodeResult = await window.fetch(`${config.postcodes}/${postcode}`)
+      const postcodeResult = await self.fetch(`${config.postcodes}/${postcode}`)
       const postcodeData = await postcodeResult.json()
       servicesUrl = `${config.servicesGeo}?longitude=${postcodeData.longitude}&latitude=${postcodeData.latitude}`
       localSearch = true
     }
   }
 
-  const servicesResult = await window.fetch(`${servicesUrl}`)
+  const servicesResult = await self.fetch(`${servicesUrl}`)
   const servicesData = await servicesResult.json()
   var requestUrls = servicesData.map(service => `${config.availability}/${isbn}?service=${service.code || service.utla19cd}`)
 
@@ -90,12 +93,15 @@ var searchByIsbn = async (isbn, postcode) => {
     await performBatchSearch(requestUrls)
     addToLibraryTable()
   }
+
+  document.getElementById('spSearchSpinner').style.visibility = 'hidden'
+  document.getElementById('btnClear').removeAttribute('disabled')
 }
 
 var performBatchSearch = async (requestUrls) => {
   await Promise.all(
     requestUrls.map(url => {
-      return window.fetch(url)
+      return self.fetch(url)
         .then(response => {
           response.json()
             .then(availabilityResults => {
