@@ -5,6 +5,16 @@ const config = {
   postcodes: 'https://api-geography.librarydata.uk/rest/postcodes'
 }
 
+var btnSearch = document.getElementById('btnSearch')
+var btnClear = document.getElementById('btnClear')
+var spSearchSpinner = document.getElementById('spSearchSpinner')
+var txtIsbn = document.getElementById('txtIsbn')
+var txtPostcode = document.getElementById('txtPostcode')
+var pFeedbackInfo = document.getElementById('pFeedbackInfo')
+var pFound = document.getElementById('pFound')
+var pAvailable = document.getElementById('pAvailable')
+var pUnavailable = document.getElementById('pUnavailable')
+
 let found = 0
 let available = 0
 let unavailable = 0
@@ -38,27 +48,27 @@ const libraryTable = new simpleDatatables.DataTable('#tblResults', {
   ]
 })
 
-document.getElementById('btnSearch').addEventListener('click', async function () {
-  const isbn = document.getElementById('txtIsbn').value
-  const postcode = document.getElementById('txtPostcode').value
+btnSearch.addEventListener('click', async function () {
+  const isbn = txtIsbn.value
+  const postcode = txtPostcode.value
   clearData()
   await searchByIsbn(isbn, postcode)
 })
 
-document.getElementById('btnClear').addEventListener('click', function () {
+btnClear.addEventListener('click', function () {
   clearData()
 })
 
 var clearData = () => {
-  document.getElementById('btnSearch').removeAttribute('disabled')
+  btnSearch.removeAttribute('disabled')
 }
 
 var searchByIsbn = async (isbn, postcode) => {
   // Check whether it's a valid isbn
   if (!isValidIsbn(isbn)) return null
 
-  document.getElementById('btnSearch').setAttribute('disabled', 'disabled')
-  document.getElementById('spSearchSpinner').style.visibility = 'visible'
+  btnSearch.setAttribute('disabled', 'disabled')
+  spSearchSpinner.style.visibility = 'visible'
 
   let localSearch = false
 
@@ -94,8 +104,8 @@ var searchByIsbn = async (isbn, postcode) => {
     addToLibraryTable()
   }
 
-  document.getElementById('spSearchSpinner').style.visibility = 'hidden'
-  document.getElementById('btnClear').removeAttribute('disabled')
+  spSearchSpinner.style.visibility = 'hidden'
+  btnClear.removeAttribute('disabled')
 }
 
 var performBatchSearch = async (requestUrls) => {
@@ -121,9 +131,9 @@ var performBatchSearch = async (requestUrls) => {
 }
 
 var updateSummaryDisplay = () => {
-  document.getElementById('pFound').innerText = `${found} found`
-  document.getElementById('pAvailable').innerText = `${available} available`
-  document.getElementById('pUnavailable').innerText = `${unavailable} unavailable`
+  pFound.innerText = `${found} found`
+  pAvailable.innerText = `${available} available`
+  pUnavailable.innerText = `${unavailable} unavailable`
 }
 
 var addToLibraryTable = () => {
