@@ -64,27 +64,31 @@ var clearData = () => {
 }
 
 var searchByIsbn = async (isbn, postcode) => {
-  // Check whether it's a valid isbn
-  if (!isValidIsbn(isbn)) return null
 
+  let servicesUrl = config.services
+  pFeedbackInfo.innerText = ''
   btnSearch.setAttribute('disabled', 'disabled')
   spSearchSpinner.style.visibility = 'visible'
 
   let localSearch = false
 
-  let servicesUrl = config.services
+  // Check whether it's a valid isbn
+  if (!isValidIsbn(isbn)) {
+    pFeedbackInfo.innerText = 'That doesn\'t seem to be an ISBN. Please try again.'
+    return
+  }
 
   // Check whether it's a valid postcode
   if (postcode && postcode.length > 0) {
-    const postcodeRe = /^([A-Z][A-HJ-Y]?\d[A-Z\d]? ?\d[A-Z]{2}|GIR ?0A{2})$/
-    const postcodeValid = postcodeRe.test(postcode)
-
-    if (postcodeValid) {
-      // Get the postcode
+    if (isValidPostcode(postcode)) {
+      pFeedbackInfo.innerText = 'Fetching postcode information.'
       const postcodeResult = await self.fetch(`${config.postcodes}/${postcode}`)
       const postcodeData = await postcodeResult.json()
       servicesUrl = `${config.servicesGeo}?longitude=${postcodeData.longitude}&latitude=${postcodeData.latitude}`
       localSearch = true
+    } else {
+      pFeedbackInfo.innerText = 'That doesn\'t seem to be a postcode. Please try again.'
+      return
     }
   }
 
@@ -141,6 +145,12 @@ var addToLibraryTable = () => {
     libraryTable.rows().add(library)
   })
   libraryTable.setColumns()
+}
+
+var isValidPostcode = (textInput) => {
+  const postcodeRe = /^([A-Z][A-HJ-Y]?\d[A-Z\d]? ?\d[A-Z]{2}|GIR ?0A{2})$/
+  const postcodeValid = postcodeRe.test(textInput)
+  return postcodeValid
 }
 
 var isValidIsbn = (textInput) => {
