@@ -65,11 +65,9 @@ var clearData = () => {
 
 var searchByIsbn = async (isbn, postcode) => {
 
-  let servicesUrl = config.services
+  
   pFeedbackInfo.innerText = ''
-  btnSearch.setAttribute('disabled', 'disabled')
-  spSearchSpinner.style.visibility = 'visible'
-
+  
   let localSearch = false
 
   // Check whether it's a valid isbn
@@ -78,10 +76,11 @@ var searchByIsbn = async (isbn, postcode) => {
     return
   }
 
+  let servicesUrl = config.services
   // Check whether it's a valid postcode
   if (postcode && postcode.length > 0) {
     if (isValidPostcode(postcode)) {
-      pFeedbackInfo.innerText = 'Fetching postcode information.'
+      pFeedbackInfo.innerText = 'Fetching postcode information'
       const postcodeResult = await self.fetch(`${config.postcodes}/${postcode}`)
       const postcodeData = await postcodeResult.json()
       servicesUrl = `${config.servicesGeo}?longitude=${postcodeData.longitude}&latitude=${postcodeData.latitude}`
@@ -92,9 +91,12 @@ var searchByIsbn = async (isbn, postcode) => {
     }
   }
 
+  btnSearch.setAttribute('disabled', 'disabled')
+  spSearchSpinner.style.visibility = 'visible'
+
   const servicesResult = await self.fetch(`${servicesUrl}`)
   const servicesData = await servicesResult.json()
-  var requestUrls = servicesData.map(service => `${config.availability}/${isbn}?service=${service.code || service.utla19cd}`)
+  var requestUrls = servicesData.map(service => [service.utla19nm || service.name, `${config.availability}/${isbn}?service=${service.code || service.utla19cd}`])
 
   if (localSearch) {
     // Do the first five
@@ -110,28 +112,33 @@ var searchByIsbn = async (isbn, postcode) => {
 
   spSearchSpinner.style.visibility = 'hidden'
   btnClear.removeAttribute('disabled')
+  pFeedbackInfo.innerText = 'Search complete.'
 }
 
 var performBatchSearch = async (requestUrls) => {
-  await Promise.all(
-    requestUrls.map(url => {
-      return self.fetch(url)
-        .then(response => {
-          response.json()
-            .then(availabilityResults => {
-              if (availabilityResults && availabilityResults.length > 0 && availabilityResults[0].availability && availabilityResults[0].availability.length > 0) {
-                availabilityResults[0].availability.forEach(library => {
-                  found += (library.available + library.unavailable)
-                  available += library.available
-                  unavailable += library.unavailable
-                  libraries.push([availabilityResults[0].service, library.library, String(library.available), String(library.unavailable), availabilityResults[0].url])
-                })
-                updateSummaryDisplay()
-              }
-            })
-        })
-    })
-  )
+  var chunked = chunkArray(requestUrls, 5)
+  for (index in chunked) {
+    pFeedbackInfo.innerText = `Searching ${chunked[index].map(service => service[0]).join(', ')}`
+    await Promise.all(
+      chunked[index].map(url => {
+        return self.fetch(url[1])
+          .then(response => {
+            response.json()
+              .then(availabilityResults => {
+                if (availabilityResults && availabilityResults.length > 0 && availabilityResults[0].availability && availabilityResults[0].availability.length > 0) {
+                  availabilityResults[0].availability.forEach(library => {
+                    found += (library.available + library.unavailable)
+                    available += library.available
+                    unavailable += library.unavailable
+                    libraries.push([availabilityResults[0].service, library.library, String(library.available), String(library.unavailable), availabilityResults[0].url])
+                  })
+                  updateSummaryDisplay()
+                }
+              })
+          })
+      })
+    )
+  }
 }
 
 var updateSummaryDisplay = () => {
@@ -193,4 +200,17 @@ var isValidIsbn = (textInput) => {
     }
     return (check.toString() === textInput[9].toUpperCase())
   }
+}
+
+var chunkArray = (array, size) => {
+  let result = []
+  for (value of array){
+      let lastArray = result[result.length -1 ]
+      if(!lastArray || lastArray.length == size){
+          result.push([value])
+      } else{
+          lastArray.push(value)
+      }
+  }
+  return result
 }
