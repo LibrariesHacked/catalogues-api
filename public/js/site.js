@@ -1,7 +1,6 @@
 const config = {
-  services: '/api/services',
+  services: 'https://api-geography.librarydata.uk/rest/libraryauthorities?fields[]=utla19cd&fields[]=utla19nm',
   availability: '/api/availabilityByISBN',
-  servicesGeo: 'https://api-geography.librarydata.uk/rest/libraryauthorities',
   postcodes: 'https://api-geography.librarydata.uk/rest/postcodes'
 }
 
@@ -83,7 +82,7 @@ var searchByIsbn = async (isbn, postcode) => {
       pFeedbackInfo.innerText = 'Fetching postcode information'
       const postcodeResult = await self.fetch(`${config.postcodes}/${postcode}`)
       const postcodeData = await postcodeResult.json()
-      servicesUrl = `${config.servicesGeo}?longitude=${postcodeData.longitude}&latitude=${postcodeData.latitude}`
+      servicesUrl = `${servicesUrl}&longitude=${postcodeData.longitude}&latitude=${postcodeData.latitude}`
       localSearch = true
     } else {
       pFeedbackInfo.innerText = 'That doesn\'t seem to be a postcode. Please try again.'
@@ -96,7 +95,7 @@ var searchByIsbn = async (isbn, postcode) => {
 
   const servicesResult = await self.fetch(`${servicesUrl}`)
   const servicesData = await servicesResult.json()
-  var requestUrls = servicesData.map(service => [service.utla19nm || service.name, `${config.availability}/${isbn}?service=${service.code || service.utla19cd}`])
+  var requestUrls = servicesData.map(service => [service.utla19nm, `${config.availability}/${isbn}?service=${service.utla19cd}`])
 
   if (localSearch) {
     // Do the first five
