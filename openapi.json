@@ -1,0 +1,57 @@
+{
+  "info": {
+    "title": "Library Books API",
+    "version": "0.1.0",
+    "description": "API to retrieve information from UK public library catalogues about library books",
+    "contact": {
+      "name": "Libraries Hacked",
+      "url": "https://www.librarieshacked.org",
+      "email": "info@librarieshacked.org"
+    }
+  },
+  "host": "https://www.librarybooks.uk",
+  "servers": [
+    {
+      "url": "https://www.librarybooks.uk/"
+    }
+  ],
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/availabilityByISBN/{isbn}": {
+      "summary": "Book title availability",
+      "get": {
+        "tags": [
+          "Availability"
+        ],
+        "description": "Return the availability of a particular title",
+        "parameters": [
+          {
+            "name": "isbn",
+            "description": "International standard book number",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "service",
+            "description": "Either name or ONS authority code of the library service to search. Providing no value will search all library services.",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of availability responses per library service"
+          }
+        }
+      }
+    }
+  },
+  "components": {},
+  "tags": []
+}

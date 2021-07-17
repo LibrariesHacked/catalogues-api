@@ -1,4 +1,5 @@
 const express = require('express')
+const swaggerUi = require('swagger-ui-express')
 const compression = require('compression')
 const libraries = require('./libraries')
 
@@ -21,6 +22,13 @@ app.get('/api/thingISBN/:isbn', libraries.thingISBN)
 app.get('/api/openLibrarySearch', libraries.openLibrarySearch)
 
 app.get('/api/testAvailabilityByISBN', libraries.testIsbnSearch)
+
+const openApiDocument = require('./openapi.json')
+app.use(
+  '/api/',
+  swaggerUi.serve,
+  swaggerUi.setup(openApiDocument)
+)
 
 const port = process.env.PORT || 3000
 app.listen(port)
