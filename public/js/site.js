@@ -38,10 +38,9 @@ const libraryTable = new simpleDatatables.DataTable('#tblResults', {
       render: function (data, cell, row) {
         const total = (parseInt(row.children[2].data) + parseInt(row.children[3].data))
         const copiesAvailable = parseInt(row.children[2].data) > 0
-        const buttonClass = copiesAvailable > 0 ? 'link' : 'link'
         const buttonIcon = copiesAvailable ? 'check' : 'times'
         row.classList.add(copiesAvailable ? 'table-success' : 'table-default')
-        return `<a class="btn btn-lg btn-${buttonClass}" href="${data}" target="_blank"><i class="fas fa-${buttonIcon}"></i> ${row.children[2].data}/${total}</a>`
+        return `<p class="lead"><a href="${data}" target="_blank"><i class="fas fa-${buttonIcon}"></i> ${row.children[2].data}/${total}</a></p>`
       }
     }
   ]
@@ -111,6 +110,7 @@ var searchByIsbn = async (isbn, postcode) => {
 
   spSearchSpinner.style.visibility = 'hidden'
   btnClear.removeAttribute('disabled')
+  libraryTable.columns().sort(2, 'desc')
   pFeedbackInfo.innerText = 'Search complete.'
 }
 
