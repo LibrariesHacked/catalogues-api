@@ -57,6 +57,9 @@ btnClear.addEventListener('click', function () {
 })
 
 var clearData = () => {
+  found = 0
+  available = 0
+  unavailable = 0
   pFeedbackInfo.innerText = ''
   btnSearch.removeAttribute('disabled')
   txtIsbn.value = ''
@@ -64,7 +67,7 @@ var clearData = () => {
   pAvailable.innerText = '0'
   pUnavailable.innerText = '0'
   libraries.length = 0
-  libraryTable.rows().remove(Array.from({length: libraryTable.data.length},(v, k) => k))
+  libraryTable.rows().remove(Array.from({ length: libraryTable.data.length }, (v, k) => k))
   btnClear.setAttribute('disabled', 'disabled')
 }
 
