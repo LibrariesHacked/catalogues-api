@@ -49,7 +49,6 @@ const libraryTable = new simpleDatatables.DataTable('#tblResults', {
 btnSearch.addEventListener('click', async function () {
   const isbn = txtIsbn.value
   const postcode = txtPostcode.value
-  clearData()
   await searchByIsbn(isbn, postcode)
 })
 
@@ -58,14 +57,21 @@ btnClear.addEventListener('click', function () {
 })
 
 var clearData = () => {
+  pFeedbackInfo.innerText = ''
   btnSearch.removeAttribute('disabled')
+  txtIsbn.value = ''
+  pFound.innerText = '0'
+  pAvailable.innerText = '0'
+  pUnavailable.innerText = '0'
+  libraries.length = 0
+  libraryTable.rows().remove(Array.from({length: libraryTable.data.length},(v, k) => k))
+  btnClear.setAttribute('disabled', 'disabled')
 }
 
 var searchByIsbn = async (isbn, postcode) => {
 
-  
   pFeedbackInfo.innerText = ''
-  
+
   let localSearch = false
 
   // Check whether it's a valid isbn
@@ -116,33 +122,33 @@ var searchByIsbn = async (isbn, postcode) => {
 
 var performBatchSearch = async (requestUrls) => {
   var chunked = chunkArray(requestUrls, 5)
-  for (index in chunked) {
-    pFeedbackInfo.innerText = `Searching ${chunked[index].map(service => service[0]).join(', ')}`
-    await Promise.all(
-      chunked[index].map(url => {
-        return self.fetch(url[1])
-          .then(response => {
-            response.json()
-              .then(availabilityResults => {
-                if (availabilityResults && availabilityResults.length > 0 && availabilityResults[0].availability && availabilityResults[0].availability.length > 0) {
-                  availabilityResults[0].availability.forEach(library => {
-                    found += (library.available + library.unavailable)
-                    available += library.available
-                    unavailable += library.unavailable
-                    libraries.push([availabilityResults[0].service, library.library, String(library.available), String(library.unavailable), availabilityResults[0].url])
-                  })
-                  updateSummaryDisplay()
-                }
-              })
-          })
-      })
-    )
+  for (var x = 0; x < chunked.length; x++) {
+    pFeedbackInfo.innerText = `Searching ${chunked[x].map(service => service[0]).join(', ')}`
+
+    var promises = chunked[x].map(async url => {
+      return self.fetch(url[1])
+        .then(response => {
+          response.json()
+            .then(async availabilityResults => {
+              if (availabilityResults && availabilityResults.length > 0 && availabilityResults[0].availability && availabilityResults[0].availability.length > 0) {
+                availabilityResults[0].availability.forEach(library => {
+                  found += (library.available + library.unavailable)
+                  available += library.available
+                  unavailable += library.unavailable
+                  libraries.push([availabilityResults[0].service, library.library, String(library.available), String(library.unavailable), availabilityResults[0].url])
+                })
+                updateSummaryDisplay()
+              }
+            })
+        })
+    })
+    await Promise.all(promises)
   }
 }
 
 var updateSummaryDisplay = () => {
   pFound.innerText = `${found} found`
-  pAvailable.innerText = `${available} available`
+  pAvailable.innerText = `${available} for loan`
   pUnavailable.innerText = `${unavailable} unavailable`
 }
 
@@ -203,13 +209,13 @@ var isValidIsbn = (textInput) => {
 
 var chunkArray = (array, size) => {
   let result = []
-  for (value of array){
-      let lastArray = result[result.length -1 ]
-      if(!lastArray || lastArray.length == size){
-          result.push([value])
-      } else{
-          lastArray.push(value)
-      }
+  for (value of array) {
+    let lastArray = result[result.length - 1]
+    if (!lastArray || lastArray.length == size) {
+      result.push([value])
+    } else {
+      lastArray.push(value)
+    }
   }
   return result
 }
