@@ -21,7 +21,7 @@ const libraries = []
 
 const libraryTable = new simpleDatatables.DataTable('#tblResults', {
   labels: {
-    noRows: 'Libraries will be listed when search is complete'
+    noRows: 'No current results to display'
   },
   perPageSelect: false,
   columns: [
@@ -38,9 +38,8 @@ const libraryTable = new simpleDatatables.DataTable('#tblResults', {
       render: function (data, cell, row) {
         const total = (parseInt(row.children[2].data) + parseInt(row.children[3].data))
         const copiesAvailable = parseInt(row.children[2].data) > 0
-        const buttonIcon = copiesAvailable ? 'check' : 'times'
         row.classList.add(copiesAvailable ? 'table-success' : 'table-default')
-        return `<p class="lead"><a href="${data}" target="_blank"><i class="fas fa-${buttonIcon}"></i> ${row.children[2].data}/${total}</a></p>`
+        return `<p class="lead"><a href="${data}" target="_blank">${row.children[2].data} of ${total}</a></p>`
       }
     }
   ]

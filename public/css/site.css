@@ -1,3 +1,40 @@
 ﻿#spSearchSpinner {
-    visibility: hidden;
+  visibility: hidden;
+}
+
+.dataTable-input {
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  color: #3e3f3a
+}
+
+.dataTable-pagination {
+  line-height: 22px;
+  font-weight: 500;
+}
+
+.dataTable-pagination li a {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.25rem;
+  color: #8e8c84;
+  border: 1px solid #dfd7ca;
+  background-color: #f8f5f0;
+}
+
+.dataTable-pagination li a:hover {
+  background-color: #f8f5f0;
+}
+
+.dataTable-pagination li.active a {
+  background-color: #dfd7ca;
+}
+
+.dataTable-pagination li:first-child a {
+  border-top-left-radius: 0.3rem;
+  border-bottom-left-radius: 0.3rem;
+}
+
+.dataTable-pagination li:last-child a {
+  border-top-right-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
 }
