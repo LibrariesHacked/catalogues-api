@@ -1,7 +1,7 @@
 {
   "info": {
     "title": "Library Books API",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "description": "API to retrieve information from UK public library catalogues about library books",
     "contact": {
       "name": "Libraries Hacked",
@@ -17,7 +17,7 @@
   ],
   "openapi": "3.0.0",
   "paths": {
-    "/api/availabilityByISBN/{isbn}": {
+    "/api/availability/{isbn}": {
       "summary": "Book title availability",
       "get": {
         "tags": [

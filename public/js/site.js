@@ -1,6 +1,6 @@
 const config = {
   services: 'https://api-geography.librarydata.uk/rest/libraryauthorities?fields[]=utla19cd&fields[]=utla19nm',
-  availability: '/api/availabilityByISBN',
+  availability: '/api/availability',
   postcodes: 'https://api-geography.librarydata.uk/rest/postcodes'
 }
 
