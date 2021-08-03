@@ -42,6 +42,6 @@ router.get('/openlibrary', async (req, res) => res.send(await openLibrary.search
  * @param {Object} req The request
  * @param {Object} res The response
  */
-router.get('/test', async (req, res) => res.send(await catalogues.testIsbnSearch))
+router.get('/test', async (req, res) => res.send(await catalogues.testIsbnSearch()))
 
 module.exports = router
