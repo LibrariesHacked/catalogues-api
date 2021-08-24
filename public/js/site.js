@@ -85,7 +85,7 @@ var searchByIsbn = async (isbn, postcode) => {
   let servicesUrl = config.services
   // Check whether it's a valid postcode
   if (postcode && postcode.length > 0) {
-    if (isValidPostcode(postcode)) {
+    if (isValidPostcode(postcode.toUpperCase())) {
       pFeedbackInfo.innerText = 'Fetching postcode information'
       const postcodeResult = await self.fetch(`${config.postcodes}/${postcode}`)
       const postcodeData = await postcodeResult.json()
@@ -162,7 +162,7 @@ var addToLibraryTable = () => {
 }
 
 var isValidPostcode = (textInput) => {
-  const postcodeRe = /^([A-Z][A-HJ-Y]?\d[A-Z\d]? ?\d[A-Z]{2}|GIR ?0A{2})$/
+  const postcodeRe = /^([A-Z][A-HJ-Y]?\d[A-Z\d]? ?\d[A-Z]{2}|GIR ?0A{2})$/i
   const postcodeValid = postcodeRe.test(textInput)
   return postcodeValid
 }
