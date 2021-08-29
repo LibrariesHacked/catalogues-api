@@ -4,6 +4,10 @@ const config = {
   postcodes: 'https://api-geography.librarydata.uk/rest/postcodes'
 }
 
+var queryString = window.location.search
+var urlParams = new URLSearchParams(queryString)
+var autoIsbn = urlParams.get('isbn')
+var autoPostcode = urlParams.get('postcode')
 var btnSearch = document.getElementById('btnSearch')
 var btnClear = document.getElementById('btnClear')
 var spSearchSpinner = document.getElementById('spSearchSpinner')
@@ -221,3 +225,6 @@ var chunkArray = (array, size) => {
   }
   return result
 }
+
+if (autoIsbn && isValidIsbn(autoIsbn)) txtIsbn.value = autoIsbn
+if (autoPostcode && isValidPostcode(autoPostcode)) txtPostcode.value = autoPostcode
