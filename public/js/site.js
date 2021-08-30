@@ -226,5 +226,9 @@ var chunkArray = (array, size) => {
   return result
 }
 
-if (autoIsbn && isValidIsbn(autoIsbn)) txtIsbn.value = autoIsbn
-if (autoPostcode && isValidPostcode(autoPostcode)) txtPostcode.value = autoPostcode
+var removeSpecialCharacters = (textInput) => {
+  return textInput.replace(/[^a-zA-Z0-9 ]/g, '')
+}
+
+if (autoIsbn && isValidIsbn(autoIsbn)) txtIsbn.value = removeSpecialCharacters(autoIsbn)
+if (autoPostcode && isValidPostcode(autoPostcode)) txtPostcode.value = removeSpecialCharacters(autoPostcode)
