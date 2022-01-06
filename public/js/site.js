@@ -1,5 +1,5 @@
 const config = {
-  services: 'https://api-geography.librarydata.uk/rest/libraryauthorities?fields[]=utla19cd&fields[]=utla19nm',
+  services: 'https://api-geography.librarydata.uk/rest/libraryauthorities?fields[]=code&fields[]=name',
   availability: '/api/availability',
   postcodes: 'https://api-geography.librarydata.uk/rest/postcodes'
 }
@@ -106,7 +106,7 @@ var searchByIsbn = async (isbn, postcode) => {
 
   const servicesResult = await self.fetch(`${servicesUrl}`)
   const servicesData = await servicesResult.json()
-  var requestUrls = servicesData.map(service => [service.utla19nm, `${config.availability}/${isbn}?service=${service.utla19cd}`])
+  var requestUrls = servicesData.map(service => [service.utla19nm, `${config.availability}/${isbn}?service=${service.code}`])
 
   if (localSearch) {
     // Do the first five
