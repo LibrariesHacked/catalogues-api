@@ -106,7 +106,7 @@ var searchByIsbn = async (isbn, postcode) => {
 
   const servicesResult = await self.fetch(`${servicesUrl}`)
   const servicesData = await servicesResult.json()
-  var requestUrls = servicesData.map(service => [service.utla19nm, `${config.availability}/${isbn}?service=${service.code}`])
+  var requestUrls = servicesData.map(service => [service.name, `${config.availability}/${isbn}?service=${service.code}`])
 
   if (localSearch) {
     // Do the first five
