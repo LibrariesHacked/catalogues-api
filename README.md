@@ -18,7 +18,7 @@ The solution can be run on a local system with [Node JS](https://nodejs.org/) in
 npm run start
 ```
 
-To test try to load the documentation at ```http://localhost:3000/api```
+Load the documentation at ```http://localhost:3000/api```
 
 The solution can be deployed into any production environment set up to run Node.
 
