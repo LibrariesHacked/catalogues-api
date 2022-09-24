@@ -1,5 +1,6 @@
 const config = {
-  services: 'https://api-geography.librarydata.uk/rest/libraryauthorities?fields[]=code&fields[]=name',
+  services:
+    'https://api-geography.librarydata.uk/rest/libraryauthorities?fields[]=code&fields[]=name',
   availability: '/api/availability',
   postcodes: 'https://api-geography.librarydata.uk/rest/postcodes'
 }
@@ -40,10 +41,10 @@ const libraryTable = new simpleDatatables.DataTable('#tblResults', {
     {
       select: 4,
       render: function (data, cell, row) {
-        const total = (parseInt(row.children[2].data) + parseInt(row.children[3].data))
+        const total =
+          parseInt(row.children[2].data) + parseInt(row.children[3].data)
         const copiesAvailable = parseInt(row.children[2].data) > 0
-        row.classList.add(copiesAvailable ? 'table-success' : 'table-default')
-        return `<p class="lead"><a href="${data}" target="_blank">${row.children[2].data} of ${total}</a></p>`
+        return `<p><a href="${data}" target="_blank">${row.children[2].data} of ${total}</a></p>`
       }
     }
   ]
@@ -70,19 +71,21 @@ var clearData = () => {
   pAvailable.innerText = '0'
   pUnavailable.innerText = '0'
   libraries.length = 0
-  libraryTable.rows().remove(Array.from({ length: libraryTable.data.length }, (v, k) => k))
+  libraryTable
+    .rows()
+    .remove(Array.from({ length: libraryTable.data.length }, (v, k) => k))
   btnClear.setAttribute('disabled', 'disabled')
 }
 
 var searchByIsbn = async (isbn, postcode) => {
-
   pFeedbackInfo.innerText = ''
 
   let localSearch = false
 
   // Check whether it's a valid isbn
   if (!isValidIsbn(isbn)) {
-    pFeedbackInfo.innerText = 'That doesn\'t seem to be an ISBN. Please try again.'
+    pFeedbackInfo.innerText =
+      "That doesn't seem to be a valid ISBN. Please try again."
     return
   }
 
@@ -96,7 +99,8 @@ var searchByIsbn = async (isbn, postcode) => {
       servicesUrl = `${servicesUrl}&longitude=${postcodeData.longitude}&latitude=${postcodeData.latitude}`
       localSearch = true
     } else {
-      pFeedbackInfo.innerText = 'That doesn\'t seem to be a postcode. Please try again.'
+      pFeedbackInfo.innerText =
+        "That doesn't seem to be a postcode. Please try again."
       return
     }
   }
@@ -106,7 +110,10 @@ var searchByIsbn = async (isbn, postcode) => {
 
   const servicesResult = await self.fetch(`${servicesUrl}`)
   const servicesData = await servicesResult.json()
-  var requestUrls = servicesData.map(service => [service.name, `${config.availability}/${isbn}?service=${service.code}`])
+  var requestUrls = servicesData.map(service => [
+    service.name,
+    `${config.availability}/${isbn}?service=${service.code}`
+  ])
 
   if (localSearch) {
     // Do the first five
@@ -126,27 +133,38 @@ var searchByIsbn = async (isbn, postcode) => {
   pFeedbackInfo.innerText = 'Search complete.'
 }
 
-var performBatchSearch = async (requestUrls) => {
+var performBatchSearch = async requestUrls => {
   var chunked = chunkArray(requestUrls, 5)
   for (var x = 0; x < chunked.length; x++) {
-    pFeedbackInfo.innerText = `Searching ${chunked[x].map(service => service[0]).join(', ')}`
+    pFeedbackInfo.innerText = `Searching ${chunked[x]
+      .map(service => service[0])
+      .join(', ')}`
 
     var promises = chunked[x].map(async url => {
-      return self.fetch(url[1])
-        .then(response => {
-          response.json()
-            .then(async availabilityResults => {
-              if (availabilityResults && availabilityResults.length > 0 && availabilityResults[0].availability && availabilityResults[0].availability.length > 0) {
-                availabilityResults[0].availability.forEach(library => {
-                  found += (library.available + library.unavailable)
-                  available += library.available
-                  unavailable += library.unavailable
-                  libraries.push([availabilityResults[0].service, library.library, String(library.available), String(library.unavailable), availabilityResults[0].url])
-                })
-                updateSummaryDisplay()
-              }
+      return self.fetch(url[1]).then(response => {
+        response.json().then(async availabilityResults => {
+          if (
+            availabilityResults &&
+            availabilityResults.length > 0 &&
+            availabilityResults[0].availability &&
+            availabilityResults[0].availability.length > 0
+          ) {
+            availabilityResults[0].availability.forEach(library => {
+              found += library.available + library.unavailable
+              available += library.available
+              unavailable += library.unavailable
+              libraries.push([
+                availabilityResults[0].service,
+                library.library,
+                String(library.available),
+                String(library.unavailable),
+                availabilityResults[0].url
+              ])
             })
+            updateSummaryDisplay()
+          }
         })
+      })
     })
     await Promise.all(promises)
   }
@@ -165,13 +183,13 @@ var addToLibraryTable = () => {
   libraryTable.setColumns()
 }
 
-var isValidPostcode = (textInput) => {
+var isValidPostcode = textInput => {
   const postcodeRe = /^([A-Z][A-HJ-Y]?\d[A-Z\d]? ?\d[A-Z]{2}|GIR ?0A{2})$/i
   const postcodeValid = postcodeRe.test(textInput)
   return postcodeValid
 }
 
-var isValidIsbn = (textInput) => {
+var isValidIsbn = textInput => {
   var sum
   var weight
   var digit
@@ -194,7 +212,7 @@ var isValidIsbn = (textInput) => {
       }
     }
     check = (10 - (sum % 10)) % 10
-    return (check.toString() === textInput[12])
+    return check.toString() === textInput[12]
   }
 
   if (textInput.length === 10) {
@@ -209,7 +227,7 @@ var isValidIsbn = (textInput) => {
     if (check === 10) {
       check = 'X'
     }
-    return (check.toString() === textInput[9].toUpperCase())
+    return check.toString() === textInput[9].toUpperCase()
   }
 }
 
@@ -226,9 +244,11 @@ var chunkArray = (array, size) => {
   return result
 }
 
-var removeSpecialCharacters = (textInput) => {
+var removeSpecialCharacters = textInput => {
   return textInput.replace(/[^a-zA-Z0-9 ]/g, '')
 }
 
-if (autoIsbn && isValidIsbn(autoIsbn)) txtIsbn.value = removeSpecialCharacters(autoIsbn)
-if (autoPostcode && isValidPostcode(autoPostcode)) txtPostcode.value = removeSpecialCharacters(autoPostcode)
+if (autoIsbn && isValidIsbn(autoIsbn))
+  txtIsbn.value = removeSpecialCharacters(autoIsbn)
+if (autoPostcode && isValidPostcode(autoPostcode))
+  txtPostcode.value = removeSpecialCharacters(autoPostcode)

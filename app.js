@@ -15,10 +15,6 @@ app.set('view engine', 'pug')
 app.get('/', (req, res) => res.render('index'))
 app.use('/api/', routes)
 
-app.use(
-  '/api/',
-  swaggerUi.serve,
-  swaggerUi.setup(openApiDocument)
-)
+app.use('/api/', swaggerUi.serve, swaggerUi.setup(openApiDocument))
 
 app.listen(port)
