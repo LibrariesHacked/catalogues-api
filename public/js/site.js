@@ -43,7 +43,6 @@ const libraryTable = new simpleDatatables.DataTable('#tblResults', {
       render: function (data, cell, row) {
         const total =
           parseInt(row.children[2].data) + parseInt(row.children[3].data)
-        const copiesAvailable = parseInt(row.children[2].data) > 0
         return `<p><a href="${data}" target="_blank">${row.children[2].data} of ${total}</a></p>`
       }
     }
@@ -71,9 +70,9 @@ var clearData = () => {
   pAvailable.innerText = '0'
   pUnavailable.innerText = '0'
   libraries.length = 0
-  libraryTable
-    .rows()
-    .remove(Array.from({ length: libraryTable.data.length }, (v, k) => k))
+  libraryTable.rows.remove(
+    Array.from({ length: libraryTable.data.length }, (v, k) => k)
+  )
   btnClear.setAttribute('disabled', 'disabled')
 }
 
@@ -178,7 +177,7 @@ var updateSummaryDisplay = () => {
 
 var addToLibraryTable = () => {
   libraries.forEach(library => {
-    libraryTable.rows().add(library)
+    libraryTable.rows.add(library)
   })
   libraryTable.setColumns()
 }
