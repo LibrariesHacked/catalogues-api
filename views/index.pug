@@ -2,9 +2,9 @@ extends layout.pug
 block content
 
     div(class="container-fluid py-4")
-        div(class="p-5 mt-2 bg-light rounded-2")
+        div(class="p-4 mt-2 bg-light bg-opacity-75 rounded-2 border")
             h1(class="fw-bold") Library books
-            p(class="fs-4") Search for library books in your area
+            p(class="fs-4") Search for books in your area
             form
                 div(class="row")
                     div(class="col-12 col-md-6")
@@ -21,36 +21,39 @@ block content
                             input(type='text', class='form-control form-control', id='txtPostcode', placeholder='Enter your postcode', autocomplete='off')
 
                 div(class="mt-2")
-                    button(class='btn btn-success', type='button', id='btnSearch') Run search
-                        span(id="spSearchSpinner", class="spinner-grow spinner-grow-sm mx-3", role="status")
-                    button(class='btn btn-link mx-3', type='button', id='btnClear', disabled='disabled') Reset search
+                    button(class='btn btn-outline-success', type='button', id='btnSearch') Run search
+                    span(id="spSearchSpinner", class="spinner-grow spinner-grow-sm mx-1", role="status")
+
             
             p(id="pFeedbackInfo", class="lead mt-3") 
 
     div(class="container-fluid py-2")
-        div(class='row')
+        h2(class="fw-bold") Results
+        button(class='btn btn-outline-dark', type='button', id='btnClear', disabled='disabled') Reset search
+
+        div(class='row py-2')
             div(class='col-12 col-sm-4')
-                div(class="alert alert-dismissible alert-info")
+                div(class="alert alert-info")
                     p
                         strong Copies
                     p(class='lead', id='pFound') 0
             div(class='col-12 col-sm-4')
-                div(class="alert alert-dismissible alert-success")
+                div(class="alert alert-success")
                     p
                         strong Available
                     p(class='lead', id='pAvailable') 0
             div(class='col-12 col-sm-4')
-                div(class="alert alert-dismissible alert-warning")
+                div(class="alert alert-warning")
                     p
                         strong Unavailable
                     p(class='lead', id='pUnavailable') 0
 
-        div(class="table-responsive")
-            table(id='tblResults', class='table')
+        div(class="table-responsive border rounded-2 bg-light bg-opacity-75")
+            table(id='tblResults')
                 thead
                     tr
                         th Service
                         th Library
                         th Available
                         th Unavailable
-                        th Availability
+                        th Copies

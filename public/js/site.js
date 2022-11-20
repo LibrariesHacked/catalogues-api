@@ -5,19 +5,19 @@ const config = {
   postcodes: 'https://api-geography.librarydata.uk/rest/postcodes'
 }
 
-var queryString = window.location.search
-var urlParams = new URLSearchParams(queryString)
-var autoIsbn = urlParams.get('isbn')
-var autoPostcode = urlParams.get('postcode')
-var btnSearch = document.getElementById('btnSearch')
-var btnClear = document.getElementById('btnClear')
-var spSearchSpinner = document.getElementById('spSearchSpinner')
-var txtIsbn = document.getElementById('txtIsbn')
-var txtPostcode = document.getElementById('txtPostcode')
-var pFeedbackInfo = document.getElementById('pFeedbackInfo')
-var pFound = document.getElementById('pFound')
-var pAvailable = document.getElementById('pAvailable')
-var pUnavailable = document.getElementById('pUnavailable')
+const queryString = window.location.search
+const urlParams = new URLSearchParams(queryString)
+const autoIsbn = urlParams.get('isbn')
+const autoPostcode = urlParams.get('postcode')
+const btnSearch = document.getElementById('btnSearch')
+const btnClear = document.getElementById('btnClear')
+const spSearchSpinner = document.getElementById('spSearchSpinner')
+const txtIsbn = document.getElementById('txtIsbn')
+const txtPostcode = document.getElementById('txtPostcode')
+const pFeedbackInfo = document.getElementById('pFeedbackInfo')
+const pFound = document.getElementById('pFound')
+const pAvailable = document.getElementById('pAvailable')
+const pUnavailable = document.getElementById('pUnavailable')
 
 let found = 0
 let available = 0
@@ -43,7 +43,8 @@ const libraryTable = new simpleDatatables.DataTable('#tblResults', {
       render: function (data, cell, row) {
         const total =
           parseInt(row.children[2].data) + parseInt(row.children[3].data)
-        return `<p><a href="${data}" target="_blank">${row.children[2].data} of ${total}</a></p>`
+        const availableClass = row.children[2].data > 0 ? 'success' : 'warning'
+        return `<p><a href="${data}" target="_blank"><span class="badge rounded-pill bg-${availableClass}">${row.children[2].data} of ${total} available</span></a></p>`
       }
     }
   ]
@@ -59,7 +60,7 @@ btnClear.addEventListener('click', function () {
   clearData()
 })
 
-var clearData = () => {
+const clearData = () => {
   found = 0
   available = 0
   unavailable = 0
@@ -76,7 +77,7 @@ var clearData = () => {
   btnClear.setAttribute('disabled', 'disabled')
 }
 
-var searchByIsbn = async (isbn, postcode) => {
+const searchByIsbn = async (isbn, postcode) => {
   pFeedbackInfo.innerText = ''
 
   let localSearch = false
@@ -109,7 +110,7 @@ var searchByIsbn = async (isbn, postcode) => {
 
   const servicesResult = await self.fetch(`${servicesUrl}`)
   const servicesData = await servicesResult.json()
-  var requestUrls = servicesData.map(service => [
+  const requestUrls = servicesData.map(service => [
     service.name,
     `${config.availability}/${isbn}?service=${service.code}`
   ])
@@ -128,18 +129,18 @@ var searchByIsbn = async (isbn, postcode) => {
 
   spSearchSpinner.style.visibility = 'hidden'
   btnClear.removeAttribute('disabled')
-  libraryTable.columns().sort(2, 'desc')
+  libraryTable.columns.sort(2, 'desc')
   pFeedbackInfo.innerText = 'Search complete.'
 }
 
-var performBatchSearch = async requestUrls => {
-  var chunked = chunkArray(requestUrls, 5)
-  for (var x = 0; x < chunked.length; x++) {
+const performBatchSearch = async requestUrls => {
+  const chunked = chunkArray(requestUrls, 5)
+  for (let x = 0; x < chunked.length; x++) {
     pFeedbackInfo.innerText = `Searching ${chunked[x]
       .map(service => service[0])
       .join(', ')}`
 
-    var promises = chunked[x].map(async url => {
+    const promises = chunked[x].map(async url => {
       return self.fetch(url[1]).then(response => {
         response.json().then(async availabilityResults => {
           if (
@@ -169,31 +170,31 @@ var performBatchSearch = async requestUrls => {
   }
 }
 
-var updateSummaryDisplay = () => {
+const updateSummaryDisplay = () => {
   pFound.innerText = `${found} found`
   pAvailable.innerText = `${available} for loan`
   pUnavailable.innerText = `${unavailable} unavailable`
 }
 
-var addToLibraryTable = () => {
+const addToLibraryTable = () => {
   libraries.forEach(library => {
     libraryTable.rows.add(library)
   })
   libraryTable.setColumns()
 }
 
-var isValidPostcode = textInput => {
+const isValidPostcode = textInput => {
   const postcodeRe = /^([A-Z][A-HJ-Y]?\d[A-Z\d]? ?\d[A-Z]{2}|GIR ?0A{2})$/i
   const postcodeValid = postcodeRe.test(textInput)
   return postcodeValid
 }
 
-var isValidIsbn = textInput => {
-  var sum
-  var weight
-  var digit
-  var check
-  var i
+const isValidIsbn = textInput => {
+  let sum
+  let weight
+  let digit
+  let check
+  let i
 
   textInput = textInput.replace(/[^0-9X]/gi, '')
 
@@ -230,7 +231,7 @@ var isValidIsbn = textInput => {
   }
 }
 
-var chunkArray = (array, size) => {
+const chunkArray = (array, size) => {
   let result = []
   for (value of array) {
     let lastArray = result[result.length - 1]
@@ -243,7 +244,7 @@ var chunkArray = (array, size) => {
   return result
 }
 
-var removeSpecialCharacters = textInput => {
+const removeSpecialCharacters = textInput => {
   return textInput.replace(/[^a-zA-Z0-9 ]/g, '')
 }
 
