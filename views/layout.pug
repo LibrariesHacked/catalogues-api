@@ -26,10 +26,22 @@ html(lang="en")
 
 	body
 
+		nav(class="navbar navbar-expand-lg navbar-light bg-light")
+			div(class="container")
+				button(class="navbar-toggler", type="button", data-bs-toggle="collapse", data-bs-target="#navbarColor03", aria-controls="navbarColor03", aria-expanded="false", aria-label="Toggle navigation")
+					span(class="navbar-toggler-icon")
+
+				div(class="collapse navbar-collapse", id="navbarColor03")
+					ul(class="navbar-nav me-auto")
+						li(class="nav-item")
+							a(class="nav-link active", href="#") Home
+							span(class="visually-hidden") (current)
+
 		.container
+
 			block content
-			
-			footer(class='py-2')
+
+			footer(class="py-2")
 				p A project by #[a(href="https://www.librarieshacked.org") Libraries Hacked]
 
 		script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js", type="text/javascript", crossorigin="anonymous")
