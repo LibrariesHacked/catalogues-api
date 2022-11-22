@@ -26,6 +26,9 @@ html(lang="en")
 
 	body
 
+		block nav
+			- var active = "index"
+
 		nav(class="navbar navbar-expand-lg navbar-light bg-light")
 			div(class="container")
 				button(class="navbar-toggler", type="button", data-bs-toggle="collapse", data-bs-target="#navbarColor03", aria-controls="navbarColor03", aria-expanded="false", aria-label="Toggle navigation")
@@ -34,8 +37,21 @@ html(lang="en")
 				div(class="collapse navbar-collapse", id="navbarColor03")
 					ul(class="navbar-nav me-auto")
 						li(class="nav-item")
-							a(class="nav-link active", href="#") Home
-							span(class="visually-hidden") (current)
+							a(class=(active === "index" ? "nav-link active" : "nav-link"), href="/") Home
+							if active === "index"
+								span(class="visually-hidden") (current)
+						li(class="nav-item")
+							a(class=(active === "about" ? "nav-link active" : "nav-link"), href="/about") About
+							if active === "about"
+								span(class="visually-hidden") (current)
+						li(class="nav-item")
+							a(class=(active === "accessibility" ? "nav-link active" : "nav-link"), href="/accessibility") Accessibility
+							if active === "accessibility"
+								span(class="visually-hidden") (current)
+						li(class="nav-item")
+							a(class=(active === "privacy" ? "nav-link active" : "nav-link"), href="/privacy") Privacy
+							if active === "privacy"
+								span(class="visually-hidden") (current)
 
 		.container
 
