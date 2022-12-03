@@ -6,9 +6,11 @@ block nav
 block content
 
     h1(class="fw-bold text-center mt-4") Library books
-    p(class="fs-4 text-center") Find a book in public libraries
+    p(class="fs-4 text-center") Find books in public libraries
 
     div(class="container-fluid py-4")
+        h3(class="fw-bold") 1. Choose a book
+        p(classs="lead") Search for a book by ISBN
         div(class="p-4 mt-2 bg-light bg-opacity-75 rounded-2 border")
             form
                 div(class="row")
@@ -33,7 +35,8 @@ block content
             p(id="pFeedbackInfo", class="lead mt-3") 
 
     div(class="container-fluid py-2")
-        h2(class="fw-bold") Results
+        h3(class="fw-bold") 2. Results
+        p(classs="lead") The results of the search will be displayed here.
         button(class='btn btn-outline-dark', type='button', id='btnClear', disabled='disabled') Reset search
 
         div(class='row py-2')
