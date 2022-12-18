@@ -6,7 +6,7 @@ This is a web service project, with basic front-end, for searching multiple publ
 
 The project uses Node Package Manager (NPM) for package management. Assuming [Node](https://nodejs.org/en/) is already installed, to build:
 
-```bash
+```console
 npm install
 ```
 
@@ -14,7 +14,7 @@ npm install
 
 The solution can be run on a local system with [Node JS](https://nodejs.org/) installed. The solution will be available under localhost at **http://localhost:3000/**.
 
-```bash
+```console
 npm run start
 ```
 
