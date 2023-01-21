@@ -40,11 +40,12 @@ const libraryTable = new simpleDatatables.DataTable('#tblResults', {
     },
     {
       select: 4,
-      render: function (data, cell, row) {
-        const total =
-          parseInt(row.children[2].data) + parseInt(row.children[3].data)
-        const availableClass = row.children[2].data > 0 ? 'success' : 'warning'
-        return `<p><a href="${data}" target="_blank"><span class="badge rounded-pill bg-${availableClass}">${row.children[2].data} of ${total} available</span></a></p>`
+      render: function (data, td, dataIndex, cellIndex) {
+        const available = parseInt(libraries[dataIndex][2])
+        const unavailable = parseInt(libraries[dataIndex][3])
+        const total = available + unavailable
+        const availableClass = available > 0 ? 'success' : 'warning'
+        return `<p><a href="${data}" target="_blank"><span class="badge rounded-pill bg-${availableClass}">${available.toString()} of ${total.toString()} available</span></a></p>`
       }
     }
   ]
@@ -70,10 +71,10 @@ const clearData = () => {
   pFound.innerText = '0'
   pAvailable.innerText = '0'
   pUnavailable.innerText = '0'
-  libraries.length = 0
   libraryTable.rows.remove(
-    Array.from({ length: libraryTable.data.length }, (v, k) => k)
+    Array.from({ length: libraries.length }, (v, k) => k)
   )
+  libraries.length = 0
   btnClear.setAttribute('disabled', 'disabled')
 }
 
@@ -180,7 +181,7 @@ const addToLibraryTable = () => {
   libraries.forEach(library => {
     libraryTable.rows.add(library)
   })
-  libraryTable.setColumns()
+  libraryTable.update()
 }
 
 const isValidPostcode = textInput => {
