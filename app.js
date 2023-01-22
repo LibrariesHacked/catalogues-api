@@ -1,9 +1,12 @@
 const express = require('express')
-const swaggerUi = require('swagger-ui-express')
 const compression = require('compression')
+
+const swaggerUi = require('swagger-ui-express')
+const openApiDocument = require('./openapi.json')
+
 const routes = require('./routes')
 const app = express()
-const openApiDocument = require('./openapi.json')
+
 const port = process.env.PORT || 3000
 
 app.use(compression())

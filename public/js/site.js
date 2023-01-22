@@ -41,8 +41,8 @@ const libraryTable = new simpleDatatables.DataTable('#tblResults', {
     {
       select: 4,
       render: function (data, td, dataIndex, cellIndex) {
-        const available = parseInt(libraries[dataIndex][2])
-        const unavailable = parseInt(libraries[dataIndex][3])
+        const available = parseInt(libraryTable.data.data[dataIndex][2].data)
+        const unavailable = parseInt(libraryTable.data.data[dataIndex][3].data)
         const total = available + unavailable
         const availableClass = available > 0 ? 'success' : 'warning'
         return `<p><a href="${data}" target="_blank"><span class="badge rounded-pill bg-${availableClass}">${available.toString()} of ${total.toString()} available</span></a></p>`
@@ -131,6 +131,7 @@ const searchByIsbn = async (isbn, postcode) => {
   spSearchSpinner.style.visibility = 'hidden'
   btnClear.removeAttribute('disabled')
   libraryTable.columns.sort(2, 'desc')
+  libraryTable.update()
   pFeedbackInfo.innerText = 'Search complete.'
 }
 
@@ -178,10 +179,7 @@ const updateSummaryDisplay = () => {
 }
 
 const addToLibraryTable = () => {
-  libraries.forEach(library => {
-    libraryTable.rows.add(library)
-  })
-  libraryTable.update()
+  libraryTable.insert({ data: libraries })
 }
 
 const isValidPostcode = textInput => {

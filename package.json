@@ -22,9 +22,6 @@
     "url": "https://github.com/LibrariesHacked/catalogues-librarydata/issues"
   },
   "homepage": "https://github.com/LibrariesHacked/catalogues-librarydata",
-  "engines": {
-    "node": "14-lts"
-  },
   "dependencies": {
     "catalogues-library": "^1.2.2",
     "compression": "^1.7.4",

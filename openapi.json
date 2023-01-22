@@ -20,7 +20,9 @@
     "/api/availability/{isbn}": {
       "summary": "Book title availability",
       "get": {
-        "tags": ["Availability"],
+        "tags": [
+          "Availability"
+        ],
         "description": "Return the availability of a particular title",
         "parameters": [
           {

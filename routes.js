@@ -4,8 +4,8 @@ const router = express.Router()
 
 /**
  * Gets library service data
- * @param {Object} req The request
- * @param {Object} res The response
+ * @param {Object} req The request to parse
+ * @param {Object} res The response to send
  */
 router.get('/services', async (req, res) =>
   res.send(await catalogues.services(req.query.service))
@@ -13,8 +13,8 @@ router.get('/services', async (req, res) =>
 
 /**
  * Gets individual library service point data
- * @param {Object} req The request
- * @param {Object} res The response
+ * @param {Object} req The request to parse
+ * @param {Object} res The response to send
  */
 router.get('/libraries', async (req, res) =>
   res.send(await catalogues.libraries(req.query.service))
@@ -22,8 +22,8 @@ router.get('/libraries', async (req, res) =>
 
 /**
  * Gets ISBN availability information for library service points
- * @param {Object} req The request
- * @param {Object} res The response
+ * @param {Object} req The request to parse
+ * @param {Object} res The response to send
  */
 router.get('/availability/:isbn', async (req, res) =>
   res.send(await catalogues.availability(req.params.isbn, req.query.service))
@@ -31,8 +31,8 @@ router.get('/availability/:isbn', async (req, res) =>
 
 /**
  * Gets results from the library thing thingISBN service
- * @param {Object} req The request
- * @param {Object} res The response
+ * @param {Object} req The request to parse
+ * @param {Object} res The response to send
  */
 router.get('/thingISBN', async (req, res) =>
   res.send((await libThing.thingISBN(req.params.isbn)).isbns)
@@ -40,8 +40,8 @@ router.get('/thingISBN', async (req, res) =>
 
 /**
  * Gets results from open libraries free text search
- * @param {Object} req The request
- * @param {Object} res The response
+ * @param {Object} req The request to parse
+ * @param {Object} res The response to send
  */
 router.get('/openlibrary', async (req, res) =>
   res.send(await openLibrary.search(req.query.q))
@@ -49,8 +49,8 @@ router.get('/openlibrary', async (req, res) =>
 
 /**
  * Runs through tests for the ISBN search
- * @param {Object} req The request
- * @param {Object} res The response
+ * @param {Object} req The request to parse
+ * @param {Object} res The response to send
  */
 router.get('/test', async (req, res) =>
   res.send(await catalogues.testIsbnSearch())
