@@ -44,19 +44,19 @@ Returns selected contents of the data.json file for each service. This can be us
 
 Returns a list of the library service points in each library service. This may include mobile libraries, and different locations within individual library buildings.
 
-| URL Route                     | Description                                          | Example                                             |
-| ----------------------------- | ---------------------------------------------------- | --------------------------------------------------- |
-| _/libraries_                  | Returns a list of libraries for each service.        | _http://localhost:3000/libraries_                   |
-| _/libraries?service=:service_ | Filters the results to a particular library service. | _http://localhost:3000/libraries?service=Wiltshire_ |
+| URL Route                     | Description                                          | Example                        |
+| ----------------------------- | ---------------------------------------------------- | ------------------------------ |
+| _/libraries_                  | Returns a list of libraries for each service.        | _/libraries_                   |
+| _/libraries?service=:service_ | Filters the results to a particular library service. | _/libraries?service=Wiltshire_ |
 
 ### Availability
 
 Returns data showing the number of available/unavailable copies of the relevant title in each library service point, for each library service.
 
-| Route                                  | Description                                                      | Example                                                                    |
-| -------------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| _/availability/:isbn_                  | Retrieves availability of a particular title by passing in ISBN. | _http://localhost:3000/availability/9780747538493_                         |
-| _/availability/:isbn?service=:service_ | Filters the results to a particular library service.             | _http://localhost:3000/availability/9780747538493?service=Gloucestershire_ |
+| Route                                  | Description                                          | Example                                               |
+| -------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------- |
+| _/availability/:isbn_                  | Retrieves availability of a particular by ISBN.      | _/availability/9780747538493_                         |
+| _/availability/:isbn?service=:service_ | Filters the results to a particular library service. | _/availability/9780747538493?service=Gloucestershire_ |
 
 ## Licence
 
