@@ -23,10 +23,10 @@
   },
   "homepage": "https://github.com/LibrariesHacked/catalogues-librarydata",
   "dependencies": {
-    "catalogues-library": "^1.2.4",
+    "catalogues-library": "^1.2.5",
     "compression": "^1.7.4",
     "express": "^4.18.2",
     "pug": "^3.0.2",
-    "swagger-ui-express": "^4.6.1"
+    "swagger-ui-express": "^4.6.3"
   }
 }
