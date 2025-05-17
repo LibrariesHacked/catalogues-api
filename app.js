@@ -7,8 +7,6 @@ const openApiDocument = require('./openapi.json')
 const routes = require('./routes')
 const app = express()
 
-const port = process.env.PORT || 3000
-
 app.use(compression())
 app.use(express.static('public', { maxAge: '1d' }))
 
@@ -23,4 +21,4 @@ app.get('/privacy', (req, res) => res.render('privacy'))
 app.use('/api/', routes)
 app.use('/api/', swaggerUi.serve, swaggerUi.setup(openApiDocument))
 
-app.listen(port)
+app.listen(process.env.PORT || 3000)
