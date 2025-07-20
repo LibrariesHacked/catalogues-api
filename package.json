@@ -24,7 +24,7 @@
   "homepage": "https://github.com/LibrariesHacked/catalogues-librarydata",
   "dependencies": {
     "catalogues-library": "^1.3.0",
-    "compression": "^1.8.0",
+    "compression": "^1.8.1",
     "express": "^5.1.0",
     "pug": "^3.0.3",
     "swagger-ui-express": "^5.0.1"
