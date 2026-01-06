@@ -1,5 +1,13 @@
-﻿#spSearchSpinner {
+﻿* {
+  text-transform: none !important;
+}
+
+#spSearchSpinner {
   visibility: hidden;
+}
+
+.navbar {
+  border: 0;
 }
 
 .dataTable-input {

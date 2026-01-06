@@ -12,10 +12,10 @@ html(lang="en")
     meta(name="msapplication-TileImage" content="/mstile-144x144.png")
     meta(name="theme-color" content="#ffffff")
 
-    link(rel="stylesheet" type="text/css" href="https://unpkg.com/bootswatch@5.3.6/dist/sandstone/bootstrap.min.css")
-    link(rel="stylesheet" type="text/css" href="https://unpkg.com/simple-datatables@8.0.0/dist/style.css")
-    link(rel="stylesheet" type="text/css" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css")
-    link(rel="stylesheet" type="text/css" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.2/css/solid.min.css")
+    link(rel="stylesheet" type="text/css" href="https://unpkg.com/bootswatch@5.3.8/dist/zephyr/bootstrap.min.css")
+    link(rel="stylesheet" type="text/css" href="https://unpkg.com/simple-datatables@10.2.0/dist/style.css")
+    link(rel="stylesheet" type="text/css" href="https://unpkg.com/@fortawesome/fontawesome-free@6.7.1/css/fontawesome.min.css")
+    link(rel="stylesheet" type="text/css" href="https://unpkg.com/@fortawesome/fontawesome-free@6.7.1/css/solid.min.css")
 
     link(rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png")
     link(rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png")
@@ -29,7 +29,7 @@ html(lang="en")
     block nav
       - var active = "index"
 
-    nav(class="navbar navbar-expand-lg navbar-light bg-light")
+    nav(class="navbar navbar-expand-lg bg-body-tertiary")
       div(class="container")
         button(class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation")
           span(class="navbar-toggler-icon")
@@ -62,9 +62,10 @@ html(lang="en")
         div(id="wcb" class="carbonbadge")
 
 
-    script(src="https://unpkg.com/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" type="text/javascript" crossorigin="anonymous")
-    script(src="https://unpkg.com/simple-datatables@8.0.0/dist/umd/simple-datatables.js" type="text/javascript")
+    script(src="https://unpkg.com/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" type="text/javascript" crossorigin="anonymous")
+    script(src="https://unpkg.com/simple-datatables@10.2.0/dist/umd/simple-datatables.js" type="text/javascript")
     script(src="https://unpkg.com/website-carbon-badges@1.1.3/b.min.js", defer=true)
+    script(src="https://analytics.librarydata.uk/script.js" data-website-id="04cfa256-3ca2-4525-8a79-0aa3e048a13e" defer=true)
     script(src="/js/site.js")
 
     block scripts

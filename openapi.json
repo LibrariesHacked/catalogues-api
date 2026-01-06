@@ -21,7 +21,7 @@
       "summary": "Book title availability",
       "get": {
         "tags": [
-          "Availability"
+          "availability"
         ],
         "description": "Return the availability of a particular title",
         "parameters": [

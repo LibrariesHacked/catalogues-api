@@ -41,8 +41,8 @@ const libraryTable = new simpleDatatables.DataTable('#tblResults', {
     {
       select: 4,
       render: function (data, td, dataIndex, cellIndex) {
-        const available = parseInt(libraryTable.data.data[dataIndex][2].data[0].data)
-        const unavailable = parseInt(libraryTable.data.data[dataIndex][2].data[0].data)
+        const available = parseInt(libraryTable.data.data[dataIndex].cells[2].data[0].data)
+        const unavailable = parseInt(libraryTable.data.data[dataIndex].cells[3].data[0].data)
         const total = available + unavailable
         const availableClass = available > 0 ? 'success' : 'warning'
         return `<p><a href="${data[0].data}" target="_blank"><span class="badge rounded-pill bg-${availableClass}">${available.toString()} of ${total.toString()} available</span></a></p>`

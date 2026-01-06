@@ -1,33 +1,34 @@
-const express = require('express')
-const catalogues = require('catalogues-library')
+import express from 'express'
 const router = express.Router()
+
+import * as catalogues from 'catalogues-library'
 
 /**
  * Gets library service data
  * @param {Object} req The request to parse
  * @param {Object} res The response to send
  */
-router.get('/services', async (req, res) =>
+router.get('/services', async (req, res) => {
   res.send(await catalogues.services(req.query.service))
-)
+})
 
 /**
  * Gets individual library service point data
  * @param {Object} req The request to parse
  * @param {Object} res The response to send
  */
-router.get('/libraries', async (req, res) =>
+router.get('/libraries', async (req, res) => {
   res.send(await catalogues.libraries(req.query.service))
-)
+})
 
 /**
  * Gets ISBN availability information for library service points
  * @param {Object} req The request to parse
  * @param {Object} res The response to send
  */
-router.get('/availability/:isbn', async (req, res) =>
+router.get('/availability/:isbn', async (req, res) => {
   res.send(await catalogues.availability(req.params.isbn, req.query.service))
-)
+})
 
 /**
  * Gets results from the library thing thingISBN service
@@ -52,8 +53,8 @@ router.get('/openlibrary', async (req, res) =>
  * @param {Object} req The request to parse
  * @param {Object} res The response to send
  */
-router.get('/test', async (req, res) =>
+router.get('/test', async (req, res) => {
   res.send(await catalogues.testIsbnSearch())
-)
+})
 
-module.exports = router
+export default router

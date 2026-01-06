@@ -1,10 +1,10 @@
-const express = require('express')
-const compression = require('compression')
+import express from 'express'
+import compression from 'compression'
+import swaggerUi from 'swagger-ui-express'
+import { readFileSync } from 'fs'
+import routes from './routes.js'
 
-const swaggerUi = require('swagger-ui-express')
-const openApiDocument = require('./openapi.json')
-
-const routes = require('./routes')
+const openApiDocument = JSON.parse(readFileSync('./openapi.json', 'utf-8'))
 const app = express()
 
 app.use(compression())
