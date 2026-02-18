@@ -41,11 +41,17 @@ const libraryTable = new simpleDatatables.DataTable('#tblResults', {
     {
       select: 4,
       render: function (data, td, dataIndex, cellIndex) {
-        const available = parseInt(libraryTable.data.data[dataIndex].cells[2].data[0].data)
-        const unavailable = parseInt(libraryTable.data.data[dataIndex].cells[3].data[0].data)
+        const available = parseInt(
+          libraryTable.data.data[dataIndex].cells[2].data[0].data
+        )
+        const unavailable = parseInt(
+          libraryTable.data.data[dataIndex].cells[3].data[0].data
+        )
         const total = available + unavailable
         const availableClass = available > 0 ? 'success' : 'warning'
-        return `<p><a href="${data[0].data}" target="_blank"><span class="badge rounded-pill bg-${availableClass}">${available.toString()} of ${total.toString()} available</span></a></p>`
+        return `<a href="${
+          data[0].data
+        }" target="_blank" class="btn btn-link text-${availableClass}">${available.toString()} of ${total.toString()} available</a>`
       }
     }
   ]
@@ -122,10 +128,8 @@ const searchByIsbn = async (isbn, postcode) => {
     while (available === 0 && requestUrls.length > 0) {
       await performBatchSearch(requestUrls.splice(0, 1))
     }
-    addToLibraryTable()
   } else {
     await performBatchSearch(requestUrls)
-    addToLibraryTable()
   }
 
   spSearchSpinner.style.visibility = 'hidden'
@@ -152,16 +156,19 @@ const performBatchSearch = async requestUrls => {
             availabilityResults[0].availability.length > 0
           ) {
             availabilityResults[0].availability.forEach(library => {
-              found += library.available + library.unavailable
-              available += library.available
-              unavailable += library.unavailable
-              libraries.push([
+              found +=
+                parseInt(library.available) + parseInt(library.unavailable)
+              available += parseInt(library.available)
+              unavailable += parseInt(library.unavailable)
+              const result = [
                 availabilityResults[0].service,
                 library.library,
-                String(library.available),
-                String(library.unavailable),
+                String(parseInt(library.available)),
+                String(parseInt(library.unavailable)),
                 availabilityResults[0].url
-              ])
+              ]
+              libraries.push(result)
+              libraryTable.insert({ data: [result] })
             })
             updateSummaryDisplay()
           }
@@ -176,10 +183,6 @@ const updateSummaryDisplay = () => {
   pFound.innerText = `${found} found`
   pAvailable.innerText = `${available} for loan`
   pUnavailable.innerText = `${unavailable} unavailable`
-}
-
-const addToLibraryTable = () => {
-  libraryTable.insert({ data: libraries })
 }
 
 const isValidPostcode = textInput => {
@@ -231,10 +234,10 @@ const isValidIsbn = textInput => {
 }
 
 const chunkArray = (array, size) => {
-  let result = []
+  const result = []
   for (value of array) {
-    let lastArray = result[result.length - 1]
-    if (!lastArray || lastArray.length == size) {
+    const lastArray = result[result.length - 1]
+    if (!lastArray || lastArray.length === size) {
       result.push([value])
     } else {
       lastArray.push(value)
@@ -247,7 +250,5 @@ const removeSpecialCharacters = textInput => {
   return textInput.replace(/[^a-zA-Z0-9 ]/g, '')
 }
 
-if (autoIsbn && isValidIsbn(autoIsbn))
-  txtIsbn.value = removeSpecialCharacters(autoIsbn)
-if (autoPostcode && isValidPostcode(autoPostcode))
-  txtPostcode.value = removeSpecialCharacters(autoPostcode)
+if (autoIsbn && isValidIsbn(autoIsbn)) { txtIsbn.value = removeSpecialCharacters(autoIsbn) }
+if (autoPostcode && isValidPostcode(autoPostcode)) { txtPostcode.value = removeSpecialCharacters(autoPostcode) }

@@ -1,7 +1,7 @@
 import express from 'express'
-const router = express.Router()
 
 import * as catalogues from 'catalogues-library'
+const router = express.Router()
 
 /**
  * Gets library service data
