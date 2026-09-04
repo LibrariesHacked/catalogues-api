@@ -50,10 +50,15 @@ router.get('/openlibrary', async (req, res) =>
 
 /**
  * Runs through tests for the ISBN search
+ * Restricted to non-production environments as it exposes internal
+ * debugging functionality with no authentication.
  * @param {Object} req The request to parse
  * @param {Object} res The response to send
  */
 router.get('/test', async (req, res) => {
+  if (process.env.NODE_ENV === 'production') {
+    return res.status(404).end()
+  }
   res.send(await catalogues.testIsbnSearch())
 })
 
